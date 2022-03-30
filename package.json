@@ -1,0 +1,18 @@
+{
+  "name": "stout-audit-cleanser",
+  "version": "0.1.0",
+  "description": "A userscript for simplifying the UW Stout Advising Audit provided in access stout.",
+  "main": "auditCleanser.user.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "esbuild --bundle --sourcemap --watch --target=es6 --outfile=dist/bundle.js src/index.js",
+    "build": "esbuild --bundle --minify --target=es6 --outfile=dist/bundle.js src/index.js"
+  },
+  "author": "Seth Berrier",
+  "license": "MIT",
+  "dependencies": {
+    "esbuild": "^0.14.29",
+    "eslint": "^8.12.0",
+    "eslint-config-standard": "^17.0.0-1"
+  }
+}
