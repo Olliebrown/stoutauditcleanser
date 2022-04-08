@@ -1,4 +1,5 @@
 import { makeLogger } from './logger.js'
+import { makeSummarizeButton } from './summarizeButton.js'
 
 const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'purple')
 const MAX_RETRIES = 10
@@ -50,8 +51,8 @@ function wait (timeout) {
   })
 }
 
-// Start primary function
-async function main () {
+// Entry point for scanning the current page
+async function scanPage () {
   const programNodes = getProgramNodes()
   if (!Array.isArray(programNodes) || programNodes.length < 1) {
     LOG.error('Failed to find program nodes')
@@ -64,4 +65,38 @@ async function main () {
     }
   }
 }
-main()
+
+// Detect when you are in an iframe
+function inIframe () {
+  try {
+    return window.self !== window.top
+  } catch (e) {
+    return true
+  }
+}
+
+// Add the 'summarize' button if we are in a loaded iframe
+if (inIframe()) {
+  const summaryDiv = makeSummarizeButton(() => { scanPage() })
+  summaryDiv.setAttribute('id', 'AUDIT_CLEANSER_BUTTON')
+  document.body.appendChild(summaryDiv)
+}
+
+// Watch the iframe for changes
+const observer = new MutationObserver(
+  (mutationsList) => {
+    LOG(mutationsList)
+  }
+)
+
+// observer.observe(
+//   document.body,
+//   { attributes: true, childList: true, subtree: true }
+// )
+
+if (document.querySelector('iframe') !== null) {
+  observer.observe(
+    document.querySelector('iframe').document.body,
+    { attributes: true, childList: true, subtree: true }
+  )
+}

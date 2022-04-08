@@ -2,11 +2,12 @@
   "name": "stout-audit-cleanser",
   "version": "0.1.0",
   "description": "A userscript for simplifying the UW Stout Advising Audit provided in access stout.",
-  "main": "auditCleanser.user.js",
+  "main": "dist/bundle.user.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "esbuild --bundle --sourcemap --watch --target=es6 --define:_DEV_=true --outfile=dist/bundle.js src/index.js",
-    "build": "esbuild --bundle --minify --target=es6 --define:_DEV_=false --outfile=dist/bundle.js src/index.js"
+    "dev": "node build.js dev",
+    "build": "node build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Seth Berrier",
   "license": "MIT",
