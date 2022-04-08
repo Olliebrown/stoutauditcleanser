@@ -18,7 +18,7 @@
   if (typeof window.AuditCleanser !== 'function') {
     // Download script as script tag
     var scriptTag = document.createElement('script')
-    scriptTag.src = 'https://gitcdn.link/repo/olliebrown/stoutauditcleanser/master/src/index.js'
+    scriptTag.src = 'https://gitcdn.link/repo/olliebrown/stoutauditcleanser/master/src/dist/bundle.js'
 
     // Enable automatic running of main entry point
     scriptTag.onload = function () {

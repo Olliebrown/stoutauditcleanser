@@ -5,8 +5,8 @@
   "main": "auditCleanser.user.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "esbuild --bundle --sourcemap --watch --target=es6 --outfile=dist/bundle.js src/index.js",
-    "build": "esbuild --bundle --minify --target=es6 --outfile=dist/bundle.js src/index.js"
+    "dev": "esbuild --bundle --sourcemap --watch --target=es6 --define:_DEV_=true --outfile=dist/bundle.js src/index.js",
+    "build": "esbuild --bundle --minify --target=es6 --define:_DEV_=false --outfile=dist/bundle.js src/index.js"
   },
   "author": "Seth Berrier",
   "license": "MIT",

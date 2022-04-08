@@ -1,3 +1,6 @@
+import { makeLogger } from './logger.js'
+
+const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'purple')
 const MAX_RETRIES = 10
 
 // Get list of header nodes for all major tables on page
@@ -18,7 +21,7 @@ async function getMainProgram (programNode) {
   // Expand main program if it is not already
   const expander = programNode.querySelector('a[aria-expanded=false]')
   if (expander) {
-    console.log('Clicking expander')
+    LOG('Clicking expander')
     expander.click()
   }
 
@@ -51,13 +54,13 @@ function wait (timeout) {
 async function main () {
   const programNodes = getProgramNodes()
   if (!Array.isArray(programNodes) || programNodes.length < 1) {
-    console.error('Failed to find program nodes')
+    LOG.error('Failed to find program nodes')
   } else {
     try {
       const mainProgram = await getMainProgram(programNodes[0])
-      console.log('Main Program is', mainProgram)
+      LOG('Main Program is', mainProgram)
     } catch (err) {
-      console.error('Failed to retrieve main program', err)
+      LOG.error('Failed to retrieve main program', err)
     }
   }
 }

@@ -11,6 +11,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "globals": {
+    "_DEV_": false
+  },
   "rules": {
   }
 }
