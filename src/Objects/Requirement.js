@@ -1,10 +1,11 @@
-import { QUERIES } from '../domTraversal/queriesAndRegex.js'
+import { makeLogger } from '../util/logger.js'
+import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
 
 /**
  * An object for examining one top-level requirement within a program
  * or sub-program (minor, certificate, etc.)
  */
-export class ProgramRequirement {
+export default class Requirement {
   /**
    * Build a program requirement object from the TR node of its heading
    * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
@@ -15,8 +16,18 @@ export class ProgramRequirement {
     this.programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement
     this.programBodyNode = this.programRowNode.parentElement
 
-    this.name = this.getRequirementHeading()
+    // Where is this requirement within the program body?
+    this.programBodyIndex = Array.from(this.programBodyNode.children)
+      .findIndex(node => node === this.programRowNode)
+
+    // Make a logger for this object
+    this.LOG = makeLogger(`REQ ${this.getHeading()}`, 'lightblue', 'black')
+
+    // Initialize derived values
+    this.extractDescriptionText()
+    this.name = this.getHeading()
     this.subRequirements = this.getSubRequirements()
+    this.satisfied = this.isSatisfied()
   }
 
   /**
@@ -24,15 +35,31 @@ export class ProgramRequirement {
    * @returns {bool} Whether or not this requirement is satisfied
    */
   isSatisfied () {
-
+    return (
+      this.satisfiedText === 'Satisfied'
+    )
   }
 
   /**
    * Extract and return just the text of the requirement's header
    * @returns {string} The text within the requirement's header row
    */
-  getRequirementHeading () {
+  getHeading () {
     return this.headingRowNode.textContent
+  }
+
+  extractDescriptionText () {
+    // Extract the description text
+    const requirementsArray = Array.from(this.programBodyNode.children)
+    const descriptionMatch = requirementsArray[this.programBodyIndex + 1]
+      .textContent.match(REGEX.requirementDescription)
+    if (descriptionMatch) {
+      this.satisfiedText = descriptionMatch.groups.satisfied
+      this.requirementID = descriptionMatch.groups.ID
+      this.description = descriptionMatch.groups.description
+    } else {
+      this.LOG.error('Description regex failed')
+    }
   }
 
   /**
@@ -43,13 +70,10 @@ export class ProgramRequirement {
     // Get array of all the requirements in the entire program
     const requirementsArray = Array.from(this.programBodyNode.children)
 
-    // Where is this requirement within the program body?
-    this.programBodyIndex = requirementsArray.findIndex(node => node === this.programRowNode)
-
     // Build array of sub-requirement rows
     const subRequirements = []
-    for (let i = this.programBodyIndex; i < requirementsArray.length; i++) {
-      const headerNode = requirementsArray[i].querySelector(QUERIES.reqHeaders)
+    for (let i = this.programBodyIndex + 2; i < requirementsArray.length; i++) {
+      const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`)
       if (!headerNode) {
         subRequirements.push(requirementsArray[i])
       } else {

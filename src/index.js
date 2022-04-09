@@ -1,7 +1,12 @@
 import { makeLogger } from './util/logger.js'
+
+// Document traversal functions and other DOM helpers
 import { makeSummarizeButton } from './elements/summarizeButton.js'
-import { getProgramNodes, getProgramRequirements } from './domTraversal/programs.js'
+import { getProgramNodes } from './domTraversal/programs.js'
 import { getRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
+
+// Core data objects
+import Program from './Objects/Program.js'
 
 // A high-visibility logger for the browser
 const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'navy')
@@ -21,11 +26,12 @@ async function scanPage () {
         LOG.error('Failed to find program nodes')
       } else {
         // Extract the main program requirements (for now, just the first one)
-        const mainProgramRequirements = getProgramRequirements(programNodes[0])
-        LOG('Main Program requirement nodes are', mainProgramRequirements)
+        const programs = programNodes.map((programNode) => new Program(programNode))
+        LOG('Found the following programs')
+        LOG(programs)
       }
     } catch (err) {
-      LOG.error('Failed to retrieve main program')
+      LOG.error('Failed to retrieve programs')
       LOG.error(err)
     }
   }
