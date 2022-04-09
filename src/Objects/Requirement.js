@@ -20,14 +20,27 @@ export default class Requirement {
     this.programBodyIndex = Array.from(this.programBodyNode.children)
       .findIndex(node => node === this.programRowNode)
 
-    // Make a logger for this object
-    this.LOG = makeLogger(`REQ ${this.getHeading()}`, 'lightblue', 'black')
+    // Set name and make a logger for this object
+    this.name = this.getHeading().trim()
+    this.LOG = makeLogger(`${this.name}`, 'lightblue', 'black', 1)
 
     // Initialize derived values
     this.extractDescriptionText()
-    this.name = this.getHeading()
     this.subRequirements = this.getSubRequirements()
     this.satisfied = this.isSatisfied()
+  }
+
+  output (labelLength = 0) {
+    const padding = Math.max(labelLength - this.name.length, 0)
+    if (this.satisfied) {
+      this.LOG.green('%cSatisfied'.padStart(padding + 11, ' '))
+    } else {
+      this.LOG.red('%cNot Satisfied'.padStart(padding + 15, ' '))
+    }
+  }
+
+  toString () {
+    return `${this.name}: ${this.satisfiedText}`
   }
 
   /**

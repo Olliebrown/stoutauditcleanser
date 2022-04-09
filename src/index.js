@@ -3,7 +3,7 @@ import { makeLogger } from './util/logger.js'
 // Document traversal functions and other DOM helpers
 import { makeSummarizeButton } from './elements/summarizeButton.js'
 import { getProgramNodes } from './domTraversal/programs.js'
-import { getRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
+import { verifyRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
 
 // Core data objects
 import Program from './Objects/Program.js'
@@ -13,7 +13,7 @@ const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'navy')
 
 // Entry point for scanning the current page
 async function scanPage () {
-  if (!getRootDoc()) {
+  if (!verifyRootDoc()) {
     window.alert('Could not find "Expand All" button.\n\nAre you sure you are in an advising audit page?')
   } else {
     try {
@@ -28,7 +28,7 @@ async function scanPage () {
         // Extract the main program requirements (for now, just the first one)
         const programs = programNodes.map((programNode) => new Program(programNode))
         LOG('Found the following programs')
-        LOG(programs)
+        programs.forEach(program => program.output())
       }
     } catch (err) {
       LOG.error('Failed to retrieve programs')

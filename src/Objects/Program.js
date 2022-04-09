@@ -1,5 +1,5 @@
 import { QUERIES } from '../domTraversal/queriesAndRegex.js'
-
+import { makeLogger } from '../util/logger.js'
 import Requirement from './Requirement.js'
 
 /**
@@ -23,16 +23,45 @@ export default class Program {
       }
     }
 
-    // Pre-compute values (for serialization)
-    this.name = this.getHeading()
-    this.satisfied = this.isSatisfied()
+    // Make a logger for this object
+    this.LOG = makeLogger(`${this.getHeading().trim()}`, 'pink', 'black')
 
-    // Try to build the list of requirements
+    // Initialize internal values
+    this.name = this.getHeading().trim()
     this.requirements = this.getProgramRequirements()
+    this.satisfied = this.isSatisfied()
   }
 
+  output () {
+    // Output the overall program status
+    if (this.satisfied) {
+      this.LOG.green('Complete')
+    } else {
+      this.LOG.red('Incomplete')
+    }
+
+    // Find length of longest label
+    let maxLabelLength = 0
+    this.requirements.forEach(req => {
+      if (req.getHeading().length > maxLabelLength) {
+        maxLabelLength = req.getHeading().length
+      }
+    })
+
+    // Output status of each requirement
+    this.requirements.forEach((req) => req.output(maxLabelLength))
+  }
+
+  /**
+   * If all requirements are satisfied, then this is considered satisfied
+   * @returns {bool} Weather or not this program is satisfied (e.g. completed)
+   */
   isSatisfied () {
-    return false
+    if (!Array.isArray(this.requirements) || this.requirements.length < 1) {
+      return false
+    }
+
+    return !this.requirements.find((requirement) => !requirement.isSatisfied())
   }
 
   /**
@@ -43,6 +72,10 @@ export default class Program {
     return this.programHeaderNode.textContent
   }
 
+  /**
+   * Extract the requirements and convert them to an array of Requirement objects
+   * @returns {Array(Requirement)} Array of Requirement objects extracted from the HTML
+   */
   getProgramRequirements () {
     // Extract the requirement nodes (all TD nodes)
     const requirementNodes = this.mainTable.querySelectorAll(QUERIES.requirementHeader)

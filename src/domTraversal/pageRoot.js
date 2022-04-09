@@ -6,12 +6,7 @@ const MAX_RETRIES = 10
 
 // Identify the root document (may be in an iFrame)
 let auditRootDoc = null
-export function getRootDoc () {
-  // Was it already found?
-  if (auditRootDoc != null) {
-    return auditRootDoc
-  }
-
+export function verifyRootDoc () {
   // First try just 'document'
   auditRootDoc = document
   let expanderButton = auditRootDoc.querySelector(QUERIES.expander)
@@ -30,6 +25,10 @@ export function getRootDoc () {
   // We didn't so clear it back to null and return null
   auditRootDoc = null
   return null
+}
+
+export function getRootDoc () {
+  return auditRootDoc
 }
 
 // Get list of all collapsed, top-level expander links
