@@ -1,9 +1,17 @@
+// Utility logger
 import { makeLogger } from './util/logger.js'
 
+// React root rendering support
+import { createRoot } from 'react-dom'
+
 // Document traversal functions and other DOM helpers
-import { makeSummarizeButton } from './elements/summarizeButton.js'
 import { getProgramNodes } from './domTraversal/programs.js'
 import { verifyRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
+
+// Key visible page elements
+import { makeSummarizeButton } from './elements/summarizeButton.js'
+import { makeCleanserContainer, makeRobotoFontTag } from './elements/reactAndMUIHelpers.js'
+import CleanserRoot from './elements/CleanserRoot.jsx'
 
 // Core data objects
 import Program from './Objects/Program.js'
@@ -41,3 +49,14 @@ async function scanPage () {
 const summaryDiv = makeSummarizeButton(() => { scanPage() })
 summaryDiv.setAttribute('id', 'AUDIT_CLEANSER_BUTTON')
 document.body.appendChild(summaryDiv)
+
+// Add React and MUI tags
+const robotoFontTag = makeRobotoFontTag()
+document.head.appendChild(robotoFontTag)
+
+const appContainer = makeCleanserContainer()
+document.body.appendChild(appContainer)
+
+// Add the main react app
+const reactAppRoot = createRoot(appContainer)
+reactAppRoot.render(<CleanserRoot />)
