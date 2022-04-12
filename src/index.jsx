@@ -2,7 +2,8 @@
 import { makeLogger } from './util/logger.js'
 
 // React root rendering support
-import { createRoot } from 'react-dom'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
 // Document traversal functions and other DOM helpers
 import { getProgramNodes } from './domTraversal/programs.js'

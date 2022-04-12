@@ -25,7 +25,7 @@ export function makeSummarizeButton (clickCallback) {
   return summarizeDiv
 }
 
-function applyStyle (node, style) {
+export function applyStyle (node, style) {
   for (const key in style) {
     node.style[key] = style[key]
   }

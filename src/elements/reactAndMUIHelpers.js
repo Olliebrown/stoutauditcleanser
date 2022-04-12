@@ -1,3 +1,11 @@
+import { applyStyle } from './summarizeButton.js'
+
+const ROOT_DIV_STYLE = {
+  position: 'fixed',
+  top: '100px',
+  right: '200px'
+}
+
 function makeFontCSSTag (href) {
   const fontTag = document.createElement('link')
   fontTag.setAttribute('rel', 'stylesheet')
@@ -6,7 +14,9 @@ function makeFontCSSTag (href) {
 }
 
 export function makeCleanserContainer () {
-
+  const rootDiv = document.createElement('div')
+  applyStyle(rootDiv, ROOT_DIV_STYLE)
+  return rootDiv
 }
 
 export function makeRobotoFontTag () {

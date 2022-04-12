@@ -13,7 +13,7 @@ const bannerText = fs.readFileSync('./configBlock.js', { encoding: 'utf8' })
 // Configure the build
 const options = {
   entryPoints: [
-    './src/index.js'
+    './src/index.jsx'
   ],
   banner: {
     js: bannerText

@@ -6,8 +6,7 @@
   "extends": [
     "standard",
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
