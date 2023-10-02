@@ -9,11 +9,21 @@ export function getProgramNodes () {
     throw new Error('Could not find program header nodes')
   }
 
-  // Extract the nodes that are program headers (skips general nodes)
-  const programNodes = Array.from(headerNodes).filter((header) => (
-    !header.textContent.match(REGEX.generalHeaders))
-  )
+  // Extract the info into three categories
+  const generalNodes = []
+  const universityNodes = []
+  const programNodes = []
 
-  // Return back filtered array
-  return programNodes
+  Array.from(headerNodes).forEach((header) => {
+    if (header.textContent.match(REGEX.generalHeader)) {
+      generalNodes.push(header)
+    } else if (header.textContent.match(REGEX.universityRequirements)) {
+      universityNodes.push(header)
+    } else {
+      programNodes.push(header)
+    }
+  })
+
+  // Return back categorized info
+  return [generalNodes, universityNodes, programNodes]
 }

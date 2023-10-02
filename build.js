@@ -10,7 +10,6 @@ if (process.argv.find((arg) => { return arg === 'dev' })) {
 // Read in the userscript config block text
 const bannerText = fs.readFileSync('./configBlock.js', { encoding: 'utf8' })
 
-// Configure the build
 const options = {
   entryPoints: [
     './src/index.jsx'
@@ -20,21 +19,23 @@ const options = {
   },
   outfile: './dist/bundle.user.js',
   bundle: true,
-  sourcemap: _DEV_,
+  sourcemap: (_DEV_),
   minify: (!_DEV_),
   define: {
-    _DEV_,
+    _DEV_: (_DEV_ ? 'true' : 'false'),
     'process.env.NODE_ENV': (_DEV_ ? '"development"' : '"production"')
   }
 }
 
+
 if (_DEV_) {
   // Serve the results for quick development
-  ESBuild.serve({
+  const ctx = await ESBuild.context(options)
+  ctx.serve({
     servedir: 'dist',
-  }, options).then(server => {
+  }).then(server => {
     // Call "stop" on the web server to stop serving
-    console.log('Server is now running')
+    console.log(`Server is now running: http://${server.host}:${server.port})`)
   })
 } else {
   // Do the build

@@ -29,18 +29,24 @@ async function scanPage () {
       // Try to expand all the header nodes
       await expandAllSections()
 
-      // Identify all the program nodes (degrees and minors)
-      const programNodes = getProgramNodes()
-      if (!Array.isArray(programNodes) || programNodes.length < 1) {
-        LOG.error('Failed to find program nodes')
-      } else {
-        // Extract the main program requirements (for now, just the first one)
-        const programs = programNodes.map((programNode) => new Program(programNode))
-        LOG('Found the following programs')
-        programs.forEach(program => program.output())
-      }
+      // Identify all the university and program nodes
+      const nodeGroups = getProgramNodes()
+
+      // Output each group of nodes
+      const titles = ['General Info', 'University Requirements', 'Programs']
+      nodeGroups.forEach((nodeGroup, i) => {
+        const groupTitle = titles[i]
+        if (!Array.isArray(nodeGroup) || nodeGroup.length < 1) {
+          LOG.error(`Failed to find ${groupTitle}`)
+        } else {
+          // Extract the rest as programs
+          const nodePrograms = nodeGroup.map((node) => new Program(node))
+          LOG(`Found the following ${groupTitle}`)
+          nodePrograms.forEach(program => program.output())
+        }
+      })
     } catch (err) {
-      LOG.error('Failed to retrieve programs')
+      LOG.error('Failed to retrieve/parse programs')
       LOG.error(err)
     }
   }

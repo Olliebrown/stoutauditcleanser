@@ -8,6 +8,7 @@ export const QUERIES = {
 }
 
 export const REGEX = {
-  generalHeaders: /(?:UNIVERSITY REQUIREMENTS)|(?:GENERAL INFORMATION)/i,
+  generalHeader: /(?:GENERAL INFORMATION)/i,
+  universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
   requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i
 }
