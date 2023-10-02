@@ -1,4 +1,4 @@
-import { QUERIES } from '../domTraversal/queriesAndRegex.js'
+import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
 import { makeLogger } from '../util/logger.js'
 import Requirement from './Requirement.js'
 
@@ -80,7 +80,12 @@ export default class Program {
     // Extract the requirement nodes (all TD nodes)
     const requirementNodes = this.mainTable.querySelectorAll(QUERIES.requirementHeader)
 
+    // Filter out informational only nodes
+    const filteredNodes = Array.from(requirementNodes).filter((node) => {
+      return !node.textContent.match(REGEX.informationalOnly)
+    })
+
     // Switch to parents (TR) and return
-    return Array.from(requirementNodes).map(node => new Requirement(node.parentNode))
+    return Array.from(filteredNodes).map(node => new Requirement(node.parentNode))
   }
 }

@@ -23584,7 +23584,8 @@
   var REGEX = {
     generalHeader: /(?:GENERAL INFORMATION)/i,
     universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i
+    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Incomplete\/In-Progress Coursework Notice)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i
   };
 
   // src/domTraversal/pageRoot.js
@@ -23831,7 +23832,10 @@
      */
     getProgramRequirements() {
       const requirementNodes = this.mainTable.querySelectorAll(QUERIES.requirementHeader);
-      return Array.from(requirementNodes).map((node) => new Requirement(node.parentNode));
+      const filteredNodes = Array.from(requirementNodes).filter((node) => {
+        return !node.textContent.match(REGEX.informationalOnly);
+      });
+      return Array.from(filteredNodes).map((node) => new Requirement(node.parentNode));
     }
   };
 
