@@ -12,7 +12,7 @@ import { verifyRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
 // Key visible page elements
 import { makeSummarizeButton } from './elements/summarizeButton.js'
 import { makeCleanserContainer, makeRobotoFontTag } from './elements/reactAndMUIHelpers.js'
-import CleanserRoot from './elements/CleanserRoot.jsx'
+import CleanserRoot from './elements/Components/CleanserRoot.jsx'
 
 // Core data objects
 import Program from './Objects/Program.js'
@@ -52,17 +52,27 @@ async function scanPage () {
   }
 }
 
-// Add the 'summarize' button to the main overall document (not to iFrame)
-const summaryDiv = makeSummarizeButton(() => { scanPage() })
-summaryDiv.setAttribute('id', 'AUDIT_CLEANSER_BUTTON')
-document.body.appendChild(summaryDiv)
-
 // Add React and MUI tags
 const robotoFontTag = makeRobotoFontTag()
 document.head.appendChild(robotoFontTag)
 
 const appContainer = makeCleanserContainer()
 document.body.appendChild(appContainer)
+
+// Add the 'summarize' button to the main overall document (not to iFrame)
+let showSummary = false
+const summaryDiv = makeSummarizeButton(() => {
+  if (!showSummary) {
+    scanPage()
+    appContainer.style.transform = 'translateX(0%)'
+    showSummary = true
+  } else {
+    appContainer.style.transform = 'translateX(120%)'
+    showSummary = false
+  }
+})
+summaryDiv.setAttribute('id', 'AUDIT_CLEANSER_BUTTON')
+document.body.appendChild(summaryDiv)
 
 // Add the main react app
 const reactAppRoot = createRoot(appContainer)

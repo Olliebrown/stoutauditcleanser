@@ -3,7 +3,9 @@ import { applyStyle } from './summarizeButton.js'
 const ROOT_DIV_STYLE = {
   position: 'fixed',
   top: '100px',
-  right: '200px'
+  right: '40px',
+  transform: 'translateX(120%)',
+  transition: 'transform 0.5s ease-in-out'
 }
 
 function makeFontCSSTag (href) {
