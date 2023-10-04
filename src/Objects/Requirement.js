@@ -1,6 +1,8 @@
 import { makeLogger } from '../util/logger.js'
 import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
 
+import SubRequirement from './SubRequirement.js'
+
 /**
  * An object for examining one top-level requirement within a program
  * or sub-program (minor, certificate, etc.)
@@ -37,6 +39,9 @@ export default class Requirement {
     } else {
       this.LOG.red('%cNot Satisfied'.padStart(padding + 15, ' '))
     }
+
+    // Output status of each sub-requirement
+    this.subRequirements.forEach((subReq) => subReq.output(labelLength))
   }
 
   toString () {
@@ -94,7 +99,8 @@ export default class Requirement {
       }
     }
 
-    // Return the (possibly empty) array
-    return subRequirements
+    // Remove empty sub-requirements then convert to objects
+    return subRequirements.filter(node => node.textContent.trim() !== '')
+      .map(node => new SubRequirement(node))
   }
 }

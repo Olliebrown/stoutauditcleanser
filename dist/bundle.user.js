@@ -25526,6 +25526,9 @@
   var QUERIES = {
     programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
     requirementHeader: ".PAGROUPDIVIDER",
+    subRequirementHeader: ".PSGROUPBOXLABEL",
+    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
+    subRequirementDescription: ".PSLONGEDITBOX",
     expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
     expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
     programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
@@ -25534,7 +25537,9 @@
     generalHeader: /(?:GENERAL INFORMATION)/i,
     universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
     requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i
+    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
+    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
   };
 
   // src/domTraversal/pageRoot.js
@@ -30771,6 +30776,66 @@ Please use another name.` : formatMuiErrorMessage(18));
     showSummary: false
   };
 
+  // src/Objects/SubRequirement.js
+  var SubRequirement = class {
+    /**
+     * Build a sub-requirement object from the TABLE node inside it's TR heading
+     * @param {HTMLElement} tableNode The TR node that contains the top-level requirement's heading
+     */
+    constructor(tableNode) {
+      this.mainTableNode = tableNode;
+      this.headingRowNode = tableNode.querySelector(QUERIES.subRequirementHeader);
+      this.detailsRowNodes = Array.from(this.mainTableNode.querySelectorAll(QUERIES.subRequirementDetails)).filter((row) => row.textContent.trim() !== "");
+      this.name = this.getHeading().trim();
+      this.LOG = makeLogger(`${this.name}`, "lightblue", "black", 1);
+      this.extractDescriptionText();
+      this.extractUnits();
+      this.satisfied = this.isSatisfied();
+    }
+    output(labelLength = 0) {
+      const padding2 = Math.max(labelLength - this.name.length, 0);
+      if (this.satisfied) {
+        this.LOG.green("%cSatisfied".padStart(padding2 + 11, " "));
+      } else {
+        this.LOG.red("%cNot Satisfied".padStart(padding2 + 15, " "));
+      }
+    }
+    toString() {
+      return `${this.name}: ${this.satisfiedText} (${this.units.taken}/${this.units.req})`;
+    }
+    /**
+     * Examine the requirement to see if it is labeled as 'satisfied'
+     * @returns {bool} Whether or not this requirement is satisfied
+     */
+    isSatisfied() {
+      return this.satisfiedText === "Satisfied";
+    }
+    /**
+     * Extract and return just the text of the requirement's header
+     * @returns {string} The text within the requirement's header row
+     */
+    getHeading() {
+      return this.headingRowNode.textContent;
+    }
+    extractDescriptionText() {
+      const descriptionGroups = this.detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent.match(REGEX.subRequirementDescription)?.groups;
+      if (descriptionGroups) {
+        this.satisfiedText = descriptionGroups.satisfied;
+        this.description = descriptionGroups.description;
+      } else {
+        this.LOG.error("Description regex failed");
+      }
+    }
+    extractUnits() {
+      this.units = this.mainTableNode.textContent.match(REGEX.subReqUnits)?.groups;
+      if (this.units) {
+        this.units.req = parseFloat(this.units?.req);
+        this.units.taken = parseFloat(this.units?.taken);
+        this.units.need = parseFloat(this.units?.need);
+      }
+    }
+  };
+
   // src/Objects/Requirement.js
   var Requirement = class {
     /**
@@ -30795,6 +30860,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       } else {
         this.LOG.red("%cNot Satisfied".padStart(padding2 + 15, " "));
       }
+      this.subRequirements.forEach((subReq) => subReq.output(labelLength));
     }
     toString() {
       return `${this.name}: ${this.satisfiedText}`;
@@ -30839,7 +30905,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           break;
         }
       }
-      return subRequirements;
+      return subRequirements.filter((node2) => node2.textContent.trim() !== "").map((node2) => new SubRequirement(node2));
     }
   };
 
