@@ -58,3 +58,17 @@ export async function expandAllSections () {
     throw new Error('Max retries exceeded waiting for program nodes to expand')
   }
 }
+
+export async function clickShowAllLinks () {
+  // Get the Show All button
+  const showAllButtons = auditRootDoc.querySelector(QUERIES.showAll)
+  if (!Array.isArray(showAllButtons) || showAllButtons.length === 0) {
+    return
+  }
+
+  // Click to initiate expansion
+  for (const showAllButton of showAllButtons) {
+    showAllButton.click()
+    await wait(100)
+  }
+}

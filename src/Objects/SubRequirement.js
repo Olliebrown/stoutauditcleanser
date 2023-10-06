@@ -12,9 +12,13 @@ export default class SubRequirement {
   constructor (tableNode) {
     // Save references to the key nodes for this requirement
     this.mainTableNode = tableNode
-    this.headingRowNode = tableNode.querySelector(QUERIES.subRequirementHeader)
-    this.detailsRowNodes = Array.from(this.mainTableNode.querySelectorAll(QUERIES.subRequirementDetails))
-      .filter(row => row.textContent.trim() !== '')
+    this.headingRowNode = tableNode?.querySelector(QUERIES.subRequirementHeader)
+    this.detailsRowNodes = Array.from(this.mainTableNode?.querySelectorAll(QUERIES.subRequirementDetails))
+      ?.filter(row => row.textContent.trim() !== '')
+
+    // Check that all the key nodes were found
+    this.isValid = (this.mainTableNode && this.headingRowNode && Array.isArray(this.detailsRowNodes))
+    if (!this.isValid) { return }
 
     // Set name and make a logger for this object
     this.name = this.getHeading().trim()
@@ -27,6 +31,7 @@ export default class SubRequirement {
   }
 
   output (labelLength = 0) {
+    if (!this.isValid) { return }
     const padding = Math.max(labelLength - this.name.length, 0)
     if (this.satisfied) {
       this.LOG.green('%cSatisfied'.padStart(padding + 11, ' '))
@@ -36,6 +41,7 @@ export default class SubRequirement {
   }
 
   toString () {
+    if (!this.isValid) { return 'Invalid Sub-Requirement' }
     return `${this.name}: ${this.satisfiedText} (${this.units.taken}/${this.units.req})`
   }
 
@@ -44,6 +50,7 @@ export default class SubRequirement {
    * @returns {bool} Whether or not this requirement is satisfied
    */
   isSatisfied () {
+    if (!this.isValid) { return false }
     return (
       this.satisfiedText === 'Satisfied'
     )
@@ -54,10 +61,13 @@ export default class SubRequirement {
    * @returns {string} The text within the requirement's header row
    */
   getHeading () {
+    if (!this.isValid) { return '' }
     return this.headingRowNode.textContent
   }
 
   extractDescriptionText () {
+    if (!this.isValid) { return }
+
     // Extract the description text
     const descriptionGroups = this.detailsRowNodes[0]
       ?.querySelector(QUERIES.subRequirementDescription)
@@ -74,6 +84,8 @@ export default class SubRequirement {
   }
 
   extractUnits () {
+    if (!this.isValid) { return }
+
     // Extract unit information
     this.units = this.mainTableNode.textContent.match(REGEX.subReqUnits)?.groups
     if (this.units) {

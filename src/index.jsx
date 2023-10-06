@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client'
 
 // Document traversal functions and other DOM helpers
 import { getProgramNodes } from './domTraversal/programs.js'
-import { verifyRootDoc, expandAllSections } from './domTraversal/pageRoot.js'
+import { verifyRootDoc, expandAllSections, clickShowAllLinks } from './domTraversal/pageRoot.js'
 
 // Key visible page elements
 import { makeSummarizeButton } from './elements/summarizeButton.js'
@@ -28,6 +28,9 @@ async function scanPage () {
     try {
       // Try to expand all the header nodes
       await expandAllSections()
+
+      // Try to click all the 'show all' links
+      await clickShowAllLinks()
 
       // Identify all the university and program nodes
       const nodeGroups = getProgramNodes()

@@ -30784,8 +30784,12 @@ Please use another name.` : formatMuiErrorMessage(18));
      */
     constructor(tableNode) {
       this.mainTableNode = tableNode;
-      this.headingRowNode = tableNode.querySelector(QUERIES.subRequirementHeader);
-      this.detailsRowNodes = Array.from(this.mainTableNode.querySelectorAll(QUERIES.subRequirementDetails)).filter((row) => row.textContent.trim() !== "");
+      this.headingRowNode = tableNode?.querySelector(QUERIES.subRequirementHeader);
+      this.detailsRowNodes = Array.from(this.mainTableNode?.querySelectorAll(QUERIES.subRequirementDetails))?.filter((row) => row.textContent.trim() !== "");
+      this.isValid = this.mainTableNode && this.headingRowNode && Array.isArray(this.detailsRowNodes);
+      if (!this.isValid) {
+        return;
+      }
       this.name = this.getHeading().trim();
       this.LOG = makeLogger(`${this.name}`, "lightblue", "black", 1);
       this.extractDescriptionText();
@@ -30793,6 +30797,9 @@ Please use another name.` : formatMuiErrorMessage(18));
       this.satisfied = this.isSatisfied();
     }
     output(labelLength = 0) {
+      if (!this.isValid) {
+        return;
+      }
       const padding2 = Math.max(labelLength - this.name.length, 0);
       if (this.satisfied) {
         this.LOG.green("%cSatisfied".padStart(padding2 + 11, " "));
@@ -30801,6 +30808,9 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
     }
     toString() {
+      if (!this.isValid) {
+        return "Invalid Sub-Requirement";
+      }
       return `${this.name}: ${this.satisfiedText} (${this.units.taken}/${this.units.req})`;
     }
     /**
@@ -30808,6 +30818,9 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @returns {bool} Whether or not this requirement is satisfied
      */
     isSatisfied() {
+      if (!this.isValid) {
+        return false;
+      }
       return this.satisfiedText === "Satisfied";
     }
     /**
@@ -30815,9 +30828,15 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @returns {string} The text within the requirement's header row
      */
     getHeading() {
+      if (!this.isValid) {
+        return "";
+      }
       return this.headingRowNode.textContent;
     }
     extractDescriptionText() {
+      if (!this.isValid) {
+        return;
+      }
       const descriptionGroups = this.detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent.match(REGEX.subRequirementDescription)?.groups;
       if (descriptionGroups) {
         this.satisfiedText = descriptionGroups.satisfied;
@@ -30827,6 +30846,9 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
     }
     extractUnits() {
+      if (!this.isValid) {
+        return;
+      }
       this.units = this.mainTableNode.textContent.match(REGEX.subReqUnits)?.groups;
       if (this.units) {
         this.units.req = parseFloat(this.units?.req);
