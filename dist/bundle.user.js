@@ -566,10 +566,10 @@
               props.children = childArray;
             }
             if (type && type.defaultProps) {
-              var defaultProps = type.defaultProps;
-              for (propName in defaultProps) {
+              var defaultProps2 = type.defaultProps;
+              for (propName in defaultProps2) {
                 if (props[propName] === void 0) {
-                  props[propName] = defaultProps[propName];
+                  props[propName] = defaultProps2[propName];
                 }
               }
             }
@@ -590,7 +590,7 @@
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
             return newElement;
           }
-          function cloneElement(element, config, children) {
+          function cloneElement2(element, config, children) {
             if (element === null || element === void 0) {
               throw new Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
             }
@@ -612,14 +612,14 @@
                 }
                 key = "" + config.key;
               }
-              var defaultProps;
+              var defaultProps2;
               if (element.type && element.type.defaultProps) {
-                defaultProps = element.type.defaultProps;
+                defaultProps2 = element.type.defaultProps;
               }
               for (propName in config) {
                 if (hasOwnProperty2.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-                  if (config[propName] === void 0 && defaultProps !== void 0) {
-                    props[propName] = defaultProps[propName];
+                  if (config[propName] === void 0 && defaultProps2 !== void 0) {
+                    props[propName] = defaultProps2[propName];
                   } else {
                     props[propName] = config[propName];
                   }
@@ -638,7 +638,7 @@
             }
             return ReactElement(element.type, key, ref, self, source, owner, props);
           }
-          function isValidElement(object) {
+          function isValidElement4(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR = ".";
@@ -703,7 +703,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement(mappedChild)) {
+                if (isValidElement4(mappedChild)) {
                   {
                     if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                       checkKeyStringCoercion(mappedChild.key);
@@ -791,12 +791,12 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement(children)) {
+            if (!isValidElement4(children)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
             return children;
           }
-          function createContext2(defaultValue) {
+          function createContext5(defaultValue) {
             var context = {
               $$typeof: REACT_CONTEXT_TYPE,
               // As a workaround to support multiple concurrent renderers, we categorize
@@ -950,17 +950,17 @@
               _init: lazyInitializer
             };
             {
-              var defaultProps;
+              var defaultProps2;
               var propTypes;
               Object.defineProperties(lazyType, {
                 defaultProps: {
                   configurable: true,
                   get: function() {
-                    return defaultProps;
+                    return defaultProps2;
                   },
                   set: function(newDefaultProps) {
                     error2("React.lazy(...): It is not supported to assign `defaultProps` to a lazy component import. Either specify them where the component is defined, or create a wrapping component around it.");
-                    defaultProps = newDefaultProps;
+                    defaultProps2 = newDefaultProps;
                     Object.defineProperty(lazyType, "defaultProps", {
                       enumerable: true
                     });
@@ -983,7 +983,7 @@
             }
             return lazyType;
           }
-          function forwardRef5(render) {
+          function forwardRef16(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error2("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1044,7 +1044,7 @@
             }
             return false;
           }
-          function memo(type, compare) {
+          function memo2(type, compare) {
             {
               if (!isValidElementType(type)) {
                 error2("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1082,7 +1082,7 @@
             }
             return dispatcher;
           }
-          function useContext6(Context) {
+          function useContext11(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1096,7 +1096,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState(initialState) {
+          function useState4(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1104,11 +1104,11 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef2(initialValue) {
+          function useRef7(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect(create, deps) {
+          function useEffect5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1116,19 +1116,19 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useInsertionEffect(create, deps);
           }
-          function useLayoutEffect2(create, deps) {
+          function useLayoutEffect3(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback(callback, deps) {
+          function useCallback4(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo(create, deps) {
+          function useMemo4(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
-          function useImperativeHandle(ref, create, deps) {
+          function useImperativeHandle3(ref, create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useImperativeHandle(ref, create, deps);
           }
@@ -1415,7 +1415,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values3, location, componentName, element) {
             {
               var has = Function.call.bind(hasOwnProperty2);
               for (var typeSpecName in typeSpecs) {
@@ -1427,7 +1427,7 @@
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values3, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
@@ -1522,11 +1522,11 @@
             if (isArray(node2)) {
               for (var i = 0; i < node2.length; i++) {
                 var child = node2[i];
-                if (isValidElement(child)) {
+                if (isValidElement4(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement(node2)) {
+            } else if (isValidElement4(node2)) {
               if (node2._store) {
                 node2._store.validated = true;
               }
@@ -1537,7 +1537,7 @@
                   var iterator = iteratorFn.call(node2);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement(step.value)) {
+                    if (isValidElement4(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1660,7 +1660,7 @@
             return validatedFactory;
           }
           function cloneElementWithValidation(element, props, children) {
-            var newElement = cloneElement.apply(this, arguments);
+            var newElement = cloneElement2.apply(this, arguments);
             for (var i = 2; i < arguments.length; i++) {
               validateChildKeys(arguments[i], newElement.type);
             }
@@ -1860,14 +1860,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children = {
+          var Children3 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children;
+          exports.Children = Children3;
           exports.Component = Component;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1876,29 +1876,29 @@
           exports.Suspense = REACT_SUSPENSE_TYPE;
           exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
           exports.cloneElement = cloneElement$1;
-          exports.createContext = createContext2;
+          exports.createContext = createContext5;
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef5;
-          exports.isValidElement = isValidElement;
+          exports.forwardRef = forwardRef16;
+          exports.isValidElement = isValidElement4;
           exports.lazy = lazy;
-          exports.memo = memo;
+          exports.memo = memo2;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback;
-          exports.useContext = useContext6;
+          exports.useCallback = useCallback4;
+          exports.useContext = useContext11;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect;
+          exports.useEffect = useEffect5;
           exports.useId = useId;
-          exports.useImperativeHandle = useImperativeHandle;
+          exports.useImperativeHandle = useImperativeHandle3;
           exports.useInsertionEffect = useInsertionEffect3;
-          exports.useLayoutEffect = useLayoutEffect2;
-          exports.useMemo = useMemo;
+          exports.useLayoutEffect = useLayoutEffect3;
+          exports.useMemo = useMemo4;
           exports.useReducer = useReducer;
-          exports.useRef = useRef2;
-          exports.useState = useState;
+          exports.useRef = useRef7;
+          exports.useState = useState4;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2394,9 +2394,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React16 = require_react();
+          var React41 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React41.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4001,7 +4001,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React16.Children.forEach(props.children, function(child) {
+                  React41.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -4433,7 +4433,7 @@
             var warnedForNaNValue = false;
             var warnedForInfinityValue = false;
             var camelize = function(string) {
-              return string.replace(hyphenPattern, function(_, character2) {
+              return string.replace(hyphenPattern, function(_2, character2) {
                 return character2.toUpperCase();
               });
             };
@@ -10785,7 +10785,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values3, location, componentName, element) {
             {
               var has2 = Function.call.bind(hasOwnProperty2);
               for (var typeSpecName in typeSpecs) {
@@ -10797,7 +10797,7 @@
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values3, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
@@ -11770,10 +11770,10 @@
           function resolveDefaultProps(Component, baseProps) {
             if (Component && Component.defaultProps) {
               var props = assign2({}, baseProps);
-              var defaultProps = Component.defaultProps;
-              for (var propName in defaultProps) {
+              var defaultProps2 = Component.defaultProps;
+              for (var propName in defaultProps2) {
                 if (props[propName] === void 0) {
-                  props[propName] = defaultProps[propName];
+                  props[propName] = defaultProps2[propName];
                 }
               }
               return props;
@@ -12448,7 +12448,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React16.Component().refs;
+          var emptyRefsObject = new React41.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -23796,7 +23796,7 @@
       var ReactPropTypesSecret;
       var loggedTypeFailures;
       var has;
-      function checkPropTypes(typeSpecs, values2, location, componentName, getStack) {
+      function checkPropTypes(typeSpecs, values3, location, componentName, getStack) {
         if (true) {
           for (var typeSpecName in typeSpecs) {
             if (has(typeSpecs, typeSpecName)) {
@@ -23809,7 +23809,7 @@
                   err.name = "Invariant Violation";
                   throw err;
                 }
-                error2 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+                error2 = typeSpecs[typeSpecName](values3, typeSpecName, componentName, location, null, ReactPropTypesSecret);
               } catch (ex) {
                 error2 = ex;
               }
@@ -23864,7 +23864,7 @@
       function emptyFunctionThatReturnsNull() {
         return null;
       }
-      module.exports = function(isValidElement, throwOnDirectAccess) {
+      module.exports = function(isValidElement4, throwOnDirectAccess) {
         var ITERATOR_SYMBOL = typeof Symbol === "function" && Symbol.iterator;
         var FAUX_ITERATOR_SYMBOL = "@@iterator";
         function getIteratorFn(maybeIterable) {
@@ -23992,7 +23992,7 @@
         function createElementTypeChecker() {
           function validate(props, propName, componentName, location, propFullName) {
             var propValue = props[propName];
-            if (!isValidElement(propValue)) {
+            if (!isValidElement4(propValue)) {
               var propType = getPropType(propValue);
               return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
             }
@@ -24180,7 +24180,7 @@
               if (Array.isArray(propValue)) {
                 return propValue.every(isNode);
               }
-              if (propValue === null || isValidElement(propValue)) {
+              if (propValue === null || isValidElement4(propValue)) {
                 return true;
               }
               var iteratorFn = getIteratorFn(propValue);
@@ -24585,7 +24585,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React16 = require_react();
+          var React41 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24611,7 +24611,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React41.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error2(format) {
             {
               {
@@ -24997,7 +24997,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values3, location, componentName, element) {
             {
               var has = Function.call.bind(hasOwnProperty2);
               for (var typeSpecName in typeSpecs) {
@@ -25009,7 +25009,7 @@
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values3, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
@@ -25203,10 +25203,10 @@
                 }
               }
               if (type && type.defaultProps) {
-                var defaultProps = type.defaultProps;
-                for (propName in defaultProps) {
+                var defaultProps2 = type.defaultProps;
+                for (propName in defaultProps2) {
                   if (props[propName] === void 0) {
-                    props[propName] = defaultProps[propName];
+                    props[propName] = defaultProps2[propName];
                   }
                 }
               }
@@ -25239,7 +25239,7 @@
           {
             propTypesMisspellWarningShown = false;
           }
-          function isValidElement(object) {
+          function isValidElement4(object) {
             {
               return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
             }
@@ -25306,11 +25306,11 @@
               if (isArray(node2)) {
                 for (var i = 0; i < node2.length; i++) {
                   var child = node2[i];
-                  if (isValidElement(child)) {
+                  if (isValidElement4(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement(node2)) {
+              } else if (isValidElement4(node2)) {
                 if (node2._store) {
                   node2._store.validated = true;
                 }
@@ -25321,7 +25321,7 @@
                     var iterator = iteratorFn.call(node2);
                     var step;
                     while (!(step = iterator.next()).done) {
-                      if (isValidElement(step.value)) {
+                      if (isValidElement4(step.value)) {
                         validateExplicitKey(step.value, parentType);
                       }
                     }
@@ -25468,197 +25468,16 @@
     }
   });
 
-  // src/util/logger.js
-  function makeLogger(label, backgroundColor2, textColor, indent = 0) {
-    const newLogger = logger.bind(this, label, backgroundColor2, textColor, indent);
-    newLogger.green = green.bind(this, label, backgroundColor2, textColor, indent);
-    newLogger.red = red.bind(this, label, backgroundColor2, textColor, indent);
-    newLogger.error = error.bind(this, label, backgroundColor2, textColor, indent);
-    return newLogger;
-  }
-  function logger(label, backgroundColor2, textColor, indent, ...rest) {
-    if (true) {
-      console.log(`${"	".repeat(indent)}%c[[${label}]]`, `background: ${backgroundColor2}; color: ${textColor}`, ...rest);
-    }
-  }
-  function green(label, backgroundColor2, textColor, indent, ...rest) {
-    let output = rest.join(" ");
-    if (!output.includes("%c")) {
-      output = `%c${output}`;
-    }
-    console.log(
-      `${"	".repeat(indent)}%c[[${label}]]%c ${output}`,
-      `background: ${backgroundColor2}; color: ${textColor}`,
-      "background: white; color, black",
-      "background: lightgreen; color: black"
-    );
-  }
-  function red(label, backgroundColor2, textColor, indent, ...rest) {
-    let output = rest.join(" ");
-    if (!output.includes("%c")) {
-      output = `%c${output}`;
-    }
-    console.log(
-      `${"	".repeat(indent)}%c[[${label}]]%c ${output}`,
-      `background: ${backgroundColor2}; color: ${textColor}`,
-      "background: white; color, black",
-      "background: tomato; color: black"
-    );
-  }
-  function error(label, backgroundColor2, textColor, indent, ...rest) {
-    console.error(`${"	".repeat(indent)}%c[[${label}]]`, `background: ${backgroundColor2}; color: ${textColor}`, ...rest);
-  }
-
   // src/index.jsx
-  var import_react8 = __toESM(require_react(), 1);
+  var import_react14 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
-  // src/util/utilFunctions.js
-  function wait(timeout) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve();
-      }, timeout);
-    });
-  }
-
-  // src/domTraversal/queriesAndRegex.js
-  var QUERIES = {
-    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
-    requirementHeader: ".PAGROUPDIVIDER",
-    subRequirementHeader: ".PSGROUPBOXLABEL",
-    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
-    subRequirementDescription: ".PSLONGEDITBOX",
-    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
-    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
-    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
-  };
-  var REGEX = {
-    generalHeader: /(?:GENERAL INFORMATION)/i,
-    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
-    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
-    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
-  };
-
-  // src/domTraversal/pageRoot.js
-  var MAX_RETRIES = 10;
-  var auditRootDoc = null;
-  function verifyRootDoc() {
-    auditRootDoc = document;
-    let expanderButton = auditRootDoc.querySelector(QUERIES.expander);
-    if (!expanderButton) {
-      const iFrame = document.querySelector("iframe");
-      auditRootDoc = iFrame.contentDocument;
-      expanderButton = auditRootDoc.querySelector(QUERIES.expander);
-    }
-    if (expanderButton !== null) {
-      return auditRootDoc;
-    }
-    auditRootDoc = null;
-    return null;
-  }
-  function getRootDoc() {
-    return auditRootDoc;
-  }
-  function getTopLevelExpanderList() {
-    return auditRootDoc.querySelectorAll(QUERIES.expanderList);
-  }
-  async function expandAllSections() {
-    const expanderButton = auditRootDoc.querySelector(QUERIES.expander);
-    if (!expanderButton) {
-      throw new Error('Failed to find "Expand All" button');
-    }
-    expanderButton.click();
-    let tries = 0;
-    while (tries < MAX_RETRIES && getTopLevelExpanderList().length > 0) {
-      await wait(1e3);
-      tries++;
-    }
-    if (getTopLevelExpanderList().length > 0) {
-      throw new Error("Max retries exceeded waiting for program nodes to expand");
-    }
-  }
-
-  // src/domTraversal/programs.js
-  function getProgramNodes() {
-    const headerNodes = getRootDoc().querySelectorAll(QUERIES.programHeader);
-    if (headerNodes.length < 1) {
-      throw new Error("Could not find program header nodes");
-    }
-    const generalNodes = [];
-    const universityNodes = [];
-    const programNodes = [];
-    Array.from(headerNodes).forEach((header) => {
-      if (header.textContent.match(REGEX.generalHeader)) {
-        generalNodes.push(header);
-      } else if (header.textContent.match(REGEX.universityRequirements)) {
-        universityNodes.push(header);
-      } else {
-        programNodes.push(header);
-      }
-    });
-    return [generalNodes, universityNodes, programNodes];
-  }
-
-  // src/elements/summarizeButton.js
-  var BUTTON_STYLE = {
-    backgroundColor: "#31B0D5",
-    color: "white",
-    padding: "10px 20px",
-    borderRadius: "4px",
-    borderColor: "#46b8da"
-  };
-  var BUTTON_DIV_STYLE = {
-    position: "fixed",
-    bottom: "-4px",
-    right: "20px"
-  };
-  function makeSummarizeButton(clickCallback) {
-    const summarizeButton = document.createElement("button");
-    summarizeButton.appendChild(document.createTextNode("Summarize"));
-    summarizeButton.addEventListener("click", clickCallback);
-    applyStyle(summarizeButton, BUTTON_STYLE);
-    const summarizeDiv = document.createElement("div");
-    summarizeDiv.appendChild(summarizeButton);
-    applyStyle(summarizeDiv, BUTTON_DIV_STYLE);
-    return summarizeDiv;
-  }
-  function applyStyle(node2, style3) {
-    for (const key in style3) {
-      node2.style[key] = style3[key];
-    }
-  }
-
-  // src/elements/reactAndMUIHelpers.js
-  var ROOT_DIV_STYLE = {
-    position: "fixed",
-    top: "100px",
-    right: "40px",
-    transform: "translateX(120%)",
-    transition: "transform 0.5s ease-in-out"
-  };
-  function makeFontCSSTag(href) {
-    const fontTag = document.createElement("link");
-    fontTag.setAttribute("rel", "stylesheet");
-    fontTag.setAttribute("href", href);
-    return fontTag;
-  }
-  function makeCleanserContainer() {
-    const rootDiv = document.createElement("div");
-    applyStyle(rootDiv, ROOT_DIV_STYLE);
-    return rootDiv;
-  }
-  function makeRobotoFontTag() {
-    return makeFontCSSTag(
-      "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    );
-  }
+  // src/elements/AppRoot.jsx
+  var import_react13 = __toESM(require_react(), 1);
 
   // src/elements/Components/CleanserRoot.jsx
-  var import_react7 = __toESM(require_react(), 1);
-  var import_prop_types8 = __toESM(require_prop_types(), 1);
+  var import_react11 = __toESM(require_react(), 1);
+  var import_prop_types24 = __toESM(require_prop_types(), 1);
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -25668,7 +25487,7 @@
   var common_default = common;
 
   // node_modules/@mui/material/colors/red.js
-  var red2 = {
+  var red = {
     50: "#ffebee",
     100: "#ffcdd2",
     200: "#ef9a9a",
@@ -25684,7 +25503,7 @@
     A400: "#ff1744",
     A700: "#d50000"
   };
-  var red_default = red2;
+  var red_default = red;
 
   // node_modules/@mui/material/colors/purple.js
   var purple = {
@@ -25744,7 +25563,7 @@
   var lightBlue_default = lightBlue;
 
   // node_modules/@mui/material/colors/green.js
-  var green2 = {
+  var green = {
     50: "#e8f5e9",
     100: "#c8e6c9",
     200: "#a5d6a7",
@@ -25760,7 +25579,7 @@
     A400: "#00e676",
     A700: "#00c853"
   };
-  var green_default = green2;
+  var green_default = green;
 
   // node_modules/@mui/material/colors/orange.js
   var orange = {
@@ -25861,6 +25680,35 @@
     return output;
   }
 
+  // node_modules/@mui/utils/esm/elementTypeAcceptingRef.js
+  var import_prop_types = __toESM(require_prop_types());
+  function isClassComponent(elementType) {
+    const {
+      prototype = {}
+    } = elementType;
+    return Boolean(prototype.isReactComponent);
+  }
+  function elementTypeAcceptingRef(props, propName, componentName, location, propFullName) {
+    const propValue = props[propName];
+    const safePropName = propFullName || propName;
+    if (propValue == null || // When server-side rendering React doesn't warn either.
+    // This is not an accurate check for SSR.
+    // This is only in place for emotion compat.
+    // TODO: Revisit once https://github.com/facebook/react/issues/20047 is resolved.
+    typeof window === "undefined") {
+      return null;
+    }
+    let warningHint;
+    if (typeof propValue === "function" && !isClassComponent(propValue)) {
+      warningHint = "Did you accidentally provide a plain function component instead?";
+    }
+    if (warningHint !== void 0) {
+      return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element type that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
+    }
+    return null;
+  }
+  var elementTypeAcceptingRef_default = chainPropTypes(import_prop_types.default.elementType, elementTypeAcceptingRef);
+
   // node_modules/@mui/utils/esm/getDisplayName.js
   var import_react_is = __toESM(require_react_is2());
   var fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
@@ -25899,12 +25747,176 @@
     return void 0;
   }
 
+  // node_modules/@mui/utils/esm/refType.js
+  var import_prop_types2 = __toESM(require_prop_types());
+  var refType = import_prop_types2.default.oneOfType([import_prop_types2.default.func, import_prop_types2.default.object]);
+  var refType_default = refType;
+
   // node_modules/@mui/utils/esm/capitalize/capitalize.js
   function capitalize(string) {
     if (typeof string !== "string") {
       throw new Error(true ? `MUI: \`capitalize(string)\` expects a string argument.` : formatMuiErrorMessage(7));
     }
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  // node_modules/@mui/utils/esm/isMuiElement.js
+  var React = __toESM(require_react());
+  function isMuiElement(element, muiNames) {
+    var _muiName, _element$type;
+    return /* @__PURE__ */ React.isValidElement(element) && muiNames.indexOf(
+      // For server components `muiName` is avaialble in element.type._payload.value.muiName
+      // relevant info - https://github.com/facebook/react/blob/2807d781a08db8e9873687fccc25c0f12b4fb3d4/packages/react/src/ReactLazy.js#L45
+      // eslint-disable-next-line no-underscore-dangle
+      (_muiName = element.type.muiName) != null ? _muiName : (_element$type = element.type) == null || (_element$type = _element$type._payload) == null || (_element$type = _element$type.value) == null ? void 0 : _element$type.muiName
+    ) !== -1;
+  }
+
+  // node_modules/@mui/utils/esm/setRef.js
+  function setRef(ref, value) {
+    if (typeof ref === "function") {
+      ref(value);
+    } else if (ref) {
+      ref.current = value;
+    }
+  }
+
+  // node_modules/@mui/utils/esm/useEnhancedEffect/useEnhancedEffect.js
+  var React2 = __toESM(require_react());
+  var useEnhancedEffect = typeof window !== "undefined" ? React2.useLayoutEffect : React2.useEffect;
+  var useEnhancedEffect_default = useEnhancedEffect;
+
+  // node_modules/@mui/utils/esm/useEventCallback/useEventCallback.js
+  var React3 = __toESM(require_react());
+  function useEventCallback(fn) {
+    const ref = React3.useRef(fn);
+    useEnhancedEffect_default(() => {
+      ref.current = fn;
+    });
+    return React3.useCallback((...args) => (
+      // @ts-expect-error hide `this`
+      // tslint:disable-next-line:ban-comma-operator
+      (0, ref.current)(...args)
+    ), []);
+  }
+  var useEventCallback_default = useEventCallback;
+
+  // node_modules/@mui/utils/esm/useForkRef/useForkRef.js
+  var React4 = __toESM(require_react());
+  function useForkRef(...refs) {
+    return React4.useMemo(() => {
+      if (refs.every((ref) => ref == null)) {
+        return null;
+      }
+      return (instance) => {
+        refs.forEach((ref) => {
+          setRef(ref, instance);
+        });
+      };
+    }, refs);
+  }
+
+  // node_modules/@mui/utils/esm/useIsFocusVisible.js
+  var React5 = __toESM(require_react());
+  var hadKeyboardEvent = true;
+  var hadFocusVisibleRecently = false;
+  var hadFocusVisibleRecentlyTimeout;
+  var inputTypesWhitelist = {
+    text: true,
+    search: true,
+    url: true,
+    tel: true,
+    email: true,
+    password: true,
+    number: true,
+    date: true,
+    month: true,
+    week: true,
+    time: true,
+    datetime: true,
+    "datetime-local": true
+  };
+  function focusTriggersKeyboardModality(node2) {
+    const {
+      type,
+      tagName
+    } = node2;
+    if (tagName === "INPUT" && inputTypesWhitelist[type] && !node2.readOnly) {
+      return true;
+    }
+    if (tagName === "TEXTAREA" && !node2.readOnly) {
+      return true;
+    }
+    if (node2.isContentEditable) {
+      return true;
+    }
+    return false;
+  }
+  function handleKeyDown(event) {
+    if (event.metaKey || event.altKey || event.ctrlKey) {
+      return;
+    }
+    hadKeyboardEvent = true;
+  }
+  function handlePointerDown() {
+    hadKeyboardEvent = false;
+  }
+  function handleVisibilityChange() {
+    if (this.visibilityState === "hidden") {
+      if (hadFocusVisibleRecently) {
+        hadKeyboardEvent = true;
+      }
+    }
+  }
+  function prepare(doc) {
+    doc.addEventListener("keydown", handleKeyDown, true);
+    doc.addEventListener("mousedown", handlePointerDown, true);
+    doc.addEventListener("pointerdown", handlePointerDown, true);
+    doc.addEventListener("touchstart", handlePointerDown, true);
+    doc.addEventListener("visibilitychange", handleVisibilityChange, true);
+  }
+  function isFocusVisible(event) {
+    const {
+      target
+    } = event;
+    try {
+      return target.matches(":focus-visible");
+    } catch (error2) {
+    }
+    return hadKeyboardEvent || focusTriggersKeyboardModality(target);
+  }
+  function useIsFocusVisible() {
+    const ref = React5.useCallback((node2) => {
+      if (node2 != null) {
+        prepare(node2.ownerDocument);
+      }
+    }, []);
+    const isFocusVisibleRef = React5.useRef(false);
+    function handleBlurVisible() {
+      if (isFocusVisibleRef.current) {
+        hadFocusVisibleRecently = true;
+        window.clearTimeout(hadFocusVisibleRecentlyTimeout);
+        hadFocusVisibleRecentlyTimeout = window.setTimeout(() => {
+          hadFocusVisibleRecently = false;
+        }, 100);
+        isFocusVisibleRef.current = false;
+        return true;
+      }
+      return false;
+    }
+    function handleFocusVisible(event) {
+      if (isFocusVisible(event)) {
+        isFocusVisibleRef.current = true;
+        return true;
+      }
+      return false;
+    }
+    return {
+      isFocusVisibleRef,
+      onFocus: handleFocusVisible,
+      onBlur: handleBlurVisible,
+      ref
+    };
   }
 
   // node_modules/@mui/utils/esm/integerPropType.js
@@ -25958,13 +25970,13 @@
   var integerPropType_default = false ? validatorNoop : validator;
 
   // node_modules/@mui/utils/esm/resolveProps.js
-  function resolveProps(defaultProps, props) {
+  function resolveProps(defaultProps2, props) {
     const output = _extends({}, props);
-    Object.keys(defaultProps).forEach((propName) => {
+    Object.keys(defaultProps2).forEach((propName) => {
       if (propName.toString().match(/^(components|slots)$/)) {
-        output[propName] = _extends({}, defaultProps[propName], output[propName]);
+        output[propName] = _extends({}, defaultProps2[propName], output[propName]);
       } else if (propName.toString().match(/^(componentsProps|slotProps)$/)) {
-        const defaultSlotProps = defaultProps[propName] || {};
+        const defaultSlotProps = defaultProps2[propName] || {};
         const slotProps = props[propName];
         output[propName] = {};
         if (!slotProps || !Object.keys(slotProps)) {
@@ -25978,7 +25990,7 @@
           });
         }
       } else if (output[propName] === void 0) {
-        output[propName] = defaultProps[propName];
+        output[propName] = defaultProps2[propName];
       }
     });
     return output;
@@ -26076,7 +26088,7 @@
   }
 
   // node_modules/@emotion/styled/base/dist/emotion-styled-base.browser.esm.js
-  var React4 = __toESM(require_react());
+  var React9 = __toESM(require_react());
 
   // node_modules/@emotion/memoize/dist/emotion-memoize.esm.js
   function memoize(fn) {
@@ -26098,7 +26110,7 @@
   );
 
   // node_modules/@emotion/react/dist/emotion-element-c39617d8.browser.esm.js
-  var React2 = __toESM(require_react());
+  var React7 = __toESM(require_react());
   var import_react = __toESM(require_react());
 
   // node_modules/@emotion/sheet/dist/emotion-sheet.browser.esm.js
@@ -27317,18 +27329,18 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   };
 
   // node_modules/@emotion/use-insertion-effect-with-fallbacks/dist/emotion-use-insertion-effect-with-fallbacks.browser.esm.js
-  var React = __toESM(require_react());
+  var React6 = __toESM(require_react());
   var syncFallback = function syncFallback2(create) {
     return create();
   };
-  var useInsertionEffect2 = React["useInsertionEffect"] ? React["useInsertionEffect"] : false;
+  var useInsertionEffect2 = React6["useInsertionEffect"] ? React6["useInsertionEffect"] : false;
   var useInsertionEffectAlwaysWithSyncFallback = useInsertionEffect2 || syncFallback;
-  var useInsertionEffectWithLayoutFallback = useInsertionEffect2 || React.useLayoutEffect;
+  var useInsertionEffectWithLayoutFallback = useInsertionEffect2 || React6.useLayoutEffect;
 
   // node_modules/@emotion/react/dist/emotion-element-c39617d8.browser.esm.js
   var isBrowser2 = true;
   var hasOwnProperty = {}.hasOwnProperty;
-  var EmotionCacheContext = /* @__PURE__ */ React2.createContext(
+  var EmotionCacheContext = /* @__PURE__ */ React7.createContext(
     // we're doing this to avoid preconstruct's dead code elimination in this one case
     // because this module is primarily intended for the browser and node
     // but it's also required in react native and similar environments sometimes
@@ -27357,7 +27369,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           cache = createCache({
             key: "css"
           });
-          return /* @__PURE__ */ React2.createElement(EmotionCacheContext.Provider, {
+          return /* @__PURE__ */ React7.createElement(EmotionCacheContext.Provider, {
             value: cache
           }, func(props, cache));
         } else {
@@ -27366,7 +27378,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       };
     };
   }
-  var ThemeContext = /* @__PURE__ */ React2.createContext({});
+  var ThemeContext = /* @__PURE__ */ React7.createContext({});
   if (true) {
     ThemeContext.displayName = "EmotionThemeContext";
   }
@@ -27393,7 +27405,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     } else if (props.className != null) {
       className = props.className + " ";
     }
-    var serialized = serializeStyles(registeredStyles, void 0, React2.useContext(ThemeContext));
+    var serialized = serializeStyles(registeredStyles, void 0, React7.useContext(ThemeContext));
     if (serialized.name.indexOf("-") === -1) {
       var labelFromStack = props[labelPropName];
       if (labelFromStack) {
@@ -27409,18 +27421,18 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     }
     newProps.ref = ref;
     newProps.className = className;
-    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement(Insertion, {
+    return /* @__PURE__ */ React7.createElement(React7.Fragment, null, /* @__PURE__ */ React7.createElement(Insertion, {
       cache,
       serialized,
       isStringTag: typeof WrappedComponent === "string"
-    }), /* @__PURE__ */ React2.createElement(WrappedComponent, newProps));
+    }), /* @__PURE__ */ React7.createElement(WrappedComponent, newProps));
   });
   if (true) {
     Emotion.displayName = "EmotionCssPropInternal";
   }
 
   // node_modules/@emotion/react/dist/emotion-react.browser.esm.js
-  var React3 = __toESM(require_react());
+  var React8 = __toESM(require_react());
   var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs());
   var pkg = {
     name: "@emotion/react",
@@ -27564,7 +27576,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       warnedAboutCssPropForGlobal = true;
     }
     var styles2 = props.styles;
-    var serialized = serializeStyles([styles2], void 0, React3.useContext(ThemeContext));
+    var serialized = serializeStyles([styles2], void 0, React8.useContext(ThemeContext));
     if (!isBrowser2) {
       var _ref;
       var serializedNames = serialized.name;
@@ -27583,11 +27595,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       if (shouldCache) {
         return null;
       }
-      return /* @__PURE__ */ React3.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
+      return /* @__PURE__ */ React8.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
         __html: rules
       }, _ref.nonce = cache.sheet.nonce, _ref));
     }
-    var sheetRef = React3.useRef();
+    var sheetRef = React8.useRef();
     useInsertionEffectWithLayoutFallback(function() {
       var key = cache.key + "-global";
       var sheet = new cache.sheet.constructor({
@@ -27633,6 +27645,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   if (true) {
     Global.displayName = "EmotionGlobal";
   }
+  function css() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    return serializeStyles(args);
+  }
+  var keyframes = function keyframes2() {
+    var insertable = css.apply(void 0, arguments);
+    var name = "animation-" + insertable.name;
+    return {
+      name,
+      styles: "@keyframes " + name + "{" + insertable.styles + "}",
+      anim: 1,
+      toString: function toString() {
+        return "_EMO_" + this.name + "_" + this.styles + "_EMO_";
+      }
+    };
+  };
   var classnames = function classnames2(args) {
     var len = args.length;
     var i = 0;
@@ -27717,11 +27747,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     var content = {
       css: css2,
       cx,
-      theme: React3.useContext(ThemeContext)
+      theme: React8.useContext(ThemeContext)
     };
     var ele = props.children(content);
     hasRendered = true;
-    return /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement(Insertion3, {
+    return /* @__PURE__ */ React8.createElement(React8.Fragment, null, /* @__PURE__ */ React8.createElement(Insertion3, {
       cache,
       serializedArr
     }), ele);
@@ -27832,7 +27862,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           for (var key in props) {
             mergedProps[key] = props[key];
           }
-          mergedProps.theme = React4.useContext(ThemeContext);
+          mergedProps.theme = React9.useContext(ThemeContext);
         }
         if (typeof props.className === "string") {
           className = getRegisteredStyles(cache.registered, classInterpolations, props.className);
@@ -27858,11 +27888,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         newProps.className = className;
         newProps.ref = ref;
-        return /* @__PURE__ */ React4.createElement(React4.Fragment, null, /* @__PURE__ */ React4.createElement(Insertion5, {
+        return /* @__PURE__ */ React9.createElement(React9.Fragment, null, /* @__PURE__ */ React9.createElement(Insertion5, {
           cache,
           serialized,
           isStringTag: typeof FinalTag === "string"
-        }), /* @__PURE__ */ React4.createElement(FinalTag, newProps));
+        }), /* @__PURE__ */ React9.createElement(FinalTag, newProps));
       });
       Styled.displayName = identifierName !== void 0 ? identifierName : "Styled(" + (typeof baseTag === "string" ? baseTag : baseTag.displayName || baseTag.name || "Component") + ")";
       Styled.defaultProps = tag.defaultProps;
@@ -28032,8 +28062,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   });
 
   // node_modules/@mui/styled-engine/GlobalStyles/GlobalStyles.js
-  var React5 = __toESM(require_react());
-  var import_prop_types = __toESM(require_prop_types());
+  var React10 = __toESM(require_react());
+  var import_prop_types3 = __toESM(require_prop_types());
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   function isEmpty(obj) {
     return obj === void 0 || obj === null || Object.keys(obj).length === 0;
@@ -28049,8 +28079,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     });
   }
   true ? GlobalStyles.propTypes = {
-    defaultTheme: import_prop_types.default.object,
-    styles: import_prop_types.default.oneOfType([import_prop_types.default.array, import_prop_types.default.string, import_prop_types.default.object, import_prop_types.default.func])
+    defaultTheme: import_prop_types3.default.object,
+    styles: import_prop_types3.default.oneOfType([import_prop_types3.default.array, import_prop_types3.default.string, import_prop_types3.default.object, import_prop_types3.default.func])
   } : void 0;
 
   // node_modules/@mui/styled-engine/index.js
@@ -28076,15 +28106,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   };
 
   // node_modules/@mui/system/esm/GlobalStyles/GlobalStyles.js
-  var React7 = __toESM(require_react());
-  var import_prop_types3 = __toESM(require_prop_types());
+  var React12 = __toESM(require_react());
+  var import_prop_types5 = __toESM(require_prop_types());
 
   // node_modules/@mui/system/esm/createTheme/createBreakpoints.js
   var _excluded = ["values", "unit", "step"];
-  var sortBreakpointsValues = (values2) => {
-    const breakpointsAsArray = Object.keys(values2).map((key) => ({
+  var sortBreakpointsValues = (values3) => {
+    const breakpointsAsArray = Object.keys(values3).map((key) => ({
       key,
-      val: values2[key]
+      val: values3[key]
     })) || [];
     breakpointsAsArray.sort((breakpoint1, breakpoint2) => breakpoint1.val - breakpoint2.val);
     return breakpointsAsArray.reduce((acc, obj) => {
@@ -28097,7 +28127,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     const {
       // The breakpoint **start** at this value.
       // For instance with the first breakpoint xs: [xs, sm).
-      values: values2 = {
+      values: values3 = {
         xs: 0,
         // phone
         sm: 600,
@@ -28112,19 +28142,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       unit = "px",
       step = 5
     } = breakpoints, other = _objectWithoutPropertiesLoose(breakpoints, _excluded);
-    const sortedValues = sortBreakpointsValues(values2);
+    const sortedValues = sortBreakpointsValues(values3);
     const keys = Object.keys(sortedValues);
     function up(key) {
-      const value = typeof values2[key] === "number" ? values2[key] : key;
+      const value = typeof values3[key] === "number" ? values3[key] : key;
       return `@media (min-width:${value}${unit})`;
     }
     function down(key) {
-      const value = typeof values2[key] === "number" ? values2[key] : key;
+      const value = typeof values3[key] === "number" ? values3[key] : key;
       return `@media (max-width:${value - step / 100}${unit})`;
     }
     function between(start, end) {
       const endIndex = keys.indexOf(end);
-      return `@media (min-width:${typeof values2[start] === "number" ? values2[start] : start}${unit}) and (max-width:${(endIndex !== -1 && typeof values2[keys[endIndex]] === "number" ? values2[keys[endIndex]] : end) - step / 100}${unit})`;
+      return `@media (min-width:${typeof values3[start] === "number" ? values3[start] : start}${unit}) and (max-width:${(endIndex !== -1 && typeof values3[keys[endIndex]] === "number" ? values3[keys[endIndex]] : end) - step / 100}${unit})`;
     }
     function only(key) {
       if (keys.indexOf(key) + 1 < keys.length) {
@@ -28161,8 +28191,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var shape_default = shape;
 
   // node_modules/@mui/system/esm/responsivePropType.js
-  var import_prop_types2 = __toESM(require_prop_types());
-  var responsivePropType = true ? import_prop_types2.default.oneOfType([import_prop_types2.default.number, import_prop_types2.default.string, import_prop_types2.default.object, import_prop_types2.default.array]) : {};
+  var import_prop_types4 = __toESM(require_prop_types());
+  var responsivePropType = true ? import_prop_types4.default.oneOfType([import_prop_types4.default.number, import_prop_types4.default.string, import_prop_types4.default.object, import_prop_types4.default.array]) : {};
   var responsivePropType_default = responsivePropType;
 
   // node_modules/@mui/system/esm/merge.js
@@ -29157,12 +29187,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
   var createTheme_default = createTheme;
 
   // node_modules/@mui/system/esm/useThemeWithoutDefault.js
-  var React6 = __toESM(require_react());
+  var React11 = __toESM(require_react());
   function isObjectEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
   function useTheme2(defaultTheme2 = null) {
-    const contextTheme = React6.useContext(ThemeContext);
+    const contextTheme = React11.useContext(ThemeContext);
     return !contextTheme || isObjectEmpty(contextTheme) ? defaultTheme2 : contextTheme;
   }
   var useThemeWithoutDefault_default = useTheme2;
@@ -29195,15 +29225,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
     /**
      * @ignore
      */
-    defaultTheme: import_prop_types3.default.object,
+    defaultTheme: import_prop_types5.default.object,
     /**
      * @ignore
      */
-    styles: import_prop_types3.default.oneOfType([import_prop_types3.default.array, import_prop_types3.default.func, import_prop_types3.default.number, import_prop_types3.default.object, import_prop_types3.default.string, import_prop_types3.default.bool]),
+    styles: import_prop_types5.default.oneOfType([import_prop_types5.default.array, import_prop_types5.default.func, import_prop_types5.default.number, import_prop_types5.default.object, import_prop_types5.default.string, import_prop_types5.default.bool]),
     /**
      * @ignore
      */
-    themeId: import_prop_types3.default.string
+    themeId: import_prop_types5.default.string
   } : void 0;
   var GlobalStyles_default = GlobalStyles2;
 
@@ -29392,7 +29422,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         skipSx: inputSkipSx,
         // TODO v6: remove `lowercaseFirstLetter()` in the next major release
         // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
+        overridesResolver: overridesResolver2 = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
       } = inputOptions, options = _objectWithoutPropertiesLoose(inputOptions, _excluded5);
       const skipVariantsResolver = inputSkipVariantsResolver !== void 0 ? inputSkipVariantsResolver : (
         // TODO v6: remove `Root` in the next major release
@@ -29430,7 +29460,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           } : stylesArg;
         }) : [];
         let transformedStyleArg = styleArg;
-        if (componentName && overridesResolver) {
+        if (componentName && overridesResolver2) {
           expressionsWithDefaultTheme.push((props) => {
             const theme = resolveTheme(_extends({}, props, {
               defaultTheme: defaultTheme2,
@@ -29444,7 +29474,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                   theme
                 })) : slotStyle;
               });
-              return overridesResolver(props, resolvedStyleOverrides);
+              return overridesResolver2(props, resolvedStyleOverrides);
             }
             return null;
           });
@@ -29565,25 +29595,25 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       throw new Error(true ? `MUI: Unsupported \`${color2}\` color.
 The following formats are supported: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color().` : formatMuiErrorMessage(9, color2));
     }
-    let values2 = color2.substring(marker + 1, color2.length - 1);
+    let values3 = color2.substring(marker + 1, color2.length - 1);
     let colorSpace;
     if (type === "color") {
-      values2 = values2.split(" ");
-      colorSpace = values2.shift();
-      if (values2.length === 4 && values2[3].charAt(0) === "/") {
-        values2[3] = values2[3].slice(1);
+      values3 = values3.split(" ");
+      colorSpace = values3.shift();
+      if (values3.length === 4 && values3[3].charAt(0) === "/") {
+        values3[3] = values3[3].slice(1);
       }
       if (["srgb", "display-p3", "a98-rgb", "prophoto-rgb", "rec-2020"].indexOf(colorSpace) === -1) {
         throw new Error(true ? `MUI: unsupported \`${colorSpace}\` color space.
 The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rgb, rec-2020.` : formatMuiErrorMessage(10, colorSpace));
       }
     } else {
-      values2 = values2.split(",");
+      values3 = values3.split(",");
     }
-    values2 = values2.map((value) => parseFloat(value));
+    values3 = values3.map((value) => parseFloat(value));
     return {
       type,
-      values: values2,
+      values: values3,
       colorSpace
     };
   }
@@ -29593,36 +29623,36 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       colorSpace
     } = color2;
     let {
-      values: values2
+      values: values3
     } = color2;
     if (type.indexOf("rgb") !== -1) {
-      values2 = values2.map((n, i) => i < 3 ? parseInt(n, 10) : n);
+      values3 = values3.map((n, i) => i < 3 ? parseInt(n, 10) : n);
     } else if (type.indexOf("hsl") !== -1) {
-      values2[1] = `${values2[1]}%`;
-      values2[2] = `${values2[2]}%`;
+      values3[1] = `${values3[1]}%`;
+      values3[2] = `${values3[2]}%`;
     }
     if (type.indexOf("color") !== -1) {
-      values2 = `${colorSpace} ${values2.join(" ")}`;
+      values3 = `${colorSpace} ${values3.join(" ")}`;
     } else {
-      values2 = `${values2.join(", ")}`;
+      values3 = `${values3.join(", ")}`;
     }
-    return `${type}(${values2})`;
+    return `${type}(${values3})`;
   }
   function hslToRgb(color2) {
     color2 = decomposeColor(color2);
     const {
-      values: values2
+      values: values3
     } = color2;
-    const h = values2[0];
-    const s = values2[1] / 100;
-    const l = values2[2] / 100;
+    const h = values3[0];
+    const s = values3[1] / 100;
+    const l = values3[2] / 100;
     const a = s * Math.min(l, 1 - l);
     const f = (n, k = (n + h / 30) % 12) => l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
     let type = "rgb";
     const rgb = [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
     if (color2.type === "hsla") {
       type += "a";
-      rgb.push(values2[3]);
+      rgb.push(values3[3]);
     }
     return recomposeColor({
       type,
@@ -30241,7 +30271,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   var createTheme_default2 = createTheme2;
 
   // node_modules/@mui/material/styles/useTheme.js
-  var React8 = __toESM(require_react());
+  var React13 = __toESM(require_react());
 
   // node_modules/@mui/material/styles/defaultTheme.js
   var defaultTheme = createTheme_default2();
@@ -30251,7 +30281,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function useTheme4() {
     const theme = useTheme_default(defaultTheme_default);
     if (true) {
-      React8.useDebugValue(theme);
+      React13.useDebugValue(theme);
     }
     return theme[identifier_default] || theme;
   }
@@ -30293,9 +30323,497 @@ Please use another name.` : formatMuiErrorMessage(18));
   // node_modules/@mui/material/utils/capitalize.js
   var capitalize_default = capitalize;
 
+  // node_modules/@mui/material/utils/createSvgIcon.js
+  var React15 = __toESM(require_react());
+
+  // node_modules/@mui/material/SvgIcon/SvgIcon.js
+  var React14 = __toESM(require_react());
+  var import_prop_types6 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/SvgIcon/svgIconClasses.js
+  function getSvgIconUtilityClass(slot) {
+    return generateUtilityClass("MuiSvgIcon", slot);
+  }
+  var svgIconClasses = generateUtilityClasses("MuiSvgIcon", ["root", "colorPrimary", "colorSecondary", "colorAction", "colorError", "colorDisabled", "fontSizeInherit", "fontSizeSmall", "fontSizeMedium", "fontSizeLarge"]);
+
+  // node_modules/@mui/material/SvgIcon/SvgIcon.js
+  var import_jsx_runtime3 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
+  var _excluded10 = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
+  var useUtilityClasses = (ownerState) => {
+    const {
+      color: color2,
+      fontSize,
+      classes
+    } = ownerState;
+    const slots = {
+      root: ["root", color2 !== "inherit" && `color${capitalize_default(color2)}`, `fontSize${capitalize_default(fontSize)}`]
+    };
+    return composeClasses(slots, getSvgIconUtilityClass, classes);
+  };
+  var SvgIconRoot = styled_default("svg", {
+    name: "MuiSvgIcon",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, ownerState.color !== "inherit" && styles2[`color${capitalize_default(ownerState.color)}`], styles2[`fontSize${capitalize_default(ownerState.fontSize)}`]];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => {
+    var _theme$transitions, _theme$transitions$cr, _theme$transitions2, _theme$typography, _theme$typography$pxT, _theme$typography2, _theme$typography2$px, _theme$typography3, _theme$typography3$px, _palette$ownerState$c, _palette, _palette2, _palette3;
+    return {
+      userSelect: "none",
+      width: "1em",
+      height: "1em",
+      display: "inline-block",
+      // the <svg> will define the property that has `currentColor`
+      // e.g. heroicons uses fill="none" and stroke="currentColor"
+      fill: ownerState.hasSvgAsChild ? void 0 : "currentColor",
+      flexShrink: 0,
+      transition: (_theme$transitions = theme.transitions) == null || (_theme$transitions$cr = _theme$transitions.create) == null ? void 0 : _theme$transitions$cr.call(_theme$transitions, "fill", {
+        duration: (_theme$transitions2 = theme.transitions) == null || (_theme$transitions2 = _theme$transitions2.duration) == null ? void 0 : _theme$transitions2.shorter
+      }),
+      fontSize: {
+        inherit: "inherit",
+        small: ((_theme$typography = theme.typography) == null || (_theme$typography$pxT = _theme$typography.pxToRem) == null ? void 0 : _theme$typography$pxT.call(_theme$typography, 20)) || "1.25rem",
+        medium: ((_theme$typography2 = theme.typography) == null || (_theme$typography2$px = _theme$typography2.pxToRem) == null ? void 0 : _theme$typography2$px.call(_theme$typography2, 24)) || "1.5rem",
+        large: ((_theme$typography3 = theme.typography) == null || (_theme$typography3$px = _theme$typography3.pxToRem) == null ? void 0 : _theme$typography3$px.call(_theme$typography3, 35)) || "2.1875rem"
+      }[ownerState.fontSize],
+      // TODO v5 deprecate, v6 remove for sx
+      color: (_palette$ownerState$c = (_palette = (theme.vars || theme).palette) == null || (_palette = _palette[ownerState.color]) == null ? void 0 : _palette.main) != null ? _palette$ownerState$c : {
+        action: (_palette2 = (theme.vars || theme).palette) == null || (_palette2 = _palette2.action) == null ? void 0 : _palette2.active,
+        disabled: (_palette3 = (theme.vars || theme).palette) == null || (_palette3 = _palette3.action) == null ? void 0 : _palette3.disabled,
+        inherit: void 0
+      }[ownerState.color]
+    };
+  });
+  var SvgIcon = /* @__PURE__ */ React14.forwardRef(function SvgIcon2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiSvgIcon"
+    });
+    const {
+      children,
+      className,
+      color: color2 = "inherit",
+      component = "svg",
+      fontSize = "medium",
+      htmlColor,
+      inheritViewBox = false,
+      titleAccess,
+      viewBox = "0 0 24 24"
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded10);
+    const hasSvgAsChild = /* @__PURE__ */ React14.isValidElement(children) && children.type === "svg";
+    const ownerState = _extends({}, props, {
+      color: color2,
+      component,
+      fontSize,
+      instanceFontSize: inProps.fontSize,
+      inheritViewBox,
+      viewBox,
+      hasSvgAsChild
+    });
+    const more = {};
+    if (!inheritViewBox) {
+      more.viewBox = viewBox;
+    }
+    const classes = useUtilityClasses(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(SvgIconRoot, _extends({
+      as: component,
+      className: clsx_default(classes.root, className),
+      focusable: "false",
+      color: htmlColor,
+      "aria-hidden": titleAccess ? void 0 : true,
+      role: titleAccess ? "img" : void 0,
+      ref
+    }, more, other, hasSvgAsChild && children.props, {
+      ownerState,
+      children: [hasSvgAsChild ? children.props.children : children, titleAccess ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("title", {
+        children: titleAccess
+      }) : null]
+    }));
+  });
+  true ? SvgIcon.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * Node passed into the SVG element.
+     */
+    children: import_prop_types6.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types6.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types6.default.string,
+    /**
+     * The color of the component.
+     * It supports both default and custom theme colors, which can be added as shown in the
+     * [palette customization guide](https://mui.com/material-ui/customization/palette/#adding-new-colors).
+     * You can use the `htmlColor` prop to apply a color attribute to the SVG element.
+     * @default 'inherit'
+     */
+    color: import_prop_types6.default.oneOfType([import_prop_types6.default.oneOf(["inherit", "action", "disabled", "primary", "secondary", "error", "info", "success", "warning"]), import_prop_types6.default.string]),
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types6.default.elementType,
+    /**
+     * The fontSize applied to the icon. Defaults to 24px, but can be configure to inherit font size.
+     * @default 'medium'
+     */
+    fontSize: import_prop_types6.default.oneOfType([import_prop_types6.default.oneOf(["inherit", "large", "medium", "small"]), import_prop_types6.default.string]),
+    /**
+     * Applies a color attribute to the SVG element.
+     */
+    htmlColor: import_prop_types6.default.string,
+    /**
+     * If `true`, the root node will inherit the custom `component`'s viewBox and the `viewBox`
+     * prop will be ignored.
+     * Useful when you want to reference a custom `component` and have `SvgIcon` pass that
+     * `component`'s viewBox to the root node.
+     * @default false
+     */
+    inheritViewBox: import_prop_types6.default.bool,
+    /**
+     * The shape-rendering attribute. The behavior of the different options is described on the
+     * [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering).
+     * If you are having issues with blurry icons you should investigate this prop.
+     */
+    shapeRendering: import_prop_types6.default.string,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types6.default.oneOfType([import_prop_types6.default.arrayOf(import_prop_types6.default.oneOfType([import_prop_types6.default.func, import_prop_types6.default.object, import_prop_types6.default.bool])), import_prop_types6.default.func, import_prop_types6.default.object]),
+    /**
+     * Provides a human-readable title for the element that contains it.
+     * https://www.w3.org/TR/SVG-access/#Equivalent
+     */
+    titleAccess: import_prop_types6.default.string,
+    /**
+     * Allows you to redefine what the coordinates without units mean inside an SVG element.
+     * For example, if the SVG element is 500 (width) by 200 (height),
+     * and you pass viewBox="0 0 50 20",
+     * this means that the coordinates inside the SVG will go from the top left corner (0,0)
+     * to bottom right (50,20) and each unit will be worth 10px.
+     * @default '0 0 24 24'
+     */
+    viewBox: import_prop_types6.default.string
+  } : void 0;
+  SvgIcon.muiName = "SvgIcon";
+  var SvgIcon_default = SvgIcon;
+
+  // node_modules/@mui/material/utils/createSvgIcon.js
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  function createSvgIcon(path, displayName) {
+    function Component(props, ref) {
+      return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(SvgIcon_default, _extends({
+        "data-testid": `${displayName}Icon`,
+        ref
+      }, props, {
+        children: path
+      }));
+    }
+    if (true) {
+      Component.displayName = `${displayName}Icon`;
+    }
+    Component.muiName = SvgIcon_default.muiName;
+    return /* @__PURE__ */ React15.memo(/* @__PURE__ */ React15.forwardRef(Component));
+  }
+
+  // node_modules/@mui/material/utils/isMuiElement.js
+  var isMuiElement_default = isMuiElement;
+
+  // node_modules/@mui/material/utils/useEnhancedEffect.js
+  var useEnhancedEffect_default2 = useEnhancedEffect_default;
+
+  // node_modules/@mui/material/utils/useEventCallback.js
+  var useEventCallback_default2 = useEventCallback_default;
+
+  // node_modules/@mui/material/utils/useForkRef.js
+  var useForkRef_default = useForkRef;
+
+  // node_modules/@mui/material/utils/useIsFocusVisible.js
+  var useIsFocusVisible_default = useIsFocusVisible;
+
+  // node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf2(o2, p2) {
+      o2.__proto__ = p2;
+      return o2;
+    };
+    return _setPrototypeOf(o, p);
+  }
+
+  // node_modules/@babel/runtime/helpers/esm/inheritsLoose.js
+  function _inheritsLoose(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    _setPrototypeOf(subClass, superClass);
+  }
+
+  // node_modules/react-transition-group/esm/TransitionGroupContext.js
+  var import_react6 = __toESM(require_react());
+  var TransitionGroupContext_default = import_react6.default.createContext(null);
+
+  // node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+
+  // node_modules/react-transition-group/esm/TransitionGroup.js
+  var import_prop_types7 = __toESM(require_prop_types());
+  var import_react8 = __toESM(require_react());
+
+  // node_modules/react-transition-group/esm/utils/ChildMapping.js
+  var import_react7 = __toESM(require_react());
+  function getChildMapping(children, mapFn) {
+    var mapper = function mapper2(child) {
+      return mapFn && (0, import_react7.isValidElement)(child) ? mapFn(child) : child;
+    };
+    var result = /* @__PURE__ */ Object.create(null);
+    if (children)
+      import_react7.Children.map(children, function(c) {
+        return c;
+      }).forEach(function(child) {
+        result[child.key] = mapper(child);
+      });
+    return result;
+  }
+  function mergeChildMappings(prev2, next2) {
+    prev2 = prev2 || {};
+    next2 = next2 || {};
+    function getValueForKey(key) {
+      return key in next2 ? next2[key] : prev2[key];
+    }
+    var nextKeysPending = /* @__PURE__ */ Object.create(null);
+    var pendingKeys = [];
+    for (var prevKey in prev2) {
+      if (prevKey in next2) {
+        if (pendingKeys.length) {
+          nextKeysPending[prevKey] = pendingKeys;
+          pendingKeys = [];
+        }
+      } else {
+        pendingKeys.push(prevKey);
+      }
+    }
+    var i;
+    var childMapping = {};
+    for (var nextKey in next2) {
+      if (nextKeysPending[nextKey]) {
+        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+          var pendingNextKey = nextKeysPending[nextKey][i];
+          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+        }
+      }
+      childMapping[nextKey] = getValueForKey(nextKey);
+    }
+    for (i = 0; i < pendingKeys.length; i++) {
+      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+    }
+    return childMapping;
+  }
+  function getProp(child, prop, props) {
+    return props[prop] != null ? props[prop] : child.props[prop];
+  }
+  function getInitialChildMapping(props, onExited) {
+    return getChildMapping(props.children, function(child) {
+      return (0, import_react7.cloneElement)(child, {
+        onExited: onExited.bind(null, child),
+        in: true,
+        appear: getProp(child, "appear", props),
+        enter: getProp(child, "enter", props),
+        exit: getProp(child, "exit", props)
+      });
+    });
+  }
+  function getNextChildMapping(nextProps, prevChildMapping, onExited) {
+    var nextChildMapping = getChildMapping(nextProps.children);
+    var children = mergeChildMappings(prevChildMapping, nextChildMapping);
+    Object.keys(children).forEach(function(key) {
+      var child = children[key];
+      if (!(0, import_react7.isValidElement)(child))
+        return;
+      var hasPrev = key in prevChildMapping;
+      var hasNext = key in nextChildMapping;
+      var prevChild = prevChildMapping[key];
+      var isLeaving = (0, import_react7.isValidElement)(prevChild) && !prevChild.props.in;
+      if (hasNext && (!hasPrev || isLeaving)) {
+        children[key] = (0, import_react7.cloneElement)(child, {
+          onExited: onExited.bind(null, child),
+          in: true,
+          exit: getProp(child, "exit", nextProps),
+          enter: getProp(child, "enter", nextProps)
+        });
+      } else if (!hasNext && hasPrev && !isLeaving) {
+        children[key] = (0, import_react7.cloneElement)(child, {
+          in: false
+        });
+      } else if (hasNext && hasPrev && (0, import_react7.isValidElement)(prevChild)) {
+        children[key] = (0, import_react7.cloneElement)(child, {
+          onExited: onExited.bind(null, child),
+          in: prevChild.props.in,
+          exit: getProp(child, "exit", nextProps),
+          enter: getProp(child, "enter", nextProps)
+        });
+      }
+    });
+    return children;
+  }
+
+  // node_modules/react-transition-group/esm/TransitionGroup.js
+  var values2 = Object.values || function(obj) {
+    return Object.keys(obj).map(function(k) {
+      return obj[k];
+    });
+  };
+  var defaultProps = {
+    component: "div",
+    childFactory: function childFactory(child) {
+      return child;
+    }
+  };
+  var TransitionGroup = /* @__PURE__ */ function(_React$Component) {
+    _inheritsLoose(TransitionGroup2, _React$Component);
+    function TransitionGroup2(props, context) {
+      var _this;
+      _this = _React$Component.call(this, props, context) || this;
+      var handleExited = _this.handleExited.bind(_assertThisInitialized(_this));
+      _this.state = {
+        contextValue: {
+          isMounting: true
+        },
+        handleExited,
+        firstRender: true
+      };
+      return _this;
+    }
+    var _proto = TransitionGroup2.prototype;
+    _proto.componentDidMount = function componentDidMount() {
+      this.mounted = true;
+      this.setState({
+        contextValue: {
+          isMounting: false
+        }
+      });
+    };
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this.mounted = false;
+    };
+    TransitionGroup2.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, _ref) {
+      var prevChildMapping = _ref.children, handleExited = _ref.handleExited, firstRender = _ref.firstRender;
+      return {
+        children: firstRender ? getInitialChildMapping(nextProps, handleExited) : getNextChildMapping(nextProps, prevChildMapping, handleExited),
+        firstRender: false
+      };
+    };
+    _proto.handleExited = function handleExited(child, node2) {
+      var currentChildMapping = getChildMapping(this.props.children);
+      if (child.key in currentChildMapping)
+        return;
+      if (child.props.onExited) {
+        child.props.onExited(node2);
+      }
+      if (this.mounted) {
+        this.setState(function(state) {
+          var children = _extends({}, state.children);
+          delete children[child.key];
+          return {
+            children
+          };
+        });
+      }
+    };
+    _proto.render = function render() {
+      var _this$props = this.props, Component = _this$props.component, childFactory2 = _this$props.childFactory, props = _objectWithoutPropertiesLoose(_this$props, ["component", "childFactory"]);
+      var contextValue = this.state.contextValue;
+      var children = values2(this.state.children).map(childFactory2);
+      delete props.appear;
+      delete props.enter;
+      delete props.exit;
+      if (Component === null) {
+        return /* @__PURE__ */ import_react8.default.createElement(TransitionGroupContext_default.Provider, {
+          value: contextValue
+        }, children);
+      }
+      return /* @__PURE__ */ import_react8.default.createElement(TransitionGroupContext_default.Provider, {
+        value: contextValue
+      }, /* @__PURE__ */ import_react8.default.createElement(Component, props, children));
+    };
+    return TransitionGroup2;
+  }(import_react8.default.Component);
+  TransitionGroup.propTypes = true ? {
+    /**
+     * `<TransitionGroup>` renders a `<div>` by default. You can change this
+     * behavior by providing a `component` prop.
+     * If you use React v16+ and would like to avoid a wrapping `<div>` element
+     * you can pass in `component={null}`. This is useful if the wrapping div
+     * borks your css styles.
+     */
+    component: import_prop_types7.default.any,
+    /**
+     * A set of `<Transition>` components, that are toggled `in` and out as they
+     * leave. the `<TransitionGroup>` will inject specific transition props, so
+     * remember to spread them through if you are wrapping the `<Transition>` as
+     * with our `<Fade>` example.
+     *
+     * While this component is meant for multiple `Transition` or `CSSTransition`
+     * children, sometimes you may want to have a single transition child with
+     * content that you want to be transitioned out and in when you change it
+     * (e.g. routes, images etc.) In that case you can change the `key` prop of
+     * the transition child as you change its content, this will cause
+     * `TransitionGroup` to transition the child out and back in.
+     */
+    children: import_prop_types7.default.node,
+    /**
+     * A convenience prop that enables or disables appear animations
+     * for all children. Note that specifying this will override any defaults set
+     * on individual children Transitions.
+     */
+    appear: import_prop_types7.default.bool,
+    /**
+     * A convenience prop that enables or disables enter animations
+     * for all children. Note that specifying this will override any defaults set
+     * on individual children Transitions.
+     */
+    enter: import_prop_types7.default.bool,
+    /**
+     * A convenience prop that enables or disables exit animations
+     * for all children. Note that specifying this will override any defaults set
+     * on individual children Transitions.
+     */
+    exit: import_prop_types7.default.bool,
+    /**
+     * You may need to apply reactive updates to a child as it is exiting.
+     * This is generally done by using `cloneElement` however in the case of an exiting
+     * child the element has already been removed and not accessible to the consumer.
+     *
+     * If you do need to update a child as it leaves you can provide a `childFactory`
+     * to wrap every child, even the ones that are leaving.
+     *
+     * @type Function(child: ReactElement) -> ReactElement
+     */
+    childFactory: import_prop_types7.default.func
+  } : {};
+  TransitionGroup.defaultProps = defaultProps;
+  var TransitionGroup_default = TransitionGroup;
+
   // node_modules/@mui/material/Paper/Paper.js
-  var React9 = __toESM(require_react());
-  var import_prop_types4 = __toESM(require_prop_types());
+  var React18 = __toESM(require_react());
+  var import_prop_types8 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/Paper/paperClasses.js
   function getPaperUtilityClass(slot) {
@@ -30304,9 +30822,9 @@ Please use another name.` : formatMuiErrorMessage(18));
   var paperClasses = generateUtilityClasses("MuiPaper", ["root", "rounded", "outlined", "elevation", "elevation0", "elevation1", "elevation2", "elevation3", "elevation4", "elevation5", "elevation6", "elevation7", "elevation8", "elevation9", "elevation10", "elevation11", "elevation12", "elevation13", "elevation14", "elevation15", "elevation16", "elevation17", "elevation18", "elevation19", "elevation20", "elevation21", "elevation22", "elevation23", "elevation24"]);
 
   // node_modules/@mui/material/Paper/Paper.js
-  var import_jsx_runtime3 = __toESM(require_jsx_runtime());
-  var _excluded10 = ["className", "component", "elevation", "square", "variant"];
-  var useUtilityClasses = (ownerState) => {
+  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
+  var _excluded11 = ["className", "component", "elevation", "square", "variant"];
+  var useUtilityClasses2 = (ownerState) => {
     const {
       square,
       elevation,
@@ -30348,7 +30866,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       backgroundImage: (_theme$vars$overlays = theme.vars.overlays) == null ? void 0 : _theme$vars$overlays[ownerState.elevation]
     }));
   });
-  var Paper = /* @__PURE__ */ React9.forwardRef(function Paper2(inProps, ref) {
+  var Paper = /* @__PURE__ */ React18.forwardRef(function Paper2(inProps, ref) {
     const props = useThemeProps2({
       props: inProps,
       name: "MuiPaper"
@@ -30359,21 +30877,21 @@ Please use another name.` : formatMuiErrorMessage(18));
       elevation = 1,
       square = false,
       variant = "elevation"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded10);
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded11);
     const ownerState = _extends({}, props, {
       component,
       elevation,
       square,
       variant
     });
-    const classes = useUtilityClasses(ownerState);
+    const classes = useUtilityClasses2(ownerState);
     if (true) {
       const theme = useTheme4();
       if (theme.shadows[elevation] === void 0) {
         console.error([`MUI: The elevation provided <Paper elevation={${elevation}}> is not available in the theme.`, `Please make sure that \`theme.shadows[${elevation}]\` is defined.`].join("\n"));
       }
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(PaperRoot, _extends({
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(PaperRoot, _extends({
       as: component,
       ownerState,
       className: clsx_default(classes.root, className),
@@ -30388,20 +30906,20 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * The content of the component.
      */
-    children: import_prop_types4.default.node,
+    children: import_prop_types8.default.node,
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types4.default.object,
+    classes: import_prop_types8.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types4.default.string,
+    className: import_prop_types8.default.string,
     /**
      * The component used for the root node.
      * Either a string to use a HTML element or a component.
      */
-    component: import_prop_types4.default.elementType,
+    component: import_prop_types8.default.elementType,
     /**
      * Shadow depth, corresponds to `dp` in the spec.
      * It accepts values between 0 and 24 inclusive.
@@ -30421,22 +30939,867 @@ Please use another name.` : formatMuiErrorMessage(18));
      * If `true`, rounded corners are disabled.
      * @default false
      */
-    square: import_prop_types4.default.bool,
+    square: import_prop_types8.default.bool,
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types4.default.oneOfType([import_prop_types4.default.arrayOf(import_prop_types4.default.oneOfType([import_prop_types4.default.func, import_prop_types4.default.object, import_prop_types4.default.bool])), import_prop_types4.default.func, import_prop_types4.default.object]),
+    sx: import_prop_types8.default.oneOfType([import_prop_types8.default.arrayOf(import_prop_types8.default.oneOfType([import_prop_types8.default.func, import_prop_types8.default.object, import_prop_types8.default.bool])), import_prop_types8.default.func, import_prop_types8.default.object]),
     /**
      * The variant to use.
      * @default 'elevation'
      */
-    variant: import_prop_types4.default.oneOfType([import_prop_types4.default.oneOf(["elevation", "outlined"]), import_prop_types4.default.string])
+    variant: import_prop_types8.default.oneOfType([import_prop_types8.default.oneOf(["elevation", "outlined"]), import_prop_types8.default.string])
   } : void 0;
   var Paper_default = Paper;
 
+  // node_modules/@mui/material/ButtonBase/ButtonBase.js
+  var React21 = __toESM(require_react());
+  var import_prop_types11 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ButtonBase/TouchRipple.js
+  var React20 = __toESM(require_react());
+  var import_prop_types10 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ButtonBase/Ripple.js
+  var React19 = __toESM(require_react());
+  var import_prop_types9 = __toESM(require_prop_types());
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  function Ripple(props) {
+    const {
+      className,
+      classes,
+      pulsate = false,
+      rippleX,
+      rippleY,
+      rippleSize,
+      in: inProp,
+      onExited,
+      timeout
+    } = props;
+    const [leaving, setLeaving] = React19.useState(false);
+    const rippleClassName = clsx_default(className, classes.ripple, classes.rippleVisible, pulsate && classes.ripplePulsate);
+    const rippleStyles = {
+      width: rippleSize,
+      height: rippleSize,
+      top: -(rippleSize / 2) + rippleY,
+      left: -(rippleSize / 2) + rippleX
+    };
+    const childClassName = clsx_default(classes.child, leaving && classes.childLeaving, pulsate && classes.childPulsate);
+    if (!inProp && !leaving) {
+      setLeaving(true);
+    }
+    React19.useEffect(() => {
+      if (!inProp && onExited != null) {
+        const timeoutId = setTimeout(onExited, timeout);
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      }
+      return void 0;
+    }, [onExited, inProp, timeout]);
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", {
+      className: rippleClassName,
+      style: rippleStyles,
+      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", {
+        className: childClassName
+      })
+    });
+  }
+  true ? Ripple.propTypes = {
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: import_prop_types9.default.object.isRequired,
+    className: import_prop_types9.default.string,
+    /**
+     * @ignore - injected from TransitionGroup
+     */
+    in: import_prop_types9.default.bool,
+    /**
+     * @ignore - injected from TransitionGroup
+     */
+    onExited: import_prop_types9.default.func,
+    /**
+     * If `true`, the ripple pulsates, typically indicating the keyboard focus state of an element.
+     */
+    pulsate: import_prop_types9.default.bool,
+    /**
+     * Diameter of the ripple.
+     */
+    rippleSize: import_prop_types9.default.number,
+    /**
+     * Horizontal position of the ripple center.
+     */
+    rippleX: import_prop_types9.default.number,
+    /**
+     * Vertical position of the ripple center.
+     */
+    rippleY: import_prop_types9.default.number,
+    /**
+     * exit delay
+     */
+    timeout: import_prop_types9.default.number.isRequired
+  } : void 0;
+  var Ripple_default = Ripple;
+
+  // node_modules/@mui/material/ButtonBase/touchRippleClasses.js
+  var touchRippleClasses = generateUtilityClasses("MuiTouchRipple", ["root", "ripple", "rippleVisible", "ripplePulsate", "child", "childLeaving", "childPulsate"]);
+  var touchRippleClasses_default = touchRippleClasses;
+
+  // node_modules/@mui/material/ButtonBase/TouchRipple.js
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+  var _excluded12 = ["center", "classes", "className"];
+  var _ = (t) => t;
+  var _t;
+  var _t2;
+  var _t3;
+  var _t4;
+  var DURATION = 550;
+  var DELAY_RIPPLE = 80;
+  var enterKeyframe = keyframes(_t || (_t = _`
+  0% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+`));
+  var exitKeyframe = keyframes(_t2 || (_t2 = _`
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`));
+  var pulsateKeyframe = keyframes(_t3 || (_t3 = _`
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.92);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+`));
+  var TouchRippleRoot = styled_default("span", {
+    name: "MuiTouchRipple",
+    slot: "Root"
+  })({
+    overflow: "hidden",
+    pointerEvents: "none",
+    position: "absolute",
+    zIndex: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: "inherit"
+  });
+  var TouchRippleRipple = styled_default(Ripple_default, {
+    name: "MuiTouchRipple",
+    slot: "Ripple"
+  })(_t4 || (_t4 = _`
+  opacity: 0;
+  position: absolute;
+
+  &.${0} {
+    opacity: 0.3;
+    transform: scale(1);
+    animation-name: ${0};
+    animation-duration: ${0}ms;
+    animation-timing-function: ${0};
+  }
+
+  &.${0} {
+    animation-duration: ${0}ms;
+  }
+
+  & .${0} {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+
+  & .${0} {
+    opacity: 0;
+    animation-name: ${0};
+    animation-duration: ${0}ms;
+    animation-timing-function: ${0};
+  }
+
+  & .${0} {
+    position: absolute;
+    /* @noflip */
+    left: 0px;
+    top: 0;
+    animation-name: ${0};
+    animation-duration: 2500ms;
+    animation-timing-function: ${0};
+    animation-iteration-count: infinite;
+    animation-delay: 200ms;
+  }
+`), touchRippleClasses_default.rippleVisible, enterKeyframe, DURATION, ({
+    theme
+  }) => theme.transitions.easing.easeInOut, touchRippleClasses_default.ripplePulsate, ({
+    theme
+  }) => theme.transitions.duration.shorter, touchRippleClasses_default.child, touchRippleClasses_default.childLeaving, exitKeyframe, DURATION, ({
+    theme
+  }) => theme.transitions.easing.easeInOut, touchRippleClasses_default.childPulsate, pulsateKeyframe, ({
+    theme
+  }) => theme.transitions.easing.easeInOut);
+  var TouchRipple = /* @__PURE__ */ React20.forwardRef(function TouchRipple2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiTouchRipple"
+    });
+    const {
+      center: centerProp = false,
+      classes = {},
+      className
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded12);
+    const [ripples, setRipples] = React20.useState([]);
+    const nextKey = React20.useRef(0);
+    const rippleCallback = React20.useRef(null);
+    React20.useEffect(() => {
+      if (rippleCallback.current) {
+        rippleCallback.current();
+        rippleCallback.current = null;
+      }
+    }, [ripples]);
+    const ignoringMouseDown = React20.useRef(false);
+    const startTimer = React20.useRef(0);
+    const startTimerCommit = React20.useRef(null);
+    const container = React20.useRef(null);
+    React20.useEffect(() => {
+      return () => {
+        if (startTimer.current) {
+          clearTimeout(startTimer.current);
+        }
+      };
+    }, []);
+    const startCommit = React20.useCallback((params) => {
+      const {
+        pulsate: pulsate2,
+        rippleX,
+        rippleY,
+        rippleSize,
+        cb
+      } = params;
+      setRipples((oldRipples) => [...oldRipples, /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(TouchRippleRipple, {
+        classes: {
+          ripple: clsx_default(classes.ripple, touchRippleClasses_default.ripple),
+          rippleVisible: clsx_default(classes.rippleVisible, touchRippleClasses_default.rippleVisible),
+          ripplePulsate: clsx_default(classes.ripplePulsate, touchRippleClasses_default.ripplePulsate),
+          child: clsx_default(classes.child, touchRippleClasses_default.child),
+          childLeaving: clsx_default(classes.childLeaving, touchRippleClasses_default.childLeaving),
+          childPulsate: clsx_default(classes.childPulsate, touchRippleClasses_default.childPulsate)
+        },
+        timeout: DURATION,
+        pulsate: pulsate2,
+        rippleX,
+        rippleY,
+        rippleSize
+      }, nextKey.current)]);
+      nextKey.current += 1;
+      rippleCallback.current = cb;
+    }, [classes]);
+    const start = React20.useCallback((event = {}, options = {}, cb = () => {
+    }) => {
+      const {
+        pulsate: pulsate2 = false,
+        center = centerProp || options.pulsate,
+        fakeElement = false
+        // For test purposes
+      } = options;
+      if ((event == null ? void 0 : event.type) === "mousedown" && ignoringMouseDown.current) {
+        ignoringMouseDown.current = false;
+        return;
+      }
+      if ((event == null ? void 0 : event.type) === "touchstart") {
+        ignoringMouseDown.current = true;
+      }
+      const element = fakeElement ? null : container.current;
+      const rect = element ? element.getBoundingClientRect() : {
+        width: 0,
+        height: 0,
+        left: 0,
+        top: 0
+      };
+      let rippleX;
+      let rippleY;
+      let rippleSize;
+      if (center || event === void 0 || event.clientX === 0 && event.clientY === 0 || !event.clientX && !event.touches) {
+        rippleX = Math.round(rect.width / 2);
+        rippleY = Math.round(rect.height / 2);
+      } else {
+        const {
+          clientX,
+          clientY
+        } = event.touches && event.touches.length > 0 ? event.touches[0] : event;
+        rippleX = Math.round(clientX - rect.left);
+        rippleY = Math.round(clientY - rect.top);
+      }
+      if (center) {
+        rippleSize = Math.sqrt((2 * rect.width ** 2 + rect.height ** 2) / 3);
+        if (rippleSize % 2 === 0) {
+          rippleSize += 1;
+        }
+      } else {
+        const sizeX = Math.max(Math.abs((element ? element.clientWidth : 0) - rippleX), rippleX) * 2 + 2;
+        const sizeY = Math.max(Math.abs((element ? element.clientHeight : 0) - rippleY), rippleY) * 2 + 2;
+        rippleSize = Math.sqrt(sizeX ** 2 + sizeY ** 2);
+      }
+      if (event != null && event.touches) {
+        if (startTimerCommit.current === null) {
+          startTimerCommit.current = () => {
+            startCommit({
+              pulsate: pulsate2,
+              rippleX,
+              rippleY,
+              rippleSize,
+              cb
+            });
+          };
+          startTimer.current = setTimeout(() => {
+            if (startTimerCommit.current) {
+              startTimerCommit.current();
+              startTimerCommit.current = null;
+            }
+          }, DELAY_RIPPLE);
+        }
+      } else {
+        startCommit({
+          pulsate: pulsate2,
+          rippleX,
+          rippleY,
+          rippleSize,
+          cb
+        });
+      }
+    }, [centerProp, startCommit]);
+    const pulsate = React20.useCallback(() => {
+      start({}, {
+        pulsate: true
+      });
+    }, [start]);
+    const stop = React20.useCallback((event, cb) => {
+      clearTimeout(startTimer.current);
+      if ((event == null ? void 0 : event.type) === "touchend" && startTimerCommit.current) {
+        startTimerCommit.current();
+        startTimerCommit.current = null;
+        startTimer.current = setTimeout(() => {
+          stop(event, cb);
+        });
+        return;
+      }
+      startTimerCommit.current = null;
+      setRipples((oldRipples) => {
+        if (oldRipples.length > 0) {
+          return oldRipples.slice(1);
+        }
+        return oldRipples;
+      });
+      rippleCallback.current = cb;
+    }, []);
+    React20.useImperativeHandle(ref, () => ({
+      pulsate,
+      start,
+      stop
+    }), [pulsate, start, stop]);
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(TouchRippleRoot, _extends({
+      className: clsx_default(touchRippleClasses_default.root, classes.root, className),
+      ref: container
+    }, other, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(TransitionGroup_default, {
+        component: null,
+        exit: true,
+        children: ripples
+      })
+    }));
+  });
+  true ? TouchRipple.propTypes = {
+    /**
+     * If `true`, the ripple starts at the center of the component
+     * rather than at the point of interaction.
+     */
+    center: import_prop_types10.default.bool,
+    /**
+     * Override or extend the styles applied to the component.
+     * See [CSS API](#css) below for more details.
+     */
+    classes: import_prop_types10.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types10.default.string
+  } : void 0;
+  var TouchRipple_default = TouchRipple;
+
+  // node_modules/@mui/material/ButtonBase/buttonBaseClasses.js
+  function getButtonBaseUtilityClass(slot) {
+    return generateUtilityClass("MuiButtonBase", slot);
+  }
+  var buttonBaseClasses = generateUtilityClasses("MuiButtonBase", ["root", "disabled", "focusVisible"]);
+  var buttonBaseClasses_default = buttonBaseClasses;
+
+  // node_modules/@mui/material/ButtonBase/ButtonBase.js
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime());
+  var _excluded13 = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
+  var useUtilityClasses3 = (ownerState) => {
+    const {
+      disabled,
+      focusVisible,
+      focusVisibleClassName,
+      classes
+    } = ownerState;
+    const slots = {
+      root: ["root", disabled && "disabled", focusVisible && "focusVisible"]
+    };
+    const composedClasses = composeClasses(slots, getButtonBaseUtilityClass, classes);
+    if (focusVisible && focusVisibleClassName) {
+      composedClasses.root += ` ${focusVisibleClassName}`;
+    }
+    return composedClasses;
+  };
+  var ButtonBaseRoot = styled_default("button", {
+    name: "MuiButtonBase",
+    slot: "Root",
+    overridesResolver: (props, styles2) => styles2.root
+  })({
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+    boxSizing: "border-box",
+    WebkitTapHighlightColor: "transparent",
+    backgroundColor: "transparent",
+    // Reset default value
+    // We disable the focus ring for mouse, touch and keyboard users.
+    outline: 0,
+    border: 0,
+    margin: 0,
+    // Remove the margin in Safari
+    borderRadius: 0,
+    padding: 0,
+    // Remove the padding in Firefox
+    cursor: "pointer",
+    userSelect: "none",
+    verticalAlign: "middle",
+    MozAppearance: "none",
+    // Reset
+    WebkitAppearance: "none",
+    // Reset
+    textDecoration: "none",
+    // So we take precedent over the style of a native <a /> element.
+    color: "inherit",
+    "&::-moz-focus-inner": {
+      borderStyle: "none"
+      // Remove Firefox dotted outline.
+    },
+    [`&.${buttonBaseClasses_default.disabled}`]: {
+      pointerEvents: "none",
+      // Disable link interactions
+      cursor: "default"
+    },
+    "@media print": {
+      colorAdjust: "exact"
+    }
+  });
+  var ButtonBase = /* @__PURE__ */ React21.forwardRef(function ButtonBase2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiButtonBase"
+    });
+    const {
+      action,
+      centerRipple = false,
+      children,
+      className,
+      component = "button",
+      disabled = false,
+      disableRipple = false,
+      disableTouchRipple = false,
+      focusRipple = false,
+      LinkComponent = "a",
+      onBlur,
+      onClick,
+      onContextMenu,
+      onDragLeave,
+      onFocus,
+      onFocusVisible,
+      onKeyDown,
+      onKeyUp,
+      onMouseDown,
+      onMouseLeave,
+      onMouseUp,
+      onTouchEnd,
+      onTouchMove,
+      onTouchStart,
+      tabIndex = 0,
+      TouchRippleProps,
+      touchRippleRef,
+      type
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded13);
+    const buttonRef = React21.useRef(null);
+    const rippleRef = React21.useRef(null);
+    const handleRippleRef = useForkRef_default(rippleRef, touchRippleRef);
+    const {
+      isFocusVisibleRef,
+      onFocus: handleFocusVisible,
+      onBlur: handleBlurVisible,
+      ref: focusVisibleRef
+    } = useIsFocusVisible_default();
+    const [focusVisible, setFocusVisible] = React21.useState(false);
+    if (disabled && focusVisible) {
+      setFocusVisible(false);
+    }
+    React21.useImperativeHandle(action, () => ({
+      focusVisible: () => {
+        setFocusVisible(true);
+        buttonRef.current.focus();
+      }
+    }), []);
+    const [mountedState, setMountedState] = React21.useState(false);
+    React21.useEffect(() => {
+      setMountedState(true);
+    }, []);
+    const enableTouchRipple = mountedState && !disableRipple && !disabled;
+    React21.useEffect(() => {
+      if (focusVisible && focusRipple && !disableRipple && mountedState) {
+        rippleRef.current.pulsate();
+      }
+    }, [disableRipple, focusRipple, focusVisible, mountedState]);
+    function useRippleHandler(rippleAction, eventCallback, skipRippleAction = disableTouchRipple) {
+      return useEventCallback_default2((event) => {
+        if (eventCallback) {
+          eventCallback(event);
+        }
+        const ignore = skipRippleAction;
+        if (!ignore && rippleRef.current) {
+          rippleRef.current[rippleAction](event);
+        }
+        return true;
+      });
+    }
+    const handleMouseDown = useRippleHandler("start", onMouseDown);
+    const handleContextMenu = useRippleHandler("stop", onContextMenu);
+    const handleDragLeave = useRippleHandler("stop", onDragLeave);
+    const handleMouseUp = useRippleHandler("stop", onMouseUp);
+    const handleMouseLeave = useRippleHandler("stop", (event) => {
+      if (focusVisible) {
+        event.preventDefault();
+      }
+      if (onMouseLeave) {
+        onMouseLeave(event);
+      }
+    });
+    const handleTouchStart = useRippleHandler("start", onTouchStart);
+    const handleTouchEnd = useRippleHandler("stop", onTouchEnd);
+    const handleTouchMove = useRippleHandler("stop", onTouchMove);
+    const handleBlur = useRippleHandler("stop", (event) => {
+      handleBlurVisible(event);
+      if (isFocusVisibleRef.current === false) {
+        setFocusVisible(false);
+      }
+      if (onBlur) {
+        onBlur(event);
+      }
+    }, false);
+    const handleFocus = useEventCallback_default2((event) => {
+      if (!buttonRef.current) {
+        buttonRef.current = event.currentTarget;
+      }
+      handleFocusVisible(event);
+      if (isFocusVisibleRef.current === true) {
+        setFocusVisible(true);
+        if (onFocusVisible) {
+          onFocusVisible(event);
+        }
+      }
+      if (onFocus) {
+        onFocus(event);
+      }
+    });
+    const isNonNativeButton = () => {
+      const button = buttonRef.current;
+      return component && component !== "button" && !(button.tagName === "A" && button.href);
+    };
+    const keydownRef = React21.useRef(false);
+    const handleKeyDown2 = useEventCallback_default2((event) => {
+      if (focusRipple && !keydownRef.current && focusVisible && rippleRef.current && event.key === " ") {
+        keydownRef.current = true;
+        rippleRef.current.stop(event, () => {
+          rippleRef.current.start(event);
+        });
+      }
+      if (event.target === event.currentTarget && isNonNativeButton() && event.key === " ") {
+        event.preventDefault();
+      }
+      if (onKeyDown) {
+        onKeyDown(event);
+      }
+      if (event.target === event.currentTarget && isNonNativeButton() && event.key === "Enter" && !disabled) {
+        event.preventDefault();
+        if (onClick) {
+          onClick(event);
+        }
+      }
+    });
+    const handleKeyUp = useEventCallback_default2((event) => {
+      if (focusRipple && event.key === " " && rippleRef.current && focusVisible && !event.defaultPrevented) {
+        keydownRef.current = false;
+        rippleRef.current.stop(event, () => {
+          rippleRef.current.pulsate(event);
+        });
+      }
+      if (onKeyUp) {
+        onKeyUp(event);
+      }
+      if (onClick && event.target === event.currentTarget && isNonNativeButton() && event.key === " " && !event.defaultPrevented) {
+        onClick(event);
+      }
+    });
+    let ComponentProp = component;
+    if (ComponentProp === "button" && (other.href || other.to)) {
+      ComponentProp = LinkComponent;
+    }
+    const buttonProps = {};
+    if (ComponentProp === "button") {
+      buttonProps.type = type === void 0 ? "button" : type;
+      buttonProps.disabled = disabled;
+    } else {
+      if (!other.href && !other.to) {
+        buttonProps.role = "button";
+      }
+      if (disabled) {
+        buttonProps["aria-disabled"] = disabled;
+      }
+    }
+    const handleRef = useForkRef_default(ref, focusVisibleRef, buttonRef);
+    if (true) {
+      React21.useEffect(() => {
+        if (enableTouchRipple && !rippleRef.current) {
+          console.error(["MUI: The `component` prop provided to ButtonBase is invalid.", "Please make sure the children prop is rendered in this custom component."].join("\n"));
+        }
+      }, [enableTouchRipple]);
+    }
+    const ownerState = _extends({}, props, {
+      centerRipple,
+      component,
+      disabled,
+      disableRipple,
+      disableTouchRipple,
+      focusRipple,
+      tabIndex,
+      focusVisible
+    });
+    const classes = useUtilityClasses3(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(ButtonBaseRoot, _extends({
+      as: ComponentProp,
+      className: clsx_default(classes.root, className),
+      ownerState,
+      onBlur: handleBlur,
+      onClick,
+      onContextMenu: handleContextMenu,
+      onFocus: handleFocus,
+      onKeyDown: handleKeyDown2,
+      onKeyUp: handleKeyUp,
+      onMouseDown: handleMouseDown,
+      onMouseLeave: handleMouseLeave,
+      onMouseUp: handleMouseUp,
+      onDragLeave: handleDragLeave,
+      onTouchEnd: handleTouchEnd,
+      onTouchMove: handleTouchMove,
+      onTouchStart: handleTouchStart,
+      ref: handleRef,
+      tabIndex: disabled ? -1 : tabIndex,
+      type
+    }, buttonProps, other, {
+      children: [children, enableTouchRipple ? (
+        /* TouchRipple is only needed client-side, x2 boost on the server. */
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(TouchRipple_default, _extends({
+          ref: handleRippleRef,
+          center: centerRipple
+        }, TouchRippleProps))
+      ) : null]
+    }));
+  });
+  true ? ButtonBase.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * A ref for imperative actions.
+     * It currently only supports `focusVisible()` action.
+     */
+    action: refType_default,
+    /**
+     * If `true`, the ripples are centered.
+     * They won't start at the cursor interaction position.
+     * @default false
+     */
+    centerRipple: import_prop_types11.default.bool,
+    /**
+     * The content of the component.
+     */
+    children: import_prop_types11.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types11.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types11.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: elementTypeAcceptingRef_default,
+    /**
+     * If `true`, the component is disabled.
+     * @default false
+     */
+    disabled: import_prop_types11.default.bool,
+    /**
+     * If `true`, the ripple effect is disabled.
+     *
+     * ⚠️ Without a ripple there is no styling for :focus-visible by default. Be sure
+     * to highlight the element by applying separate styles with the `.Mui-focusVisible` class.
+     * @default false
+     */
+    disableRipple: import_prop_types11.default.bool,
+    /**
+     * If `true`, the touch ripple effect is disabled.
+     * @default false
+     */
+    disableTouchRipple: import_prop_types11.default.bool,
+    /**
+     * If `true`, the base button will have a keyboard focus ripple.
+     * @default false
+     */
+    focusRipple: import_prop_types11.default.bool,
+    /**
+     * This prop can help identify which element has keyboard focus.
+     * The class name will be applied when the element gains the focus through keyboard interaction.
+     * It's a polyfill for the [CSS :focus-visible selector](https://drafts.csswg.org/selectors-4/#the-focus-visible-pseudo).
+     * The rationale for using this feature [is explained here](https://github.com/WICG/focus-visible/blob/HEAD/explainer.md).
+     * A [polyfill can be used](https://github.com/WICG/focus-visible) to apply a `focus-visible` class to other components
+     * if needed.
+     */
+    focusVisibleClassName: import_prop_types11.default.string,
+    /**
+     * @ignore
+     */
+    href: import_prop_types11.default.any,
+    /**
+     * The component used to render a link when the `href` prop is provided.
+     * @default 'a'
+     */
+    LinkComponent: import_prop_types11.default.elementType,
+    /**
+     * @ignore
+     */
+    onBlur: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onClick: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onContextMenu: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onDragLeave: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onFocus: import_prop_types11.default.func,
+    /**
+     * Callback fired when the component is focused with a keyboard.
+     * We trigger a `onFocus` callback too.
+     */
+    onFocusVisible: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onKeyDown: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onKeyUp: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onMouseDown: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onMouseLeave: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onMouseUp: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onTouchEnd: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onTouchMove: import_prop_types11.default.func,
+    /**
+     * @ignore
+     */
+    onTouchStart: import_prop_types11.default.func,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types11.default.oneOfType([import_prop_types11.default.arrayOf(import_prop_types11.default.oneOfType([import_prop_types11.default.func, import_prop_types11.default.object, import_prop_types11.default.bool])), import_prop_types11.default.func, import_prop_types11.default.object]),
+    /**
+     * @default 0
+     */
+    tabIndex: import_prop_types11.default.number,
+    /**
+     * Props applied to the `TouchRipple` element.
+     */
+    TouchRippleProps: import_prop_types11.default.object,
+    /**
+     * A ref that points to the `TouchRipple` element.
+     */
+    touchRippleRef: import_prop_types11.default.oneOfType([import_prop_types11.default.func, import_prop_types11.default.shape({
+      current: import_prop_types11.default.shape({
+        pulsate: import_prop_types11.default.func.isRequired,
+        start: import_prop_types11.default.func.isRequired,
+        stop: import_prop_types11.default.func.isRequired
+      })
+    })]),
+    /**
+     * @ignore
+     */
+    type: import_prop_types11.default.oneOfType([import_prop_types11.default.oneOf(["button", "reset", "submit"]), import_prop_types11.default.string])
+  } : void 0;
+  var ButtonBase_default = ButtonBase;
+
   // node_modules/@mui/material/Typography/Typography.js
-  var React10 = __toESM(require_react());
-  var import_prop_types5 = __toESM(require_prop_types());
+  var React22 = __toESM(require_react());
+  var import_prop_types12 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/Typography/typographyClasses.js
   function getTypographyUtilityClass(slot) {
@@ -30445,9 +31808,9 @@ Please use another name.` : formatMuiErrorMessage(18));
   var typographyClasses = generateUtilityClasses("MuiTypography", ["root", "h1", "h2", "h3", "h4", "h5", "h6", "subtitle1", "subtitle2", "body1", "body2", "inherit", "button", "caption", "overline", "alignLeft", "alignRight", "alignCenter", "alignJustify", "noWrap", "gutterBottom", "paragraph"]);
 
   // node_modules/@mui/material/Typography/Typography.js
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var _excluded11 = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
-  var useUtilityClasses2 = (ownerState) => {
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime());
+  var _excluded14 = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+  var useUtilityClasses4 = (ownerState) => {
     const {
       align,
       gutterBottom,
@@ -30512,7 +31875,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   var transformDeprecatedColors = (color2) => {
     return colorTransformations[color2] || color2;
   };
-  var Typography = /* @__PURE__ */ React10.forwardRef(function Typography2(inProps, ref) {
+  var Typography = /* @__PURE__ */ React22.forwardRef(function Typography2(inProps, ref) {
     const themeProps = useThemeProps2({
       props: inProps,
       name: "MuiTypography"
@@ -30530,7 +31893,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       paragraph = false,
       variant = "body1",
       variantMapping = defaultVariantMapping
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded11);
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded14);
     const ownerState = _extends({}, props, {
       align,
       color: color2,
@@ -30543,8 +31906,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       variantMapping
     });
     const Component = component || (paragraph ? "p" : variantMapping[variant] || defaultVariantMapping[variant]) || "span";
-    const classes = useUtilityClasses2(ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(TypographyRoot, _extends({
+    const classes = useUtilityClasses4(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(TypographyRoot, _extends({
       as: Component,
       ref,
       ownerState,
@@ -30560,29 +31923,29 @@ Please use another name.` : formatMuiErrorMessage(18));
      * Set the text-align on the component.
      * @default 'inherit'
      */
-    align: import_prop_types5.default.oneOf(["center", "inherit", "justify", "left", "right"]),
+    align: import_prop_types12.default.oneOf(["center", "inherit", "justify", "left", "right"]),
     /**
      * The content of the component.
      */
-    children: import_prop_types5.default.node,
+    children: import_prop_types12.default.node,
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types5.default.object,
+    classes: import_prop_types12.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types5.default.string,
+    className: import_prop_types12.default.string,
     /**
      * The component used for the root node.
      * Either a string to use a HTML element or a component.
      */
-    component: import_prop_types5.default.elementType,
+    component: import_prop_types12.default.elementType,
     /**
      * If `true`, the text will have a bottom margin.
      * @default false
      */
-    gutterBottom: import_prop_types5.default.bool,
+    gutterBottom: import_prop_types12.default.bool,
     /**
      * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
      *
@@ -30590,21 +31953,21 @@ Please use another name.` : formatMuiErrorMessage(18));
      * (the element needs to have a width in order to overflow).
      * @default false
      */
-    noWrap: import_prop_types5.default.bool,
+    noWrap: import_prop_types12.default.bool,
     /**
      * If `true`, the element will be a paragraph element.
      * @default false
      */
-    paragraph: import_prop_types5.default.bool,
+    paragraph: import_prop_types12.default.bool,
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types5.default.oneOfType([import_prop_types5.default.arrayOf(import_prop_types5.default.oneOfType([import_prop_types5.default.func, import_prop_types5.default.object, import_prop_types5.default.bool])), import_prop_types5.default.func, import_prop_types5.default.object]),
+    sx: import_prop_types12.default.oneOfType([import_prop_types12.default.arrayOf(import_prop_types12.default.oneOfType([import_prop_types12.default.func, import_prop_types12.default.object, import_prop_types12.default.bool])), import_prop_types12.default.func, import_prop_types12.default.object]),
     /**
      * Applies the theme typography styles.
      * @default 'body1'
      */
-    variant: import_prop_types5.default.oneOfType([import_prop_types5.default.oneOf(["body1", "body2", "button", "caption", "h1", "h2", "h3", "h4", "h5", "h6", "inherit", "overline", "subtitle1", "subtitle2"]), import_prop_types5.default.string]),
+    variant: import_prop_types12.default.oneOfType([import_prop_types12.default.oneOf(["body1", "body2", "button", "caption", "h1", "h2", "h3", "h4", "h5", "h6", "inherit", "overline", "subtitle1", "subtitle2"]), import_prop_types12.default.string]),
     /**
      * The component maps the variant prop to a range of different HTML element types.
      * For instance, subtitle1 to `<h6>`.
@@ -30624,16 +31987,160 @@ Please use another name.` : formatMuiErrorMessage(18));
      *   inherit: 'p',
      * }
      */
-    variantMapping: import_prop_types5.default.object
+    variantMapping: import_prop_types12.default.object
   } : void 0;
   var Typography_default = Typography;
 
+  // node_modules/@mui/base/utils/isHostComponent.js
+  function isHostComponent(element) {
+    return typeof element === "string";
+  }
+
+  // node_modules/@mui/material/ListSubheader/ListSubheader.js
+  var React23 = __toESM(require_react());
+  var import_prop_types13 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ListSubheader/listSubheaderClasses.js
+  function getListSubheaderUtilityClass(slot) {
+    return generateUtilityClass("MuiListSubheader", slot);
+  }
+  var listSubheaderClasses = generateUtilityClasses("MuiListSubheader", ["root", "colorPrimary", "colorInherit", "gutters", "inset", "sticky"]);
+
+  // node_modules/@mui/material/ListSubheader/ListSubheader.js
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
+  var _excluded15 = ["className", "color", "component", "disableGutters", "disableSticky", "inset"];
+  var useUtilityClasses5 = (ownerState) => {
+    const {
+      classes,
+      color: color2,
+      disableGutters,
+      inset,
+      disableSticky
+    } = ownerState;
+    const slots = {
+      root: ["root", color2 !== "default" && `color${capitalize_default(color2)}`, !disableGutters && "gutters", inset && "inset", !disableSticky && "sticky"]
+    };
+    return composeClasses(slots, getListSubheaderUtilityClass, classes);
+  };
+  var ListSubheaderRoot = styled_default("li", {
+    name: "MuiListSubheader",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, ownerState.color !== "default" && styles2[`color${capitalize_default(ownerState.color)}`], !ownerState.disableGutters && styles2.gutters, ownerState.inset && styles2.inset, !ownerState.disableSticky && styles2.sticky];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    boxSizing: "border-box",
+    lineHeight: "48px",
+    listStyle: "none",
+    color: (theme.vars || theme).palette.text.secondary,
+    fontFamily: theme.typography.fontFamily,
+    fontWeight: theme.typography.fontWeightMedium,
+    fontSize: theme.typography.pxToRem(14)
+  }, ownerState.color === "primary" && {
+    color: (theme.vars || theme).palette.primary.main
+  }, ownerState.color === "inherit" && {
+    color: "inherit"
+  }, !ownerState.disableGutters && {
+    paddingLeft: 16,
+    paddingRight: 16
+  }, ownerState.inset && {
+    paddingLeft: 72
+  }, !ownerState.disableSticky && {
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
+    backgroundColor: (theme.vars || theme).palette.background.paper
+  }));
+  var ListSubheader = /* @__PURE__ */ React23.forwardRef(function ListSubheader2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListSubheader"
+    });
+    const {
+      className,
+      color: color2 = "default",
+      component = "li",
+      disableGutters = false,
+      disableSticky = false,
+      inset = false
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded15);
+    const ownerState = _extends({}, props, {
+      color: color2,
+      component,
+      disableGutters,
+      disableSticky,
+      inset
+    });
+    const classes = useUtilityClasses5(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(ListSubheaderRoot, _extends({
+      as: component,
+      className: clsx_default(classes.root, className),
+      ref,
+      ownerState
+    }, other));
+  });
+  ListSubheader.muiSkipListHighlight = true;
+  true ? ListSubheader.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The content of the component.
+     */
+    children: import_prop_types13.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types13.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types13.default.string,
+    /**
+     * The color of the component. It supports those theme colors that make sense for this component.
+     * @default 'default'
+     */
+    color: import_prop_types13.default.oneOf(["default", "inherit", "primary"]),
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types13.default.elementType,
+    /**
+     * If `true`, the List Subheader will not have gutters.
+     * @default false
+     */
+    disableGutters: import_prop_types13.default.bool,
+    /**
+     * If `true`, the List Subheader will not stick to the top during scroll.
+     * @default false
+     */
+    disableSticky: import_prop_types13.default.bool,
+    /**
+     * If `true`, the List Subheader is indented.
+     * @default false
+     */
+    inset: import_prop_types13.default.bool,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types13.default.oneOfType([import_prop_types13.default.arrayOf(import_prop_types13.default.oneOfType([import_prop_types13.default.func, import_prop_types13.default.object, import_prop_types13.default.bool])), import_prop_types13.default.func, import_prop_types13.default.object])
+  } : void 0;
+  var ListSubheader_default = ListSubheader;
+
   // node_modules/@mui/material/GlobalStyles/GlobalStyles.js
-  var React11 = __toESM(require_react());
-  var import_prop_types6 = __toESM(require_prop_types());
-  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  var React24 = __toESM(require_react());
+  var import_prop_types14 = __toESM(require_prop_types());
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
   function GlobalStyles3(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(GlobalStyles_default, _extends({}, props, {
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(GlobalStyles_default, _extends({}, props, {
       defaultTheme: defaultTheme_default,
       themeId: identifier_default
     }));
@@ -30646,15 +32153,405 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * The styles you want to apply globally.
      */
-    styles: import_prop_types6.default.oneOfType([import_prop_types6.default.array, import_prop_types6.default.func, import_prop_types6.default.number, import_prop_types6.default.object, import_prop_types6.default.string, import_prop_types6.default.bool])
+    styles: import_prop_types14.default.oneOfType([import_prop_types14.default.array, import_prop_types14.default.func, import_prop_types14.default.number, import_prop_types14.default.object, import_prop_types14.default.string, import_prop_types14.default.bool])
   } : void 0;
   var GlobalStyles_default2 = GlobalStyles3;
 
+  // node_modules/@mui/material/Button/Button.js
+  var React27 = __toESM(require_react());
+  var import_prop_types15 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/Button/buttonClasses.js
+  function getButtonUtilityClass(slot) {
+    return generateUtilityClass("MuiButton", slot);
+  }
+  var buttonClasses = generateUtilityClasses("MuiButton", ["root", "text", "textInherit", "textPrimary", "textSecondary", "textSuccess", "textError", "textInfo", "textWarning", "outlined", "outlinedInherit", "outlinedPrimary", "outlinedSecondary", "outlinedSuccess", "outlinedError", "outlinedInfo", "outlinedWarning", "contained", "containedInherit", "containedPrimary", "containedSecondary", "containedSuccess", "containedError", "containedInfo", "containedWarning", "disableElevation", "focusVisible", "disabled", "colorInherit", "textSizeSmall", "textSizeMedium", "textSizeLarge", "outlinedSizeSmall", "outlinedSizeMedium", "outlinedSizeLarge", "containedSizeSmall", "containedSizeMedium", "containedSizeLarge", "sizeMedium", "sizeSmall", "sizeLarge", "fullWidth", "startIcon", "endIcon", "iconSizeSmall", "iconSizeMedium", "iconSizeLarge"]);
+  var buttonClasses_default = buttonClasses;
+
+  // node_modules/@mui/material/ButtonGroup/ButtonGroupContext.js
+  var React25 = __toESM(require_react());
+  var ButtonGroupContext = /* @__PURE__ */ React25.createContext({});
+  if (true) {
+    ButtonGroupContext.displayName = "ButtonGroupContext";
+  }
+  var ButtonGroupContext_default = ButtonGroupContext;
+
+  // node_modules/@mui/material/ButtonGroup/ButtonGroupButtonContext.js
+  var React26 = __toESM(require_react());
+  var ButtonGroupButtonContext = /* @__PURE__ */ React26.createContext(void 0);
+  if (true) {
+    ButtonGroupButtonContext.displayName = "ButtonGroupButtonContext";
+  }
+  var ButtonGroupButtonContext_default = ButtonGroupButtonContext;
+
+  // node_modules/@mui/material/Button/Button.js
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
+  var _excluded16 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+  var useUtilityClasses6 = (ownerState) => {
+    const {
+      color: color2,
+      disableElevation,
+      fullWidth,
+      size,
+      variant,
+      classes
+    } = ownerState;
+    const slots = {
+      root: ["root", variant, `${variant}${capitalize_default(color2)}`, `size${capitalize_default(size)}`, `${variant}Size${capitalize_default(size)}`, color2 === "inherit" && "colorInherit", disableElevation && "disableElevation", fullWidth && "fullWidth"],
+      label: ["label"],
+      startIcon: ["startIcon", `iconSize${capitalize_default(size)}`],
+      endIcon: ["endIcon", `iconSize${capitalize_default(size)}`]
+    };
+    const composedClasses = composeClasses(slots, getButtonUtilityClass, classes);
+    return _extends({}, classes, composedClasses);
+  };
+  var commonIconStyles = (ownerState) => _extends({}, ownerState.size === "small" && {
+    "& > *:nth-of-type(1)": {
+      fontSize: 18
+    }
+  }, ownerState.size === "medium" && {
+    "& > *:nth-of-type(1)": {
+      fontSize: 20
+    }
+  }, ownerState.size === "large" && {
+    "& > *:nth-of-type(1)": {
+      fontSize: 22
+    }
+  });
+  var ButtonRoot = styled_default(ButtonBase_default, {
+    shouldForwardProp: (prop) => rootShouldForwardProp(prop) || prop === "classes",
+    name: "MuiButton",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, styles2[ownerState.variant], styles2[`${ownerState.variant}${capitalize_default(ownerState.color)}`], styles2[`size${capitalize_default(ownerState.size)}`], styles2[`${ownerState.variant}Size${capitalize_default(ownerState.size)}`], ownerState.color === "inherit" && styles2.colorInherit, ownerState.disableElevation && styles2.disableElevation, ownerState.fullWidth && styles2.fullWidth];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => {
+    var _theme$palette$getCon, _theme$palette;
+    const inheritContainedBackgroundColor = theme.palette.mode === "light" ? theme.palette.grey[300] : theme.palette.grey[800];
+    const inheritContainedHoverBackgroundColor = theme.palette.mode === "light" ? theme.palette.grey.A100 : theme.palette.grey[700];
+    return _extends({}, theme.typography.button, {
+      minWidth: 64,
+      padding: "6px 16px",
+      borderRadius: (theme.vars || theme).shape.borderRadius,
+      transition: theme.transitions.create(["background-color", "box-shadow", "border-color", "color"], {
+        duration: theme.transitions.duration.short
+      }),
+      "&:hover": _extends({
+        textDecoration: "none",
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / ${theme.vars.palette.action.hoverOpacity})` : alpha(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
+      }, ownerState.variant === "text" && ownerState.color !== "inherit" && {
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.hoverOpacity})` : alpha(theme.palette[ownerState.color].main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
+      }, ownerState.variant === "outlined" && ownerState.color !== "inherit" && {
+        border: `1px solid ${(theme.vars || theme).palette[ownerState.color].main}`,
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.hoverOpacity})` : alpha(theme.palette[ownerState.color].main, theme.palette.action.hoverOpacity),
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: "transparent"
+        }
+      }, ownerState.variant === "contained" && {
+        backgroundColor: theme.vars ? theme.vars.palette.Button.inheritContainedHoverBg : inheritContainedHoverBackgroundColor,
+        boxShadow: (theme.vars || theme).shadows[4],
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          boxShadow: (theme.vars || theme).shadows[2],
+          backgroundColor: (theme.vars || theme).palette.grey[300]
+        }
+      }, ownerState.variant === "contained" && ownerState.color !== "inherit" && {
+        backgroundColor: (theme.vars || theme).palette[ownerState.color].dark,
+        // Reset on touch devices, it doesn't add specificity
+        "@media (hover: none)": {
+          backgroundColor: (theme.vars || theme).palette[ownerState.color].main
+        }
+      }),
+      "&:active": _extends({}, ownerState.variant === "contained" && {
+        boxShadow: (theme.vars || theme).shadows[8]
+      }),
+      [`&.${buttonClasses_default.focusVisible}`]: _extends({}, ownerState.variant === "contained" && {
+        boxShadow: (theme.vars || theme).shadows[6]
+      }),
+      [`&.${buttonClasses_default.disabled}`]: _extends({
+        color: (theme.vars || theme).palette.action.disabled
+      }, ownerState.variant === "outlined" && {
+        border: `1px solid ${(theme.vars || theme).palette.action.disabledBackground}`
+      }, ownerState.variant === "contained" && {
+        color: (theme.vars || theme).palette.action.disabled,
+        boxShadow: (theme.vars || theme).shadows[0],
+        backgroundColor: (theme.vars || theme).palette.action.disabledBackground
+      })
+    }, ownerState.variant === "text" && {
+      padding: "6px 8px"
+    }, ownerState.variant === "text" && ownerState.color !== "inherit" && {
+      color: (theme.vars || theme).palette[ownerState.color].main
+    }, ownerState.variant === "outlined" && {
+      padding: "5px 15px",
+      border: "1px solid currentColor"
+    }, ownerState.variant === "outlined" && ownerState.color !== "inherit" && {
+      color: (theme.vars || theme).palette[ownerState.color].main,
+      border: theme.vars ? `1px solid rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.5)` : `1px solid ${alpha(theme.palette[ownerState.color].main, 0.5)}`
+    }, ownerState.variant === "contained" && {
+      color: theme.vars ? (
+        // this is safe because grey does not change between default light/dark mode
+        theme.vars.palette.text.primary
+      ) : (_theme$palette$getCon = (_theme$palette = theme.palette).getContrastText) == null ? void 0 : _theme$palette$getCon.call(_theme$palette, theme.palette.grey[300]),
+      backgroundColor: theme.vars ? theme.vars.palette.Button.inheritContainedBg : inheritContainedBackgroundColor,
+      boxShadow: (theme.vars || theme).shadows[2]
+    }, ownerState.variant === "contained" && ownerState.color !== "inherit" && {
+      color: (theme.vars || theme).palette[ownerState.color].contrastText,
+      backgroundColor: (theme.vars || theme).palette[ownerState.color].main
+    }, ownerState.color === "inherit" && {
+      color: "inherit",
+      borderColor: "currentColor"
+    }, ownerState.size === "small" && ownerState.variant === "text" && {
+      padding: "4px 5px",
+      fontSize: theme.typography.pxToRem(13)
+    }, ownerState.size === "large" && ownerState.variant === "text" && {
+      padding: "8px 11px",
+      fontSize: theme.typography.pxToRem(15)
+    }, ownerState.size === "small" && ownerState.variant === "outlined" && {
+      padding: "3px 9px",
+      fontSize: theme.typography.pxToRem(13)
+    }, ownerState.size === "large" && ownerState.variant === "outlined" && {
+      padding: "7px 21px",
+      fontSize: theme.typography.pxToRem(15)
+    }, ownerState.size === "small" && ownerState.variant === "contained" && {
+      padding: "4px 10px",
+      fontSize: theme.typography.pxToRem(13)
+    }, ownerState.size === "large" && ownerState.variant === "contained" && {
+      padding: "8px 22px",
+      fontSize: theme.typography.pxToRem(15)
+    }, ownerState.fullWidth && {
+      width: "100%"
+    });
+  }, ({
+    ownerState
+  }) => ownerState.disableElevation && {
+    boxShadow: "none",
+    "&:hover": {
+      boxShadow: "none"
+    },
+    [`&.${buttonClasses_default.focusVisible}`]: {
+      boxShadow: "none"
+    },
+    "&:active": {
+      boxShadow: "none"
+    },
+    [`&.${buttonClasses_default.disabled}`]: {
+      boxShadow: "none"
+    }
+  });
+  var ButtonStartIcon = styled_default("span", {
+    name: "MuiButton",
+    slot: "StartIcon",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.startIcon, styles2[`iconSize${capitalize_default(ownerState.size)}`]];
+    }
+  })(({
+    ownerState
+  }) => _extends({
+    display: "inherit",
+    marginRight: 8,
+    marginLeft: -4
+  }, ownerState.size === "small" && {
+    marginLeft: -2
+  }, commonIconStyles(ownerState)));
+  var ButtonEndIcon = styled_default("span", {
+    name: "MuiButton",
+    slot: "EndIcon",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.endIcon, styles2[`iconSize${capitalize_default(ownerState.size)}`]];
+    }
+  })(({
+    ownerState
+  }) => _extends({
+    display: "inherit",
+    marginRight: -4,
+    marginLeft: 8
+  }, ownerState.size === "small" && {
+    marginRight: -2
+  }, commonIconStyles(ownerState)));
+  var Button = /* @__PURE__ */ React27.forwardRef(function Button2(inProps, ref) {
+    const contextProps = React27.useContext(ButtonGroupContext_default);
+    const buttonGroupButtonContextPositionClassName = React27.useContext(ButtonGroupButtonContext_default);
+    const resolvedProps = resolveProps(contextProps, inProps);
+    const props = useThemeProps2({
+      props: resolvedProps,
+      name: "MuiButton"
+    });
+    const {
+      children,
+      color: color2 = "primary",
+      component = "button",
+      className,
+      disabled = false,
+      disableElevation = false,
+      disableFocusRipple = false,
+      endIcon: endIconProp,
+      focusVisibleClassName,
+      fullWidth = false,
+      size = "medium",
+      startIcon: startIconProp,
+      type,
+      variant = "text"
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded16);
+    const ownerState = _extends({}, props, {
+      color: color2,
+      component,
+      disabled,
+      disableElevation,
+      disableFocusRipple,
+      fullWidth,
+      size,
+      type,
+      variant
+    });
+    const classes = useUtilityClasses6(ownerState);
+    const startIcon = startIconProp && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ButtonStartIcon, {
+      className: classes.startIcon,
+      ownerState,
+      children: startIconProp
+    });
+    const endIcon = endIconProp && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(ButtonEndIcon, {
+      className: classes.endIcon,
+      ownerState,
+      children: endIconProp
+    });
+    const positionClassName = buttonGroupButtonContextPositionClassName || "";
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(ButtonRoot, _extends({
+      ownerState,
+      className: clsx_default(contextProps.className, classes.root, className, positionClassName),
+      component,
+      disabled,
+      focusRipple: !disableFocusRipple,
+      focusVisibleClassName: clsx_default(classes.focusVisible, focusVisibleClassName),
+      ref,
+      type
+    }, other, {
+      classes,
+      children: [startIcon, children, endIcon]
+    }));
+  });
+  true ? Button.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The content of the component.
+     */
+    children: import_prop_types15.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types15.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types15.default.string,
+    /**
+     * The color of the component.
+     * It supports both default and custom theme colors, which can be added as shown in the
+     * [palette customization guide](https://mui.com/material-ui/customization/palette/#adding-new-colors).
+     * @default 'primary'
+     */
+    color: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["inherit", "primary", "secondary", "success", "error", "info", "warning"]), import_prop_types15.default.string]),
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types15.default.elementType,
+    /**
+     * If `true`, the component is disabled.
+     * @default false
+     */
+    disabled: import_prop_types15.default.bool,
+    /**
+     * If `true`, no elevation is used.
+     * @default false
+     */
+    disableElevation: import_prop_types15.default.bool,
+    /**
+     * If `true`, the  keyboard focus ripple is disabled.
+     * @default false
+     */
+    disableFocusRipple: import_prop_types15.default.bool,
+    /**
+     * If `true`, the ripple effect is disabled.
+     *
+     * ⚠️ Without a ripple there is no styling for :focus-visible by default. Be sure
+     * to highlight the element by applying separate styles with the `.Mui-focusVisible` class.
+     * @default false
+     */
+    disableRipple: import_prop_types15.default.bool,
+    /**
+     * Element placed after the children.
+     */
+    endIcon: import_prop_types15.default.node,
+    /**
+     * @ignore
+     */
+    focusVisibleClassName: import_prop_types15.default.string,
+    /**
+     * If `true`, the button will take up the full width of its container.
+     * @default false
+     */
+    fullWidth: import_prop_types15.default.bool,
+    /**
+     * The URL to link to when the button is clicked.
+     * If defined, an `a` element will be used as the root node.
+     */
+    href: import_prop_types15.default.string,
+    /**
+     * The size of the component.
+     * `small` is equivalent to the dense button styling.
+     * @default 'medium'
+     */
+    size: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["small", "medium", "large"]), import_prop_types15.default.string]),
+    /**
+     * Element placed before the children.
+     */
+    startIcon: import_prop_types15.default.node,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types15.default.oneOfType([import_prop_types15.default.arrayOf(import_prop_types15.default.oneOfType([import_prop_types15.default.func, import_prop_types15.default.object, import_prop_types15.default.bool])), import_prop_types15.default.func, import_prop_types15.default.object]),
+    /**
+     * @ignore
+     */
+    type: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["button", "reset", "submit"]), import_prop_types15.default.string]),
+    /**
+     * The variant to use.
+     * @default 'text'
+     */
+    variant: import_prop_types15.default.oneOfType([import_prop_types15.default.oneOf(["contained", "outlined", "text"]), import_prop_types15.default.string])
+  } : void 0;
+  var Button_default = Button;
+
   // node_modules/@mui/material/CssBaseline/CssBaseline.js
-  var React12 = __toESM(require_react());
-  var import_prop_types7 = __toESM(require_prop_types());
-  var import_jsx_runtime6 = __toESM(require_jsx_runtime());
-  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var React28 = __toESM(require_react());
+  var import_prop_types16 = __toESM(require_prop_types());
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
   var html = (theme, enableColorScheme) => _extends({
     WebkitFontSmoothing: "antialiased",
     // Antialiasing.
@@ -30721,8 +32618,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       children,
       enableColorScheme = false
     } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(React12.Fragment, {
-      children: [/* @__PURE__ */ (0, import_jsx_runtime6.jsx)(GlobalStyles_default2, {
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(React28.Fragment, {
+      children: [/* @__PURE__ */ (0, import_jsx_runtime16.jsx)(GlobalStyles_default2, {
         styles: (theme) => styles(theme, enableColorScheme)
       }), children]
     });
@@ -30735,46 +32632,971 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * You can wrap a node.
      */
-    children: import_prop_types7.default.node,
+    children: import_prop_types16.default.node,
     /**
      * Enable `color-scheme` CSS property to use `theme.palette.mode`.
      * For more details, check out https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
      * For browser support, check out https://caniuse.com/?search=color-scheme
      * @default false
      */
-    enableColorScheme: import_prop_types7.default.bool
+    enableColorScheme: import_prop_types16.default.bool
   } : void 0;
   var CssBaseline_default = CssBaseline;
 
-  // src/elements/Components/StudentSummary.jsx
-  var import_react6 = __toESM(require_react(), 1);
-  function StudentSummary(props) {
-    return /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement(Typography_default, { variant: "body" }, "Student Summary Here"));
-  }
+  // node_modules/@mui/material/List/List.js
+  var React30 = __toESM(require_react());
+  var import_prop_types17 = __toESM(require_prop_types());
 
-  // src/elements/Components/CleanserRoot.jsx
-  function CleanserRoot(props) {
-    const { showSummary: showSummary2, ...rest } = props;
-    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react7.default.createElement(
-      Paper_default,
-      {
-        elevation: 5,
-        sx: {
-          height: "45vh",
-          width: "33vw",
-          padding: "20px"
-        }
-      },
-      /* @__PURE__ */ import_react7.default.createElement(Typography_default, { component: "h1", variant: "h5" }, "Audit Summary"),
-      /* @__PURE__ */ import_react7.default.createElement(StudentSummary, { ...rest })
-    ));
+  // node_modules/@mui/material/List/ListContext.js
+  var React29 = __toESM(require_react());
+  var ListContext = /* @__PURE__ */ React29.createContext({});
+  if (true) {
+    ListContext.displayName = "ListContext";
   }
-  CleanserRoot.propTypes = {
-    showSummary: import_prop_types8.default.bool
+  var ListContext_default = ListContext;
+
+  // node_modules/@mui/material/List/listClasses.js
+  function getListUtilityClass(slot) {
+    return generateUtilityClass("MuiList", slot);
+  }
+  var listClasses = generateUtilityClasses("MuiList", ["root", "padding", "dense", "subheader"]);
+
+  // node_modules/@mui/material/List/List.js
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
+  var _excluded17 = ["children", "className", "component", "dense", "disablePadding", "subheader"];
+  var useUtilityClasses7 = (ownerState) => {
+    const {
+      classes,
+      disablePadding,
+      dense,
+      subheader
+    } = ownerState;
+    const slots = {
+      root: ["root", !disablePadding && "padding", dense && "dense", subheader && "subheader"]
+    };
+    return composeClasses(slots, getListUtilityClass, classes);
   };
-  CleanserRoot.defaultProps = {
-    showSummary: false
+  var ListRoot = styled_default("ul", {
+    name: "MuiList",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, !ownerState.disablePadding && styles2.padding, ownerState.dense && styles2.dense, ownerState.subheader && styles2.subheader];
+    }
+  })(({
+    ownerState
+  }) => _extends({
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    position: "relative"
+  }, !ownerState.disablePadding && {
+    paddingTop: 8,
+    paddingBottom: 8
+  }, ownerState.subheader && {
+    paddingTop: 0
+  }));
+  var List = /* @__PURE__ */ React30.forwardRef(function List2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiList"
+    });
+    const {
+      children,
+      className,
+      component = "ul",
+      dense = false,
+      disablePadding = false,
+      subheader
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded17);
+    const context = React30.useMemo(() => ({
+      dense
+    }), [dense]);
+    const ownerState = _extends({}, props, {
+      component,
+      dense,
+      disablePadding
+    });
+    const classes = useUtilityClasses7(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(ListContext_default.Provider, {
+      value: context,
+      children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(ListRoot, _extends({
+        as: component,
+        className: clsx_default(classes.root, className),
+        ref,
+        ownerState
+      }, other, {
+        children: [subheader, children]
+      }))
+    });
+  });
+  true ? List.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The content of the component.
+     */
+    children: import_prop_types17.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types17.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types17.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types17.default.elementType,
+    /**
+     * If `true`, compact vertical padding designed for keyboard and mouse input is used for
+     * the list and list items.
+     * The prop is available to descendant components as the `dense` context.
+     * @default false
+     */
+    dense: import_prop_types17.default.bool,
+    /**
+     * If `true`, vertical padding is removed from the list.
+     * @default false
+     */
+    disablePadding: import_prop_types17.default.bool,
+    /**
+     * The content of the subheader, normally `ListSubheader`.
+     */
+    subheader: import_prop_types17.default.node,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types17.default.oneOfType([import_prop_types17.default.arrayOf(import_prop_types17.default.oneOfType([import_prop_types17.default.func, import_prop_types17.default.object, import_prop_types17.default.bool])), import_prop_types17.default.func, import_prop_types17.default.object])
+  } : void 0;
+  var List_default = List;
+
+  // node_modules/@mui/material/ListItem/ListItem.js
+  var React32 = __toESM(require_react());
+  var import_prop_types19 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ListItem/listItemClasses.js
+  function getListItemUtilityClass(slot) {
+    return generateUtilityClass("MuiListItem", slot);
+  }
+  var listItemClasses = generateUtilityClasses("MuiListItem", ["root", "container", "focusVisible", "dense", "alignItemsFlexStart", "disabled", "divider", "gutters", "padding", "button", "secondaryAction", "selected"]);
+  var listItemClasses_default = listItemClasses;
+
+  // node_modules/@mui/material/ListItemButton/listItemButtonClasses.js
+  var listItemButtonClasses = generateUtilityClasses("MuiListItemButton", ["root", "focusVisible", "dense", "alignItemsFlexStart", "disabled", "divider", "gutters", "selected"]);
+  var listItemButtonClasses_default = listItemButtonClasses;
+
+  // node_modules/@mui/material/ListItemSecondaryAction/ListItemSecondaryAction.js
+  var React31 = __toESM(require_react());
+  var import_prop_types18 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ListItemSecondaryAction/listItemSecondaryActionClasses.js
+  function getListItemSecondaryActionClassesUtilityClass(slot) {
+    return generateUtilityClass("MuiListItemSecondaryAction", slot);
+  }
+  var listItemSecondaryActionClasses = generateUtilityClasses("MuiListItemSecondaryAction", ["root", "disableGutters"]);
+
+  // node_modules/@mui/material/ListItemSecondaryAction/ListItemSecondaryAction.js
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var _excluded18 = ["className"];
+  var useUtilityClasses8 = (ownerState) => {
+    const {
+      disableGutters,
+      classes
+    } = ownerState;
+    const slots = {
+      root: ["root", disableGutters && "disableGutters"]
+    };
+    return composeClasses(slots, getListItemSecondaryActionClassesUtilityClass, classes);
   };
+  var ListItemSecondaryActionRoot = styled_default("div", {
+    name: "MuiListItemSecondaryAction",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, ownerState.disableGutters && styles2.disableGutters];
+    }
+  })(({
+    ownerState
+  }) => _extends({
+    position: "absolute",
+    right: 16,
+    top: "50%",
+    transform: "translateY(-50%)"
+  }, ownerState.disableGutters && {
+    right: 0
+  }));
+  var ListItemSecondaryAction = /* @__PURE__ */ React31.forwardRef(function ListItemSecondaryAction2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListItemSecondaryAction"
+    });
+    const {
+      className
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded18);
+    const context = React31.useContext(ListContext_default);
+    const ownerState = _extends({}, props, {
+      disableGutters: context.disableGutters
+    });
+    const classes = useUtilityClasses8(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(ListItemSecondaryActionRoot, _extends({
+      className: clsx_default(classes.root, className),
+      ownerState,
+      ref
+    }, other));
+  });
+  true ? ListItemSecondaryAction.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The content of the component, normally an `IconButton` or selection control.
+     */
+    children: import_prop_types18.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types18.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types18.default.string,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types18.default.oneOfType([import_prop_types18.default.arrayOf(import_prop_types18.default.oneOfType([import_prop_types18.default.func, import_prop_types18.default.object, import_prop_types18.default.bool])), import_prop_types18.default.func, import_prop_types18.default.object])
+  } : void 0;
+  ListItemSecondaryAction.muiName = "ListItemSecondaryAction";
+  var ListItemSecondaryAction_default = ListItemSecondaryAction;
+
+  // node_modules/@mui/material/ListItem/ListItem.js
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var _excluded19 = ["className"];
+  var _excluded22 = ["alignItems", "autoFocus", "button", "children", "className", "component", "components", "componentsProps", "ContainerComponent", "ContainerProps", "dense", "disabled", "disableGutters", "disablePadding", "divider", "focusVisibleClassName", "secondaryAction", "selected", "slotProps", "slots"];
+  var overridesResolver = (props, styles2) => {
+    const {
+      ownerState
+    } = props;
+    return [styles2.root, ownerState.dense && styles2.dense, ownerState.alignItems === "flex-start" && styles2.alignItemsFlexStart, ownerState.divider && styles2.divider, !ownerState.disableGutters && styles2.gutters, !ownerState.disablePadding && styles2.padding, ownerState.button && styles2.button, ownerState.hasSecondaryAction && styles2.secondaryAction];
+  };
+  var useUtilityClasses9 = (ownerState) => {
+    const {
+      alignItems,
+      button,
+      classes,
+      dense,
+      disabled,
+      disableGutters,
+      disablePadding,
+      divider,
+      hasSecondaryAction,
+      selected
+    } = ownerState;
+    const slots = {
+      root: ["root", dense && "dense", !disableGutters && "gutters", !disablePadding && "padding", divider && "divider", disabled && "disabled", button && "button", alignItems === "flex-start" && "alignItemsFlexStart", hasSecondaryAction && "secondaryAction", selected && "selected"],
+      container: ["container"]
+    };
+    return composeClasses(slots, getListItemUtilityClass, classes);
+  };
+  var ListItemRoot = styled_default("div", {
+    name: "MuiListItem",
+    slot: "Root",
+    overridesResolver
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "relative",
+    textDecoration: "none",
+    width: "100%",
+    boxSizing: "border-box",
+    textAlign: "left"
+  }, !ownerState.disablePadding && _extends({
+    paddingTop: 8,
+    paddingBottom: 8
+  }, ownerState.dense && {
+    paddingTop: 4,
+    paddingBottom: 4
+  }, !ownerState.disableGutters && {
+    paddingLeft: 16,
+    paddingRight: 16
+  }, !!ownerState.secondaryAction && {
+    // Add some space to avoid collision as `ListItemSecondaryAction`
+    // is absolutely positioned.
+    paddingRight: 48
+  }), !!ownerState.secondaryAction && {
+    [`& > .${listItemButtonClasses_default.root}`]: {
+      paddingRight: 48
+    }
+  }, {
+    [`&.${listItemClasses_default.focusVisible}`]: {
+      backgroundColor: (theme.vars || theme).palette.action.focus
+    },
+    [`&.${listItemClasses_default.selected}`]: {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+      [`&.${listItemClasses_default.focusVisible}`]: {
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+      }
+    },
+    [`&.${listItemClasses_default.disabled}`]: {
+      opacity: (theme.vars || theme).palette.action.disabledOpacity
+    }
+  }, ownerState.alignItems === "flex-start" && {
+    alignItems: "flex-start"
+  }, ownerState.divider && {
+    borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
+    backgroundClip: "padding-box"
+  }, ownerState.button && {
+    transition: theme.transitions.create("background-color", {
+      duration: theme.transitions.duration.shortest
+    }),
+    "&:hover": {
+      textDecoration: "none",
+      backgroundColor: (theme.vars || theme).palette.action.hover,
+      // Reset on touch devices, it doesn't add specificity
+      "@media (hover: none)": {
+        backgroundColor: "transparent"
+      }
+    },
+    [`&.${listItemClasses_default.selected}:hover`]: {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+      // Reset on touch devices, it doesn't add specificity
+      "@media (hover: none)": {
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
+      }
+    }
+  }, ownerState.hasSecondaryAction && {
+    // Add some space to avoid collision as `ListItemSecondaryAction`
+    // is absolutely positioned.
+    paddingRight: 48
+  }));
+  var ListItemContainer = styled_default("li", {
+    name: "MuiListItem",
+    slot: "Container",
+    overridesResolver: (props, styles2) => styles2.container
+  })({
+    position: "relative"
+  });
+  var ListItem = /* @__PURE__ */ React32.forwardRef(function ListItem2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListItem"
+    });
+    const {
+      alignItems = "center",
+      autoFocus = false,
+      button = false,
+      children: childrenProp,
+      className,
+      component: componentProp,
+      components = {},
+      componentsProps = {},
+      ContainerComponent = "li",
+      ContainerProps: {
+        className: ContainerClassName
+      } = {},
+      dense = false,
+      disabled = false,
+      disableGutters = false,
+      disablePadding = false,
+      divider = false,
+      focusVisibleClassName,
+      secondaryAction,
+      selected = false,
+      slotProps = {},
+      slots = {}
+    } = props, ContainerProps = _objectWithoutPropertiesLoose(props.ContainerProps, _excluded19), other = _objectWithoutPropertiesLoose(props, _excluded22);
+    const context = React32.useContext(ListContext_default);
+    const childContext = React32.useMemo(() => ({
+      dense: dense || context.dense || false,
+      alignItems,
+      disableGutters
+    }), [alignItems, context.dense, dense, disableGutters]);
+    const listItemRef = React32.useRef(null);
+    useEnhancedEffect_default2(() => {
+      if (autoFocus) {
+        if (listItemRef.current) {
+          listItemRef.current.focus();
+        } else if (true) {
+          console.error("MUI: Unable to set focus to a ListItem whose component has not been rendered.");
+        }
+      }
+    }, [autoFocus]);
+    const children = React32.Children.toArray(childrenProp);
+    const hasSecondaryAction = children.length && isMuiElement_default(children[children.length - 1], ["ListItemSecondaryAction"]);
+    const ownerState = _extends({}, props, {
+      alignItems,
+      autoFocus,
+      button,
+      dense: childContext.dense,
+      disabled,
+      disableGutters,
+      disablePadding,
+      divider,
+      hasSecondaryAction,
+      selected
+    });
+    const classes = useUtilityClasses9(ownerState);
+    const handleRef = useForkRef_default(listItemRef, ref);
+    const Root = slots.root || components.Root || ListItemRoot;
+    const rootProps = slotProps.root || componentsProps.root || {};
+    const componentProps = _extends({
+      className: clsx_default(classes.root, rootProps.className, className),
+      disabled
+    }, other);
+    let Component = componentProp || "li";
+    if (button) {
+      componentProps.component = componentProp || "div";
+      componentProps.focusVisibleClassName = clsx_default(listItemClasses_default.focusVisible, focusVisibleClassName);
+      Component = ButtonBase_default;
+    }
+    if (hasSecondaryAction) {
+      Component = !componentProps.component && !componentProp ? "div" : Component;
+      if (ContainerComponent === "li") {
+        if (Component === "li") {
+          Component = "div";
+        } else if (componentProps.component === "li") {
+          componentProps.component = "div";
+        }
+      }
+      return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListContext_default.Provider, {
+        value: childContext,
+        children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(ListItemContainer, _extends({
+          as: ContainerComponent,
+          className: clsx_default(classes.container, ContainerClassName),
+          ref: handleRef,
+          ownerState
+        }, ContainerProps, {
+          children: [/* @__PURE__ */ (0, import_jsx_runtime21.jsx)(Root, _extends({}, rootProps, !isHostComponent(Root) && {
+            as: Component,
+            ownerState: _extends({}, ownerState, rootProps.ownerState)
+          }, componentProps, {
+            children
+          })), children.pop()]
+        }))
+      });
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListContext_default.Provider, {
+      value: childContext,
+      children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Root, _extends({}, rootProps, {
+        as: Component,
+        ref: handleRef
+      }, !isHostComponent(Root) && {
+        ownerState: _extends({}, ownerState, rootProps.ownerState)
+      }, componentProps, {
+        children: [children, secondaryAction && /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(ListItemSecondaryAction_default, {
+          children: secondaryAction
+        })]
+      }))
+    });
+  });
+  true ? ListItem.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * Defines the `align-items` style property.
+     * @default 'center'
+     */
+    alignItems: import_prop_types19.default.oneOf(["center", "flex-start"]),
+    /**
+     * If `true`, the list item is focused during the first mount.
+     * Focus will also be triggered if the value changes from false to true.
+     * @default false
+     * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
+     */
+    autoFocus: import_prop_types19.default.bool,
+    /**
+     * If `true`, the list item is a button (using `ButtonBase`). Props intended
+     * for `ButtonBase` can then be applied to `ListItem`.
+     * @default false
+     * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
+     */
+    button: import_prop_types19.default.bool,
+    /**
+     * The content of the component if a `ListItemSecondaryAction` is used it must
+     * be the last child.
+     */
+    children: chainPropTypes(import_prop_types19.default.node, (props) => {
+      const children = React32.Children.toArray(props.children);
+      let secondaryActionIndex = -1;
+      for (let i = children.length - 1; i >= 0; i -= 1) {
+        const child = children[i];
+        if (isMuiElement_default(child, ["ListItemSecondaryAction"])) {
+          secondaryActionIndex = i;
+          break;
+        }
+      }
+      if (secondaryActionIndex !== -1 && secondaryActionIndex !== children.length - 1) {
+        return new Error("MUI: You used an element after ListItemSecondaryAction. For ListItem to detect that it has a secondary action you must pass it as the last child to ListItem.");
+      }
+      return null;
+    }),
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types19.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types19.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types19.default.elementType,
+    /**
+     * The components used for each slot inside.
+     *
+     * This prop is an alias for the `slots` prop.
+     * It's recommended to use the `slots` prop instead.
+     *
+     * @default {}
+     */
+    components: import_prop_types19.default.shape({
+      Root: import_prop_types19.default.elementType
+    }),
+    /**
+     * The extra props for the slot components.
+     * You can override the existing props or add new ones.
+     *
+     * This prop is an alias for the `slotProps` prop.
+     * It's recommended to use the `slotProps` prop instead, as `componentsProps` will be deprecated in the future.
+     *
+     * @default {}
+     */
+    componentsProps: import_prop_types19.default.shape({
+      root: import_prop_types19.default.object
+    }),
+    /**
+     * The container component used when a `ListItemSecondaryAction` is the last child.
+     * @default 'li'
+     * @deprecated
+     */
+    ContainerComponent: elementTypeAcceptingRef_default,
+    /**
+     * Props applied to the container component if used.
+     * @default {}
+     * @deprecated
+     */
+    ContainerProps: import_prop_types19.default.object,
+    /**
+     * If `true`, compact vertical padding designed for keyboard and mouse input is used.
+     * The prop defaults to the value inherited from the parent List component.
+     * @default false
+     */
+    dense: import_prop_types19.default.bool,
+    /**
+     * If `true`, the component is disabled.
+     * @default false
+     * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
+     */
+    disabled: import_prop_types19.default.bool,
+    /**
+     * If `true`, the left and right padding is removed.
+     * @default false
+     */
+    disableGutters: import_prop_types19.default.bool,
+    /**
+     * If `true`, all padding is removed.
+     * @default false
+     */
+    disablePadding: import_prop_types19.default.bool,
+    /**
+     * If `true`, a 1px light border is added to the bottom of the list item.
+     * @default false
+     */
+    divider: import_prop_types19.default.bool,
+    /**
+     * @ignore
+     */
+    focusVisibleClassName: import_prop_types19.default.string,
+    /**
+     * The element to display at the end of ListItem.
+     */
+    secondaryAction: import_prop_types19.default.node,
+    /**
+     * Use to apply selected styling.
+     * @default false
+     * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
+     */
+    selected: import_prop_types19.default.bool,
+    /**
+     * The extra props for the slot components.
+     * You can override the existing props or add new ones.
+     *
+     * This prop is an alias for the `componentsProps` prop, which will be deprecated in the future.
+     *
+     * @default {}
+     */
+    slotProps: import_prop_types19.default.shape({
+      root: import_prop_types19.default.object
+    }),
+    /**
+     * The components used for each slot inside.
+     *
+     * This prop is an alias for the `components` prop, which will be deprecated in the future.
+     *
+     * @default {}
+     */
+    slots: import_prop_types19.default.shape({
+      root: import_prop_types19.default.elementType
+    }),
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types19.default.oneOfType([import_prop_types19.default.arrayOf(import_prop_types19.default.oneOfType([import_prop_types19.default.func, import_prop_types19.default.object, import_prop_types19.default.bool])), import_prop_types19.default.func, import_prop_types19.default.object])
+  } : void 0;
+  var ListItem_default = ListItem;
+
+  // node_modules/@mui/material/ListItemIcon/ListItemIcon.js
+  var React33 = __toESM(require_react());
+  var import_prop_types20 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ListItemIcon/listItemIconClasses.js
+  function getListItemIconUtilityClass(slot) {
+    return generateUtilityClass("MuiListItemIcon", slot);
+  }
+  var listItemIconClasses = generateUtilityClasses("MuiListItemIcon", ["root", "alignItemsFlexStart"]);
+
+  // node_modules/@mui/material/ListItemIcon/ListItemIcon.js
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var _excluded20 = ["className"];
+  var useUtilityClasses10 = (ownerState) => {
+    const {
+      alignItems,
+      classes
+    } = ownerState;
+    const slots = {
+      root: ["root", alignItems === "flex-start" && "alignItemsFlexStart"]
+    };
+    return composeClasses(slots, getListItemIconUtilityClass, classes);
+  };
+  var ListItemIconRoot = styled_default("div", {
+    name: "MuiListItemIcon",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [styles2.root, ownerState.alignItems === "flex-start" && styles2.alignItemsFlexStart];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    minWidth: 56,
+    color: (theme.vars || theme).palette.action.active,
+    flexShrink: 0,
+    display: "inline-flex"
+  }, ownerState.alignItems === "flex-start" && {
+    marginTop: 8
+  }));
+  var ListItemIcon = /* @__PURE__ */ React33.forwardRef(function ListItemIcon2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListItemIcon"
+    });
+    const {
+      className
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded20);
+    const context = React33.useContext(ListContext_default);
+    const ownerState = _extends({}, props, {
+      alignItems: context.alignItems
+    });
+    const classes = useUtilityClasses10(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(ListItemIconRoot, _extends({
+      className: clsx_default(classes.root, className),
+      ownerState,
+      ref
+    }, other));
+  });
+  true ? ListItemIcon.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The content of the component, normally `Icon`, `SvgIcon`,
+     * or a `@mui/icons-material` SVG icon element.
+     */
+    children: import_prop_types20.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types20.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types20.default.string,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types20.default.oneOfType([import_prop_types20.default.arrayOf(import_prop_types20.default.oneOfType([import_prop_types20.default.func, import_prop_types20.default.object, import_prop_types20.default.bool])), import_prop_types20.default.func, import_prop_types20.default.object])
+  } : void 0;
+  var ListItemIcon_default = ListItemIcon;
+
+  // node_modules/@mui/material/ListItemText/ListItemText.js
+  var React34 = __toESM(require_react());
+  var import_prop_types21 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/ListItemText/listItemTextClasses.js
+  function getListItemTextUtilityClass(slot) {
+    return generateUtilityClass("MuiListItemText", slot);
+  }
+  var listItemTextClasses = generateUtilityClasses("MuiListItemText", ["root", "multiline", "dense", "inset", "primary", "secondary"]);
+  var listItemTextClasses_default = listItemTextClasses;
+
+  // node_modules/@mui/material/ListItemText/ListItemText.js
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  var _excluded21 = ["children", "className", "disableTypography", "inset", "primary", "primaryTypographyProps", "secondary", "secondaryTypographyProps"];
+  var useUtilityClasses11 = (ownerState) => {
+    const {
+      classes,
+      inset,
+      primary,
+      secondary,
+      dense
+    } = ownerState;
+    const slots = {
+      root: ["root", inset && "inset", dense && "dense", primary && secondary && "multiline"],
+      primary: ["primary"],
+      secondary: ["secondary"]
+    };
+    return composeClasses(slots, getListItemTextUtilityClass, classes);
+  };
+  var ListItemTextRoot = styled_default("div", {
+    name: "MuiListItemText",
+    slot: "Root",
+    overridesResolver: (props, styles2) => {
+      const {
+        ownerState
+      } = props;
+      return [{
+        [`& .${listItemTextClasses_default.primary}`]: styles2.primary
+      }, {
+        [`& .${listItemTextClasses_default.secondary}`]: styles2.secondary
+      }, styles2.root, ownerState.inset && styles2.inset, ownerState.primary && ownerState.secondary && styles2.multiline, ownerState.dense && styles2.dense];
+    }
+  })(({
+    ownerState
+  }) => _extends({
+    flex: "1 1 auto",
+    minWidth: 0,
+    marginTop: 4,
+    marginBottom: 4
+  }, ownerState.primary && ownerState.secondary && {
+    marginTop: 6,
+    marginBottom: 6
+  }, ownerState.inset && {
+    paddingLeft: 56
+  }));
+  var ListItemText = /* @__PURE__ */ React34.forwardRef(function ListItemText2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListItemText"
+    });
+    const {
+      children,
+      className,
+      disableTypography = false,
+      inset = false,
+      primary: primaryProp,
+      primaryTypographyProps,
+      secondary: secondaryProp,
+      secondaryTypographyProps
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded21);
+    const {
+      dense
+    } = React34.useContext(ListContext_default);
+    let primary = primaryProp != null ? primaryProp : children;
+    let secondary = secondaryProp;
+    const ownerState = _extends({}, props, {
+      disableTypography,
+      inset,
+      primary: !!primary,
+      secondary: !!secondary,
+      dense
+    });
+    const classes = useUtilityClasses11(ownerState);
+    if (primary != null && primary.type !== Typography_default && !disableTypography) {
+      primary = /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Typography_default, _extends({
+        variant: dense ? "body2" : "body1",
+        className: classes.primary,
+        component: primaryTypographyProps != null && primaryTypographyProps.variant ? void 0 : "span",
+        display: "block"
+      }, primaryTypographyProps, {
+        children: primary
+      }));
+    }
+    if (secondary != null && secondary.type !== Typography_default && !disableTypography) {
+      secondary = /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Typography_default, _extends({
+        variant: "body2",
+        className: classes.secondary,
+        color: "text.secondary",
+        display: "block"
+      }, secondaryTypographyProps, {
+        children: secondary
+      }));
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(ListItemTextRoot, _extends({
+      className: clsx_default(classes.root, className),
+      ownerState,
+      ref
+    }, other, {
+      children: [primary, secondary]
+    }));
+  });
+  true ? ListItemText.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * Alias for the `primary` prop.
+     */
+    children: import_prop_types21.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types21.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types21.default.string,
+    /**
+     * If `true`, the children won't be wrapped by a Typography component.
+     * This can be useful to render an alternative Typography variant by wrapping
+     * the `children` (or `primary`) text, and optional `secondary` text
+     * with the Typography component.
+     * @default false
+     */
+    disableTypography: import_prop_types21.default.bool,
+    /**
+     * If `true`, the children are indented.
+     * This should be used if there is no left avatar or left icon.
+     * @default false
+     */
+    inset: import_prop_types21.default.bool,
+    /**
+     * The main content element.
+     */
+    primary: import_prop_types21.default.node,
+    /**
+     * These props will be forwarded to the primary typography component
+     * (as long as disableTypography is not `true`).
+     */
+    primaryTypographyProps: import_prop_types21.default.object,
+    /**
+     * The secondary content element.
+     */
+    secondary: import_prop_types21.default.node,
+    /**
+     * These props will be forwarded to the secondary typography component
+     * (as long as disableTypography is not `true`).
+     */
+    secondaryTypographyProps: import_prop_types21.default.object,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types21.default.oneOfType([import_prop_types21.default.arrayOf(import_prop_types21.default.oneOfType([import_prop_types21.default.func, import_prop_types21.default.object, import_prop_types21.default.bool])), import_prop_types21.default.func, import_prop_types21.default.object])
+  } : void 0;
+  var ListItemText_default = ListItemText;
+
+  // src/elements/Components/StudentSummary.jsx
+  var import_react10 = __toESM(require_react(), 1);
+  var import_prop_types23 = __toESM(require_prop_types(), 1);
+
+  // src/elements/Components/SummaryNode.jsx
+  var import_react9 = __toESM(require_react(), 1);
+  var import_prop_types22 = __toESM(require_prop_types(), 1);
+
+  // node_modules/@mui/icons-material/esm/Folder.js
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var Folder_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime26.jsx)("path", {
+    d: "M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"
+  }), "Folder");
+
+  // src/domTraversal/queriesAndRegex.js
+  var QUERIES = {
+    otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
+    otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
+    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
+    requirementHeader: ".PAGROUPDIVIDER",
+    subRequirementHeader: ".PSGROUPBOXLABEL",
+    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
+    subRequirementDescription: ".PSLONGEDITBOX",
+    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
+    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
+    showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
+    pageElement: (page) => `div[page="${page}"]`,
+    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
+  };
+  var REGEX = {
+    generalHeader: /(?:GENERAL INFORMATION)/i,
+    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
+    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
+    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
+  };
+
+  // src/util/logger.js
+  function makeLogger(label, backgroundColor2, textColor, indent = 0) {
+    const newLogger = logger.bind(this, label, backgroundColor2, textColor, indent);
+    newLogger.green = green2.bind(this, label, backgroundColor2, textColor, indent);
+    newLogger.red = red2.bind(this, label, backgroundColor2, textColor, indent);
+    newLogger.error = error.bind(this, label, backgroundColor2, textColor, indent);
+    return newLogger;
+  }
+  function logger(label, backgroundColor2, textColor, indent, ...rest) {
+    if (true) {
+      console.log(`${"	".repeat(indent)}%c[[${label}]]`, `background: ${backgroundColor2}; color: ${textColor}`, ...rest);
+    }
+  }
+  function green2(label, backgroundColor2, textColor, indent, ...rest) {
+    let output = rest.join(" ");
+    if (!output.includes("%c")) {
+      output = `%c${output}`;
+    }
+    console.log(
+      `${"	".repeat(indent)}%c[[${label}]]%c ${output}`,
+      `background: ${backgroundColor2}; color: ${textColor}`,
+      "background: white; color, black",
+      "background: lightgreen; color: black"
+    );
+  }
+  function red2(label, backgroundColor2, textColor, indent, ...rest) {
+    let output = rest.join(" ");
+    if (!output.includes("%c")) {
+      output = `%c${output}`;
+    }
+    console.log(
+      `${"	".repeat(indent)}%c[[${label}]]%c ${output}`,
+      `background: ${backgroundColor2}; color: ${textColor}`,
+      "background: white; color, black",
+      "background: tomato; color: black"
+    );
+  }
+  function error(label, backgroundColor2, textColor, indent, ...rest) {
+    console.error(`${"	".repeat(indent)}%c[[${label}]]`, `background: ${backgroundColor2}; color: ${textColor}`, ...rest);
+  }
 
   // src/Objects/SubRequirement.js
   var SubRequirement = class {
@@ -30992,51 +33814,319 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   };
 
-  // src/index.jsx
+  // src/elements/Components/SummaryNode.jsx
+  function SummaryNode(props) {
+    const { programNode } = props;
+    return /* @__PURE__ */ import_react9.default.createElement(
+      List_default,
+      {
+        dense: true,
+        subheader: /* @__PURE__ */ import_react9.default.createElement(ListSubheader_default, { component: "div" }, programNode.getHeading())
+      },
+      programNode.requirements.map((req, i) => /* @__PURE__ */ import_react9.default.createElement(ListItem_default, { key: programNode.getHeading() + i }, /* @__PURE__ */ import_react9.default.createElement(ListItemIcon_default, { color: req.isSatisfied() ? "success" : "error" }, /* @__PURE__ */ import_react9.default.createElement(Folder_default, null)), /* @__PURE__ */ import_react9.default.createElement(ListItemText_default, { primary: req.getHeading() })))
+    );
+  }
+  SummaryNode.propTypes = {
+    programNode: import_prop_types22.default.objectOf(Program)
+  };
+
+  // src/elements/Components/StudentSummary.jsx
+  function StudentSummary(props) {
+    const { programData } = props;
+    console.log("Program Data:", programData);
+    const generalSummaries = import_react10.default.useMemo(() => {
+      return programData?.generalNodes.map(
+        (node2, i) => /* @__PURE__ */ import_react10.default.createElement(SummaryNode, { key: `generalSummary${i}`, programNode: node2 })
+      );
+    }, [programData?.generalNodes]);
+    const universitySummaries = import_react10.default.useMemo(() => {
+      return programData?.universityNodes.map(
+        (node2, i) => /* @__PURE__ */ import_react10.default.createElement(SummaryNode, { key: `univSummary${i}`, programNode: node2 })
+      );
+    }, [programData?.universityNodes]);
+    const programSummaries = import_react10.default.useMemo(() => {
+      return programData?.programNodes.map(
+        (node2, i) => /* @__PURE__ */ import_react10.default.createElement(SummaryNode, { key: `programSummary${i}`, programNode: node2 })
+      );
+    }, [programData?.programNodes]);
+    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement(Typography_default, { variant: "body" }, generalSummaries), /* @__PURE__ */ import_react10.default.createElement(Typography_default, { variant: "body" }, universitySummaries), /* @__PURE__ */ import_react10.default.createElement(Typography_default, { variant: "body" }, programSummaries));
+  }
+  StudentSummary.propTypes = {
+    programData: import_prop_types23.default.object
+  };
+  StudentSummary.defaultProps = {
+    programData: {}
+  };
+
+  // src/elements/Components/CleanserRoot.jsx
+  function CleanserRoot(props) {
+    const { showSummary, ...rest } = props;
+    return /* @__PURE__ */ import_react11.default.createElement(
+      "div",
+      {
+        style: {
+          position: "fixed",
+          top: "100px",
+          right: "40px",
+          transform: showSummary ? "translateX(0%)" : "translateX(120%)",
+          transition: "transform 0.5s ease-in-out"
+        }
+      },
+      /* @__PURE__ */ import_react11.default.createElement(
+        Paper_default,
+        {
+          elevation: 5,
+          sx: {
+            height: "55vh",
+            width: "45vw",
+            padding: "20px"
+          }
+        },
+        /* @__PURE__ */ import_react11.default.createElement(Typography_default, { component: "h1", variant: "h5" }, "Audit Summary"),
+        /* @__PURE__ */ import_react11.default.createElement(StudentSummary, { ...rest })
+      )
+    );
+  }
+  CleanserRoot.propTypes = {
+    showSummary: import_prop_types24.default.bool
+  };
+  CleanserRoot.defaultProps = {
+    showSummary: false
+  };
+
+  // src/elements/Components/SummarizeButton.jsx
+  var import_react12 = __toESM(require_react(), 1);
+  var import_prop_types25 = __toESM(require_prop_types(), 1);
+  function SummarizeButton(props) {
+    const { onClickCallback } = props;
+    return /* @__PURE__ */ import_react12.default.createElement("div", { style: {
+      position: "fixed",
+      bottom: "-4px",
+      right: "20px"
+    } }, /* @__PURE__ */ import_react12.default.createElement(
+      Button_default,
+      {
+        onClick: onClickCallback,
+        variant: "contained",
+        color: "primary"
+      },
+      "Summarize"
+    ));
+  }
+  SummarizeButton.propTypes = {
+    onClickCallback: import_prop_types25.default.func
+  };
+  SummarizeButton.defaultProps = {
+    onClickCallback: () => {
+    }
+  };
+
+  // src/util/utilFunctions.js
+  function wait(timeout) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, timeout);
+    });
+  }
+
+  // src/domTraversal/pageRoot.js
+  var MAX_RETRIES = 10;
+  async function navigateToAuditPage() {
+    if (verifyRootDoc()) {
+      return;
+    }
+    let rootDoc = document;
+    let auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown);
+    if (!auditDropdown) {
+      rootDoc = document.querySelector("iframe")?.contentDocument;
+      auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown);
+      if (!auditDropdown) {
+        throw new Error('Failed to find "Other Academic" dropdown');
+      }
+    }
+    const index = Array.from(auditDropdown.options).findIndex(
+      (option) => option.text.toLowerCase() === "academic requirements"
+    );
+    if (index === -1) {
+      throw new Error('Failed to find "Academic Requirements" option');
+    }
+    auditDropdown.selectedIndex = index;
+    await wait(100);
+    const goButton = rootDoc.querySelector(QUERIES.otherAcademicGoButton);
+    if (!goButton) {
+      throw new Error('Failed to find "Go" button');
+    }
+    goButton.click();
+    let tries = 0;
+    let pageElement = null;
+    do {
+      await wait(100);
+      pageElement = rootDoc.querySelector(QUERIES.pageElement("SAA_SS_DPR_ADB"));
+    } while (!pageElement && tries++ < 1e3);
+    if (!pageElement) {
+      throw new Error("Max retries exceeded waiting for audit page to load");
+    }
+  }
+  var auditRootDoc = null;
+  function verifyRootDoc() {
+    auditRootDoc = document;
+    let expanderButton = auditRootDoc.querySelector(QUERIES.expander);
+    if (!expanderButton) {
+      const iFrame = document.querySelector("iframe");
+      auditRootDoc = iFrame.contentDocument;
+      expanderButton = auditRootDoc.querySelector(QUERIES.expander);
+    }
+    if (expanderButton !== null) {
+      return auditRootDoc;
+    }
+    auditRootDoc = null;
+    return null;
+  }
+  function getRootDoc() {
+    return auditRootDoc;
+  }
+  function getTopLevelExpanderList() {
+    return auditRootDoc.querySelectorAll(QUERIES.expanderList);
+  }
+  async function expandAllSections() {
+    const expanderButton = auditRootDoc.querySelector(QUERIES.expander);
+    if (!expanderButton) {
+      throw new Error('Failed to find "Expand All" button');
+    }
+    expanderButton.click();
+    let tries = 0;
+    while (tries < MAX_RETRIES && getTopLevelExpanderList().length > 0) {
+      await wait(1e3);
+      tries++;
+    }
+    if (getTopLevelExpanderList().length > 0) {
+      throw new Error("Max retries exceeded waiting for program nodes to expand");
+    }
+  }
+  async function clickViewAllLinks() {
+    const showButtons = Array.from(auditRootDoc.querySelectorAll(QUERIES.showButton));
+    if (!Array.isArray(showButtons) || showButtons.length === 0) {
+      console.log('Failed to find any "View All" buttons');
+      return;
+    }
+    for (let i = 0; i < showButtons.length; i++) {
+      const showButton = showButtons[i];
+      try {
+        await clickAndWait(showButton);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+  async function clickAndWait(showButton, curText = "view all") {
+    if (showButton.textContent.toLowerCase() === curText.toLowerCase()) {
+      const buttonId = showButton.id;
+      showButton.click();
+      let tries = 0;
+      let checkButton = null;
+      do {
+        await wait(100);
+        checkButton = auditRootDoc.getElementById(buttonId);
+        tries++;
+      } while (checkButton?.textContent.toLowerCase() === curText.toLowerCase() && tries < 100);
+      if (checkButton.textContent.toLowerCase() === curText.toLowerCase()) {
+        throw new Error(`Max retries exceeded waiting for "${curText.toLowerCase()} list to expand`);
+      }
+    } else {
+      console.error(`	Expected button text to be "${curText}" but found "${showButton.textContent}"`);
+    }
+  }
+
+  // src/domTraversal/programs.js
+  function getProgramNodes() {
+    const headerNodes = getRootDoc().querySelectorAll(QUERIES.programHeader);
+    if (headerNodes.length < 1) {
+      throw new Error("Could not find program header nodes");
+    }
+    const generalNodes = [];
+    const universityNodes = [];
+    const programNodes = [];
+    Array.from(headerNodes).forEach((header) => {
+      if (header.textContent.match(REGEX.generalHeader)) {
+        generalNodes.push(header);
+      } else if (header.textContent.match(REGEX.universityRequirements)) {
+        universityNodes.push(header);
+      } else {
+        programNodes.push(header);
+      }
+    });
+    return [generalNodes, universityNodes, programNodes];
+  }
+
+  // src/Objects/auditCleanserLogic.js
   var LOG = makeLogger("AUDIT_CLEANER", "yellow", "navy");
-  async function scanPage() {
+  async function scanPageForPrograms() {
+    try {
+      await navigateToAuditPage();
+    } catch (err) {
+      LOG.error("Failed to navigate to audit page");
+      LOG.error(err);
+      return;
+    }
     if (!verifyRootDoc()) {
       window.alert('Could not find "Expand All" button.\n\nAre you sure you are in an advising audit page?');
     } else {
       try {
         await expandAllSections();
+        await clickViewAllLinks();
         const nodeGroups = getProgramNodes();
-        const titles = ["General Info", "University Requirements", "Programs"];
-        nodeGroups.forEach((nodeGroup, i) => {
-          const groupTitle = titles[i];
-          if (!Array.isArray(nodeGroup) || nodeGroup.length < 1) {
-            LOG.error(`Failed to find ${groupTitle}`);
-          } else {
-            const nodePrograms = nodeGroup.map((node2) => new Program(node2));
-            LOG(`Found the following ${groupTitle}`);
-            nodePrograms.forEach((program) => program.output());
-          }
-        });
+        return {
+          generalNodes: nodeGroups[0]?.map((node2) => new Program(node2)),
+          universityNodes: nodeGroups[1]?.map((node2) => new Program(node2)),
+          programNodes: nodeGroups[2]?.map((node2) => new Program(node2))
+        };
       } catch (err) {
         LOG.error("Failed to retrieve/parse programs");
         LOG.error(err);
       }
     }
   }
-  var robotoFontTag = makeRobotoFontTag();
-  document.head.appendChild(robotoFontTag);
-  var appContainer = makeCleanserContainer();
+
+  // src/elements/AppRoot.jsx
+  function AppRoot() {
+    const [showSummary, setShowSummary] = import_react13.default.useState(false);
+    const toggleSummary = () => {
+      setShowSummary(!showSummary);
+    };
+    const [programGroups, setProgramGroups] = import_react13.default.useState(null);
+    import_react13.default.useEffect(() => {
+      async function retrieveProgramData() {
+        const newGroups = await scanPageForPrograms();
+        setProgramGroups(newGroups);
+      }
+      if (showSummary) {
+        retrieveProgramData();
+      }
+    }, [showSummary]);
+    return /* @__PURE__ */ import_react13.default.createElement(import_react13.default.Fragment, null, /* @__PURE__ */ import_react13.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react13.default.createElement(CleanserRoot, { showSummary, programData: programGroups }), /* @__PURE__ */ import_react13.default.createElement(SummarizeButton, { onClickCallback: toggleSummary }));
+  }
+
+  // src/index.jsx
+  function makeFontCSSTag(href) {
+    const fontTag = document.createElement("link");
+    fontTag.setAttribute("rel", "stylesheet");
+    fontTag.setAttribute("href", href);
+    return fontTag;
+  }
+  function makeFontTags() {
+    return [
+      makeFontCSSTag("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"),
+      makeFontCSSTag("https://fonts.googleapis.com/icon?family=Material+Icons")
+    ];
+  }
+  var fontTags = makeFontTags();
+  fontTags.forEach((tag) => document.head.appendChild(tag));
+  var appContainer = document.createElement("div");
+  appContainer.id = "cleanser-app-container";
   document.body.appendChild(appContainer);
-  var showSummary = false;
-  var summaryDiv = makeSummarizeButton(() => {
-    if (!showSummary) {
-      scanPage();
-      appContainer.style.transform = "translateX(0%)";
-      showSummary = true;
-    } else {
-      appContainer.style.transform = "translateX(120%)";
-      showSummary = false;
-    }
-  });
-  summaryDiv.setAttribute("id", "AUDIT_CLEANSER_BUTTON");
-  document.body.appendChild(summaryDiv);
   var reactAppRoot = (0, import_client.createRoot)(appContainer);
-  reactAppRoot.render(/* @__PURE__ */ import_react8.default.createElement(CleanserRoot, null));
+  reactAppRoot.render(/* @__PURE__ */ import_react14.default.createElement(AppRoot, null));
 })();
 /*! Bundled license information:
 

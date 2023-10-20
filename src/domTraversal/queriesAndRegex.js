@@ -1,5 +1,7 @@
 // Various queries and regex strings used throughout
 export const QUERIES = {
+  otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
+  otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
   programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
   requirementHeader: '.PAGROUPDIVIDER',
   subRequirementHeader: '.PSGROUPBOXLABEL',
@@ -7,6 +9,8 @@ export const QUERIES = {
   subRequirementDescription: '.PSLONGEDITBOX',
   expander: '#DERIVED_SAA_DPR_SSS_EXPAND_ALL',
   expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
+  showButton: 'a.PSLEVEL3GRIDLABEL:nth-child(2)',
+  pageElement: (page) => `div[page="${page}"]`,
   programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
 }
 

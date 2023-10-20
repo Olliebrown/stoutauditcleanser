@@ -27,15 +27,14 @@ const options = {
   }
 }
 
-
 if (_DEV_) {
   // Serve the results for quick development
   const ctx = await ESBuild.context(options)
   ctx.serve({
-    servedir: 'dist',
+    servedir: 'dist'
   }).then(server => {
     // Call "stop" on the web server to stop serving
-    console.log(`Server is now running: http://${server.host}:${server.port})`)
+    console.log(`Server is now running: http://${server.host === '0.0.0.0' ? 'localhost' : server.host}:${server.port}`)
   })
 } else {
   // Do the build
