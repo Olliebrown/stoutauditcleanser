@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Typography } from '@mui/material'
+import { Paper, Typography } from '@mui/material'
 import SummaryNode from './SummaryNode.jsx'
+
+import Program from '../../Objects/Program.js'
 
 export default function StudentSummary (props) {
   const { programData } = props
-
-  // DEBUGGING
-  console.log('Program Data:', programData)
 
   // Build the summary nodes for the general program data
   const generalSummaries = React.useMemo(() => {
@@ -31,25 +30,37 @@ export default function StudentSummary (props) {
     )
   }, [programData?.programNodes])
 
+  if (!programData) {
+    return (
+      <React.Fragment>
+        <Typography component='h1' variant='h6' gutterBottom>
+          {'Loading ...'}
+        </Typography>
+      </React.Fragment>
+    )
+  }
+
   return (
     <React.Fragment>
-      <Typography variant='body'>
+      <Typography component='h1' variant='h6' gutterBottom>
+        {`${programData?.studentName} Summary`}
+      </Typography>
+      <Paper sx={{ overflowY: 'auto', height: 'calc(100% - 30px)' }} elevation={0}>
         {generalSummaries}
-      </Typography>
-
-      <Typography variant='body'>
         {universitySummaries}
-      </Typography>
-
-      <Typography variant='body'>
         {programSummaries}
-      </Typography>
+      </Paper>
     </React.Fragment>
   )
 }
 
 StudentSummary.propTypes = {
-  programData: PropTypes.object
+  programData: PropTypes.shape({
+    studentName: PropTypes.string,
+    generalNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program)),
+    universityNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program)),
+    programNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program))
+  })
 }
 
 StudentSummary.defaultProps = {

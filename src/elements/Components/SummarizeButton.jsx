@@ -4,13 +4,15 @@ import PropTypes from 'prop-types'
 import { Button } from '@mui/material'
 
 export default function SummarizeButton (props) {
-  const { onClickCallback } = props
+  const { onClickCallback, showButton } = props
 
   return (
     <div style={{
       position: 'fixed',
-      bottom: '-4px',
-      right: '20px'
+      top: '150px',
+      right: (showButton ? '-45px' : '-80px'),
+      transform: 'rotate(-90deg)',
+      transition: 'right 0.33s ease-in-out'
     }}>
       <Button
         onClick={onClickCallback}
@@ -24,9 +26,11 @@ export default function SummarizeButton (props) {
 }
 
 SummarizeButton.propTypes = {
-  onClickCallback: PropTypes.func
+  onClickCallback: PropTypes.func,
+  showButton: PropTypes.bool
 }
 
 SummarizeButton.defaultProps = {
-  onClickCallback: () => {}
+  onClickCallback: () => {},
+  showButton: true
 }

@@ -2,10 +2,11 @@ import { makeLogger } from '../util/logger.js'
 
 // Document traversal functions and other DOM helpers
 import { getProgramNodes } from '../domTraversal/programs.js'
-import { navigateToAuditPage, verifyRootDoc, expandAllSections, clickViewAllLinks } from '../domTraversal/pageRoot.js'
+import { navigateToAuditPage, verifyRootDoc, expandAllSections, clickViewAllLinks, getRootDoc } from '../domTraversal/pageRoot.js'
 
 // Core data object
 import Program from './Program.js'
+import { QUERIES } from '../domTraversal/queriesAndRegex.js'
 
 // A high-visibility logger for the browser
 const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'navy')
@@ -34,8 +35,12 @@ export async function scanPageForPrograms () {
       // Identify the various node elements
       const nodeGroups = getProgramNodes()
 
+      // Find the student name
+      const studentName = getRootDoc().querySelector(QUERIES.studentName)?.textContent
+
       // Convert the node elements into Program objects and return
       return {
+        studentName,
         generalNodes: nodeGroups[0]?.map(node => new Program(node)),
         universityNodes: nodeGroups[1]?.map(node => new Program(node)),
         programNodes: nodeGroups[2]?.map(node => new Program(node))

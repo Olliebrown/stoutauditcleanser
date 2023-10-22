@@ -9,8 +9,12 @@ import { CssBaseline } from '@mui/material'
 
 export default function AppRoot () {
   const [showSummary, setShowSummary] = React.useState(false)
-  const toggleSummary = () => {
-    setShowSummary(!showSummary)
+  const onShowSummary = () => {
+    setShowSummary(true)
+  }
+
+  const onHideSummary = () => {
+    setShowSummary(false)
   }
 
   const [programGroups, setProgramGroups] = React.useState(null)
@@ -21,6 +25,7 @@ export default function AppRoot () {
     }
 
     if (showSummary) {
+      setProgramGroups(null)
       retrieveProgramData()
     }
   }, [showSummary])
@@ -28,8 +33,8 @@ export default function AppRoot () {
   return (
     <React.Fragment>
       <CssBaseline />
-      <CleanserRoot showSummary={showSummary} programData={programGroups} />
-      <SummarizeButton onClickCallback={toggleSummary} />
+      <CleanserRoot showSummary={showSummary} onHideSummary={onHideSummary} programData={programGroups} />
+      <SummarizeButton showButton={!showSummary} onClickCallback={onShowSummary} />
     </React.Fragment>
   )
 }

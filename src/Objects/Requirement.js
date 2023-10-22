@@ -1,7 +1,8 @@
-import { makeLogger } from '../util/logger.js'
 import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
 
 import SubRequirement from './SubRequirement.js'
+import Program from './Program.js'
+import { abbreviate, makeKey, toTitleCase } from './abbreviator.js'
 
 /**
  * An object for examining one top-level requirement within a program
@@ -22,26 +23,14 @@ export default class Requirement {
     this.programBodyIndex = Array.from(this.programBodyNode.children)
       .findIndex(node => node === this.programRowNode)
 
-    // Set name and make a logger for this object
-    this.name = this.getHeading().trim()
-    this.LOG = makeLogger(`${this.name}`, 'lightblue', 'black', 1)
+    // Set name and key
+    this.name = abbreviate(toTitleCase(this.getHeading().trim()))
+    this.innerId = this.programRowNode.textContent.match(/RQ-\d+/)?.[0] ?? ''
+    this.key = makeKey(this.name)
 
     // Initialize derived values
     this.extractDescriptionText()
     this.subRequirements = this.getSubRequirements()
-    this.satisfied = this.isSatisfied()
-  }
-
-  output (labelLength = 0) {
-    const padding = Math.max(labelLength - this.name.length, 0)
-    if (this.satisfied) {
-      this.LOG.green('%cSatisfied'.padStart(padding + 11, ' '))
-    } else {
-      this.LOG.red('%cNot Satisfied'.padStart(padding + 15, ' '))
-    }
-
-    // Output status of each sub-requirement
-    this.subRequirements.forEach((subReq) => subReq.output(labelLength))
   }
 
   toString () {
@@ -53,9 +42,11 @@ export default class Requirement {
    * @returns {bool} Whether or not this requirement is satisfied
    */
   isSatisfied () {
-    return (
-      this.satisfiedText === 'Satisfied'
-    )
+    if (this.satisfiedText === 'Satisfied') {
+      return Program.SATISFIED_TYPE.COMPLETE
+    }
+
+    return Program.SATISFIED_TYPE.INCOMPLETE
   }
 
   /**
@@ -76,7 +67,12 @@ export default class Requirement {
       this.requirementID = descriptionMatch.groups.ID
       this.description = descriptionMatch.groups.description
     } else {
-      this.LOG.error('Description regex failed')
+      console.warn('Requirement Description regex failed')
+      console.warn('------------------------')
+      console.warn(this.name)
+      console.warn('------------------------')
+      console.warn(requirementsArray[this.programBodyIndex + 1].textContent.trim())
+      console.warn('------------------------')
     }
   }
 

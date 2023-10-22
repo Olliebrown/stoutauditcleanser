@@ -1,5 +1,6 @@
-import { makeLogger } from '../util/logger.js'
 import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
+import Program from './Program.js'
+import { abbreviate, makeKey, toTitleCase } from './abbreviator.js'
 
 /**
  * An object for examining a sub-requirement within a program requirement
@@ -21,25 +22,15 @@ export default class SubRequirement {
     if (!this.isValid) { return }
 
     // Set name and make a logger for this object
-    this.name = this.getHeading().trim()
-    this.LOG = makeLogger(`${this.name}`, 'lightblue', 'black', 1)
+    this.name = abbreviate(toTitleCase(this.getHeading().trim()))
+    this.key = makeKey(this.name)
 
     // Initialize derived values
     this.extractDescriptionText()
     this.extractUnits()
-    this.satisfied = this.isSatisfied()
   }
 
-  output (labelLength = 0) {
-    if (!this.isValid) { return }
-    const padding = Math.max(labelLength - this.name.length, 0)
-    if (this.satisfied) {
-      this.LOG.green('%cSatisfied'.padStart(padding + 11, ' '))
-    } else {
-      this.LOG.red('%cNot Satisfied'.padStart(padding + 15, ' '))
-    }
-  }
-
+  // Convert to string
   toString () {
     if (!this.isValid) { return 'Invalid Sub-Requirement' }
     return `${this.name}: ${this.satisfiedText} (${this.units.taken}/${this.units.req})`
@@ -50,10 +41,11 @@ export default class SubRequirement {
    * @returns {bool} Whether or not this requirement is satisfied
    */
   isSatisfied () {
-    if (!this.isValid) { return false }
-    return (
-      this.satisfiedText === 'Satisfied'
-    )
+    if (this.isValid && this.satisfiedText === 'Satisfied') {
+      return Program.SATISFIED_TYPE.COMPLETE
+    }
+
+    return Program.SATISFIED_TYPE.INCOMPLETE
   }
 
   /**
@@ -65,6 +57,7 @@ export default class SubRequirement {
     return this.headingRowNode.textContent
   }
 
+  // Extract the descriptive text and satisfied status
   extractDescriptionText () {
     if (!this.isValid) { return }
 
@@ -79,10 +72,18 @@ export default class SubRequirement {
       this.satisfiedText = descriptionGroups.satisfied
       this.description = descriptionGroups.description
     } else {
-      this.LOG.error('Description regex failed')
+      console.warn('Sub-Requirement Description regex failed')
+      console.warn('------------------------')
+      console.warn(this.name)
+      console.warn('------------------------')
+      console.warn(this.detailsRowNodes[0]
+        ?.querySelector(QUERIES.subRequirementDescription)
+        ?.textContent?.trim())
+      console.warn('------------------------')
     }
   }
 
+  // Find and extract the completion unit information
   extractUnits () {
     if (!this.isValid) { return }
 

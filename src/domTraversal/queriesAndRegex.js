@@ -10,6 +10,7 @@ export const QUERIES = {
   expander: '#DERIVED_SAA_DPR_SSS_EXPAND_ALL',
   expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
   showButton: 'a.PSLEVEL3GRIDLABEL:nth-child(2)',
+  studentName: 'table.PABACKGROUNDINVISIBLE .PAPAGETITLE',
   pageElement: (page) => `div[page="${page}"]`,
   programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
 }

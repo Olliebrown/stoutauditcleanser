@@ -1,6 +1,6 @@
 import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
-import { makeLogger } from '../util/logger.js'
 import Requirement from './Requirement.js'
+import { abbreviate, makeKey, toTitleCase } from './abbreviator.js'
 
 /**
  * An object for examining a program or sub-program and its requirements
@@ -23,33 +23,11 @@ export default class Program {
       }
     }
 
-    // Make a logger for this object
-    this.LOG = makeLogger(`${this.getHeading().trim()}`, 'pink', 'black')
-
     // Initialize internal values
-    this.name = this.getHeading().trim()
+    this.name = abbreviate(toTitleCase(this.getHeading().trim()))
+    this.innerId = this.programRoot.textContent.match(/RG-\d+/)?.[0] ?? ''
+    this.key = makeKey(this.name)
     this.requirements = this.getProgramRequirements()
-    this.satisfied = this.isSatisfied()
-  }
-
-  output () {
-    // Output the overall program status
-    if (this.satisfied) {
-      this.LOG.green('Complete')
-    } else {
-      this.LOG.red('Incomplete')
-    }
-
-    // Find length of longest label
-    let maxLabelLength = 0
-    this.requirements.forEach(req => {
-      if (req.getHeading().length > maxLabelLength) {
-        maxLabelLength = req.getHeading().length
-      }
-    })
-
-    // Output status of each requirement
-    this.requirements.forEach((req) => req.output(maxLabelLength))
   }
 
   /**
@@ -57,11 +35,28 @@ export default class Program {
    * @returns {bool} Weather or not this program is satisfied (e.g. completed)
    */
   isSatisfied () {
+    // Something is wrong so just return incomplete
     if (!Array.isArray(this.requirements) || this.requirements.length < 1) {
-      return false
+      return Program.SATISFIED_TYPE.INCOMPLETE
     }
 
-    return !this.requirements.find((requirement) => !requirement.isSatisfied())
+    // Check each requirement
+    return this.requirements.reduce((complete, requirement) => {
+      switch (complete) {
+        // Once we have an incomplete, we can't go back
+        case Program.SATISFIED_TYPE.INCOMPLETE:
+          return Program.SATISFIED_TYPE.INCOMPLETE
+
+        // Never return to 'complete' status once we are in-progress
+        case Program.SATISFIED_TYPE.IN_PROGRESS:
+          if (requirement.isSatisfied() === Program.SATISFIED_TYPE.COMPLETE) {
+            return Program.SATISFIED_TYPE.IN_PROGRESS
+          }
+      }
+
+      // Otherwise, just return the status of the current requirement
+      return requirement.isSatisfied()
+    })
   }
 
   /**
@@ -89,3 +84,10 @@ export default class Program {
     return Array.from(filteredNodes).map(node => new Requirement(node.parentNode))
   }
 }
+
+// Enum for requirement satisfaction status
+Program.SATISFIED_TYPE = Object.freeze({
+  COMPLETE: 'COMPLETE',
+  IN_PROGRESS: 'IN_PROGRESS',
+  INCOMPLETE: 'INCOMPLETE'
+})
