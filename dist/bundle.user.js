@@ -983,7 +983,7 @@
             }
             return lazyType;
           }
-          function forwardRef22(render) {
+          function forwardRef23(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error2("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1082,7 +1082,7 @@
             }
             return dispatcher;
           }
-          function useContext12(Context) {
+          function useContext13(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1104,7 +1104,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef11(initialValue) {
+          function useRef12(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1124,7 +1124,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo6(create, deps) {
+          function useMemo7(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1880,14 +1880,14 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef22;
+          exports.forwardRef = forwardRef23;
           exports.isValidElement = isValidElement7;
           exports.lazy = lazy;
           exports.memo = memo2;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback6;
-          exports.useContext = useContext12;
+          exports.useContext = useContext13;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect10;
@@ -1895,9 +1895,9 @@
           exports.useImperativeHandle = useImperativeHandle4;
           exports.useInsertionEffect = useInsertionEffect3;
           exports.useLayoutEffect = useLayoutEffect3;
-          exports.useMemo = useMemo6;
+          exports.useMemo = useMemo7;
           exports.useReducer = useReducer;
-          exports.useRef = useRef11;
+          exports.useRef = useRef12;
           exports.useState = useState9;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -2394,9 +2394,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React51 = require_react();
+          var React52 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React51.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React52.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4001,7 +4001,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React51.Children.forEach(props.children, function(child) {
+                  React52.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12448,7 +12448,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React51.Component().refs;
+          var emptyRefsObject = new React52.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24585,7 +24585,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React51 = require_react();
+          var React52 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24611,7 +24611,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React51.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React52.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error2(format) {
             {
               {
@@ -25477,7 +25477,7 @@
 
   // src/elements/Components/CleanserRoot.jsx
   var import_react12 = __toESM(require_react(), 1);
-  var import_prop_types33 = __toESM(require_prop_types(), 1);
+  var import_prop_types34 = __toESM(require_prop_types(), 1);
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -29551,7 +29551,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         skipSx: inputSkipSx,
         // TODO v6: remove `lowercaseFirstLetter()` in the next major release
         // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver: overridesResolver2 = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
+        overridesResolver: overridesResolver3 = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
       } = inputOptions, options = _objectWithoutPropertiesLoose(inputOptions, _excluded5);
       const skipVariantsResolver = inputSkipVariantsResolver !== void 0 ? inputSkipVariantsResolver : (
         // TODO v6: remove `Root` in the next major release
@@ -29589,7 +29589,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           } : stylesArg;
         }) : [];
         let transformedStyleArg = styleArg;
-        if (componentName && overridesResolver2) {
+        if (componentName && overridesResolver3) {
           expressionsWithDefaultTheme.push((props) => {
             const theme = resolveTheme(_extends({}, props, {
               defaultTheme: defaultTheme2,
@@ -29603,7 +29603,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                   theme
                 })) : slotStyle;
               });
-              return overridesResolver2(props, resolvedStyleOverrides);
+              return overridesResolver3(props, resolvedStyleOverrides);
             }
             return null;
           });
@@ -36004,8 +36004,8 @@ Please use another name.` : formatMuiErrorMessage(18));
   var List_default = List;
 
   // node_modules/@mui/material/ListItem/ListItem.js
-  var React41 = __toESM(require_react());
-  var import_prop_types27 = __toESM(require_prop_types());
+  var React42 = __toESM(require_react());
+  var import_prop_types28 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/ListItem/listItemClasses.js
   function getListItemUtilityClass(slot) {
@@ -36014,13 +36014,244 @@ Please use another name.` : formatMuiErrorMessage(18));
   var listItemClasses = generateUtilityClasses("MuiListItem", ["root", "container", "focusVisible", "dense", "alignItemsFlexStart", "disabled", "divider", "gutters", "padding", "button", "secondaryAction", "selected"]);
   var listItemClasses_default = listItemClasses;
 
+  // node_modules/@mui/material/ListItemButton/ListItemButton.js
+  var React40 = __toESM(require_react());
+  var import_prop_types26 = __toESM(require_prop_types());
+
   // node_modules/@mui/material/ListItemButton/listItemButtonClasses.js
+  function getListItemButtonUtilityClass(slot) {
+    return generateUtilityClass("MuiListItemButton", slot);
+  }
   var listItemButtonClasses = generateUtilityClasses("MuiListItemButton", ["root", "focusVisible", "dense", "alignItemsFlexStart", "disabled", "divider", "gutters", "selected"]);
   var listItemButtonClasses_default = listItemButtonClasses;
 
+  // node_modules/@mui/material/ListItemButton/ListItemButton.js
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  var _excluded24 = ["alignItems", "autoFocus", "component", "children", "dense", "disableGutters", "divider", "focusVisibleClassName", "selected", "className"];
+  var overridesResolver = (props, styles3) => {
+    const {
+      ownerState
+    } = props;
+    return [styles3.root, ownerState.dense && styles3.dense, ownerState.alignItems === "flex-start" && styles3.alignItemsFlexStart, ownerState.divider && styles3.divider, !ownerState.disableGutters && styles3.gutters];
+  };
+  var useUtilityClasses10 = (ownerState) => {
+    const {
+      alignItems,
+      classes,
+      dense,
+      disabled,
+      disableGutters,
+      divider,
+      selected
+    } = ownerState;
+    const slots = {
+      root: ["root", dense && "dense", !disableGutters && "gutters", divider && "divider", disabled && "disabled", alignItems === "flex-start" && "alignItemsFlexStart", selected && "selected"]
+    };
+    const composedClasses = composeClasses(slots, getListItemButtonUtilityClass, classes);
+    return _extends({}, classes, composedClasses);
+  };
+  var ListItemButtonRoot = styled_default(ButtonBase_default, {
+    shouldForwardProp: (prop) => rootShouldForwardProp(prop) || prop === "classes",
+    name: "MuiListItemButton",
+    slot: "Root",
+    overridesResolver
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    display: "flex",
+    flexGrow: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "relative",
+    textDecoration: "none",
+    minWidth: 0,
+    boxSizing: "border-box",
+    textAlign: "left",
+    paddingTop: 8,
+    paddingBottom: 8,
+    transition: theme.transitions.create("background-color", {
+      duration: theme.transitions.duration.shortest
+    }),
+    "&:hover": {
+      textDecoration: "none",
+      backgroundColor: (theme.vars || theme).palette.action.hover,
+      // Reset on touch devices, it doesn't add specificity
+      "@media (hover: none)": {
+        backgroundColor: "transparent"
+      }
+    },
+    [`&.${listItemButtonClasses_default.selected}`]: {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+      [`&.${listItemButtonClasses_default.focusVisible}`]: {
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+      }
+    },
+    [`&.${listItemButtonClasses_default.selected}:hover`]: {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+      // Reset on touch devices, it doesn't add specificity
+      "@media (hover: none)": {
+        backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
+      }
+    },
+    [`&.${listItemButtonClasses_default.focusVisible}`]: {
+      backgroundColor: (theme.vars || theme).palette.action.focus
+    },
+    [`&.${listItemButtonClasses_default.disabled}`]: {
+      opacity: (theme.vars || theme).palette.action.disabledOpacity
+    }
+  }, ownerState.divider && {
+    borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
+    backgroundClip: "padding-box"
+  }, ownerState.alignItems === "flex-start" && {
+    alignItems: "flex-start"
+  }, !ownerState.disableGutters && {
+    paddingLeft: 16,
+    paddingRight: 16
+  }, ownerState.dense && {
+    paddingTop: 4,
+    paddingBottom: 4
+  }));
+  var ListItemButton = /* @__PURE__ */ React40.forwardRef(function ListItemButton2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiListItemButton"
+    });
+    const {
+      alignItems = "center",
+      autoFocus = false,
+      component = "div",
+      children,
+      dense = false,
+      disableGutters = false,
+      divider = false,
+      focusVisibleClassName,
+      selected = false,
+      className
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded24);
+    const context = React40.useContext(ListContext_default);
+    const childContext = React40.useMemo(() => ({
+      dense: dense || context.dense || false,
+      alignItems,
+      disableGutters
+    }), [alignItems, context.dense, dense, disableGutters]);
+    const listItemRef = React40.useRef(null);
+    useEnhancedEffect_default2(() => {
+      if (autoFocus) {
+        if (listItemRef.current) {
+          listItemRef.current.focus();
+        } else if (true) {
+          console.error("MUI: Unable to set focus to a ListItemButton whose component has not been rendered.");
+        }
+      }
+    }, [autoFocus]);
+    const ownerState = _extends({}, props, {
+      alignItems,
+      dense: childContext.dense,
+      disableGutters,
+      divider,
+      selected
+    });
+    const classes = useUtilityClasses10(ownerState);
+    const handleRef = useForkRef_default(listItemRef, ref);
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ListContext_default.Provider, {
+      value: childContext,
+      children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ListItemButtonRoot, _extends({
+        ref: handleRef,
+        href: other.href || other.to,
+        component: (other.href || other.to) && component === "div" ? "button" : component,
+        focusVisibleClassName: clsx_default(classes.focusVisible, focusVisibleClassName),
+        ownerState,
+        className: clsx_default(classes.root, className)
+      }, other, {
+        classes,
+        children
+      }))
+    });
+  });
+  true ? ListItemButton.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * Defines the `align-items` style property.
+     * @default 'center'
+     */
+    alignItems: import_prop_types26.default.oneOf(["center", "flex-start"]),
+    /**
+     * If `true`, the list item is focused during the first mount.
+     * Focus will also be triggered if the value changes from false to true.
+     * @default false
+     */
+    autoFocus: import_prop_types26.default.bool,
+    /**
+     * The content of the component if a `ListItemSecondaryAction` is used it must
+     * be the last child.
+     */
+    children: import_prop_types26.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types26.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types26.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types26.default.elementType,
+    /**
+     * If `true`, compact vertical padding designed for keyboard and mouse input is used.
+     * The prop defaults to the value inherited from the parent List component.
+     * @default false
+     */
+    dense: import_prop_types26.default.bool,
+    /**
+     * If `true`, the component is disabled.
+     * @default false
+     */
+    disabled: import_prop_types26.default.bool,
+    /**
+     * If `true`, the left and right padding is removed.
+     * @default false
+     */
+    disableGutters: import_prop_types26.default.bool,
+    /**
+     * If `true`, a 1px light border is added to the bottom of the list item.
+     * @default false
+     */
+    divider: import_prop_types26.default.bool,
+    /**
+     * This prop can help identify which element has keyboard focus.
+     * The class name will be applied when the element gains the focus through keyboard interaction.
+     * It's a polyfill for the [CSS :focus-visible selector](https://drafts.csswg.org/selectors-4/#the-focus-visible-pseudo).
+     * The rationale for using this feature [is explained here](https://github.com/WICG/focus-visible/blob/HEAD/explainer.md).
+     * A [polyfill can be used](https://github.com/WICG/focus-visible) to apply a `focus-visible` class to other components
+     * if needed.
+     */
+    focusVisibleClassName: import_prop_types26.default.string,
+    /**
+     * @ignore
+     */
+    href: import_prop_types26.default.string,
+    /**
+     * Use to apply selected styling.
+     * @default false
+     */
+    selected: import_prop_types26.default.bool,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types26.default.oneOfType([import_prop_types26.default.arrayOf(import_prop_types26.default.oneOfType([import_prop_types26.default.func, import_prop_types26.default.object, import_prop_types26.default.bool])), import_prop_types26.default.func, import_prop_types26.default.object])
+  } : void 0;
+  var ListItemButton_default = ListItemButton;
+
   // node_modules/@mui/material/ListItemSecondaryAction/ListItemSecondaryAction.js
-  var React40 = __toESM(require_react());
-  var import_prop_types26 = __toESM(require_prop_types());
+  var React41 = __toESM(require_react());
+  var import_prop_types27 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/ListItemSecondaryAction/listItemSecondaryActionClasses.js
   function getListItemSecondaryActionClassesUtilityClass(slot) {
@@ -36029,9 +36260,9 @@ Please use another name.` : formatMuiErrorMessage(18));
   var listItemSecondaryActionClasses = generateUtilityClasses("MuiListItemSecondaryAction", ["root", "disableGutters"]);
 
   // node_modules/@mui/material/ListItemSecondaryAction/ListItemSecondaryAction.js
-  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
-  var _excluded24 = ["className"];
-  var useUtilityClasses10 = (ownerState) => {
+  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
+  var _excluded25 = ["className"];
+  var useUtilityClasses11 = (ownerState) => {
     const {
       disableGutters,
       classes
@@ -36060,20 +36291,20 @@ Please use another name.` : formatMuiErrorMessage(18));
   }, ownerState.disableGutters && {
     right: 0
   }));
-  var ListItemSecondaryAction = /* @__PURE__ */ React40.forwardRef(function ListItemSecondaryAction2(inProps, ref) {
+  var ListItemSecondaryAction = /* @__PURE__ */ React41.forwardRef(function ListItemSecondaryAction2(inProps, ref) {
     const props = useThemeProps2({
       props: inProps,
       name: "MuiListItemSecondaryAction"
     });
     const {
       className
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded24);
-    const context = React40.useContext(ListContext_default);
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded25);
+    const context = React41.useContext(ListContext_default);
     const ownerState = _extends({}, props, {
       disableGutters: context.disableGutters
     });
-    const classes = useUtilityClasses10(ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(ListItemSecondaryActionRoot, _extends({
+    const classes = useUtilityClasses11(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ListItemSecondaryActionRoot, _extends({
       className: clsx_default(classes.root, className),
       ownerState,
       ref
@@ -36087,35 +36318,35 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * The content of the component, normally an `IconButton` or selection control.
      */
-    children: import_prop_types26.default.node,
+    children: import_prop_types27.default.node,
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types26.default.object,
+    classes: import_prop_types27.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types26.default.string,
+    className: import_prop_types27.default.string,
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types26.default.oneOfType([import_prop_types26.default.arrayOf(import_prop_types26.default.oneOfType([import_prop_types26.default.func, import_prop_types26.default.object, import_prop_types26.default.bool])), import_prop_types26.default.func, import_prop_types26.default.object])
+    sx: import_prop_types27.default.oneOfType([import_prop_types27.default.arrayOf(import_prop_types27.default.oneOfType([import_prop_types27.default.func, import_prop_types27.default.object, import_prop_types27.default.bool])), import_prop_types27.default.func, import_prop_types27.default.object])
   } : void 0;
   ListItemSecondaryAction.muiName = "ListItemSecondaryAction";
   var ListItemSecondaryAction_default = ListItemSecondaryAction;
 
   // node_modules/@mui/material/ListItem/ListItem.js
-  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
   var import_jsx_runtime28 = __toESM(require_jsx_runtime());
-  var _excluded25 = ["className"];
-  var _excluded26 = ["alignItems", "autoFocus", "button", "children", "className", "component", "components", "componentsProps", "ContainerComponent", "ContainerProps", "dense", "disabled", "disableGutters", "disablePadding", "divider", "focusVisibleClassName", "secondaryAction", "selected", "slotProps", "slots"];
-  var overridesResolver = (props, styles3) => {
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  var _excluded26 = ["className"];
+  var _excluded27 = ["alignItems", "autoFocus", "button", "children", "className", "component", "components", "componentsProps", "ContainerComponent", "ContainerProps", "dense", "disabled", "disableGutters", "disablePadding", "divider", "focusVisibleClassName", "secondaryAction", "selected", "slotProps", "slots"];
+  var overridesResolver2 = (props, styles3) => {
     const {
       ownerState
     } = props;
     return [styles3.root, ownerState.dense && styles3.dense, ownerState.alignItems === "flex-start" && styles3.alignItemsFlexStart, ownerState.divider && styles3.divider, !ownerState.disableGutters && styles3.gutters, !ownerState.disablePadding && styles3.padding, ownerState.button && styles3.button, ownerState.hasSecondaryAction && styles3.secondaryAction];
   };
-  var useUtilityClasses11 = (ownerState) => {
+  var useUtilityClasses12 = (ownerState) => {
     const {
       alignItems,
       button,
@@ -36137,7 +36368,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   var ListItemRoot = styled_default("div", {
     name: "MuiListItem",
     slot: "Root",
-    overridesResolver
+    overridesResolver: overridesResolver2
   })(({
     theme,
     ownerState
@@ -36216,7 +36447,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   })({
     position: "relative"
   });
-  var ListItem = /* @__PURE__ */ React41.forwardRef(function ListItem2(inProps, ref) {
+  var ListItem = /* @__PURE__ */ React42.forwardRef(function ListItem2(inProps, ref) {
     const props = useThemeProps2({
       props: inProps,
       name: "MuiListItem"
@@ -36244,14 +36475,14 @@ Please use another name.` : formatMuiErrorMessage(18));
       selected = false,
       slotProps = {},
       slots = {}
-    } = props, ContainerProps = _objectWithoutPropertiesLoose(props.ContainerProps, _excluded25), other = _objectWithoutPropertiesLoose(props, _excluded26);
-    const context = React41.useContext(ListContext_default);
-    const childContext = React41.useMemo(() => ({
+    } = props, ContainerProps = _objectWithoutPropertiesLoose(props.ContainerProps, _excluded26), other = _objectWithoutPropertiesLoose(props, _excluded27);
+    const context = React42.useContext(ListContext_default);
+    const childContext = React42.useMemo(() => ({
       dense: dense || context.dense || false,
       alignItems,
       disableGutters
     }), [alignItems, context.dense, dense, disableGutters]);
-    const listItemRef = React41.useRef(null);
+    const listItemRef = React42.useRef(null);
     useEnhancedEffect_default2(() => {
       if (autoFocus) {
         if (listItemRef.current) {
@@ -36261,7 +36492,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         }
       }
     }, [autoFocus]);
-    const children = React41.Children.toArray(childrenProp);
+    const children = React42.Children.toArray(childrenProp);
     const hasSecondaryAction = children.length && isMuiElement_default(children[children.length - 1], ["ListItemSecondaryAction"]);
     const ownerState = _extends({}, props, {
       alignItems,
@@ -36275,7 +36506,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       hasSecondaryAction,
       selected
     });
-    const classes = useUtilityClasses11(ownerState);
+    const classes = useUtilityClasses12(ownerState);
     const handleRef = useForkRef_default(listItemRef, ref);
     const Root = slots.root || components.Root || ListItemRoot;
     const rootProps = slotProps.root || componentsProps.root || {};
@@ -36298,15 +36529,15 @@ Please use another name.` : formatMuiErrorMessage(18));
           componentProps.component = "div";
         }
       }
-      return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ListContext_default.Provider, {
+      return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ListContext_default.Provider, {
         value: childContext,
-        children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(ListItemContainer, _extends({
+        children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(ListItemContainer, _extends({
           as: ContainerComponent,
           className: clsx_default(classes.container, ContainerClassName),
           ref: handleRef,
           ownerState
         }, ContainerProps, {
-          children: [/* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Root, _extends({}, rootProps, !isHostComponent(Root) && {
+          children: [/* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Root, _extends({}, rootProps, !isHostComponent(Root) && {
             as: Component,
             ownerState: _extends({}, ownerState, rootProps.ownerState)
           }, componentProps, {
@@ -36315,15 +36546,15 @@ Please use another name.` : formatMuiErrorMessage(18));
         }))
       });
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ListContext_default.Provider, {
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ListContext_default.Provider, {
       value: childContext,
-      children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(Root, _extends({}, rootProps, {
+      children: /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(Root, _extends({}, rootProps, {
         as: Component,
         ref: handleRef
       }, !isHostComponent(Root) && {
         ownerState: _extends({}, ownerState, rootProps.ownerState)
       }, componentProps, {
-        children: [children, secondaryAction && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(ListItemSecondaryAction_default, {
+        children: [children, secondaryAction && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(ListItemSecondaryAction_default, {
           children: secondaryAction
         })]
       }))
@@ -36338,27 +36569,27 @@ Please use another name.` : formatMuiErrorMessage(18));
      * Defines the `align-items` style property.
      * @default 'center'
      */
-    alignItems: import_prop_types27.default.oneOf(["center", "flex-start"]),
+    alignItems: import_prop_types28.default.oneOf(["center", "flex-start"]),
     /**
      * If `true`, the list item is focused during the first mount.
      * Focus will also be triggered if the value changes from false to true.
      * @default false
      * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
      */
-    autoFocus: import_prop_types27.default.bool,
+    autoFocus: import_prop_types28.default.bool,
     /**
      * If `true`, the list item is a button (using `ButtonBase`). Props intended
      * for `ButtonBase` can then be applied to `ListItem`.
      * @default false
      * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
      */
-    button: import_prop_types27.default.bool,
+    button: import_prop_types28.default.bool,
     /**
      * The content of the component if a `ListItemSecondaryAction` is used it must
      * be the last child.
      */
-    children: chainPropTypes(import_prop_types27.default.node, (props) => {
-      const children = React41.Children.toArray(props.children);
+    children: chainPropTypes(import_prop_types28.default.node, (props) => {
+      const children = React42.Children.toArray(props.children);
       let secondaryActionIndex = -1;
       for (let i = children.length - 1; i >= 0; i -= 1) {
         const child = children[i];
@@ -36375,16 +36606,16 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types27.default.object,
+    classes: import_prop_types28.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types27.default.string,
+    className: import_prop_types28.default.string,
     /**
      * The component used for the root node.
      * Either a string to use a HTML element or a component.
      */
-    component: import_prop_types27.default.elementType,
+    component: import_prop_types28.default.elementType,
     /**
      * The components used for each slot inside.
      *
@@ -36393,8 +36624,8 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    components: import_prop_types27.default.shape({
-      Root: import_prop_types27.default.elementType
+    components: import_prop_types28.default.shape({
+      Root: import_prop_types28.default.elementType
     }),
     /**
      * The extra props for the slot components.
@@ -36405,8 +36636,8 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    componentsProps: import_prop_types27.default.shape({
-      root: import_prop_types27.default.object
+    componentsProps: import_prop_types28.default.shape({
+      root: import_prop_types28.default.object
     }),
     /**
      * The container component used when a `ListItemSecondaryAction` is the last child.
@@ -36419,48 +36650,48 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @default {}
      * @deprecated
      */
-    ContainerProps: import_prop_types27.default.object,
+    ContainerProps: import_prop_types28.default.object,
     /**
      * If `true`, compact vertical padding designed for keyboard and mouse input is used.
      * The prop defaults to the value inherited from the parent List component.
      * @default false
      */
-    dense: import_prop_types27.default.bool,
+    dense: import_prop_types28.default.bool,
     /**
      * If `true`, the component is disabled.
      * @default false
      * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
      */
-    disabled: import_prop_types27.default.bool,
+    disabled: import_prop_types28.default.bool,
     /**
      * If `true`, the left and right padding is removed.
      * @default false
      */
-    disableGutters: import_prop_types27.default.bool,
+    disableGutters: import_prop_types28.default.bool,
     /**
      * If `true`, all padding is removed.
      * @default false
      */
-    disablePadding: import_prop_types27.default.bool,
+    disablePadding: import_prop_types28.default.bool,
     /**
      * If `true`, a 1px light border is added to the bottom of the list item.
      * @default false
      */
-    divider: import_prop_types27.default.bool,
+    divider: import_prop_types28.default.bool,
     /**
      * @ignore
      */
-    focusVisibleClassName: import_prop_types27.default.string,
+    focusVisibleClassName: import_prop_types28.default.string,
     /**
      * The element to display at the end of ListItem.
      */
-    secondaryAction: import_prop_types27.default.node,
+    secondaryAction: import_prop_types28.default.node,
     /**
      * Use to apply selected styling.
      * @default false
      * @deprecated checkout [ListItemButton](/material-ui/api/list-item-button/) instead
      */
-    selected: import_prop_types27.default.bool,
+    selected: import_prop_types28.default.bool,
     /**
      * The extra props for the slot components.
      * You can override the existing props or add new ones.
@@ -36469,8 +36700,8 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slotProps: import_prop_types27.default.shape({
-      root: import_prop_types27.default.object
+    slotProps: import_prop_types28.default.shape({
+      root: import_prop_types28.default.object
     }),
     /**
      * The components used for each slot inside.
@@ -36479,19 +36710,19 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slots: import_prop_types27.default.shape({
-      root: import_prop_types27.default.elementType
+    slots: import_prop_types28.default.shape({
+      root: import_prop_types28.default.elementType
     }),
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types27.default.oneOfType([import_prop_types27.default.arrayOf(import_prop_types27.default.oneOfType([import_prop_types27.default.func, import_prop_types27.default.object, import_prop_types27.default.bool])), import_prop_types27.default.func, import_prop_types27.default.object])
+    sx: import_prop_types28.default.oneOfType([import_prop_types28.default.arrayOf(import_prop_types28.default.oneOfType([import_prop_types28.default.func, import_prop_types28.default.object, import_prop_types28.default.bool])), import_prop_types28.default.func, import_prop_types28.default.object])
   } : void 0;
   var ListItem_default = ListItem;
 
   // node_modules/@mui/material/ListItemIcon/ListItemIcon.js
-  var React42 = __toESM(require_react());
-  var import_prop_types28 = __toESM(require_prop_types());
+  var React43 = __toESM(require_react());
+  var import_prop_types29 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/ListItemIcon/listItemIconClasses.js
   function getListItemIconUtilityClass(slot) {
@@ -36500,9 +36731,9 @@ Please use another name.` : formatMuiErrorMessage(18));
   var listItemIconClasses = generateUtilityClasses("MuiListItemIcon", ["root", "alignItemsFlexStart"]);
 
   // node_modules/@mui/material/ListItemIcon/ListItemIcon.js
-  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
-  var _excluded27 = ["className"];
-  var useUtilityClasses12 = (ownerState) => {
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  var _excluded28 = ["className"];
+  var useUtilityClasses13 = (ownerState) => {
     const {
       alignItems,
       classes
@@ -36532,20 +36763,20 @@ Please use another name.` : formatMuiErrorMessage(18));
   }, ownerState.alignItems === "flex-start" && {
     marginTop: 8
   }));
-  var ListItemIcon = /* @__PURE__ */ React42.forwardRef(function ListItemIcon2(inProps, ref) {
+  var ListItemIcon = /* @__PURE__ */ React43.forwardRef(function ListItemIcon2(inProps, ref) {
     const props = useThemeProps2({
       props: inProps,
       name: "MuiListItemIcon"
     });
     const {
       className
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded27);
-    const context = React42.useContext(ListContext_default);
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded28);
+    const context = React43.useContext(ListContext_default);
     const ownerState = _extends({}, props, {
       alignItems: context.alignItems
     });
-    const classes = useUtilityClasses12(ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(ListItemIconRoot, _extends({
+    const classes = useUtilityClasses13(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(ListItemIconRoot, _extends({
       className: clsx_default(classes.root, className),
       ownerState,
       ref
@@ -36560,25 +36791,25 @@ Please use another name.` : formatMuiErrorMessage(18));
      * The content of the component, normally `Icon`, `SvgIcon`,
      * or a `@mui/icons-material` SVG icon element.
      */
-    children: import_prop_types28.default.node,
+    children: import_prop_types29.default.node,
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types28.default.object,
+    classes: import_prop_types29.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types28.default.string,
+    className: import_prop_types29.default.string,
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types28.default.oneOfType([import_prop_types28.default.arrayOf(import_prop_types28.default.oneOfType([import_prop_types28.default.func, import_prop_types28.default.object, import_prop_types28.default.bool])), import_prop_types28.default.func, import_prop_types28.default.object])
+    sx: import_prop_types29.default.oneOfType([import_prop_types29.default.arrayOf(import_prop_types29.default.oneOfType([import_prop_types29.default.func, import_prop_types29.default.object, import_prop_types29.default.bool])), import_prop_types29.default.func, import_prop_types29.default.object])
   } : void 0;
   var ListItemIcon_default = ListItemIcon;
 
   // node_modules/@mui/material/ListItemText/ListItemText.js
-  var React43 = __toESM(require_react());
-  var import_prop_types29 = __toESM(require_prop_types());
+  var React44 = __toESM(require_react());
+  var import_prop_types30 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/ListItemText/listItemTextClasses.js
   function getListItemTextUtilityClass(slot) {
@@ -36588,10 +36819,10 @@ Please use another name.` : formatMuiErrorMessage(18));
   var listItemTextClasses_default = listItemTextClasses;
 
   // node_modules/@mui/material/ListItemText/ListItemText.js
-  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
   var import_jsx_runtime31 = __toESM(require_jsx_runtime());
-  var _excluded28 = ["children", "className", "disableTypography", "inset", "primary", "primaryTypographyProps", "secondary", "secondaryTypographyProps"];
-  var useUtilityClasses13 = (ownerState) => {
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
+  var _excluded29 = ["children", "className", "disableTypography", "inset", "primary", "primaryTypographyProps", "secondary", "secondaryTypographyProps"];
+  var useUtilityClasses14 = (ownerState) => {
     const {
       classes,
       inset,
@@ -36632,7 +36863,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   }, ownerState.inset && {
     paddingLeft: 56
   }));
-  var ListItemText = /* @__PURE__ */ React43.forwardRef(function ListItemText2(inProps, ref) {
+  var ListItemText = /* @__PURE__ */ React44.forwardRef(function ListItemText2(inProps, ref) {
     const props = useThemeProps2({
       props: inProps,
       name: "MuiListItemText"
@@ -36646,10 +36877,10 @@ Please use another name.` : formatMuiErrorMessage(18));
       primaryTypographyProps,
       secondary: secondaryProp,
       secondaryTypographyProps
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded28);
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded29);
     const {
       dense
-    } = React43.useContext(ListContext_default);
+    } = React44.useContext(ListContext_default);
     let primary = primaryProp != null ? primaryProp : children;
     let secondary = secondaryProp;
     const ownerState = _extends({}, props, {
@@ -36659,9 +36890,9 @@ Please use another name.` : formatMuiErrorMessage(18));
       secondary: !!secondary,
       dense
     });
-    const classes = useUtilityClasses13(ownerState);
+    const classes = useUtilityClasses14(ownerState);
     if (primary != null && primary.type !== Typography_default && !disableTypography) {
-      primary = /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Typography_default, _extends({
+      primary = /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Typography_default, _extends({
         variant: dense ? "body2" : "body1",
         className: classes.primary,
         component: primaryTypographyProps != null && primaryTypographyProps.variant ? void 0 : "span",
@@ -36671,7 +36902,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       }));
     }
     if (secondary != null && secondary.type !== Typography_default && !disableTypography) {
-      secondary = /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Typography_default, _extends({
+      secondary = /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Typography_default, _extends({
         variant: "body2",
         className: classes.secondary,
         color: "text.secondary",
@@ -36680,7 +36911,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         children: secondary
       }));
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(ListItemTextRoot, _extends({
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(ListItemTextRoot, _extends({
       className: clsx_default(classes.root, className),
       ownerState,
       ref
@@ -36696,15 +36927,15 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * Alias for the `primary` prop.
      */
-    children: import_prop_types29.default.node,
+    children: import_prop_types30.default.node,
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types29.default.object,
+    classes: import_prop_types30.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types29.default.string,
+    className: import_prop_types30.default.string,
     /**
      * If `true`, the children won't be wrapped by a Typography component.
      * This can be useful to render an alternative Typography variant by wrapping
@@ -36712,41 +36943,41 @@ Please use another name.` : formatMuiErrorMessage(18));
      * with the Typography component.
      * @default false
      */
-    disableTypography: import_prop_types29.default.bool,
+    disableTypography: import_prop_types30.default.bool,
     /**
      * If `true`, the children are indented.
      * This should be used if there is no left avatar or left icon.
      * @default false
      */
-    inset: import_prop_types29.default.bool,
+    inset: import_prop_types30.default.bool,
     /**
      * The main content element.
      */
-    primary: import_prop_types29.default.node,
+    primary: import_prop_types30.default.node,
     /**
      * These props will be forwarded to the primary typography component
      * (as long as disableTypography is not `true`).
      */
-    primaryTypographyProps: import_prop_types29.default.object,
+    primaryTypographyProps: import_prop_types30.default.object,
     /**
      * The secondary content element.
      */
-    secondary: import_prop_types29.default.node,
+    secondary: import_prop_types30.default.node,
     /**
      * These props will be forwarded to the secondary typography component
      * (as long as disableTypography is not `true`).
      */
-    secondaryTypographyProps: import_prop_types29.default.object,
+    secondaryTypographyProps: import_prop_types30.default.object,
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types29.default.oneOfType([import_prop_types29.default.arrayOf(import_prop_types29.default.oneOfType([import_prop_types29.default.func, import_prop_types29.default.object, import_prop_types29.default.bool])), import_prop_types29.default.func, import_prop_types29.default.object])
+    sx: import_prop_types30.default.oneOfType([import_prop_types30.default.arrayOf(import_prop_types30.default.oneOfType([import_prop_types30.default.func, import_prop_types30.default.object, import_prop_types30.default.bool])), import_prop_types30.default.func, import_prop_types30.default.object])
   } : void 0;
   var ListItemText_default = ListItemText;
 
   // node_modules/@mui/material/Tooltip/Tooltip.js
-  var React44 = __toESM(require_react());
-  var import_prop_types30 = __toESM(require_prop_types());
+  var React45 = __toESM(require_react());
+  var import_prop_types31 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/Tooltip/tooltipClasses.js
   function getTooltipUtilityClass(slot) {
@@ -36756,13 +36987,13 @@ Please use another name.` : formatMuiErrorMessage(18));
   var tooltipClasses_default = tooltipClasses;
 
   // node_modules/@mui/material/Tooltip/Tooltip.js
-  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
   var import_jsx_runtime33 = __toESM(require_jsx_runtime());
-  var _excluded29 = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
+  var _excluded30 = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
   function round3(value) {
     return Math.round(value * 1e5) / 1e5;
   }
-  var useUtilityClasses14 = (ownerState) => {
+  var useUtilityClasses15 = (ownerState) => {
     const {
       classes,
       disableInteractive,
@@ -36943,7 +37174,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       handler(event);
     };
   }
-  var Tooltip = /* @__PURE__ */ React44.forwardRef(function Tooltip2(inProps, ref) {
+  var Tooltip = /* @__PURE__ */ React45.forwardRef(function Tooltip2(inProps, ref) {
     var _ref, _slots$popper, _ref2, _ref3, _slots$transition, _ref4, _slots$tooltip, _ref5, _slots$arrow, _slotProps$popper, _ref6, _slotProps$popper2, _slotProps$transition, _slotProps$tooltip, _ref7, _slotProps$tooltip2, _slotProps$arrow, _ref8, _slotProps$arrow2;
     const props = useThemeProps2({
       props: inProps,
@@ -36977,20 +37208,20 @@ Please use another name.` : formatMuiErrorMessage(18));
       title,
       TransitionComponent: TransitionComponentProp = Grow_default,
       TransitionProps
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded29);
-    const children = /* @__PURE__ */ React44.isValidElement(childrenProp) ? childrenProp : /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", {
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded30);
+    const children = /* @__PURE__ */ React45.isValidElement(childrenProp) ? childrenProp : /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("span", {
       children: childrenProp
     });
     const theme = useTheme4();
     const isRtl = theme.direction === "rtl";
-    const [childNode, setChildNode] = React44.useState();
-    const [arrowRef, setArrowRef] = React44.useState(null);
-    const ignoreNonTouchEvents = React44.useRef(false);
+    const [childNode, setChildNode] = React45.useState();
+    const [arrowRef, setArrowRef] = React45.useState(null);
+    const ignoreNonTouchEvents = React45.useRef(false);
     const disableInteractive = disableInteractiveProp || followCursor;
-    const closeTimer = React44.useRef();
-    const enterTimer = React44.useRef();
-    const leaveTimer = React44.useRef();
-    const touchTimer = React44.useRef();
+    const closeTimer = React45.useRef();
+    const enterTimer = React45.useRef();
+    const leaveTimer = React45.useRef();
+    const touchTimer = React45.useRef();
     const [openState, setOpenState] = useControlled_default({
       controlled: openProp,
       default: false,
@@ -37001,23 +37232,23 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (true) {
       const {
         current: isControlled
-      } = React44.useRef(openProp !== void 0);
-      React44.useEffect(() => {
+      } = React45.useRef(openProp !== void 0);
+      React45.useEffect(() => {
         if (childNode && childNode.disabled && !isControlled && title !== "" && childNode.tagName.toLowerCase() === "button") {
           console.error(["MUI: You are providing a disabled `button` child to the Tooltip component.", "A disabled element does not fire events.", "Tooltip needs to listen to the child element's events to display the title.", "", "Add a simple wrapper element, such as a `span`."].join("\n"));
         }
       }, [title, childNode, isControlled]);
     }
     const id = useId_default(idProp);
-    const prevUserSelect = React44.useRef();
-    const stopTouchInteraction = React44.useCallback(() => {
+    const prevUserSelect = React45.useRef();
+    const stopTouchInteraction = React45.useCallback(() => {
       if (prevUserSelect.current !== void 0) {
         document.body.style.WebkitUserSelect = prevUserSelect.current;
         prevUserSelect.current = void 0;
       }
       clearTimeout(touchTimer.current);
     }, []);
-    React44.useEffect(() => {
+    React45.useEffect(() => {
       return () => {
         clearTimeout(closeTimer.current);
         clearTimeout(enterTimer.current);
@@ -37082,7 +37313,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       onFocus: handleFocusVisible,
       ref: focusVisibleRef
     } = useIsFocusVisible_default();
-    const [, setChildIsFocusVisible] = React44.useState(false);
+    const [, setChildIsFocusVisible] = React45.useState(false);
     const handleBlur = (event) => {
       handleBlurVisible(event);
       if (isFocusVisibleRef.current === false) {
@@ -37131,7 +37362,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         handleClose(event);
       }, leaveTouchDelay);
     };
-    React44.useEffect(() => {
+    React45.useEffect(() => {
       if (!open) {
         return void 0;
       }
@@ -37149,7 +37380,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (!title && title !== 0) {
       open = false;
     }
-    const popperRef = React44.useRef();
+    const popperRef = React45.useRef();
     const handleMouseMove = (event) => {
       const childrenProps2 = children.props;
       if (childrenProps2.onMouseMove) {
@@ -37181,7 +37412,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     } : {});
     if (true) {
       childrenProps["data-mui-internal-clone-element"] = true;
-      React44.useEffect(() => {
+      React45.useEffect(() => {
         if (childNode && !childNode.getAttribute("data-mui-internal-clone-element")) {
           console.error(["MUI: The `children` component of the Tooltip is not forwarding its props correctly.", "Please make sure that props are spread on the same element that the ref is applied to."].join("\n"));
         }
@@ -37213,7 +37444,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         console.error(["MUI: You have provided a `title` prop to the child of <Tooltip />.", `Remove this title prop \`${children.props.title}\` or the Tooltip component.`].join("\n"));
       }
     }
-    const popperOptions = React44.useMemo(() => {
+    const popperOptions = React45.useMemo(() => {
       var _PopperProps$popperOp;
       let tooltipModifiers = [{
         name: "arrow",
@@ -37238,7 +37469,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       PopperComponentProp,
       touch: ignoreNonTouchEvents.current
     });
-    const classes = useUtilityClasses14(ownerState);
+    const classes = useUtilityClasses15(ownerState);
     const PopperComponent = (_ref = (_slots$popper = slots.popper) != null ? _slots$popper : components.Popper) != null ? _ref : TooltipPopper;
     const TransitionComponent = (_ref2 = (_ref3 = (_slots$transition = slots.transition) != null ? _slots$transition : components.Transition) != null ? _ref3 : TransitionComponentProp) != null ? _ref2 : Grow_default;
     const TooltipComponent = (_ref4 = (_slots$tooltip = slots.tooltip) != null ? _slots$tooltip : components.Tooltip) != null ? _ref4 : TooltipTooltip;
@@ -37253,8 +37484,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     const tooltipArrowProps = appendOwnerState(ArrowComponent, _extends({}, (_slotProps$arrow = slotProps.arrow) != null ? _slotProps$arrow : componentsProps.arrow, {
       className: clsx_default(classes.arrow, (_ref8 = (_slotProps$arrow2 = slotProps.arrow) != null ? _slotProps$arrow2 : componentsProps.arrow) == null ? void 0 : _ref8.className)
     }), ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(React44.Fragment, {
-      children: [/* @__PURE__ */ React44.cloneElement(children, childrenProps), /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(PopperComponent, _extends({
+    return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(React45.Fragment, {
+      children: [/* @__PURE__ */ React45.cloneElement(children, childrenProps), /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(PopperComponent, _extends({
         as: PopperComponentProp != null ? PopperComponentProp : Popper_default,
         placement,
         anchorEl: followCursor ? {
@@ -37275,11 +37506,11 @@ Please use another name.` : formatMuiErrorMessage(18));
         popperOptions,
         children: ({
           TransitionProps: TransitionPropsInner
-        }) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(TransitionComponent, _extends({
+        }) => /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(TransitionComponent, _extends({
           timeout: theme.transitions.duration.shorter
         }, TransitionPropsInner, transitionProps, {
-          children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(TooltipComponent, _extends({}, tooltipProps, {
-            children: [title, arrow2 ? /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(ArrowComponent, _extends({}, tooltipArrowProps, {
+          children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(TooltipComponent, _extends({}, tooltipProps, {
+            children: [title, arrow2 ? /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(ArrowComponent, _extends({}, tooltipArrowProps, {
               ref: setArrowRef
             })) : null]
           }))
@@ -37296,7 +37527,7 @@ Please use another name.` : formatMuiErrorMessage(18));
      * If `true`, adds an arrow to the tooltip.
      * @default false
      */
-    arrow: import_prop_types30.default.bool,
+    arrow: import_prop_types31.default.bool,
     /**
      * Tooltip reference element.
      */
@@ -37304,11 +37535,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types30.default.object,
+    classes: import_prop_types31.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types30.default.string,
+    className: import_prop_types31.default.string,
     /**
      * The components used for each slot inside.
      *
@@ -37317,11 +37548,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    components: import_prop_types30.default.shape({
-      Arrow: import_prop_types30.default.elementType,
-      Popper: import_prop_types30.default.elementType,
-      Tooltip: import_prop_types30.default.elementType,
-      Transition: import_prop_types30.default.elementType
+    components: import_prop_types31.default.shape({
+      Arrow: import_prop_types31.default.elementType,
+      Popper: import_prop_types31.default.elementType,
+      Tooltip: import_prop_types31.default.elementType,
+      Transition: import_prop_types31.default.elementType
     }),
     /**
      * The extra props for the slot components.
@@ -37332,107 +37563,107 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    componentsProps: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.object,
-      popper: import_prop_types30.default.object,
-      tooltip: import_prop_types30.default.object,
-      transition: import_prop_types30.default.object
+    componentsProps: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.object,
+      popper: import_prop_types31.default.object,
+      tooltip: import_prop_types31.default.object,
+      transition: import_prop_types31.default.object
     }),
     /**
      * Set to `true` if the `title` acts as an accessible description.
      * By default the `title` acts as an accessible label for the child.
      * @default false
      */
-    describeChild: import_prop_types30.default.bool,
+    describeChild: import_prop_types31.default.bool,
     /**
      * Do not respond to focus-visible events.
      * @default false
      */
-    disableFocusListener: import_prop_types30.default.bool,
+    disableFocusListener: import_prop_types31.default.bool,
     /**
      * Do not respond to hover events.
      * @default false
      */
-    disableHoverListener: import_prop_types30.default.bool,
+    disableHoverListener: import_prop_types31.default.bool,
     /**
      * Makes a tooltip not interactive, i.e. it will close when the user
      * hovers over the tooltip before the `leaveDelay` is expired.
      * @default false
      */
-    disableInteractive: import_prop_types30.default.bool,
+    disableInteractive: import_prop_types31.default.bool,
     /**
      * Do not respond to long press touch events.
      * @default false
      */
-    disableTouchListener: import_prop_types30.default.bool,
+    disableTouchListener: import_prop_types31.default.bool,
     /**
      * The number of milliseconds to wait before showing the tooltip.
      * This prop won't impact the enter touch delay (`enterTouchDelay`).
      * @default 100
      */
-    enterDelay: import_prop_types30.default.number,
+    enterDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds to wait before showing the tooltip when one was already recently opened.
      * @default 0
      */
-    enterNextDelay: import_prop_types30.default.number,
+    enterNextDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds a user must touch the element before showing the tooltip.
      * @default 700
      */
-    enterTouchDelay: import_prop_types30.default.number,
+    enterTouchDelay: import_prop_types31.default.number,
     /**
      * If `true`, the tooltip follow the cursor over the wrapped element.
      * @default false
      */
-    followCursor: import_prop_types30.default.bool,
+    followCursor: import_prop_types31.default.bool,
     /**
      * This prop is used to help implement the accessibility logic.
      * If you don't provide this prop. It falls back to a randomly generated id.
      */
-    id: import_prop_types30.default.string,
+    id: import_prop_types31.default.string,
     /**
      * The number of milliseconds to wait before hiding the tooltip.
      * This prop won't impact the leave touch delay (`leaveTouchDelay`).
      * @default 0
      */
-    leaveDelay: import_prop_types30.default.number,
+    leaveDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds after the user stops touching an element before hiding the tooltip.
      * @default 1500
      */
-    leaveTouchDelay: import_prop_types30.default.number,
+    leaveTouchDelay: import_prop_types31.default.number,
     /**
      * Callback fired when the component requests to be closed.
      *
      * @param {React.SyntheticEvent} event The event source of the callback.
      */
-    onClose: import_prop_types30.default.func,
+    onClose: import_prop_types31.default.func,
     /**
      * Callback fired when the component requests to be open.
      *
      * @param {React.SyntheticEvent} event The event source of the callback.
      */
-    onOpen: import_prop_types30.default.func,
+    onOpen: import_prop_types31.default.func,
     /**
      * If `true`, the component is shown.
      */
-    open: import_prop_types30.default.bool,
+    open: import_prop_types31.default.bool,
     /**
      * Tooltip placement.
      * @default 'bottom'
      */
-    placement: import_prop_types30.default.oneOf(["bottom-end", "bottom-start", "bottom", "left-end", "left-start", "left", "right-end", "right-start", "right", "top-end", "top-start", "top"]),
+    placement: import_prop_types31.default.oneOf(["bottom-end", "bottom-start", "bottom", "left-end", "left-start", "left", "right-end", "right-start", "right", "top-end", "top-start", "top"]),
     /**
      * The component used for the popper.
      * @default Popper
      */
-    PopperComponent: import_prop_types30.default.elementType,
+    PopperComponent: import_prop_types31.default.elementType,
     /**
      * Props applied to the [`Popper`](/material-ui/api/popper/) element.
      * @default {}
      */
-    PopperProps: import_prop_types30.default.object,
+    PopperProps: import_prop_types31.default.object,
     /**
      * The extra props for the slot components.
      * You can override the existing props or add new ones.
@@ -37441,11 +37672,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slotProps: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.object,
-      popper: import_prop_types30.default.object,
-      tooltip: import_prop_types30.default.object,
-      transition: import_prop_types30.default.object
+    slotProps: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.object,
+      popper: import_prop_types31.default.object,
+      tooltip: import_prop_types31.default.object,
+      transition: import_prop_types31.default.object
     }),
     /**
      * The components used for each slot inside.
@@ -37454,98 +37685,73 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slots: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.elementType,
-      popper: import_prop_types30.default.elementType,
-      tooltip: import_prop_types30.default.elementType,
-      transition: import_prop_types30.default.elementType
+    slots: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.elementType,
+      popper: import_prop_types31.default.elementType,
+      tooltip: import_prop_types31.default.elementType,
+      transition: import_prop_types31.default.elementType
     }),
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types30.default.oneOfType([import_prop_types30.default.arrayOf(import_prop_types30.default.oneOfType([import_prop_types30.default.func, import_prop_types30.default.object, import_prop_types30.default.bool])), import_prop_types30.default.func, import_prop_types30.default.object]),
+    sx: import_prop_types31.default.oneOfType([import_prop_types31.default.arrayOf(import_prop_types31.default.oneOfType([import_prop_types31.default.func, import_prop_types31.default.object, import_prop_types31.default.bool])), import_prop_types31.default.func, import_prop_types31.default.object]),
     /**
      * Tooltip title. Zero-length titles string, undefined, null and false are never displayed.
      */
-    title: import_prop_types30.default.node,
+    title: import_prop_types31.default.node,
     /**
      * The component used for the transition.
      * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
      * @default Grow
      */
-    TransitionComponent: import_prop_types30.default.elementType,
+    TransitionComponent: import_prop_types31.default.elementType,
     /**
      * Props applied to the transition element.
      * By default, the element is based on this [`Transition`](http://reactcommunity.org/react-transition-group/transition/) component.
      */
-    TransitionProps: import_prop_types30.default.object
+    TransitionProps: import_prop_types31.default.object
   } : void 0;
   var Tooltip_default = Tooltip;
 
   // node_modules/@mui/icons-material/esm/CheckCircle.js
-  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
-  var CheckCircle_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime34.jsx)("path", {
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
+  var CheckCircle_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime35.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
   }), "CheckCircle");
 
   // node_modules/@mui/icons-material/esm/Dangerous.js
-  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
-  var Dangerous_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime35.jsx)("path", {
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var Dangerous_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime36.jsx)("path", {
     d: "M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM17 15.74 15.74 17 12 13.26 8.26 17 7 15.74 10.74 12 7 8.26 8.26 7 12 10.74 15.74 7 17 8.26 13.26 12 17 15.74z"
   }), "Dangerous");
 
   // node_modules/@mui/icons-material/esm/Info.js
-  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
-  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime36.jsx)("path", {
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime37.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
   }), "Info");
 
   // node_modules/@mui/icons-material/esm/KeyboardDoubleArrowRight.js
-  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
-  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime37.jsx)("path", {
+  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
+  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
     d: "M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"
-  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("path", {
+  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
     d: "m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"
   }, "1")], "KeyboardDoubleArrowRight");
 
   // node_modules/@mui/icons-material/esm/Warning.js
-  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
-  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
+  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
+  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
   }), "Warning");
 
   // src/elements/Components/StudentSummary.jsx
   var import_react11 = __toESM(require_react(), 1);
-  var import_prop_types32 = __toESM(require_prop_types(), 1);
+  var import_prop_types33 = __toESM(require_prop_types(), 1);
 
   // src/elements/Components/SummaryNode.jsx
   var import_react10 = __toESM(require_react(), 1);
-  var import_prop_types31 = __toESM(require_prop_types(), 1);
-
-  // src/domTraversal/queriesAndRegex.js
-  var QUERIES = {
-    otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
-    otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
-    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
-    requirementHeader: ".PAGROUPDIVIDER",
-    subRequirementHeader: ".PSGROUPBOXLABEL",
-    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
-    subRequirementDescription: ".PSLONGEDITBOX",
-    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
-    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
-    showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
-    studentName: "table.PABACKGROUNDINVISIBLE .PAPAGETITLE",
-    pageElement: (page) => `div[page="${page}"]`,
-    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
-  };
-  var REGEX = {
-    generalHeader: /(?:GENERAL INFORMATION)/i,
-    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
-    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
-    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
-  };
+  var import_prop_types32 = __toESM(require_prop_types(), 1);
 
   // src/Objects/abbreviator.js
   var ABBREVIATIONS = {
@@ -37594,13 +37800,25 @@ Please use another name.` : formatMuiErrorMessage(18));
     "Social & Behavioral Sciences": "SBSci",
     "Cross-disciplinary Issues": "CI",
     "Social Responsibility & Ethical Reasoning": "SRER",
-    // Other common abbreviations
+    // Ensure certain words remain all-caps (might have been messed up by switching to title case)
+    cs: "CS",
+    gdd: "GDD",
+    mscs: "MSCS",
+    math: "MATH",
+    phys: "PHYS",
+    arth: "ARTH",
+    cnit: "CNIT",
+    ict: "ICT",
+    comst: "COMST",
+    engl: "ENGL",
+    res: "RES",
+    glp: "GLP",
     gpa: "GPA"
   };
   function abbreviate(str) {
     let result = str;
     for (const [key, value] of Object.entries(ABBREVIATIONS)) {
-      const regex = new RegExp(key, "i");
+      const regex = new RegExp(`\\b${key}\\b`, "ig");
       result = result.replace(regex, value);
     }
     return result;
@@ -37615,134 +37833,262 @@ Please use another name.` : formatMuiErrorMessage(18));
     return str.trim().toLowerCase().replace(/[^a-z0-9_]/g, "_");
   }
 
+  // src/Objects/AuditNode.js
+  var AuditNode = class _AuditNode {
+    // Internal values
+    #name = "UNKNOWN";
+    #internalId = "UNKNOWN_ID";
+    #key = "UNKNOWN_KEY";
+    #subNodes = [];
+    #rootElement = null;
+    // Initialize important internal values in a consistent way
+    _initialize(rootElement, keyRegex) {
+      this.#rootElement = rootElement;
+      this.#name = abbreviate(toTitleCase(this._extractHeading().trim()));
+      if (this.#rootElement && keyRegex) {
+        this.#internalId = this.#rootElement.textContent?.match(keyRegex)?.[0] ?? "UNKNOWN_ID";
+      }
+      this.#key = makeKey(this.#name);
+      this.#subNodes = this._extractSubNodes();
+    }
+    // Abstract methods to be override by subclasses
+    _extractHeading() {
+      return "BAD_HEADING";
+    }
+    _extractSubNodes() {
+      return [];
+    }
+    // If there is a root element, scroll it into view (accounting for iFrame)
+    scrollIntoView() {
+      if (!this.#rootElement) {
+        console.log("No root element");
+        return;
+      }
+      const iFrame = document.querySelector("iframe");
+      if (iFrame) {
+        console.log("Scrolling inside iFrame");
+        iFrame.contentWindow.scrollTo({
+          top: this.#rootElement.offsetTop,
+          behavior: "smooth"
+        });
+      } else {
+        console.log("Scrolling Normal");
+        this.#rootElement.scrollIntoView();
+      }
+    }
+    // Default implementations (should be overridden by subclasses)
+    toString() {
+      return `${this.#name}: ${this.isSatisfied()}`;
+    }
+    isSatisfied() {
+      return _AuditNode.SATISFIED_TYPE.UNKNOWN;
+    }
+    // Accessors for private values
+    getName() {
+      return this.#name;
+    }
+    getInternalId() {
+      return this.#internalId;
+    }
+    getKey() {
+      return this.#key;
+    }
+    getSubNodes() {
+      return this.#subNodes;
+    }
+    getRootElement() {
+      return this.#rootElement;
+    }
+  };
+  AuditNode.SATISFIED_TYPE = Object.freeze({
+    COMPLETE: "COMPLETE",
+    IN_PROGRESS: "IN_PROGRESS",
+    INCOMPLETE: "INCOMPLETE",
+    UNKNOWN: "UNKNOWN"
+  });
+
+  // src/domTraversal/queriesAndRegex.js
+  var QUERIES = {
+    otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
+    otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
+    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
+    requirementHeader: ".PAGROUPDIVIDER",
+    subRequirementHeader: ".PSGROUPBOXLABEL",
+    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
+    subRequirementDescription: ".PSLONGEDITBOX",
+    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
+    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
+    showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
+    studentName: "table.PABACKGROUNDINVISIBLE .PAPAGETITLE",
+    pageElement: (page) => `div[page="${page}"]`,
+    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
+  };
+  var REGEX = {
+    generalHeader: /(?:GENERAL INFORMATION)/i,
+    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
+    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
+    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
+  };
+
   // src/Objects/SubRequirement.js
-  var SubRequirement = class {
+  var SubRequirement = class extends AuditNode {
+    // References to DOM elements used for extraction of details
+    #mainTableNode = null;
+    #headingRowNode = null;
+    #detailsRowNodes = null;
+    // Initialize derived values
+    #satisfiedText = "";
+    #description = "";
+    #units = { req: 0, taken: 0, need: 0 };
+    #isValid = false;
     /**
      * Build a sub-requirement object from the TABLE node inside it's TR heading
      * @param {HTMLElement} tableNode The TR node that contains the top-level requirement's heading
      */
     constructor(tableNode) {
-      this.mainTableNode = tableNode;
-      this.headingRowNode = tableNode?.querySelector(QUERIES.subRequirementHeader);
-      this.detailsRowNodes = Array.from(this.mainTableNode?.querySelectorAll(QUERIES.subRequirementDetails))?.filter((row) => row.textContent.trim() !== "");
-      this.isValid = this.mainTableNode && this.headingRowNode && Array.isArray(this.detailsRowNodes);
-      if (!this.isValid) {
+      super();
+      this.#mainTableNode = tableNode;
+      this.#headingRowNode = tableNode?.querySelector(QUERIES.subRequirementHeader);
+      this.#detailsRowNodes = Array.from(this.#mainTableNode?.querySelectorAll(QUERIES.subRequirementDetails))?.filter((row) => row.textContent.trim() !== "");
+      this.#isValid = this.#mainTableNode && this.#headingRowNode && Array.isArray(this.#detailsRowNodes);
+      if (!this.#isValid) {
         return;
       }
-      this.name = abbreviate(toTitleCase(this.getHeading().trim()));
-      this.key = makeKey(this.name);
-      this.extractDescriptionText();
-      this.extractUnits();
+      this._initialize();
+      this._extractDescription();
+      this._extractUnits();
+    }
+    // Accessors for private values
+    getDescription() {
+      return this.#description;
+    }
+    getUnits() {
+      return this.#units;
+    }
+    isValid() {
+      return this.#isValid;
     }
     // Convert to string
     toString() {
-      if (!this.isValid) {
+      if (!this.#isValid) {
         return "Invalid Sub-Requirement";
       }
-      return `${this.name}: ${this.satisfiedText} (${this.units.taken}/${this.units.req})`;
+      return `${this.getName()}: ${this.isSatisfied()} (${this.#units.taken}/${this.#units.req})`;
     }
     /**
      * Examine the requirement to see if it is labeled as 'satisfied'
      * @returns {bool} Whether or not this requirement is satisfied
      */
     isSatisfied() {
-      if (this.isValid && this.satisfiedText === "Satisfied") {
-        return Program.SATISFIED_TYPE.COMPLETE;
+      if (this.#isValid && this.#satisfiedText === "Satisfied") {
+        return AuditNode.SATISFIED_TYPE.COMPLETE;
       }
-      return Program.SATISFIED_TYPE.INCOMPLETE;
+      return AuditNode.SATISFIED_TYPE.INCOMPLETE;
     }
     /**
      * Extract and return just the text of the requirement's header
      * @returns {string} The text within the requirement's header row
      */
-    getHeading() {
-      if (!this.isValid) {
+    _extractHeading() {
+      if (!this.#isValid) {
         return "";
       }
-      return this.headingRowNode.textContent;
+      return this.#headingRowNode.textContent;
     }
     // Extract the descriptive text and satisfied status
-    extractDescriptionText() {
-      if (!this.isValid) {
+    _extractDescription() {
+      if (!this.#isValid) {
         return;
       }
-      const descriptionGroups = this.detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent.match(REGEX.subRequirementDescription)?.groups;
+      const descriptionGroups = this.#detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent.match(REGEX.subRequirementDescription)?.groups;
       if (descriptionGroups) {
-        this.satisfiedText = descriptionGroups.satisfied;
-        this.description = descriptionGroups.description;
+        this.#satisfiedText = descriptionGroups.satisfied;
+        this.#description = descriptionGroups.description;
       } else {
         console.warn("Sub-Requirement Description regex failed");
         console.warn("------------------------");
-        console.warn(this.name);
-        console.warn("------------------------");
-        console.warn(this.detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent?.trim());
+        console.warn(this.getName());
+        console.warn(this.#mainTableNode);
         console.warn("------------------------");
       }
     }
     // Find and extract the completion unit information
-    extractUnits() {
-      if (!this.isValid) {
+    _extractUnits() {
+      if (!this.#isValid) {
         return;
       }
-      this.units = this.mainTableNode.textContent.match(REGEX.subReqUnits)?.groups;
-      if (this.units) {
-        this.units.req = parseFloat(this.units?.req);
-        this.units.taken = parseFloat(this.units?.taken);
-        this.units.need = parseFloat(this.units?.need);
+      this.#units = this.#mainTableNode.textContent.match(REGEX.subReqUnits)?.groups;
+      if (this.#units) {
+        this.#units.req = parseFloat(this.#units?.req);
+        this.#units.taken = parseFloat(this.#units?.taken);
+        this.#units.need = parseFloat(this.#units?.need);
       }
     }
   };
 
   // src/Objects/Requirement.js
-  var Requirement = class {
+  var Requirement = class extends AuditNode {
+    // References to DOM elements used for extraction of details
+    #headingRowNode = null;
+    #programRowNode = null;
+    #programBodyNode = null;
+    #programBodyIndex = null;
+    // Initialize derived values
+    #satisfiedText = "";
+    #requirementID = "";
+    #description = "";
     /**
      * Build a program requirement object from the TR node of its heading
      * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
      */
     constructor(headingRowNode) {
-      this.headingRowNode = headingRowNode;
-      this.programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement;
-      this.programBodyNode = this.programRowNode.parentElement;
-      this.programBodyIndex = Array.from(this.programBodyNode.children).findIndex((node2) => node2 === this.programRowNode);
-      this.name = abbreviate(toTitleCase(this.getHeading().trim()));
-      this.innerId = this.programRowNode.textContent.match(/RQ-\d+/)?.[0] ?? "";
-      this.key = makeKey(this.name);
-      this.extractDescriptionText();
-      this.subRequirements = this.getSubRequirements();
+      super();
+      this.#headingRowNode = headingRowNode;
+      this.#programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement;
+      this.#programBodyNode = this.#programRowNode.parentElement;
+      this.#programBodyIndex = Array.from(this.#programBodyNode.children).findIndex((node2) => node2 === this.#programRowNode);
+      this._initialize(this.#programRowNode, /RQ-\d+/);
+      this._extractDescription();
     }
-    toString() {
-      return `${this.name}: ${this.satisfiedText}`;
+    // Accessors for private values
+    getDescription() {
+      return this.#description;
+    }
+    getRequirementID() {
+      return this.#requirementID;
     }
     /**
      * Examine the requirement to see if it is labeled as 'satisfied'
      * @returns {bool} Whether or not this requirement is satisfied
      */
     isSatisfied() {
-      if (this.satisfiedText === "Satisfied") {
-        return Program.SATISFIED_TYPE.COMPLETE;
+      if (this.#satisfiedText === "Satisfied") {
+        return AuditNode.SATISFIED_TYPE.COMPLETE;
       }
-      return Program.SATISFIED_TYPE.INCOMPLETE;
+      return AuditNode.SATISFIED_TYPE.INCOMPLETE;
     }
     /**
      * Extract and return just the text of the requirement's header
      * @returns {string} The text within the requirement's header row
      */
-    getHeading() {
-      return this.headingRowNode.textContent;
+    _extractHeading() {
+      return this.#headingRowNode.textContent;
     }
-    extractDescriptionText() {
-      const requirementsArray = Array.from(this.programBodyNode.children);
-      const descriptionMatch = requirementsArray[this.programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
+    _extractDescription() {
+      const requirementsArray = Array.from(this.#programBodyNode.children);
+      const descriptionMatch = requirementsArray[this.#programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
       if (descriptionMatch) {
-        this.satisfiedText = descriptionMatch.groups.satisfied;
-        this.requirementID = descriptionMatch.groups.ID;
-        this.description = descriptionMatch.groups.description;
+        this.#satisfiedText = descriptionMatch.groups.satisfied;
+        this.#requirementID = descriptionMatch.groups.ID;
+        this.#description = descriptionMatch.groups.description;
       } else {
         console.warn("Requirement Description regex failed");
         console.warn("------------------------");
-        console.warn(this.name);
+        console.warn(this.getName());
         console.warn("------------------------");
-        console.warn(requirementsArray[this.programBodyIndex + 1].textContent.trim());
+        console.warn(requirementsArray[this.#programBodyIndex + 1].textContent.trim());
         console.warn("------------------------");
       }
     }
@@ -37750,10 +38096,10 @@ Please use another name.` : formatMuiErrorMessage(18));
      * Get the array of nodes that contain this requirements sub-requirements
      * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
      */
-    getSubRequirements() {
-      const requirementsArray = Array.from(this.programBodyNode.children);
+    _extractSubNodes() {
+      const requirementsArray = Array.from(this.#programBodyNode.children);
       const subRequirements = [];
-      for (let i = this.programBodyIndex + 2; i < requirementsArray.length; i++) {
+      for (let i = this.#programBodyIndex + 2; i < requirementsArray.length; i++) {
         const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`);
         if (!headerNode) {
           subRequirements.push(requirementsArray[i]);
@@ -37766,66 +38112,67 @@ Please use another name.` : formatMuiErrorMessage(18));
   };
 
   // src/Objects/Program.js
-  var Program = class _Program {
+  var Program = class extends AuditNode {
+    // References to DOM elements used for extraction of details
+    #programHeaderNode = null;
+    #programRoot = null;
+    #mainTable = null;
     constructor(programHeaderNode) {
-      this.programHeaderNode = programHeaderNode;
-      this.programRoot = programHeaderNode.parentNode.parentNode.parentNode;
-      this.mainTable = this.programRoot.querySelector(QUERIES.programTable(5));
-      if (!this.mainTable) {
-        this.mainTable = this.programRoot.querySelector(QUERIES.programTable(3));
-        if (!this.mainTable) {
+      super();
+      this.#programHeaderNode = programHeaderNode;
+      this.#programRoot = programHeaderNode.parentNode.parentNode.parentNode;
+      this.#mainTable = this.#programRoot.querySelector(QUERIES.programTable(5));
+      if (!this.#mainTable) {
+        this.#mainTable = this.#programRoot.querySelector(QUERIES.programTable(3));
+        if (!this.#mainTable) {
           throw new Error("Failed to find program table");
         }
       }
-      this.name = abbreviate(toTitleCase(this.getHeading().trim()));
-      this.innerId = this.programRoot.textContent.match(/RG-\d+/)?.[0] ?? "";
-      this.key = makeKey(this.name);
-      this.requirements = this.getProgramRequirements();
-    }
-    /**
-     * If all requirements are satisfied, then this is considered satisfied
-     * @returns {bool} Weather or not this program is satisfied (e.g. completed)
-     */
-    isSatisfied() {
-      if (!Array.isArray(this.requirements) || this.requirements.length < 1) {
-        return _Program.SATISFIED_TYPE.INCOMPLETE;
-      }
-      return this.requirements.reduce((complete, requirement) => {
-        switch (complete) {
-          case _Program.SATISFIED_TYPE.INCOMPLETE:
-            return _Program.SATISFIED_TYPE.INCOMPLETE;
-          case _Program.SATISFIED_TYPE.IN_PROGRESS:
-            if (requirement.isSatisfied() === _Program.SATISFIED_TYPE.COMPLETE) {
-              return _Program.SATISFIED_TYPE.IN_PROGRESS;
-            }
-        }
-        return requirement.isSatisfied();
-      });
+      this._initialize(this.#programRoot, /RG-\d+/);
     }
     /**
      * Extract and return just the text of the program's header
      * @returns {string} The text within the program's header row
+     * @override
      */
-    getHeading() {
-      return this.programHeaderNode.textContent;
+    _extractHeading() {
+      return this.#programHeaderNode.textContent;
     }
     /**
      * Extract the requirements and convert them to an array of Requirement objects
      * @returns {Array(Requirement)} Array of Requirement objects extracted from the HTML
+     * @override
      */
-    getProgramRequirements() {
-      const requirementNodes = this.mainTable.querySelectorAll(QUERIES.requirementHeader);
+    _extractSubNodes() {
+      const requirementNodes = this.#mainTable.querySelectorAll(QUERIES.requirementHeader);
       const filteredNodes = Array.from(requirementNodes).filter((node2) => {
         return !node2.textContent.match(REGEX.informationalOnly);
       });
       return Array.from(filteredNodes).map((node2) => new Requirement(node2.parentNode));
     }
+    /**
+     * If all requirements are satisfied, then this is considered satisfied
+     * @returns {bool} Weather or not this program is satisfied (e.g. completed)
+     * @override
+     */
+    isSatisfied() {
+      const requirements = this.getSubNodes();
+      if (!Array.isArray(requirements) || requirements.length < 1) {
+        return AuditNode.SATISFIED_TYPE.INCOMPLETE;
+      }
+      return requirements.reduce((complete, requirement) => {
+        switch (complete) {
+          case AuditNode.SATISFIED_TYPE.INCOMPLETE:
+            return AuditNode.SATISFIED_TYPE.INCOMPLETE;
+          case AuditNode.SATISFIED_TYPE.IN_PROGRESS:
+            if (requirement.isSatisfied() === AuditNode.SATISFIED_TYPE.COMPLETE) {
+              return AuditNode.SATISFIED_TYPE.IN_PROGRESS;
+            }
+        }
+        return requirement.isSatisfied();
+      });
+    }
   };
-  Program.SATISFIED_TYPE = Object.freeze({
-    COMPLETE: "COMPLETE",
-    IN_PROGRESS: "IN_PROGRESS",
-    INCOMPLETE: "INCOMPLETE"
-  });
 
   // src/elements/Components/SummaryNode.jsx
   function SummaryNode(props) {
@@ -37858,22 +38205,23 @@ Please use another name.` : formatMuiErrorMessage(18));
                 textOverflow: "ellipsis"
               }
             },
-            programNode.name
+            programNode.getName()
           ),
-          /* @__PURE__ */ import_react10.default.createElement(Tooltip_default, { title: programNode.innerId }, /* @__PURE__ */ import_react10.default.createElement(Info_default, { color: grey_default[100] }))
+          /* @__PURE__ */ import_react10.default.createElement(Tooltip_default, { title: programNode.getInternalId() }, /* @__PURE__ */ import_react10.default.createElement(Info_default, { color: grey_default[100] }))
         )
       },
-      programNode.requirements.map((req, i) => /* @__PURE__ */ import_react10.default.createElement(
+      programNode.getSubNodes().map((req, i) => /* @__PURE__ */ import_react10.default.createElement(
         ListItem_default,
         {
-          key: `${programNode.key}_${i}`,
+          key: `${programNode.getKey()}_${i}`,
           sx: {
             paddingTop: i === 0 ? "12px" : void 0,
-            paddingBottom: i === programNode.requirements.length - 1 ? "12px" : void 0
+            paddingBottom: i === programNode.getSubNodes().length - 1 ? "12px" : void 0
           }
         },
-        /* @__PURE__ */ import_react10.default.createElement(Tooltip_default, { title: req.innerId }, /* @__PURE__ */ import_react10.default.createElement(ListItemIcon_default, null, req.isSatisfied() === Program.SATISFIED_TYPE.COMPLETE && /* @__PURE__ */ import_react10.default.createElement(CheckCircle_default, { color: "success" }), req.isSatisfied() === Program.SATISFIED_TYPE.IN_PROGRESS && /* @__PURE__ */ import_react10.default.createElement(Warning_default, { color: "warning" }), req.isSatisfied() === Program.SATISFIED_TYPE.INCOMPLETE && /* @__PURE__ */ import_react10.default.createElement(Dangerous_default, { color: "error" }))),
-        /* @__PURE__ */ import_react10.default.createElement(
+        /* @__PURE__ */ import_react10.default.createElement(ListItemButton_default, { onClick: () => {
+          req.scrollIntoView();
+        } }, /* @__PURE__ */ import_react10.default.createElement(Tooltip_default, { title: req.getInternalId() }, /* @__PURE__ */ import_react10.default.createElement(ListItemIcon_default, null, req.isSatisfied() === AuditNode.SATISFIED_TYPE.COMPLETE && /* @__PURE__ */ import_react10.default.createElement(CheckCircle_default, { color: "success" }), req.isSatisfied() === AuditNode.SATISFIED_TYPE.IN_PROGRESS && /* @__PURE__ */ import_react10.default.createElement(Warning_default, { color: "warning" }), req.isSatisfied() === AuditNode.SATISFIED_TYPE.INCOMPLETE && /* @__PURE__ */ import_react10.default.createElement(Dangerous_default, { color: "error" }))), /* @__PURE__ */ import_react10.default.createElement(
           ListItemText_default,
           {
             primaryTypographyProps: {
@@ -37883,14 +38231,14 @@ Please use another name.` : formatMuiErrorMessage(18));
                 textOverflow: "ellipsis"
               }
             },
-            primary: req.name
+            primary: req.getName()
           }
-        )
+        ))
       ))
     );
   }
   SummaryNode.propTypes = {
-    programNode: import_prop_types31.default.instanceOf(Program)
+    programNode: import_prop_types32.default.instanceOf(Program)
   };
 
   // src/elements/Components/StudentSummary.jsx
@@ -37917,11 +38265,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, `${programData?.studentName} Summary`), /* @__PURE__ */ import_react11.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, generalSummaries, universitySummaries, programSummaries));
   }
   StudentSummary.propTypes = {
-    programData: import_prop_types32.default.shape({
-      studentName: import_prop_types32.default.string,
-      generalNodes: import_prop_types32.default.arrayOf(import_prop_types32.default.instanceOf(Program)),
-      universityNodes: import_prop_types32.default.arrayOf(import_prop_types32.default.instanceOf(Program)),
-      programNodes: import_prop_types32.default.arrayOf(import_prop_types32.default.instanceOf(Program))
+    programData: import_prop_types33.default.shape({
+      studentName: import_prop_types33.default.string,
+      generalNodes: import_prop_types33.default.arrayOf(import_prop_types33.default.instanceOf(Program)),
+      universityNodes: import_prop_types33.default.arrayOf(import_prop_types33.default.instanceOf(Program)),
+      programNodes: import_prop_types33.default.arrayOf(import_prop_types33.default.instanceOf(Program))
     })
   };
   StudentSummary.defaultProps = {
@@ -37966,8 +38314,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
   CleanserRoot.propTypes = {
-    showSummary: import_prop_types33.default.bool,
-    onHideSummary: import_prop_types33.default.func
+    showSummary: import_prop_types34.default.bool,
+    onHideSummary: import_prop_types34.default.func
   };
   CleanserRoot.defaultProps = {
     showSummary: false,
@@ -37977,7 +38325,7 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/elements/Components/SummarizeButton.jsx
   var import_react13 = __toESM(require_react(), 1);
-  var import_prop_types34 = __toESM(require_prop_types(), 1);
+  var import_prop_types35 = __toESM(require_prop_types(), 1);
   function SummarizeButton(props) {
     const { onClickCallback, showButton } = props;
     return /* @__PURE__ */ import_react13.default.createElement("div", { style: {
@@ -37997,8 +38345,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     ));
   }
   SummarizeButton.propTypes = {
-    onClickCallback: import_prop_types34.default.func,
-    showButton: import_prop_types34.default.bool
+    onClickCallback: import_prop_types35.default.func,
+    showButton: import_prop_types35.default.bool
   };
   SummarizeButton.defaultProps = {
     onClickCallback: () => {

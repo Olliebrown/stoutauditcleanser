@@ -50,7 +50,19 @@ const ABBREVIATIONS = {
   'Cross-disciplinary Issues': 'CI',
   'Social Responsibility & Ethical Reasoning': 'SRER',
 
-  // Other common abbreviations
+  // Ensure certain words remain all-caps (might have been messed up by switching to title case)
+  cs: 'CS',
+  gdd: 'GDD',
+  mscs: 'MSCS',
+  math: 'MATH',
+  phys: 'PHYS',
+  arth: 'ARTH',
+  cnit: 'CNIT',
+  ict: 'ICT',
+  comst: 'COMST',
+  engl: 'ENGL',
+  res: 'RES',
+  glp: 'GLP',
   gpa: 'GPA'
 }
 
@@ -58,7 +70,8 @@ const ABBREVIATIONS = {
 export function abbreviate (str) {
   let result = str
   for (const [key, value] of Object.entries(ABBREVIATIONS)) {
-    const regex = new RegExp(key, 'i')
+    // \b matches word boundaries and we escape the "\" in the string
+    const regex = new RegExp(`\\b${key}\\b`, 'ig')
     result = result.replace(regex, value)
   }
   return result
