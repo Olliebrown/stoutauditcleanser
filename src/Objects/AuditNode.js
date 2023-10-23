@@ -32,8 +32,12 @@ export default class AuditNode {
     const iFrame = document.querySelector('iframe')
     if (iFrame) {
       console.log('Scrolling inside iFrame')
+      // Need to get fresh reference to element to get correct position
+      const childWithId = this.#rootElement.querySelector('[id]')
+      const elementRect = iFrame.contentDocument.getElementById(childWithId.id).getBoundingClientRect()
+      const scrollY = iFrame.contentWindow.scrollY
       iFrame.contentWindow.scrollTo({
-        top: this.#rootElement.offsetTop,
+        top: scrollY + elementRect.top - 10,
         behavior: 'smooth'
       })
     } else {

@@ -59,6 +59,17 @@ export default class Requirement extends AuditNode {
   }
 
   /**
+   * Is this a general education / Stout Core requirement? Includes all requirements
+   * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
+   * @returns {bool} Whether or not this requirement is a GenEd requirement
+   */
+  isGenEd () {
+    return this.getName().includes('GenEd') ||
+      this.getName().includes('RES') ||
+      this.getName().includes('GLP')
+  }
+
+  /**
    * Extract and return just the text of the requirement's header
    * @returns {string} The text within the requirement's header row
    */
@@ -97,15 +108,29 @@ export default class Requirement extends AuditNode {
     const subRequirements = []
     for (let i = this.#programBodyIndex + 2; i < requirementsArray.length; i++) {
       const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`)
-      if (!headerNode) {
+      if (headerNode) {
         subRequirements.push(requirementsArray[i])
       } else {
         break
       }
     }
 
-    // Remove empty sub-requirements then convert to objects
+    // Remove empty sub-requirements
     return subRequirements.filter(node => node.textContent.trim() !== '')
-      .map(node => new SubRequirement(node))
+      .reduce((nodeList, node) => {
+        // Find table tag that contains this sub-requirement
+        let tableNode = node
+        while (tableNode.tagType.toLowerCase() !== 'table' && tableNode.parentElement) {
+          tableNode = tableNode.parentElement
+        }
+
+        // Ignore this node if we didn't find a table tag (unlikely)
+        if (tableNode?.tagType.toLowerCase() !== 'table') {
+          return nodeList
+        }
+
+        // Convert to proper sub-requirement and append
+        return [...nodeList, new SubRequirement(tableNode)]
+      }, [])
   }
 }
