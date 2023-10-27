@@ -37970,6 +37970,87 @@ Please use another name.` : formatMuiErrorMessage(18));
     subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
   };
 
+  // src/Objects/Requirement.js
+  var Requirement2 = class extends AuditNode {
+    // References to DOM elements used for extraction of details
+    #headingRowNode = null;
+    #programRowNode = null;
+    #programBodyNode = null;
+    #programBodyIndex = null;
+    // Initialize derived values
+    #satisfiedText = "";
+    #requirementID = "";
+    #description = "";
+    /**
+     * Build a program requirement object from the TR node of its heading
+     * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
+     */
+    constructor(headingRowNode) {
+      super();
+      this.#headingRowNode = headingRowNode;
+      this.#programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement;
+      this.#programBodyNode = this.#programRowNode.parentElement;
+      this.#programBodyIndex = Array.from(this.#programBodyNode.children).findIndex((node2) => node2 === this.#programRowNode);
+      this._initialize(this.#programRowNode, /RQ-\d+/);
+      this._extractDescription();
+    }
+    // Accessors for private values
+    getDescription() {
+      return this.#description;
+    }
+    getRequirementID() {
+      return this.#requirementID;
+    }
+    /**
+     * Examine the requirement to see if it is labeled as 'satisfied'
+     * @returns {bool} Whether or not this requirement is satisfied
+     */
+    isSatisfied() {
+      if (this.#satisfiedText === "Satisfied") {
+        return AuditNode.SATISFIED_TYPE.COMPLETE;
+      }
+      return AuditNode.SATISFIED_TYPE.INCOMPLETE;
+    }
+    /**
+     * Is this a general education / Stout Core requirement? Includes all requirements
+     * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
+     * @returns {bool} Whether or not this requirement is a GenEd requirement
+     */
+    isGenEd() {
+      return this.getName().includes("GenEd") || this.getName().includes("RES") || this.getName().includes("GLP");
+    }
+    /**
+     * Extract and return just the text of the requirement's header
+     * @returns {string} The text within the requirement's header row
+     */
+    _extractHeading() {
+      return this.#headingRowNode.textContent;
+    }
+    _extractDescription() {
+      const requirementsArray = Array.from(this.#programBodyNode.children);
+      const descriptionMatch = requirementsArray[this.#programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
+      if (descriptionMatch) {
+        this.#satisfiedText = descriptionMatch.groups.satisfied;
+        this.#requirementID = descriptionMatch.groups.ID;
+        this.#description = descriptionMatch.groups.description;
+      } else {
+        console.warn("Requirement Description regex failed");
+        console.warn("------------------------");
+        console.warn(this.getName());
+        console.warn("------------------------");
+        console.warn(requirementsArray[this.#programBodyIndex + 1].textContent.trim());
+        console.warn("------------------------");
+      }
+    }
+    /**
+     * Get the array of nodes that contain this requirements sub-requirements
+     * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
+     */
+    _extractSubNodes() {
+      return makeSubRequirementsArray(this.#programBodyNode, this.#programBodyIndex);
+    }
+  };
+
   // src/Objects/SubRequirement.js
   var SubRequirement = class extends AuditNode {
     // References to DOM elements used for extraction of details
@@ -38066,105 +38147,60 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   };
 
-  // src/Objects/Requirement.js
-  var Requirement2 = class extends AuditNode {
-    // References to DOM elements used for extraction of details
-    #headingRowNode = null;
-    #programRowNode = null;
-    #programBodyNode = null;
-    #programBodyIndex = null;
-    // Initialize derived values
-    #satisfiedText = "";
-    #requirementID = "";
-    #description = "";
-    /**
-     * Build a program requirement object from the TR node of its heading
-     * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
-     */
-    constructor(headingRowNode) {
-      super();
-      this.#headingRowNode = headingRowNode;
-      this.#programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement;
-      this.#programBodyNode = this.#programRowNode.parentElement;
-      this.#programBodyIndex = Array.from(this.#programBodyNode.children).findIndex((node2) => node2 === this.#programRowNode);
-      this._initialize(this.#programRowNode, /RQ-\d+/);
-      this._extractDescription();
+  // src/Objects/NodeFactories.js
+  function makeProgramArrays(rootDoc) {
+    const headerNodes = rootDoc.querySelectorAll(QUERIES.programHeader);
+    if (headerNodes.length < 1) {
+      throw new Error("Could not find program header nodes");
     }
-    // Accessors for private values
-    getDescription() {
-      return this.#description;
-    }
-    getRequirementID() {
-      return this.#requirementID;
-    }
-    /**
-     * Examine the requirement to see if it is labeled as 'satisfied'
-     * @returns {bool} Whether or not this requirement is satisfied
-     */
-    isSatisfied() {
-      if (this.#satisfiedText === "Satisfied") {
-        return AuditNode.SATISFIED_TYPE.COMPLETE;
-      }
-      return AuditNode.SATISFIED_TYPE.INCOMPLETE;
-    }
-    /**
-     * Is this a general education / Stout Core requirement? Includes all requirements
-     * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
-     * @returns {bool} Whether or not this requirement is a GenEd requirement
-     */
-    isGenEd() {
-      return this.getName().includes("GenEd") || this.getName().includes("RES") || this.getName().includes("GLP");
-    }
-    /**
-     * Extract and return just the text of the requirement's header
-     * @returns {string} The text within the requirement's header row
-     */
-    _extractHeading() {
-      return this.#headingRowNode.textContent;
-    }
-    _extractDescription() {
-      const requirementsArray = Array.from(this.#programBodyNode.children);
-      const descriptionMatch = requirementsArray[this.#programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
-      if (descriptionMatch) {
-        this.#satisfiedText = descriptionMatch.groups.satisfied;
-        this.#requirementID = descriptionMatch.groups.ID;
-        this.#description = descriptionMatch.groups.description;
+    const generalNodes = [];
+    const universityNodes = [];
+    const programNodes = [];
+    Array.from(headerNodes).forEach((header) => {
+      if (header.textContent.match(REGEX.generalHeader)) {
+        generalNodes.push(header);
+      } else if (header.textContent.match(REGEX.universityRequirements)) {
+        universityNodes.push(header);
       } else {
-        console.warn("Requirement Description regex failed");
-        console.warn("------------------------");
-        console.warn(this.getName());
-        console.warn("------------------------");
-        console.warn(requirementsArray[this.#programBodyIndex + 1].textContent.trim());
-        console.warn("------------------------");
+        programNodes.push(header);
+      }
+    });
+    return {
+      studentName: rootDoc.querySelector(QUERIES.studentName)?.textContent ?? "Name not found",
+      generalNodes: generalNodes?.map((node2) => new Program(node2)) ?? [],
+      universityNodes: universityNodes?.map((node2) => new Program(node2)) ?? [],
+      programNodes: programNodes?.map((node2) => new Program(node2)) ?? []
+    };
+  }
+  function makeRequirementsArray(rootNode) {
+    const requirementNodes = rootNode.querySelectorAll(QUERIES.requirementHeader);
+    const filteredNodes = Array.from(requirementNodes).filter((node2) => {
+      return !node2.textContent.match(REGEX.informationalOnly);
+    });
+    return Array.from(filteredNodes).map((node2) => new Requirement2(node2.parentNode));
+  }
+  function makeSubRequirementsArray(rootNode, rootIndex) {
+    const requirementsArray = Array.from(rootNode.children);
+    const subRequirements = [];
+    for (let i = rootIndex + 2; i < requirementsArray.length; i++) {
+      const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`);
+      if (headerNode) {
+        subRequirements.push(requirementsArray[i]);
+      } else {
+        break;
       }
     }
-    /**
-     * Get the array of nodes that contain this requirements sub-requirements
-     * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
-     */
-    _extractSubNodes() {
-      const requirementsArray = Array.from(this.#programBodyNode.children);
-      const subRequirements = [];
-      for (let i = this.#programBodyIndex + 2; i < requirementsArray.length; i++) {
-        const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`);
-        if (headerNode) {
-          subRequirements.push(requirementsArray[i]);
-        } else {
-          break;
-        }
+    return subRequirements.filter((node2) => node2.textContent.trim() !== "").reduce((nodeList, node2) => {
+      let tableNode = node2;
+      while (tableNode.tagType.toLowerCase() !== "table" && tableNode.parentElement) {
+        tableNode = tableNode.parentElement;
       }
-      return subRequirements.filter((node2) => node2.textContent.trim() !== "").reduce((nodeList, node2) => {
-        let tableNode = node2;
-        while (tableNode.tagType.toLowerCase() !== "table" && tableNode.parentElement) {
-          tableNode = tableNode.parentElement;
-        }
-        if (tableNode?.tagType.toLowerCase() !== "table") {
-          return nodeList;
-        }
-        return [...nodeList, new SubRequirement(tableNode)];
-      }, []);
-    }
-  };
+      if (tableNode?.tagType.toLowerCase() !== "table") {
+        return nodeList;
+      }
+      return [...nodeList, new SubRequirement(tableNode)];
+    }, []);
+  }
 
   // src/Objects/Program.js
   var Program = class extends AuditNode {
@@ -38199,11 +38235,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @override
      */
     _extractSubNodes() {
-      const requirementNodes = this.#mainTable.querySelectorAll(QUERIES.requirementHeader);
-      const filteredNodes = Array.from(requirementNodes).filter((node2) => {
-        return !node2.textContent.match(REGEX.informationalOnly);
-      });
-      return Array.from(filteredNodes).map((node2) => new Requirement2(node2.parentNode));
+      const requirements = makeRequirementsArray(this.#mainTable);
+      if (Array.isArray(requirements) && requirements.length > 0) {
+        return requirements;
+      }
+      return makeSubRequirementsArray(this.#mainTable, 0);
     }
     /**
      * If all requirements are satisfied, then this is considered satisfied
@@ -38562,27 +38598,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   }
 
-  // src/domTraversal/programs.js
-  function getProgramNodes() {
-    const headerNodes = getRootDoc().querySelectorAll(QUERIES.programHeader);
-    if (headerNodes.length < 1) {
-      throw new Error("Could not find program header nodes");
-    }
-    const generalNodes = [];
-    const universityNodes = [];
-    const programNodes = [];
-    Array.from(headerNodes).forEach((header) => {
-      if (header.textContent.match(REGEX.generalHeader)) {
-        generalNodes.push(header);
-      } else if (header.textContent.match(REGEX.universityRequirements)) {
-        universityNodes.push(header);
-      } else {
-        programNodes.push(header);
-      }
-    });
-    return [generalNodes, universityNodes, programNodes];
-  }
-
   // src/Objects/auditCleanserLogic.js
   var LOG = makeLogger("AUDIT_CLEANER", "yellow", "navy");
   async function scanPageForPrograms() {
@@ -38599,17 +38614,11 @@ Please use another name.` : formatMuiErrorMessage(18));
       try {
         await expandAllSections();
         await clickViewAllLinks();
-        const nodeGroups = getProgramNodes();
-        const studentName = getRootDoc().querySelector(QUERIES.studentName)?.textContent;
-        return {
-          studentName,
-          generalNodes: nodeGroups[0]?.map((node2) => new Program(node2)),
-          universityNodes: nodeGroups[1]?.map((node2) => new Program(node2)),
-          programNodes: nodeGroups[2]?.map((node2) => new Program(node2))
-        };
+        return makeProgramArrays(getRootDoc());
       } catch (err) {
         LOG.error("Failed to retrieve/parse programs");
         LOG.error(err);
+        return { studentName: "error" };
       }
     }
   }
@@ -38626,8 +38635,12 @@ Please use another name.` : formatMuiErrorMessage(18));
     const [programGroups, setProgramGroups] = import_react17.default.useState(null);
     import_react17.default.useEffect(() => {
       async function retrieveProgramData() {
-        const newGroups = await scanPageForPrograms();
-        setProgramGroups(newGroups);
+        try {
+          const newGroups = await scanPageForPrograms();
+          setProgramGroups(newGroups);
+        } catch (error2) {
+          console.error("Failed to read program data from page", error2);
+        }
       }
       if (showSummary) {
         setProgramGroups(null);

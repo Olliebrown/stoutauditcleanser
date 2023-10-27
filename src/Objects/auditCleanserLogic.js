@@ -1,12 +1,10 @@
 import { makeLogger } from '../util/logger.js'
 
 // Document traversal functions and other DOM helpers
-import { getProgramNodes } from '../domTraversal/programs.js'
 import { navigateToAuditPage, verifyRootDoc, expandAllSections, clickViewAllLinks, getRootDoc } from '../domTraversal/pageRoot.js'
 
-// Core data object
-import Program from './Program.js'
-import { QUERIES } from '../domTraversal/queriesAndRegex.js'
+// Factories for generating the core Program object
+import { makeProgramArrays } from './NodeFactories.js'
 
 // A high-visibility logger for the browser
 const LOG = makeLogger('AUDIT_CLEANER', 'yellow', 'navy')
@@ -32,22 +30,12 @@ export async function scanPageForPrograms () {
       // Try to click all the 'show all' links
       await clickViewAllLinks()
 
-      // Identify the various node elements
-      const nodeGroups = getProgramNodes()
-
-      // Find the student name
-      const studentName = getRootDoc().querySelector(QUERIES.studentName)?.textContent
-
-      // Convert the node elements into Program objects and return
-      return {
-        studentName,
-        generalNodes: nodeGroups[0]?.map(node => new Program(node)),
-        universityNodes: nodeGroups[1]?.map(node => new Program(node)),
-        programNodes: nodeGroups[2]?.map(node => new Program(node))
-      }
+      // Build and return all the programs and the student name
+      return makeProgramArrays(getRootDoc())
     } catch (err) {
       LOG.error('Failed to retrieve/parse programs')
       LOG.error(err)
+      return { studentName: 'error' }
     }
   }
 }

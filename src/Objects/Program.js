@@ -1,7 +1,7 @@
-import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
+import { QUERIES } from '../domTraversal/queriesAndRegex.js'
 
 import AuditNode from './AuditNode.js'
-import Requirement from './Requirement.js'
+import { makeRequirementsArray, makeSubRequirementsArray } from './NodeFactories.js'
 
 /**
  * An object for examining a program or sub-program and its requirements
@@ -49,16 +49,14 @@ export default class Program extends AuditNode {
    * @override
    */
   _extractSubNodes () {
-    // Extract the requirement nodes (all TD nodes)
-    const requirementNodes = this.#mainTable.querySelectorAll(QUERIES.requirementHeader)
+    // Try to extract as Requirements
+    const requirements = makeRequirementsArray(this.#mainTable)
+    if (Array.isArray(requirements) && requirements.length > 0) {
+      return requirements
+    }
 
-    // Filter out informational only nodes
-    const filteredNodes = Array.from(requirementNodes).filter((node) => {
-      return !node.textContent.match(REGEX.informationalOnly)
-    })
-
-    // Switch to parents (TR) and return
-    return Array.from(filteredNodes).map(node => new Requirement(node.parentNode))
+    // If we failed, then try to extract as SubRequirements
+    return makeSubRequirementsArray(this.#mainTable, 0)
   }
 
   /**

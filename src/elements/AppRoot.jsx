@@ -20,8 +20,12 @@ export default function AppRoot () {
   const [programGroups, setProgramGroups] = React.useState(null)
   React.useEffect(() => {
     async function retrieveProgramData () {
-      const newGroups = await scanPageForPrograms()
-      setProgramGroups(newGroups)
+      try {
+        const newGroups = await scanPageForPrograms()
+        setProgramGroups(newGroups)
+      } catch (error) {
+        console.error('Failed to read program data from page', error)
+      }
     }
 
     if (showSummary) {

@@ -1,7 +1,7 @@
-import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
+import { REGEX } from '../domTraversal/queriesAndRegex.js'
 
 import AuditNode from './AuditNode.js'
-import SubRequirement from './SubRequirement.js'
+import { makeSubRequirementsArray } from './NodeFactories.js'
 
 /**
  * An object for examining one top-level requirement within a program
@@ -101,36 +101,6 @@ export default class Requirement extends AuditNode {
    * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
    */
   _extractSubNodes () {
-    // Get array of all the requirements in the entire program
-    const requirementsArray = Array.from(this.#programBodyNode.children)
-
-    // Build array of sub-requirement rows
-    const subRequirements = []
-    for (let i = this.#programBodyIndex + 2; i < requirementsArray.length; i++) {
-      const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`)
-      if (headerNode) {
-        subRequirements.push(requirementsArray[i])
-      } else {
-        break
-      }
-    }
-
-    // Remove empty sub-requirements
-    return subRequirements.filter(node => node.textContent.trim() !== '')
-      .reduce((nodeList, node) => {
-        // Find table tag that contains this sub-requirement
-        let tableNode = node
-        while (tableNode.tagType.toLowerCase() !== 'table' && tableNode.parentElement) {
-          tableNode = tableNode.parentElement
-        }
-
-        // Ignore this node if we didn't find a table tag (unlikely)
-        if (tableNode?.tagType.toLowerCase() !== 'table') {
-          return nodeList
-        }
-
-        // Convert to proper sub-requirement and append
-        return [...nodeList, new SubRequirement(tableNode)]
-      }, [])
+    return makeSubRequirementsArray(this.#programBodyNode, this.#programBodyIndex)
   }
 }
