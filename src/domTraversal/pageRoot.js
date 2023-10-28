@@ -1,24 +1,51 @@
 import { wait } from '../util/utilFunctions.js'
-import { QUERIES } from './queriesAndRegex.js'
+import { PAGE_IDS, QUERIES } from './queriesAndRegex.js'
 
 // When waiting for programs to expand, how many times should we retry?
-const MAX_RETRIES = 10
+// NOTE: waits 1s between each try
+const MAX_EXPAND_ALL_RETRIES = 10
 
+// When waiting for audit page to load, how many times should we retry?
+// NOTE: waits 1/10s between each try
+const MAX_AUDIT_PAGE_WAIT = 1000
+
+// Will be the root document after 'verifyRootDoc' is called
+let auditRootDoc = null
+
+// Convenience function to identify the audit page being loaded
+export function isAuditPage () {
+  return !!findPageElementInIframe(QUERIES.pageElement(PAGE_IDS.audit))
+}
+
+// Convenience function to identify the student center page being loaded
+export function isStudentCenterPage () {
+  return !!findPageElementInIframe(QUERIES.pageElement(PAGE_IDS.studentCenter))
+}
+
+// Find an element on the page (possibly searching the iframe document)
+function findPageElementInIframe (queryString) {
+  // Start looking at the global doc
+  let rootDoc = document
+  let pageElement = rootDoc.querySelector(queryString)
+  if (!pageElement) {
+    // Try looking inside the iframe
+    rootDoc = document.querySelector('iframe')?.contentDocument
+    pageElement = rootDoc.querySelector(queryString)
+  }
+
+  return pageElement
+}
+
+// Asynchronously navigate to the audit page (assumes we are on the student center page)
 export async function navigateToAuditPage () {
   // Are we already on the audit page?
   if (verifyRootDoc()) { return }
 
-  // Start looking at the global doc
-  let rootDoc = document
-  let auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown)
-  if (!auditDropdown) {
-    // Try looking inside the iframe
-    rootDoc = document.querySelector('iframe')?.contentDocument
-    auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown)
-
-    if (!auditDropdown) {
-      throw new Error('Failed to find "Other Academic" dropdown')
-    }
+  // Try to locate the "Other Academic" dropdown and go button
+  const auditDropdown = findPageElementInIframe(QUERIES.otherAcademicDropdown)
+  const goButton = findPageElementInIframe(QUERIES.otherAcademicGoButton)
+  if (!auditDropdown || !goButton) {
+    throw new Error('Failed to find "Other Academic" dropdown or "Go" button')
   }
 
   // Select the "Academic Requirements" option
@@ -30,28 +57,21 @@ export async function navigateToAuditPage () {
   auditDropdown.selectedIndex = index
   await wait(100)
 
-  // Find and click the go button
-  const goButton = rootDoc.querySelector(QUERIES.otherAcademicGoButton)
-  if (!goButton) {
-    throw new Error('Failed to find "Go" button')
-  }
+  // Click the "Go" button
   goButton.click()
 
   // Wait for the page to load (can take a surprisingly long time)
   let tries = 0
-  let pageElement = null
   do {
     await wait(100)
-    pageElement = rootDoc.querySelector(QUERIES.pageElement('SAA_SS_DPR_ADB'))
-  } while (!pageElement && tries++ < 1000)
+  } while (!findPageElementInIframe(QUERIES.pageElement('SAA_SS_DPR_ADB')) && ++tries < MAX_AUDIT_PAGE_WAIT)
 
-  if (!pageElement) {
+  if (!findPageElementInIframe(QUERIES.pageElement('SAA_SS_DPR_ADB'))) {
     throw new Error('Max retries exceeded waiting for audit page to load')
   }
 }
 
 // Identify the root document (may be in an iFrame)
-let auditRootDoc = null
 export function verifyRootDoc () {
   // First try just 'document'
   auditRootDoc = document
@@ -94,7 +114,7 @@ export async function expandAllSections () {
 
   // Wait until all are expanded
   let tries = 0
-  while (tries < MAX_RETRIES && getTopLevelExpanderList().length > 0) {
+  while (tries < MAX_EXPAND_ALL_RETRIES && getTopLevelExpanderList().length > 0) {
     await wait(1000)
     tries++
   }
@@ -120,6 +140,7 @@ export async function clickViewAllLinks () {
       await clickAndWait(showButton)
     } catch (err) {
       console.error(err)
+      console.log(showButton)
     }
   }
 }
@@ -127,15 +148,17 @@ export async function clickViewAllLinks () {
 async function clickAndWait (showButton, curText = 'view all') {
   if (showButton.textContent.toLowerCase() === curText.toLowerCase()) {
     const buttonId = showButton.id
-    showButton.click()
 
     let tries = 0
     let checkButton = null
     do {
       await wait(100)
       checkButton = auditRootDoc.getElementById(buttonId)
+      if (tries % 10 === 0) {
+        checkButton.click()
+      }
       tries++
-    } while (checkButton?.textContent.toLowerCase() === curText.toLowerCase() && tries < 100)
+    } while (checkButton?.textContent.toLowerCase() === curText.toLowerCase() && tries < 40)
 
     if (checkButton.textContent.toLowerCase() === curText.toLowerCase()) {
       throw new Error(`Max retries exceeded waiting for "${curText.toLowerCase()} list to expand`)

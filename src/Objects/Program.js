@@ -1,7 +1,7 @@
 import { QUERIES } from '../domTraversal/queriesAndRegex.js'
 
 import AuditNode from './AuditNode.js'
-import { makeRequirementsArray, makeSubRequirementsArray } from './NodeFactories.js'
+import { makeRequirementsArray } from './NodeFactories.js'
 
 /**
  * An object for examining a program or sub-program and its requirements
@@ -30,6 +30,18 @@ export default class Program extends AuditNode {
       }
     }
 
+    // If there are no sub-nodes, then we need to find the parent table
+    const subNodes = this._extractSubNodes()
+    if (!Array.isArray(subNodes) || subNodes.length < 1) {
+      while (!this.#mainTable.classList?.contains(QUERIES.requirementAltHeader) && this.#mainTable.parentNode.classList) {
+        this.#mainTable = this.#mainTable.parentNode
+      }
+
+      if (this.#mainTable.tagType?.toLowerCase() === 'table') {
+        this.#mainTable = this.#mainTable.tBodies[0]
+      }
+    }
+
     // Initialize internal values
     this._initialize(this.#programRoot, /RG-\d+/)
   }
@@ -51,12 +63,7 @@ export default class Program extends AuditNode {
   _extractSubNodes () {
     // Try to extract as Requirements
     const requirements = makeRequirementsArray(this.#mainTable)
-    if (Array.isArray(requirements) && requirements.length > 0) {
-      return requirements
-    }
-
-    // If we failed, then try to extract as SubRequirements
-    return makeSubRequirementsArray(this.#mainTable, 0)
+    return requirements
   }
 
   /**

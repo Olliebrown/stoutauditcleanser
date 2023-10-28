@@ -5,9 +5,10 @@ import { Paper, Typography } from '@mui/material'
 import SummaryNode from './SummaryNode.jsx'
 
 import Program from '../../Objects/Program.js'
+import AuditSkeleton from './AuditSkeleton.jsx'
 
 export default function StudentSummary (props) {
-  const { programData } = props
+  const { programData, loadingStatus } = props
 
   // Build the summary nodes for the general program data
   const generalSummaries = React.useMemo(() => {
@@ -33,9 +34,12 @@ export default function StudentSummary (props) {
   if (!programData) {
     return (
       <React.Fragment>
-        <Typography component='h1' variant='h6' gutterBottom>
-          {'Loading ...'}
+        <Typography component='h1' variant='h6'>
+          {loadingStatus ?? 'Loading ...'}
         </Typography>
+        <Paper sx={{ overflowY: 'auto', height: 'calc(100% - 30px)' }} elevation={0}>
+          <AuditSkeleton />
+        </Paper>
       </React.Fragment>
     )
   }
@@ -60,9 +64,11 @@ StudentSummary.propTypes = {
     generalNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program)),
     universityNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program)),
     programNodes: PropTypes.arrayOf(PropTypes.instanceOf(Program))
-  })
+  }),
+  loadingStatus: PropTypes.string
 }
 
 StudentSummary.defaultProps = {
-  programData: {}
+  programData: {},
+  loadingStatus: ''
 }

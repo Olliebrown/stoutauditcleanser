@@ -1,9 +1,10 @@
-// Various queries and regex strings used throughout
+// Various query selectors used for DOM traversal
 export const QUERIES = {
   otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
   otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
   programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
   requirementHeader: '.PAGROUPDIVIDER',
+  requirementAltHeader: 'PSGROUPBOX',
   subRequirementHeader: '.PSGROUPBOXLABEL',
   subRequirementDetails: '.PSLEVEL1SCROLLAREABODYNBO > tbody > tr',
   subRequirementDescription: '.PSLONGEDITBOX',
@@ -11,10 +12,23 @@ export const QUERIES = {
   expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
   showButton: 'a.PSLEVEL3GRIDLABEL:nth-child(2)',
   studentName: 'table.PABACKGROUNDINVISIBLE .PAPAGETITLE',
+  pageDivId: 'pt_pageinfo_win0',
   pageElement: (page) => `div[page="${page}"]`,
   programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
 }
 
+// Page IDs for the different iFrame pages
+export const PAGE_IDS = {
+  audit: 'SAA_SS_DPR_ADB',
+  studentCenter: 'SSS_STUDENT_CENTER'
+}
+
+// Reverse lookup table for page IDs
+export const PAGE_NAME_TO_ID = Object.fromEntries(
+  Object.entries(PAGE_IDS).map(([key, value]) => [value, key])
+)
+
+// Regex for extracting information from audit
 export const REGEX = {
   generalHeader: /(?:GENERAL INFORMATION)/i,
   universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,

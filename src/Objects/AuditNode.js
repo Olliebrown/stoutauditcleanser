@@ -31,7 +31,7 @@ export default class AuditNode {
     if (!this.#rootElement) { console.log('No root element'); return }
     const iFrame = document.querySelector('iframe')
     if (iFrame) {
-      console.log('Scrolling inside iFrame')
+      // console.log('Scrolling inside iFrame')
       // Need to get fresh reference to element to get correct position
       const childWithId = this.#rootElement.querySelector('[id]')
       const elementRect = iFrame.contentDocument.getElementById(childWithId.id).getBoundingClientRect()

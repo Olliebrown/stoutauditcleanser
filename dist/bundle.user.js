@@ -983,7 +983,7 @@
             }
             return lazyType;
           }
-          function forwardRef22(render) {
+          function forwardRef23(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error2("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1880,7 +1880,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef22;
+          exports.forwardRef = forwardRef23;
           exports.isValidElement = isValidElement6;
           exports.lazy = lazy;
           exports.memo = memo2;
@@ -2394,9 +2394,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React53 = require_react();
+          var React56 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React53.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React56.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4001,7 +4001,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React53.Children.forEach(props.children, function(child) {
+                  React56.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -4433,7 +4433,7 @@
             var warnedForNaNValue = false;
             var warnedForInfinityValue = false;
             var camelize = function(string) {
-              return string.replace(hyphenPattern, function(_2, character2) {
+              return string.replace(hyphenPattern, function(_3, character2) {
                 return character2.toUpperCase();
               });
             };
@@ -12448,7 +12448,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React53.Component().refs;
+          var emptyRefsObject = new React56.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24585,7 +24585,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React53 = require_react();
+          var React56 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24611,7 +24611,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React53.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React56.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error2(format) {
             {
               {
@@ -25469,15 +25469,15 @@
   });
 
   // src/index.jsx
-  var import_react18 = __toESM(require_react(), 1);
+  var import_react20 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/elements/AppRoot.jsx
-  var import_react17 = __toESM(require_react(), 1);
+  var import_react19 = __toESM(require_react(), 1);
 
   // src/elements/Components/CleanserRoot.jsx
-  var import_react15 = __toESM(require_react(), 1);
-  var import_prop_types36 = __toESM(require_prop_types(), 1);
+  var import_react16 = __toESM(require_react(), 1);
+  var import_prop_types38 = __toESM(require_prop_types(), 1);
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -30386,6 +30386,14 @@ Please use another name.` : formatMuiErrorMessage(18));
     return muiTheme;
   }
   var createTheme_default2 = createTheme2;
+
+  // node_modules/@mui/material/styles/cssUtils.js
+  function getUnit(input) {
+    return String(input).match(/[\d.\-+]*\s*(.*)/)[1] || "";
+  }
+  function toUnitless(length2) {
+    return parseFloat(length2);
+  }
 
   // node_modules/@mui/material/styles/useTheme.js
   var React14 = __toESM(require_react());
@@ -36838,9 +36846,229 @@ Please use another name.` : formatMuiErrorMessage(18));
   } : void 0;
   var ListItemText_default = ListItemText;
 
-  // node_modules/@mui/material/Tooltip/Tooltip.js
+  // node_modules/@mui/material/Skeleton/Skeleton.js
   var React43 = __toESM(require_react());
   var import_prop_types30 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/Skeleton/skeletonClasses.js
+  function getSkeletonUtilityClass(slot) {
+    return generateUtilityClass("MuiSkeleton", slot);
+  }
+  var skeletonClasses = generateUtilityClasses("MuiSkeleton", ["root", "text", "rectangular", "rounded", "circular", "pulse", "wave", "withChildren", "fitContent", "heightAuto"]);
+
+  // node_modules/@mui/material/Skeleton/Skeleton.js
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  var _excluded28 = ["animation", "className", "component", "height", "style", "variant", "width"];
+  var _2 = (t) => t;
+  var _t5;
+  var _t22;
+  var _t32;
+  var _t42;
+  var useUtilityClasses14 = (ownerState) => {
+    const {
+      classes,
+      variant,
+      animation,
+      hasChildren,
+      width: width2,
+      height: height2
+    } = ownerState;
+    const slots = {
+      root: ["root", variant, animation, hasChildren && "withChildren", hasChildren && !width2 && "fitContent", hasChildren && !height2 && "heightAuto"]
+    };
+    return composeClasses(slots, getSkeletonUtilityClass, classes);
+  };
+  var pulseKeyframe = keyframes(_t5 || (_t5 = _2`
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`));
+  var waveKeyframe = keyframes(_t22 || (_t22 = _2`
+  0% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    /* +0.5s of delay between each loop */
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+`));
+  var SkeletonRoot = styled_default("span", {
+    name: "MuiSkeleton",
+    slot: "Root",
+    overridesResolver: (props, styles3) => {
+      const {
+        ownerState
+      } = props;
+      return [styles3.root, styles3[ownerState.variant], ownerState.animation !== false && styles3[ownerState.animation], ownerState.hasChildren && styles3.withChildren, ownerState.hasChildren && !ownerState.width && styles3.fitContent, ownerState.hasChildren && !ownerState.height && styles3.heightAuto];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => {
+    const radiusUnit = getUnit(theme.shape.borderRadius) || "px";
+    const radiusValue = toUnitless(theme.shape.borderRadius);
+    return _extends({
+      display: "block",
+      // Create a "on paper" color with sufficient contrast retaining the color
+      backgroundColor: theme.vars ? theme.vars.palette.Skeleton.bg : alpha(theme.palette.text.primary, theme.palette.mode === "light" ? 0.11 : 0.13),
+      height: "1.2em"
+    }, ownerState.variant === "text" && {
+      marginTop: 0,
+      marginBottom: 0,
+      height: "auto",
+      transformOrigin: "0 55%",
+      transform: "scale(1, 0.60)",
+      borderRadius: `${radiusValue}${radiusUnit}/${Math.round(radiusValue / 0.6 * 10) / 10}${radiusUnit}`,
+      "&:empty:before": {
+        content: '"\\00a0"'
+      }
+    }, ownerState.variant === "circular" && {
+      borderRadius: "50%"
+    }, ownerState.variant === "rounded" && {
+      borderRadius: (theme.vars || theme).shape.borderRadius
+    }, ownerState.hasChildren && {
+      "& > *": {
+        visibility: "hidden"
+      }
+    }, ownerState.hasChildren && !ownerState.width && {
+      maxWidth: "fit-content"
+    }, ownerState.hasChildren && !ownerState.height && {
+      height: "auto"
+    });
+  }, ({
+    ownerState
+  }) => ownerState.animation === "pulse" && css(_t32 || (_t32 = _2`
+      animation: ${0} 2s ease-in-out 0.5s infinite;
+    `), pulseKeyframe), ({
+    ownerState,
+    theme
+  }) => ownerState.animation === "wave" && css(_t42 || (_t42 = _2`
+      position: relative;
+      overflow: hidden;
+
+      /* Fix bug in Safari https://bugs.webkit.org/show_bug.cgi?id=68196 */
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+      &::after {
+        animation: ${0} 2s linear 0.5s infinite;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          ${0},
+          transparent
+        );
+        content: '';
+        position: absolute;
+        transform: translateX(-100%); /* Avoid flash during server-side hydration */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+    `), waveKeyframe, (theme.vars || theme).palette.action.hover));
+  var Skeleton = /* @__PURE__ */ React43.forwardRef(function Skeleton2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiSkeleton"
+    });
+    const {
+      animation = "pulse",
+      className,
+      component = "span",
+      height: height2,
+      style: style3,
+      variant = "text",
+      width: width2
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded28);
+    const ownerState = _extends({}, props, {
+      animation,
+      component,
+      variant,
+      hasChildren: Boolean(other.children)
+    });
+    const classes = useUtilityClasses14(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(SkeletonRoot, _extends({
+      as: component,
+      ref,
+      className: clsx_default(classes.root, className),
+      ownerState
+    }, other, {
+      style: _extends({
+        width: width2,
+        height: height2
+      }, style3)
+    }));
+  });
+  true ? Skeleton.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * The animation.
+     * If `false` the animation effect is disabled.
+     * @default 'pulse'
+     */
+    animation: import_prop_types30.default.oneOf(["pulse", "wave", false]),
+    /**
+     * Optional children to infer width and height from.
+     */
+    children: import_prop_types30.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types30.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types30.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types30.default.elementType,
+    /**
+     * Height of the skeleton.
+     * Useful when you don't want to adapt the skeleton to a text element but for instance a card.
+     */
+    height: import_prop_types30.default.oneOfType([import_prop_types30.default.number, import_prop_types30.default.string]),
+    /**
+     * @ignore
+     */
+    style: import_prop_types30.default.object,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types30.default.oneOfType([import_prop_types30.default.arrayOf(import_prop_types30.default.oneOfType([import_prop_types30.default.func, import_prop_types30.default.object, import_prop_types30.default.bool])), import_prop_types30.default.func, import_prop_types30.default.object]),
+    /**
+     * The type of content that will be rendered.
+     * @default 'text'
+     */
+    variant: import_prop_types30.default.oneOfType([import_prop_types30.default.oneOf(["circular", "rectangular", "rounded", "text"]), import_prop_types30.default.string]),
+    /**
+     * Width of the skeleton.
+     * Useful when the skeleton is inside an inline element with no width of its own.
+     */
+    width: import_prop_types30.default.oneOfType([import_prop_types30.default.number, import_prop_types30.default.string])
+  } : void 0;
+  var Skeleton_default = Skeleton;
+
+  // node_modules/@mui/material/Tooltip/Tooltip.js
+  var React44 = __toESM(require_react());
+  var import_prop_types31 = __toESM(require_prop_types());
 
   // node_modules/@mui/material/Tooltip/tooltipClasses.js
   function getTooltipUtilityClass(slot) {
@@ -36850,13 +37078,13 @@ Please use another name.` : formatMuiErrorMessage(18));
   var tooltipClasses_default = tooltipClasses;
 
   // node_modules/@mui/material/Tooltip/Tooltip.js
-  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
   var import_jsx_runtime32 = __toESM(require_jsx_runtime());
-  var _excluded28 = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  var _excluded29 = ["arrow", "children", "classes", "components", "componentsProps", "describeChild", "disableFocusListener", "disableHoverListener", "disableInteractive", "disableTouchListener", "enterDelay", "enterNextDelay", "enterTouchDelay", "followCursor", "id", "leaveDelay", "leaveTouchDelay", "onClose", "onOpen", "open", "placement", "PopperComponent", "PopperProps", "slotProps", "slots", "title", "TransitionComponent", "TransitionProps"];
   function round3(value) {
     return Math.round(value * 1e5) / 1e5;
   }
-  var useUtilityClasses14 = (ownerState) => {
+  var useUtilityClasses15 = (ownerState) => {
     const {
       classes,
       disableInteractive,
@@ -37037,7 +37265,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       handler(event);
     };
   }
-  var Tooltip = /* @__PURE__ */ React43.forwardRef(function Tooltip2(inProps, ref) {
+  var Tooltip = /* @__PURE__ */ React44.forwardRef(function Tooltip2(inProps, ref) {
     var _ref, _slots$popper, _ref2, _ref3, _slots$transition, _ref4, _slots$tooltip, _ref5, _slots$arrow, _slotProps$popper, _ref6, _slotProps$popper2, _slotProps$transition, _slotProps$tooltip, _ref7, _slotProps$tooltip2, _slotProps$arrow, _ref8, _slotProps$arrow2;
     const props = useThemeProps2({
       props: inProps,
@@ -37071,20 +37299,20 @@ Please use another name.` : formatMuiErrorMessage(18));
       title,
       TransitionComponent: TransitionComponentProp = Grow_default,
       TransitionProps
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded28);
-    const children = /* @__PURE__ */ React43.isValidElement(childrenProp) ? childrenProp : /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", {
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded29);
+    const children = /* @__PURE__ */ React44.isValidElement(childrenProp) ? childrenProp : /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", {
       children: childrenProp
     });
     const theme = useTheme4();
     const isRtl = theme.direction === "rtl";
-    const [childNode, setChildNode] = React43.useState();
-    const [arrowRef, setArrowRef] = React43.useState(null);
-    const ignoreNonTouchEvents = React43.useRef(false);
+    const [childNode, setChildNode] = React44.useState();
+    const [arrowRef, setArrowRef] = React44.useState(null);
+    const ignoreNonTouchEvents = React44.useRef(false);
     const disableInteractive = disableInteractiveProp || followCursor;
-    const closeTimer = React43.useRef();
-    const enterTimer = React43.useRef();
-    const leaveTimer = React43.useRef();
-    const touchTimer = React43.useRef();
+    const closeTimer = React44.useRef();
+    const enterTimer = React44.useRef();
+    const leaveTimer = React44.useRef();
+    const touchTimer = React44.useRef();
     const [openState, setOpenState] = useControlled_default({
       controlled: openProp,
       default: false,
@@ -37095,23 +37323,23 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (true) {
       const {
         current: isControlled
-      } = React43.useRef(openProp !== void 0);
-      React43.useEffect(() => {
+      } = React44.useRef(openProp !== void 0);
+      React44.useEffect(() => {
         if (childNode && childNode.disabled && !isControlled && title !== "" && childNode.tagName.toLowerCase() === "button") {
           console.error(["MUI: You are providing a disabled `button` child to the Tooltip component.", "A disabled element does not fire events.", "Tooltip needs to listen to the child element's events to display the title.", "", "Add a simple wrapper element, such as a `span`."].join("\n"));
         }
       }, [title, childNode, isControlled]);
     }
     const id = useId_default(idProp);
-    const prevUserSelect = React43.useRef();
-    const stopTouchInteraction = React43.useCallback(() => {
+    const prevUserSelect = React44.useRef();
+    const stopTouchInteraction = React44.useCallback(() => {
       if (prevUserSelect.current !== void 0) {
         document.body.style.WebkitUserSelect = prevUserSelect.current;
         prevUserSelect.current = void 0;
       }
       clearTimeout(touchTimer.current);
     }, []);
-    React43.useEffect(() => {
+    React44.useEffect(() => {
       return () => {
         clearTimeout(closeTimer.current);
         clearTimeout(enterTimer.current);
@@ -37176,7 +37404,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       onFocus: handleFocusVisible,
       ref: focusVisibleRef
     } = useIsFocusVisible_default();
-    const [, setChildIsFocusVisible] = React43.useState(false);
+    const [, setChildIsFocusVisible] = React44.useState(false);
     const handleBlur = (event) => {
       handleBlurVisible(event);
       if (isFocusVisibleRef.current === false) {
@@ -37225,7 +37453,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         handleClose(event);
       }, leaveTouchDelay);
     };
-    React43.useEffect(() => {
+    React44.useEffect(() => {
       if (!open) {
         return void 0;
       }
@@ -37243,7 +37471,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (!title && title !== 0) {
       open = false;
     }
-    const popperRef = React43.useRef();
+    const popperRef = React44.useRef();
     const handleMouseMove = (event) => {
       const childrenProps2 = children.props;
       if (childrenProps2.onMouseMove) {
@@ -37275,7 +37503,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     } : {});
     if (true) {
       childrenProps["data-mui-internal-clone-element"] = true;
-      React43.useEffect(() => {
+      React44.useEffect(() => {
         if (childNode && !childNode.getAttribute("data-mui-internal-clone-element")) {
           console.error(["MUI: The `children` component of the Tooltip is not forwarding its props correctly.", "Please make sure that props are spread on the same element that the ref is applied to."].join("\n"));
         }
@@ -37307,7 +37535,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         console.error(["MUI: You have provided a `title` prop to the child of <Tooltip />.", `Remove this title prop \`${children.props.title}\` or the Tooltip component.`].join("\n"));
       }
     }
-    const popperOptions = React43.useMemo(() => {
+    const popperOptions = React44.useMemo(() => {
       var _PopperProps$popperOp;
       let tooltipModifiers = [{
         name: "arrow",
@@ -37332,7 +37560,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       PopperComponentProp,
       touch: ignoreNonTouchEvents.current
     });
-    const classes = useUtilityClasses14(ownerState);
+    const classes = useUtilityClasses15(ownerState);
     const PopperComponent = (_ref = (_slots$popper = slots.popper) != null ? _slots$popper : components.Popper) != null ? _ref : TooltipPopper;
     const TransitionComponent = (_ref2 = (_ref3 = (_slots$transition = slots.transition) != null ? _slots$transition : components.Transition) != null ? _ref3 : TransitionComponentProp) != null ? _ref2 : Grow_default;
     const TooltipComponent = (_ref4 = (_slots$tooltip = slots.tooltip) != null ? _slots$tooltip : components.Tooltip) != null ? _ref4 : TooltipTooltip;
@@ -37347,8 +37575,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     const tooltipArrowProps = appendOwnerState(ArrowComponent, _extends({}, (_slotProps$arrow = slotProps.arrow) != null ? _slotProps$arrow : componentsProps.arrow, {
       className: clsx_default(classes.arrow, (_ref8 = (_slotProps$arrow2 = slotProps.arrow) != null ? _slotProps$arrow2 : componentsProps.arrow) == null ? void 0 : _ref8.className)
     }), ownerState);
-    return /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(React43.Fragment, {
-      children: [/* @__PURE__ */ React43.cloneElement(children, childrenProps), /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(PopperComponent, _extends({
+    return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(React44.Fragment, {
+      children: [/* @__PURE__ */ React44.cloneElement(children, childrenProps), /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(PopperComponent, _extends({
         as: PopperComponentProp != null ? PopperComponentProp : Popper_default,
         placement,
         anchorEl: followCursor ? {
@@ -37369,11 +37597,11 @@ Please use another name.` : formatMuiErrorMessage(18));
         popperOptions,
         children: ({
           TransitionProps: TransitionPropsInner
-        }) => /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(TransitionComponent, _extends({
+        }) => /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(TransitionComponent, _extends({
           timeout: theme.transitions.duration.shorter
         }, TransitionPropsInner, transitionProps, {
-          children: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(TooltipComponent, _extends({}, tooltipProps, {
-            children: [title, arrow2 ? /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(ArrowComponent, _extends({}, tooltipArrowProps, {
+          children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(TooltipComponent, _extends({}, tooltipProps, {
+            children: [title, arrow2 ? /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(ArrowComponent, _extends({}, tooltipArrowProps, {
               ref: setArrowRef
             })) : null]
           }))
@@ -37390,7 +37618,7 @@ Please use another name.` : formatMuiErrorMessage(18));
      * If `true`, adds an arrow to the tooltip.
      * @default false
      */
-    arrow: import_prop_types30.default.bool,
+    arrow: import_prop_types31.default.bool,
     /**
      * Tooltip reference element.
      */
@@ -37398,11 +37626,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     /**
      * Override or extend the styles applied to the component.
      */
-    classes: import_prop_types30.default.object,
+    classes: import_prop_types31.default.object,
     /**
      * @ignore
      */
-    className: import_prop_types30.default.string,
+    className: import_prop_types31.default.string,
     /**
      * The components used for each slot inside.
      *
@@ -37411,11 +37639,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    components: import_prop_types30.default.shape({
-      Arrow: import_prop_types30.default.elementType,
-      Popper: import_prop_types30.default.elementType,
-      Tooltip: import_prop_types30.default.elementType,
-      Transition: import_prop_types30.default.elementType
+    components: import_prop_types31.default.shape({
+      Arrow: import_prop_types31.default.elementType,
+      Popper: import_prop_types31.default.elementType,
+      Tooltip: import_prop_types31.default.elementType,
+      Transition: import_prop_types31.default.elementType
     }),
     /**
      * The extra props for the slot components.
@@ -37426,107 +37654,107 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    componentsProps: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.object,
-      popper: import_prop_types30.default.object,
-      tooltip: import_prop_types30.default.object,
-      transition: import_prop_types30.default.object
+    componentsProps: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.object,
+      popper: import_prop_types31.default.object,
+      tooltip: import_prop_types31.default.object,
+      transition: import_prop_types31.default.object
     }),
     /**
      * Set to `true` if the `title` acts as an accessible description.
      * By default the `title` acts as an accessible label for the child.
      * @default false
      */
-    describeChild: import_prop_types30.default.bool,
+    describeChild: import_prop_types31.default.bool,
     /**
      * Do not respond to focus-visible events.
      * @default false
      */
-    disableFocusListener: import_prop_types30.default.bool,
+    disableFocusListener: import_prop_types31.default.bool,
     /**
      * Do not respond to hover events.
      * @default false
      */
-    disableHoverListener: import_prop_types30.default.bool,
+    disableHoverListener: import_prop_types31.default.bool,
     /**
      * Makes a tooltip not interactive, i.e. it will close when the user
      * hovers over the tooltip before the `leaveDelay` is expired.
      * @default false
      */
-    disableInteractive: import_prop_types30.default.bool,
+    disableInteractive: import_prop_types31.default.bool,
     /**
      * Do not respond to long press touch events.
      * @default false
      */
-    disableTouchListener: import_prop_types30.default.bool,
+    disableTouchListener: import_prop_types31.default.bool,
     /**
      * The number of milliseconds to wait before showing the tooltip.
      * This prop won't impact the enter touch delay (`enterTouchDelay`).
      * @default 100
      */
-    enterDelay: import_prop_types30.default.number,
+    enterDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds to wait before showing the tooltip when one was already recently opened.
      * @default 0
      */
-    enterNextDelay: import_prop_types30.default.number,
+    enterNextDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds a user must touch the element before showing the tooltip.
      * @default 700
      */
-    enterTouchDelay: import_prop_types30.default.number,
+    enterTouchDelay: import_prop_types31.default.number,
     /**
      * If `true`, the tooltip follow the cursor over the wrapped element.
      * @default false
      */
-    followCursor: import_prop_types30.default.bool,
+    followCursor: import_prop_types31.default.bool,
     /**
      * This prop is used to help implement the accessibility logic.
      * If you don't provide this prop. It falls back to a randomly generated id.
      */
-    id: import_prop_types30.default.string,
+    id: import_prop_types31.default.string,
     /**
      * The number of milliseconds to wait before hiding the tooltip.
      * This prop won't impact the leave touch delay (`leaveTouchDelay`).
      * @default 0
      */
-    leaveDelay: import_prop_types30.default.number,
+    leaveDelay: import_prop_types31.default.number,
     /**
      * The number of milliseconds after the user stops touching an element before hiding the tooltip.
      * @default 1500
      */
-    leaveTouchDelay: import_prop_types30.default.number,
+    leaveTouchDelay: import_prop_types31.default.number,
     /**
      * Callback fired when the component requests to be closed.
      *
      * @param {React.SyntheticEvent} event The event source of the callback.
      */
-    onClose: import_prop_types30.default.func,
+    onClose: import_prop_types31.default.func,
     /**
      * Callback fired when the component requests to be open.
      *
      * @param {React.SyntheticEvent} event The event source of the callback.
      */
-    onOpen: import_prop_types30.default.func,
+    onOpen: import_prop_types31.default.func,
     /**
      * If `true`, the component is shown.
      */
-    open: import_prop_types30.default.bool,
+    open: import_prop_types31.default.bool,
     /**
      * Tooltip placement.
      * @default 'bottom'
      */
-    placement: import_prop_types30.default.oneOf(["bottom-end", "bottom-start", "bottom", "left-end", "left-start", "left", "right-end", "right-start", "right", "top-end", "top-start", "top"]),
+    placement: import_prop_types31.default.oneOf(["bottom-end", "bottom-start", "bottom", "left-end", "left-start", "left", "right-end", "right-start", "right", "top-end", "top-start", "top"]),
     /**
      * The component used for the popper.
      * @default Popper
      */
-    PopperComponent: import_prop_types30.default.elementType,
+    PopperComponent: import_prop_types31.default.elementType,
     /**
      * Props applied to the [`Popper`](/material-ui/api/popper/) element.
      * @default {}
      */
-    PopperProps: import_prop_types30.default.object,
+    PopperProps: import_prop_types31.default.object,
     /**
      * The extra props for the slot components.
      * You can override the existing props or add new ones.
@@ -37535,11 +37763,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slotProps: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.object,
-      popper: import_prop_types30.default.object,
-      tooltip: import_prop_types30.default.object,
-      transition: import_prop_types30.default.object
+    slotProps: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.object,
+      popper: import_prop_types31.default.object,
+      tooltip: import_prop_types31.default.object,
+      transition: import_prop_types31.default.object
     }),
     /**
      * The components used for each slot inside.
@@ -37548,93 +37776,93 @@ Please use another name.` : formatMuiErrorMessage(18));
      *
      * @default {}
      */
-    slots: import_prop_types30.default.shape({
-      arrow: import_prop_types30.default.elementType,
-      popper: import_prop_types30.default.elementType,
-      tooltip: import_prop_types30.default.elementType,
-      transition: import_prop_types30.default.elementType
+    slots: import_prop_types31.default.shape({
+      arrow: import_prop_types31.default.elementType,
+      popper: import_prop_types31.default.elementType,
+      tooltip: import_prop_types31.default.elementType,
+      transition: import_prop_types31.default.elementType
     }),
     /**
      * The system prop that allows defining system overrides as well as additional CSS styles.
      */
-    sx: import_prop_types30.default.oneOfType([import_prop_types30.default.arrayOf(import_prop_types30.default.oneOfType([import_prop_types30.default.func, import_prop_types30.default.object, import_prop_types30.default.bool])), import_prop_types30.default.func, import_prop_types30.default.object]),
+    sx: import_prop_types31.default.oneOfType([import_prop_types31.default.arrayOf(import_prop_types31.default.oneOfType([import_prop_types31.default.func, import_prop_types31.default.object, import_prop_types31.default.bool])), import_prop_types31.default.func, import_prop_types31.default.object]),
     /**
      * Tooltip title. Zero-length titles string, undefined, null and false are never displayed.
      */
-    title: import_prop_types30.default.node,
+    title: import_prop_types31.default.node,
     /**
      * The component used for the transition.
      * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
      * @default Grow
      */
-    TransitionComponent: import_prop_types30.default.elementType,
+    TransitionComponent: import_prop_types31.default.elementType,
     /**
      * Props applied to the transition element.
      * By default, the element is based on this [`Transition`](http://reactcommunity.org/react-transition-group/transition/) component.
      */
-    TransitionProps: import_prop_types30.default.object
+    TransitionProps: import_prop_types31.default.object
   } : void 0;
   var Tooltip_default = Tooltip;
 
   // node_modules/@mui/icons-material/esm/CheckCircle.js
-  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
-  var CheckCircle_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime33.jsx)("path", {
+  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
+  var CheckCircle_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime34.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
   }), "CheckCircle");
 
   // node_modules/@mui/icons-material/esm/Dangerous.js
-  var import_jsx_runtime34 = __toESM(require_jsx_runtime());
-  var Dangerous_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime34.jsx)("path", {
+  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
+  var Dangerous_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime35.jsx)("path", {
     d: "M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM17 15.74 15.74 17 12 13.26 8.26 17 7 15.74 10.74 12 7 8.26 8.26 7 12 10.74 15.74 7 17 8.26 13.26 12 17 15.74z"
   }), "Dangerous");
 
   // node_modules/@mui/icons-material/esm/ExpandLess.js
-  var import_jsx_runtime35 = __toESM(require_jsx_runtime());
-  var ExpandLess_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime35.jsx)("path", {
+  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
+  var ExpandLess_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime36.jsx)("path", {
     d: "m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"
   }), "ExpandLess");
 
   // node_modules/@mui/icons-material/esm/ExpandMore.js
-  var import_jsx_runtime36 = __toESM(require_jsx_runtime());
-  var ExpandMore_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime36.jsx)("path", {
+  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
+  var ExpandMore_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime37.jsx)("path", {
     d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
   }), "ExpandMore");
 
   // node_modules/@mui/icons-material/esm/Info.js
-  var import_jsx_runtime37 = __toESM(require_jsx_runtime());
-  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime37.jsx)("path", {
+  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
+  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
   }), "Info");
 
   // node_modules/@mui/icons-material/esm/KeyboardDoubleArrowRight.js
-  var import_jsx_runtime38 = __toESM(require_jsx_runtime());
-  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
+  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
+  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
     d: "M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"
-  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
+  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
     d: "m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"
   }, "1")], "KeyboardDoubleArrowRight");
 
   // node_modules/@mui/icons-material/esm/Warning.js
-  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
-  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
+  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
+  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime40.jsx)("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
   }), "Warning");
 
   // src/elements/Components/StudentSummary.jsx
-  var import_react14 = __toESM(require_react(), 1);
-  var import_prop_types35 = __toESM(require_prop_types(), 1);
+  var import_react15 = __toESM(require_react(), 1);
+  var import_prop_types37 = __toESM(require_prop_types(), 1);
 
   // src/elements/Components/SummaryNode.jsx
   var import_react13 = __toESM(require_react(), 1);
-  var import_prop_types34 = __toESM(require_prop_types(), 1);
+  var import_prop_types35 = __toESM(require_prop_types(), 1);
 
   // src/elements/Components/Requirement.jsx
   var import_react12 = __toESM(require_react(), 1);
-  var import_prop_types33 = __toESM(require_prop_types(), 1);
+  var import_prop_types34 = __toESM(require_prop_types(), 1);
 
   // src/elements/Components/RequirementGroup.jsx
   var import_react11 = __toESM(require_react(), 1);
-  var import_prop_types32 = __toESM(require_prop_types(), 1);
+  var import_prop_types33 = __toESM(require_prop_types(), 1);
 
   // src/Objects/abbreviator.js
   var ABBREVIATIONS = {
@@ -37749,7 +37977,6 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
       const iFrame = document.querySelector("iframe");
       if (iFrame) {
-        console.log("Scrolling inside iFrame");
         const childWithId = this.#rootElement.querySelector("[id]");
         const elementRect = iFrame.contentDocument.getElementById(childWithId.id).getBoundingClientRect();
         const scrollY = iFrame.contentWindow.scrollY;
@@ -37795,7 +38022,7 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/elements/Components/RequirementItem.jsx
   var import_react10 = __toESM(require_react(), 1);
-  var import_prop_types31 = __toESM(require_prop_types(), 1);
+  var import_prop_types32 = __toESM(require_prop_types(), 1);
   var ABBREVIATE_PROPS = {
     sx: {
       whiteSpace: "nowrap",
@@ -37829,10 +38056,10 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
   RequirementItem.propTypes = {
-    requirementNode: import_prop_types31.default.instanceOf(AuditNode).isRequired,
-    description: import_prop_types31.default.string,
-    first: import_prop_types31.default.bool,
-    last: import_prop_types31.default.bool
+    requirementNode: import_prop_types32.default.instanceOf(AuditNode).isRequired,
+    description: import_prop_types32.default.string,
+    first: import_prop_types32.default.bool,
+    last: import_prop_types32.default.bool
   };
   RequirementItem.defaultProps = {
     description: null,
@@ -37891,11 +38118,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     ))))));
   }
   RequirementGroup.propTypes = {
-    requirementNodes: import_prop_types32.default.arrayOf(import_prop_types32.default.instanceOf(AuditNode)),
-    programKey: import_prop_types32.default.string,
-    groupName: import_prop_types32.default.string,
-    first: import_prop_types32.default.bool,
-    last: import_prop_types32.default.bool
+    requirementNodes: import_prop_types33.default.arrayOf(import_prop_types33.default.instanceOf(AuditNode)),
+    programKey: import_prop_types33.default.string,
+    groupName: import_prop_types33.default.string,
+    first: import_prop_types33.default.bool,
+    last: import_prop_types33.default.bool
   };
   RequirementGroup.defaultProps = {
     groupName: "unknown group",
@@ -37935,10 +38162,10 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   }
   Requirement.propTypes = {
-    requirementNode: import_prop_types33.default.instanceOf(AuditNode).isRequired,
-    programKey: import_prop_types33.default.string.isRequired,
-    first: import_prop_types33.default.bool,
-    last: import_prop_types33.default.bool
+    requirementNode: import_prop_types34.default.instanceOf(AuditNode).isRequired,
+    programKey: import_prop_types34.default.string.isRequired,
+    first: import_prop_types34.default.bool,
+    last: import_prop_types34.default.bool
   };
   Requirement.defaultProps = {
     first: false,
@@ -37951,6 +38178,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
     programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
     requirementHeader: ".PAGROUPDIVIDER",
+    requirementAltHeader: "PSGROUPBOX",
     subRequirementHeader: ".PSGROUPBOXLABEL",
     subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
     subRequirementDescription: ".PSLONGEDITBOX",
@@ -37958,9 +38186,17 @@ Please use another name.` : formatMuiErrorMessage(18));
     expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
     showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
     studentName: "table.PABACKGROUNDINVISIBLE .PAPAGETITLE",
+    pageDivId: "pt_pageinfo_win0",
     pageElement: (page) => `div[page="${page}"]`,
     programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
   };
+  var PAGE_IDS = {
+    audit: "SAA_SS_DPR_ADB",
+    studentCenter: "SSS_STUDENT_CENTER"
+  };
+  var PAGE_NAME_TO_ID = Object.fromEntries(
+    Object.entries(PAGE_IDS).map(([key, value]) => [value, key])
+  );
   var REGEX = {
     generalHeader: /(?:GENERAL INFORMATION)/i,
     universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
@@ -38219,6 +38455,15 @@ Please use another name.` : formatMuiErrorMessage(18));
           throw new Error("Failed to find program table");
         }
       }
+      const subNodes = this._extractSubNodes();
+      if (!Array.isArray(subNodes) || subNodes.length < 1) {
+        while (!this.#mainTable.classList?.contains(QUERIES.requirementAltHeader) && this.#mainTable.parentNode.classList) {
+          this.#mainTable = this.#mainTable.parentNode;
+        }
+        if (this.#mainTable.tagType?.toLowerCase() === "table") {
+          this.#mainTable = this.#mainTable.tBodies[0];
+        }
+      }
       this._initialize(this.#programRoot, /RG-\d+/);
     }
     /**
@@ -38236,10 +38481,7 @@ Please use another name.` : formatMuiErrorMessage(18));
      */
     _extractSubNodes() {
       const requirements = makeRequirementsArray(this.#mainTable);
-      if (Array.isArray(requirements) && requirements.length > 0) {
-        return requirements;
-      }
-      return makeSubRequirementsArray(this.#mainTable, 0);
+      return requirements;
     }
     /**
      * If all requirements are satisfied, then this is considered satisfied
@@ -38324,48 +38566,106 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
   SummaryNode.propTypes = {
-    programNode: import_prop_types34.default.instanceOf(Program)
+    programNode: import_prop_types35.default.instanceOf(Program)
+  };
+
+  // src/elements/Components/AuditSkeleton.jsx
+  var import_react14 = __toESM(require_react(), 1);
+  var import_prop_types36 = __toESM(require_prop_types(), 1);
+  function AuditSkeleton(props) {
+    const { programCount, requirementCountMin, requirementCountMax } = props;
+    const [requirementCounts, setRequirementCounts] = import_react14.default.useState([]);
+    import_react14.default.useEffect(() => {
+      const newCounts = [];
+      for (let i = 0; i < programCount; i++) {
+        const randInRange = Math.floor(
+          Math.random() * (requirementCountMax - requirementCountMin + 1)
+        ) + requirementCountMin;
+        newCounts.push(Array(randInRange).fill());
+      }
+      setRequirementCounts(newCounts);
+    }, [requirementCountMin, requirementCountMax, programCount]);
+    if (requirementCounts.length !== programCount) {
+      return null;
+    }
+    return Array(programCount).fill().map((_3, i) => /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, { key: i }, /* @__PURE__ */ import_react14.default.createElement(Skeleton_default, { variant: "text", sx: { fontSize: "4rem" } }), requirementCounts[i].map((_4, j) => /* @__PURE__ */ import_react14.default.createElement(
+      "div",
+      {
+        key: j,
+        style: {
+          display: "flex",
+          width: "100%",
+          marginBottom: j === requirementCounts[i].length - 1 ? 0 : "5px"
+        }
+      },
+      /* @__PURE__ */ import_react14.default.createElement(
+        Skeleton_default,
+        {
+          variant: "circular",
+          sx: { width: 40, height: 40, marginLeft: "5px" }
+        }
+      ),
+      /* @__PURE__ */ import_react14.default.createElement(
+        Skeleton_default,
+        {
+          variant: "rectangular",
+          sx: { height: 40, width: "calc(100% - 50px)", mx: "5px" }
+        }
+      )
+    ))));
+  }
+  AuditSkeleton.propTypes = {
+    programCount: import_prop_types36.default.number,
+    requirementCountMin: import_prop_types36.default.number,
+    requirementCountMax: import_prop_types36.default.number
+  };
+  AuditSkeleton.defaultProps = {
+    programCount: 3,
+    requirementCountMin: 3,
+    requirementCountMax: 5
   };
 
   // src/elements/Components/StudentSummary.jsx
   function StudentSummary(props) {
-    const { programData } = props;
-    const generalSummaries = import_react14.default.useMemo(() => {
+    const { programData, loadingStatus } = props;
+    const generalSummaries = import_react15.default.useMemo(() => {
       return programData?.generalNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react14.default.createElement(SummaryNode, { key: `generalSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `generalSummary${i}`, programNode: node2 })
       );
     }, [programData?.generalNodes]);
-    const universitySummaries = import_react14.default.useMemo(() => {
+    const universitySummaries = import_react15.default.useMemo(() => {
       return programData?.universityNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react14.default.createElement(SummaryNode, { key: `univSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `univSummary${i}`, programNode: node2 })
       );
     }, [programData?.universityNodes]);
-    const programSummaries = import_react14.default.useMemo(() => {
+    const programSummaries = import_react15.default.useMemo(() => {
       return programData?.programNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react14.default.createElement(SummaryNode, { key: `programSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `programSummary${i}`, programNode: node2 })
       );
     }, [programData?.programNodes]);
     if (!programData) {
-      return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, "Loading ..."));
+      return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(Typography_default, { component: "h1", variant: "h6" }, loadingStatus ?? "Loading ..."), /* @__PURE__ */ import_react15.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, /* @__PURE__ */ import_react15.default.createElement(AuditSkeleton, null)));
     }
-    return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, `${programData?.studentName} Summary`), /* @__PURE__ */ import_react14.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, generalSummaries, universitySummaries, programSummaries));
+    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, `${programData?.studentName} Summary`), /* @__PURE__ */ import_react15.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, generalSummaries, universitySummaries, programSummaries));
   }
   StudentSummary.propTypes = {
-    programData: import_prop_types35.default.shape({
-      studentName: import_prop_types35.default.string,
-      generalNodes: import_prop_types35.default.arrayOf(import_prop_types35.default.instanceOf(Program)),
-      universityNodes: import_prop_types35.default.arrayOf(import_prop_types35.default.instanceOf(Program)),
-      programNodes: import_prop_types35.default.arrayOf(import_prop_types35.default.instanceOf(Program))
-    })
+    programData: import_prop_types37.default.shape({
+      studentName: import_prop_types37.default.string,
+      generalNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program)),
+      universityNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program)),
+      programNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program))
+    }),
+    loadingStatus: import_prop_types37.default.string
   };
   StudentSummary.defaultProps = {
-    programData: {}
+    programData: {},
+    loadingStatus: ""
   };
 
   // src/elements/Components/CleanserRoot.jsx
   function CleanserRoot(props) {
     const { onHideSummary, showSummary, ...rest } = props;
-    return /* @__PURE__ */ import_react15.default.createElement(
+    return /* @__PURE__ */ import_react16.default.createElement(
       "div",
       {
         style: {
@@ -38376,7 +38676,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           transition: "transform 0.33s ease-in-out"
         }
       },
-      /* @__PURE__ */ import_react15.default.createElement(
+      /* @__PURE__ */ import_react16.default.createElement(
         Paper_default,
         {
           elevation: 5,
@@ -38386,22 +38686,22 @@ Please use another name.` : formatMuiErrorMessage(18));
             padding: "20px"
           }
         },
-        /* @__PURE__ */ import_react15.default.createElement(
+        /* @__PURE__ */ import_react16.default.createElement(
           IconButton_default,
           {
             "aria-label": "hide summary",
             sx: { position: "absolute", top: "10px", right: "10px" },
             onClick: onHideSummary
           },
-          /* @__PURE__ */ import_react15.default.createElement(KeyboardDoubleArrowRight_default, null)
+          /* @__PURE__ */ import_react16.default.createElement(KeyboardDoubleArrowRight_default, null)
         ),
-        /* @__PURE__ */ import_react15.default.createElement(StudentSummary, { ...rest })
+        /* @__PURE__ */ import_react16.default.createElement(StudentSummary, { ...rest })
       )
     );
   }
   CleanserRoot.propTypes = {
-    showSummary: import_prop_types36.default.bool,
-    onHideSummary: import_prop_types36.default.func
+    showSummary: import_prop_types38.default.bool,
+    onHideSummary: import_prop_types38.default.func
   };
   CleanserRoot.defaultProps = {
     showSummary: false,
@@ -38410,17 +38710,17 @@ Please use another name.` : formatMuiErrorMessage(18));
   };
 
   // src/elements/Components/SummarizeButton.jsx
-  var import_react16 = __toESM(require_react(), 1);
-  var import_prop_types37 = __toESM(require_prop_types(), 1);
+  var import_react17 = __toESM(require_react(), 1);
+  var import_prop_types39 = __toESM(require_prop_types(), 1);
   function SummarizeButton(props) {
     const { onClickCallback, showButton } = props;
-    return /* @__PURE__ */ import_react16.default.createElement("div", { style: {
+    return /* @__PURE__ */ import_react17.default.createElement("div", { style: {
       position: "fixed",
       top: "150px",
       right: showButton ? "-45px" : "-80px",
       transform: "rotate(-90deg)",
       transition: "right 0.33s ease-in-out"
-    } }, /* @__PURE__ */ import_react16.default.createElement(
+    } }, /* @__PURE__ */ import_react17.default.createElement(
       Button_default,
       {
         onClick: onClickCallback,
@@ -38431,8 +38731,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     ));
   }
   SummarizeButton.propTypes = {
-    onClickCallback: import_prop_types37.default.func,
-    showButton: import_prop_types37.default.bool
+    onClickCallback: import_prop_types39.default.func,
+    showButton: import_prop_types39.default.bool
   };
   SummarizeButton.defaultProps = {
     onClickCallback: () => {
@@ -38491,19 +38791,26 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/domTraversal/pageRoot.js
-  var MAX_RETRIES = 10;
+  var MAX_EXPAND_ALL_RETRIES = 10;
+  var MAX_AUDIT_PAGE_WAIT = 1e3;
+  var auditRootDoc = null;
+  function findPageElementInIframe(queryString) {
+    let rootDoc = document;
+    let pageElement = rootDoc.querySelector(queryString);
+    if (!pageElement) {
+      rootDoc = document.querySelector("iframe")?.contentDocument;
+      pageElement = rootDoc.querySelector(queryString);
+    }
+    return pageElement;
+  }
   async function navigateToAuditPage() {
     if (verifyRootDoc()) {
       return;
     }
-    let rootDoc = document;
-    let auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown);
-    if (!auditDropdown) {
-      rootDoc = document.querySelector("iframe")?.contentDocument;
-      auditDropdown = rootDoc.querySelector(QUERIES.otherAcademicDropdown);
-      if (!auditDropdown) {
-        throw new Error('Failed to find "Other Academic" dropdown');
-      }
+    const auditDropdown = findPageElementInIframe(QUERIES.otherAcademicDropdown);
+    const goButton = findPageElementInIframe(QUERIES.otherAcademicGoButton);
+    if (!auditDropdown || !goButton) {
+      throw new Error('Failed to find "Other Academic" dropdown or "Go" button');
     }
     const index = Array.from(auditDropdown.options).findIndex(
       (option) => option.text.toLowerCase() === "academic requirements"
@@ -38513,22 +38820,15 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
     auditDropdown.selectedIndex = index;
     await wait(100);
-    const goButton = rootDoc.querySelector(QUERIES.otherAcademicGoButton);
-    if (!goButton) {
-      throw new Error('Failed to find "Go" button');
-    }
     goButton.click();
     let tries = 0;
-    let pageElement = null;
     do {
       await wait(100);
-      pageElement = rootDoc.querySelector(QUERIES.pageElement("SAA_SS_DPR_ADB"));
-    } while (!pageElement && tries++ < 1e3);
-    if (!pageElement) {
+    } while (!findPageElementInIframe(QUERIES.pageElement("SAA_SS_DPR_ADB")) && ++tries < MAX_AUDIT_PAGE_WAIT);
+    if (!findPageElementInIframe(QUERIES.pageElement("SAA_SS_DPR_ADB"))) {
       throw new Error("Max retries exceeded waiting for audit page to load");
     }
   }
-  var auditRootDoc = null;
   function verifyRootDoc() {
     auditRootDoc = document;
     let expanderButton = auditRootDoc.querySelector(QUERIES.expander);
@@ -38556,7 +38856,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
     expanderButton.click();
     let tries = 0;
-    while (tries < MAX_RETRIES && getTopLevelExpanderList().length > 0) {
+    while (tries < MAX_EXPAND_ALL_RETRIES && getTopLevelExpanderList().length > 0) {
       await wait(1e3);
       tries++;
     }
@@ -38576,20 +38876,23 @@ Please use another name.` : formatMuiErrorMessage(18));
         await clickAndWait(showButton);
       } catch (err) {
         console.error(err);
+        console.log(showButton);
       }
     }
   }
   async function clickAndWait(showButton, curText = "view all") {
     if (showButton.textContent.toLowerCase() === curText.toLowerCase()) {
       const buttonId = showButton.id;
-      showButton.click();
       let tries = 0;
       let checkButton = null;
       do {
         await wait(100);
         checkButton = auditRootDoc.getElementById(buttonId);
+        if (tries % 10 === 0) {
+          checkButton.click();
+        }
         tries++;
-      } while (checkButton?.textContent.toLowerCase() === curText.toLowerCase() && tries < 100);
+      } while (checkButton?.textContent.toLowerCase() === curText.toLowerCase() && tries < 40);
       if (checkButton.textContent.toLowerCase() === curText.toLowerCase()) {
         throw new Error(`Max retries exceeded waiting for "${curText.toLowerCase()} list to expand`);
       }
@@ -38623,17 +38926,72 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   }
 
+  // src/elements/usePageObserver.js
+  var import_react18 = __toESM(require_react(), 1);
+  var PAGE_DIV_CHECK_WAIT_TIME = 200;
+  function usePageObserver() {
+    const [pageId, setPageId] = import_react18.default.useState("");
+    const [iframeRef, setIframeRef] = import_react18.default.useState(null);
+    import_react18.default.useEffect(() => {
+      const iframe = document.querySelector("iframe");
+      setIframeRef(iframe);
+    }, []);
+    const checkPage = import_react18.default.useCallback(() => {
+      const targetElement = iframeRef?.contentDocument?.getElementById(QUERIES.pageDivId);
+      if (targetElement) {
+        const pageVal = targetElement.getAttribute("page");
+        if (pageVal !== pageId) {
+          setPageId(pageVal);
+        }
+      } else {
+        console.log("Page id not found");
+        setPageId("");
+      }
+    }, [iframeRef?.contentDocument, pageId]);
+    import_react18.default.useEffect(() => {
+      if (!iframeRef) {
+        return;
+      }
+      iframeRef.addEventListener("load", checkPage);
+      return () => {
+        iframeRef.removeEventListener("load", checkPage);
+      };
+    }, [checkPage, iframeRef]);
+    import_react18.default.useEffect(() => {
+      if (!iframeRef) {
+        return;
+      }
+      const observer = new MutationObserver(() => {
+        checkPage();
+      });
+      const findPageDiv = () => {
+        const targetNode = iframeRef?.contentDocument?.getElementById(QUERIES.pageDivId);
+        if (targetNode) {
+          observer.observe(iframeRef.contentDocument?.body, { attributes: true });
+        } else {
+          setTimeout(findPageDiv, PAGE_DIV_CHECK_WAIT_TIME);
+        }
+      };
+      setTimeout(findPageDiv, PAGE_DIV_CHECK_WAIT_TIME);
+      return () => {
+        observer.disconnect();
+      };
+    }, [checkPage, iframeRef, iframeRef?.contentDocument?.body]);
+    return pageId;
+  }
+
   // src/elements/AppRoot.jsx
   function AppRoot() {
-    const [showSummary, setShowSummary] = import_react17.default.useState(false);
+    const [showSummary, setShowSummary] = import_react19.default.useState(false);
     const onShowSummary = () => {
       setShowSummary(true);
     };
     const onHideSummary = () => {
       setShowSummary(false);
     };
-    const [programGroups, setProgramGroups] = import_react17.default.useState(null);
-    import_react17.default.useEffect(() => {
+    const pageId = usePageObserver();
+    const [programGroups, setProgramGroups] = import_react19.default.useState(null);
+    import_react19.default.useEffect(() => {
       async function retrieveProgramData() {
         try {
           const newGroups = await scanPageForPrograms();
@@ -38647,7 +39005,23 @@ Please use another name.` : formatMuiErrorMessage(18));
         retrieveProgramData();
       }
     }, [showSummary]);
-    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react17.default.createElement(CleanserRoot, { showSummary, onHideSummary, programData: programGroups }), /* @__PURE__ */ import_react17.default.createElement(SummarizeButton, { showButton: !showSummary, onClickCallback: onShowSummary }));
+    const disableShowButton = pageId !== PAGE_IDS.audit && pageId !== PAGE_IDS.studentCenter;
+    const statusMessage = pageId !== PAGE_IDS.audit ? "Loading Advising Audit ..." : "Expanding all sections ...";
+    return /* @__PURE__ */ import_react19.default.createElement(import_react19.default.Fragment, null, /* @__PURE__ */ import_react19.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react19.default.createElement(
+      CleanserRoot,
+      {
+        showSummary,
+        onHideSummary,
+        loadingStatus: statusMessage,
+        programData: programGroups
+      }
+    ), /* @__PURE__ */ import_react19.default.createElement(
+      SummarizeButton,
+      {
+        showButton: !disableShowButton && !showSummary,
+        onClickCallback: onShowSummary
+      }
+    ));
   }
 
   // src/index.jsx
@@ -38669,7 +39043,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   appContainer.id = "cleanser-app-container";
   document.body.appendChild(appContainer);
   var reactAppRoot = (0, import_client.createRoot)(appContainer);
-  reactAppRoot.render(/* @__PURE__ */ import_react18.default.createElement(AppRoot, null));
+  reactAppRoot.render(/* @__PURE__ */ import_react20.default.createElement(AppRoot, null));
 })();
 /*! Bundled license information:
 
