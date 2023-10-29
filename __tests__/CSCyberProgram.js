@@ -1,35 +1,18 @@
 // Necessary when using ECMA modules
 import { jest } from '@jest/globals'
 
-// Setup basic HTML page before each test
-import fs from 'fs'
-import path from 'path'
-
-// Project specific imports
-import { QUERIES } from '../src/domTraversal/queriesAndRegex.js'
-import Program from '../src/Objects/Program.js'
-
-// Read in the HTML page
-const baseHTML = fs.readFileSync(path.join('__tests__', 'data', 'CSCyberProgram.html'), 'utf8')
+// Help load the program HTML page
+import { InitProgramTest } from '../__testHelp__/_ProgramHelpers.js'
 
 // Disable jest mocking for fs module
 jest.dontMock('fs')
 
-describe('General Info Node', () => {
+describe('BS in CS: CyberSec and SecSoftDev Program Node', () => {
   // Inject clean version of HTML page and rebuild program before tests
   let program = null
   beforeAll(() => {
     // Load page from imported HTML
-    document.documentElement.innerHTML = baseHTML.toString()
-
-    // Extract program headers and make sure there's at least one
-    const headerNodes = document.querySelectorAll(QUERIES.programHeader)
-    if (headerNodes?.length < 1) {
-      throw new Error('Unable to find at least one program')
-    }
-
-    // Create program object
-    program = new Program(headerNodes[0])
+    program = InitProgramTest('CSCyberProgram.html')
   })
 
   // Clear out the HTML and program
