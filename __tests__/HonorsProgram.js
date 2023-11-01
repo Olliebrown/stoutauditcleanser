@@ -32,4 +32,8 @@ describe('Honors College Node', () => {
     expect(program).toBeTruthy()
     expect(program.getName()).toBe('Honors College Overview')
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mathematics Minor Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-11154",
+  "key": "minor__infosec_mgmt",
+  "name": "Minor: InfoSec Mgmt",
+  "satisfied": {
+    "description": "",
+    "internalId": "",
+    "isGenEd": false,
+    "key": "minor__infosec_mgmt_minor",
+    "name": "Minor: InfoSec Mgmt Minor",
+    "satisfied": "INCOMPLETE",
+    "subNodes": [],
+  },
+  "subNodes": [
+    {
+      "description": "",
+      "internalId": "",
+      "isGenEd": false,
+      "key": "minor__infosec_mgmt_minor",
+      "name": "Minor: InfoSec Mgmt Minor",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+  ],
+}
+`;

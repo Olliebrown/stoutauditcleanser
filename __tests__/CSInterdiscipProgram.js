@@ -32,4 +32,8 @@ describe('BS in CS: Interdisciplinary Program Node', () => {
     expect(program).toBeTruthy()
     expect(program.getName()).toMatch(/^BS In CS - Interdisciplinary\s+\d\d\d\d$/)
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

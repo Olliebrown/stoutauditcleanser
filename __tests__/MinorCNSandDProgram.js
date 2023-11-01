@@ -32,4 +32,8 @@ describe('Computer Network Systems and Design Minor Node', () => {
     expect(program).toBeTruthy()
     expect(program.getName()).toBe('Computer Networking Systems & Design Minor')
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

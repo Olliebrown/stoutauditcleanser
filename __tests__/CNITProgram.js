@@ -32,4 +32,8 @@ describe('BS in Computer Networking & Information Technology Node', () => {
     expect(program).toBeTruthy()
     expect(program.getName()).toMatch(/^BS In CNIT\s+\d\d\d\d$/)
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

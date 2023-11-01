@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mathematics Minor Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-171",
+  "key": "minor__mathematics",
+  "name": "Minor: mathematics",
+  "satisfied": "INCOMPLETE",
+  "subNodes": [],
+}
+`;

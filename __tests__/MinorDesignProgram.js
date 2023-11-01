@@ -32,4 +32,8 @@ describe('Design Minor Node', () => {
     expect(program).toBeTruthy()
     expect(program.getName()).toBe('Minor: design')
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

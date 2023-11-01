@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Honors College Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-10778",
+  "key": "honors_college_overview",
+  "name": "Honors College Overview",
+  "satisfied": "INCOMPLETE",
+  "subNodes": [
+    {
+      "description": "HONORS COLLEGE REQUIREMENTS",
+      "internalId": "RQ-10485",
+      "isGenEd": false,
+      "key": "honors_college_requirements",
+      "name": "Honors College Requirements",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+    {
+      "description": "Honors College Colloquium Students must complete a total of 8 colloquia. ",
+      "internalId": "RQ-10530",
+      "isGenEd": false,
+      "key": "honors_college_colloquium",
+      "name": "Honors College Colloquium",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+    {
+      "description": "Honors College Enhancement Events Participation in one Enhancement Event per academic year is required.  Check with the Honors College Office for a list of the qualifying Enhancement Events with which you can be credited. ",
+      "internalId": "RQ-10531",
+      "isGenEd": false,
+      "key": "honors_college_enhancement_events",
+      "name": "Honors College Enhancement Events",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+  ],
+}
+`;

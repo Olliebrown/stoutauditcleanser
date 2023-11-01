@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`University Requirements Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-0001",
+  "key": "university_requirements_for_graduation",
+  "name": "University Requirements For Graduation",
+  "satisfied": "COMPLETE",
+  "subNodes": [
+    {
+      "description": "UNIVERSITY CREDIT REQUIREMENT FOR GRADUATION -  120 Earned Credits Required (Some Academic Plans may require additional credits for completion of degree requirements. Contact your Program Director and/or Academic Advisor for further information.)",
+      "internalId": "RQ-10029",
+      "isGenEd": false,
+      "key": "university_credit_requirement_for_graduation",
+      "name": "University Credit Requirement For Graduation",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+    {
+      "description": "UNIVERSITY GPA REQUIREMENT FOR GRADUATION - An 2.00 Overall GPA is Required (Some Academic Plans may require a higher GPA for completion of degree requirements.  Contact your Program Director and/or Academic Advisor for further information.) ",
+      "internalId": "RQ-0183",
+      "isGenEd": false,
+      "key": "university_gpa_requirement_for_graduation",
+      "name": "University GPA Requirement For Graduation",
+      "satisfied": "COMPLETE",
+      "subNodes": [],
+    },
+    {
+      "description": "UNIVERSITY RESIDENCY REQUIREMENT FOR GRADUATION: UNIVERSITY RESIDENCY REQUIREMENT FOR GRADUATION -",
+      "internalId": "RQ-10136",
+      "isGenEd": false,
+      "key": "university_residency_requirement_for_graduation",
+      "name": "University Residency Requirement For Graduation",
+      "satisfied": "COMPLETE",
+      "subNodes": [],
+    },
+  ],
+}
+`;

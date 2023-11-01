@@ -14,8 +14,10 @@ export default class AuditNode {
   _initialize (rootElement, keyRegex) {
     this.#rootElement = rootElement
     this.#name = abbreviate(toTitleCase(this._extractHeading().trim()))
-    if (this.#rootElement && keyRegex) {
+    if (this.#rootElement && keyRegex instanceof RegExp) {
       this.#internalId = this.#rootElement.textContent?.match(keyRegex)?.[0] ?? 'UNKNOWN_ID'
+    } else if (typeof keyRegex === 'string') {
+      this.#internalId = keyRegex
     }
 
     this.#key = makeKey(this.#name)
@@ -49,6 +51,20 @@ export default class AuditNode {
   // Default implementations (should be overridden by subclasses)
   toString () { return `${this.#name}: ${this.isSatisfied()}` }
   isSatisfied () { return AuditNode.SATISFIED_TYPE.UNKNOWN }
+
+  /**
+   * Return a data-only object with reduced fields for serialization
+   * @returns {Object} A simplified JS object for serialization
+   */
+  toJSON () {
+    return {
+      name: this.getName(),
+      key: this.getKey(),
+      internalId: this.getInternalId(),
+      satisfied: this.isSatisfied(),
+      subNodes: this.getSubNodes().map(subNode => subNode.toJSON())
+    }
+  }
 
   // Accessors for private values
   getName () { return this.#name }

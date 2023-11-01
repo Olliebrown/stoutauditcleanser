@@ -28,4 +28,8 @@ describe('BS in AMCS: Interdisciplinary Program Node', () => {
     expect(titleElem?.textContent).toBe('BS Applied Math Computer Science Interdisciplinary')
     expect(program?.getName()).toMatch(/^BS In AMCS: interdisciplinary CONC\s+\d\d\d\d$/)
   })
+
+  test('should have expected snapshot', () => {
+    expect(program?.toJSON()).toMatchSnapshot()
+  })
 })

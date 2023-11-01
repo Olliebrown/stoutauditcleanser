@@ -16,7 +16,7 @@ export default class Requirement extends AuditNode {
 
   // Initialize derived values
   #satisfiedText = ''
-  #requirementID = ''
+  #requirementId = ''
   #description = ''
 
   /**
@@ -35,16 +35,16 @@ export default class Requirement extends AuditNode {
     this.#programBodyIndex = Array.from(this.#programBodyNode.children)
       .findIndex(node => node === this.#programRowNode)
 
-    // Set name and key
-    this._initialize(this.#programRowNode, /RQ-\d+/)
-
     // Initialize derived values
     this._extractDescription()
+
+    // Set name and key
+    this._initialize(this.#programRowNode, this.#requirementId)
   }
 
   // Accessors for private values
   getDescription () { return this.#description }
-  getRequirementID () { return this.#requirementID }
+  getRequirementId () { return this.#requirementId }
 
   /**
    * Examine the requirement to see if it is labeled as 'satisfied'
@@ -54,7 +54,6 @@ export default class Requirement extends AuditNode {
     if (this.#satisfiedText === 'Satisfied') {
       return AuditNode.SATISFIED_TYPE.COMPLETE
     }
-
     return AuditNode.SATISFIED_TYPE.INCOMPLETE
   }
 
@@ -84,7 +83,7 @@ export default class Requirement extends AuditNode {
       .textContent.match(REGEX.requirementDescription)
     if (descriptionMatch) {
       this.#satisfiedText = descriptionMatch.groups.satisfied
-      this.#requirementID = descriptionMatch.groups.ID
+      this.#requirementId = descriptionMatch.groups.ID
       this.#description = descriptionMatch.groups.description
     } else {
       console.warn('Requirement Description regex failed')
@@ -102,5 +101,19 @@ export default class Requirement extends AuditNode {
    */
   _extractSubNodes () {
     return makeSubRequirementsArray(this.#programBodyNode, this.#programBodyIndex)
+  }
+
+  /**
+   * Return a data-only object with reduced fields for serialization
+   * @returns {Object} A simplified JS object for serialization
+   * @override
+   */
+  toJSON () {
+    const JSONBase = super.toJSON()
+    return {
+      ...JSONBase,
+      isGenEd: this.isGenEd(),
+      description: this.getDescription()
+    }
   }
 }

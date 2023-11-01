@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Computer Network Systems and Design Minor Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-10510",
+  "key": "computer_networking_systems___design_minor",
+  "name": "Computer Networking Systems & Design Minor",
+  "satisfied": {
+    "description": "Computer Network System & Design Minor",
+    "internalId": "RQ-10510",
+    "isGenEd": false,
+    "key": "minor__computer_network_system___design_minor",
+    "name": "Minor -Computer Network System & Design Minor",
+    "satisfied": "COMPLETE",
+    "subNodes": [],
+  },
+  "subNodes": [
+    {
+      "description": "Computer Network System & Design Minor",
+      "internalId": "RQ-10510",
+      "isGenEd": false,
+      "key": "minor__computer_network_system___design_minor",
+      "name": "Minor -Computer Network System & Design Minor",
+      "satisfied": "COMPLETE",
+      "subNodes": [],
+    },
+  ],
+}
+`;

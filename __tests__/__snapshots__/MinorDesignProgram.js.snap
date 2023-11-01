@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Design Minor Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-011666",
+  "key": "minor__design",
+  "name": "Minor: design",
+  "satisfied": {
+    "description": "DESIGN MINOR (24 CREDITS)",
+    "internalId": "RQ-10816",
+    "isGenEd": false,
+    "key": "minor___design",
+    "name": "Minor - Design",
+    "satisfied": "INCOMPLETE",
+    "subNodes": [],
+  },
+  "subNodes": [
+    {
+      "description": "DESIGN MINOR (24 CREDITS)",
+      "internalId": "RQ-10816",
+      "isGenEd": false,
+      "key": "minor___design",
+      "name": "Minor - Design",
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+    },
+  ],
+}
+`;
