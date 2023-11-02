@@ -5,25 +5,31 @@ exports[`Computer Network Systems and Design Minor Node should have expected sna
   "internalId": "RG-10510",
   "key": "computer_networking_systems___design_minor",
   "name": "Computer Networking Systems & Design Minor",
-  "satisfied": {
-    "description": "Computer Network System & Design Minor",
-    "internalId": "RQ-10510",
-    "isGenEd": false,
-    "key": "minor__computer_network_system___design_minor",
-    "name": "Minor -Computer Network System & Design Minor",
-    "satisfied": "COMPLETE",
-    "subNodes": [],
-  },
+  "satisfied": "COMPLETE",
   "subNodes": [
     {
       "description": "Computer Network System & Design Minor",
+      "index": 1,
       "internalId": "RQ-10510",
       "isGenEd": false,
       "key": "minor__computer_network_system___design_minor",
       "name": "Minor -Computer Network System & Design Minor",
+      "nextIndex": 8,
       "satisfied": "COMPLETE",
       "subNodes": [],
+      "units": {
+        "credits": {
+          "current": 21,
+          "required": 21,
+        },
+      },
     },
   ],
+  "units": {
+    "credits": {
+      "current": 21,
+      "required": 21,
+    },
+  },
 }
 `;

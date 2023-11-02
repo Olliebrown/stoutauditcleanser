@@ -37924,7 +37924,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     engl: "ENGL",
     res: "RES",
     glp: "GLP",
-    gpa: "GPA"
+    gpa: "GPA",
+    ii: "II"
   };
   function abbreviate(str) {
     let result = str;
@@ -37944,6 +37945,42 @@ Please use another name.` : formatMuiErrorMessage(18));
     return str.trim().toLowerCase().replace(/[^a-z0-9_]/g, "_");
   }
 
+  // src/domTraversal/queriesAndRegex.js
+  var QUERIES = {
+    otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
+    otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
+    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
+    requirementHeader: ".PAGROUPDIVIDER",
+    requirementAltHeader: "PSGROUPBOX",
+    subRequirementHeader: 'div[id^="win0divDERIVED_SAA_DPR_GROUPBOX3GP"]',
+    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
+    subRequirementDescription: ".PSLONGEDITBOX",
+    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
+    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
+    showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
+    studentName: "table.PABACKGROUNDINVISIBLE .PAPAGETITLE",
+    pageDivId: "pt_pageinfo_win0",
+    pageElement: (page) => `div[page="${page}"]`,
+    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
+  };
+  var PAGE_IDS = {
+    audit: "SAA_SS_DPR_ADB",
+    studentCenter: "SSS_STUDENT_CENTER"
+  };
+  var PAGE_NAME_TO_ID = Object.fromEntries(
+    Object.entries(PAGE_IDS).map(([key, value]) => [value, key])
+  );
+  var REGEX = {
+    generalHeader: /(?:GENERAL INFORMATION)/i,
+    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
+    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
+    credits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i,
+    courses: /Courses:\s+(?<req>[\d]+)\s+required,\s+(?<taken>[\d]+)\s+taken,\s+(?<need>[\d]+)\s+needed/i,
+    gpa: /GPA:\s+(?<req>[\d.]+)\s+required,\s+(?<actual>[\d.]+)\s+actual/i
+  };
+
   // src/Objects/AuditNode.js
   var AuditNode = class _AuditNode {
     // Internal values
@@ -37952,15 +37989,53 @@ Please use another name.` : formatMuiErrorMessage(18));
     #key = "UNKNOWN_KEY";
     #subNodes = [];
     #rootElement = null;
+    #units = {
+      courses: null,
+      credits: null,
+      gpa: null
+    };
     // Initialize important internal values in a consistent way
     _initialize(rootElement, keyRegex) {
       this.#rootElement = rootElement;
       this.#name = abbreviate(toTitleCase(this._extractHeading().trim()));
-      if (this.#rootElement && keyRegex) {
+      if (this.#rootElement && keyRegex instanceof RegExp) {
         this.#internalId = this.#rootElement.textContent?.match(keyRegex)?.[0] ?? "UNKNOWN_ID";
+      } else if (typeof keyRegex === "string") {
+        this.#internalId = keyRegex;
       }
       this.#key = makeKey(this.#name);
       this.#subNodes = this._extractSubNodes();
+      this.#units = this._extractUnits();
+    }
+    // Find and extract the completion unit information
+    _extractUnits() {
+      const units = {};
+      const credits = this._extractFullText().match(REGEX.credits)?.groups;
+      if (credits) {
+        units.credits = {
+          current: parseFloat(credits?.taken),
+          required: parseFloat(credits?.req)
+        };
+      }
+      const courses = this._extractFullText().match(REGEX.courses)?.groups;
+      if (courses) {
+        units.courses = {
+          current: parseFloat(courses?.taken),
+          required: parseFloat(courses?.req)
+        };
+      }
+      const gpa = this._extractFullText().match(REGEX.gpa)?.groups;
+      if (gpa) {
+        units.gpa = {
+          current: parseFloat(gpa?.actual),
+          required: parseFloat(gpa?.req)
+        };
+      }
+      return units;
+    }
+    // Extract all the text of this node (including any sub-nodes)
+    _extractFullText() {
+      return this.#rootElement?.textContent.trim() ?? "";
     }
     // Abstract methods to be override by subclasses
     _extractHeading() {
@@ -37989,12 +38064,35 @@ Please use another name.` : formatMuiErrorMessage(18));
         this.#rootElement.scrollIntoView();
       }
     }
+    /**
+     * Is this a general education / Stout Core requirement? Includes all requirements
+     * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
+     * @returns {bool} Whether or not this requirement is a GenEd requirement
+     */
+    isGenEd() {
+      return this.getName().includes("GenEd") || this.getName().includes("RES") || this.getName().includes("GLP");
+    }
     // Default implementations (should be overridden by subclasses)
     toString() {
       return `${this.#name}: ${this.isSatisfied()}`;
     }
     isSatisfied() {
       return _AuditNode.SATISFIED_TYPE.UNKNOWN;
+    }
+    /**
+     * Return a data-only object with reduced fields for serialization
+     * @returns {Object} A simplified JS object for serialization
+     */
+    toJSON() {
+      return {
+        name: this.getName(),
+        key: this.getKey(),
+        internalId: this.getInternalId(),
+        isGenEd: this.isGenEd(),
+        satisfied: this.isSatisfied(),
+        units: this.getUnits(),
+        subNodes: this.getSubNodes().map((subNode) => subNode.toJSON())
+      };
     }
     // Accessors for private values
     getName() {
@@ -38011,6 +38109,9 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
     getRootElement() {
       return this.#rootElement;
+    }
+    getUnits() {
+      return this.#units;
     }
   };
   AuditNode.SATISFIED_TYPE = Object.freeze({
@@ -38172,40 +38273,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     last: false
   };
 
-  // src/domTraversal/queriesAndRegex.js
-  var QUERIES = {
-    otherAcademicDropdown: '[name^="DERIVED_SSS_SCL_SSS_MORE_ACAD"]',
-    otherAcademicGoButton: '[name^="DERIVED_SSS_SCL_SSS_GO"]',
-    programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
-    requirementHeader: ".PAGROUPDIVIDER",
-    requirementAltHeader: "PSGROUPBOX",
-    subRequirementHeader: ".PSGROUPBOXLABEL",
-    subRequirementDetails: ".PSLEVEL1SCROLLAREABODYNBO > tbody > tr",
-    subRequirementDescription: ".PSLONGEDITBOX",
-    expander: "#DERIVED_SAA_DPR_SSS_EXPAND_ALL",
-    expanderList: 'a[id^="DERIVED_SAA_DPR_GROUPBOX1"][aria-expanded="false"]',
-    showButton: "a.PSLEVEL3GRIDLABEL:nth-child(2)",
-    studentName: "table.PABACKGROUNDINVISIBLE .PAPAGETITLE",
-    pageDivId: "pt_pageinfo_win0",
-    pageElement: (page) => `div[page="${page}"]`,
-    programTable: (depth) => `tr:nth-child(2) > td tbody > tr:nth-child(2) > td:nth-child(2) tbody > tr:nth-child(2) td tbody > tr:nth-child(${depth}) > td:nth-child(2) tbody tbody`
-  };
-  var PAGE_IDS = {
-    audit: "SAA_SS_DPR_ADB",
-    studentCenter: "SSS_STUDENT_CENTER"
-  };
-  var PAGE_NAME_TO_ID = Object.fromEntries(
-    Object.entries(PAGE_IDS).map(([key, value]) => [value, key])
-  );
-  var REGEX = {
-    generalHeader: /(?:GENERAL INFORMATION)/i,
-    universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
-    informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
-    subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
-  };
-
   // src/Objects/Requirement.js
   var Requirement2 = class extends AuditNode {
     // References to DOM elements used for extraction of details
@@ -38213,29 +38280,35 @@ Please use another name.` : formatMuiErrorMessage(18));
     #programRowNode = null;
     #programBodyNode = null;
     #programBodyIndex = null;
+    #programBodyNextIndex = null;
     // Initialize derived values
     #satisfiedText = "";
-    #requirementID = "";
+    #requirementId = "";
     #description = "";
     /**
      * Build a program requirement object from the TR node of its heading
      * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
      */
-    constructor(headingRowNode) {
+    constructor(headingRowNode, nextNodeText) {
       super();
       this.#headingRowNode = headingRowNode;
       this.#programRowNode = headingRowNode.parentElement.parentElement.parentElement.parentElement.parentElement;
       this.#programBodyNode = this.#programRowNode.parentElement;
       this.#programBodyIndex = Array.from(this.#programBodyNode.children).findIndex((node2) => node2 === this.#programRowNode);
-      this._initialize(this.#programRowNode, /RQ-\d+/);
+      if (nextNodeText) {
+        this.#programBodyNextIndex = Array.from(this.#programBodyNode.children).findIndex((node2) => node2.textContent.includes(nextNodeText));
+      } else {
+        this.#programBodyNextIndex = this.#programBodyNode.children.length;
+      }
       this._extractDescription();
+      this._initialize(this.#programRowNode, this.#requirementId);
     }
     // Accessors for private values
     getDescription() {
       return this.#description;
     }
-    getRequirementID() {
-      return this.#requirementID;
+    getRequirementId() {
+      return this.#requirementId;
     }
     /**
      * Examine the requirement to see if it is labeled as 'satisfied'
@@ -38248,26 +38321,21 @@ Please use another name.` : formatMuiErrorMessage(18));
       return AuditNode.SATISFIED_TYPE.INCOMPLETE;
     }
     /**
-     * Is this a general education / Stout Core requirement? Includes all requirements
-     * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
-     * @returns {bool} Whether or not this requirement is a GenEd requirement
-     */
-    isGenEd() {
-      return this.getName().includes("GenEd") || this.getName().includes("RES") || this.getName().includes("GLP");
-    }
-    /**
      * Extract and return just the text of the requirement's header
      * @returns {string} The text within the requirement's header row
      */
     _extractHeading() {
       return this.#headingRowNode.textContent;
     }
+    _extractFullText() {
+      return Array.from(this.#programBodyNode.children).slice(this.#programBodyIndex, this.#programBodyNextIndex).map((node2) => node2.textContent).join("\n");
+    }
     _extractDescription() {
       const requirementsArray = Array.from(this.#programBodyNode.children);
       const descriptionMatch = requirementsArray[this.#programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
       if (descriptionMatch) {
         this.#satisfiedText = descriptionMatch.groups.satisfied;
-        this.#requirementID = descriptionMatch.groups.ID;
+        this.#requirementId = descriptionMatch.groups.ID;
         this.#description = descriptionMatch.groups.description;
       } else {
         console.warn("Requirement Description regex failed");
@@ -38283,7 +38351,21 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
      */
     _extractSubNodes() {
-      return makeSubRequirementsArray(this.#programBodyNode, this.#programBodyIndex);
+      return makeSubRequirementsArray(this.#programRowNode);
+    }
+    /**
+     * Return a data-only object with reduced fields for serialization
+     * @returns {Object} A simplified JS object for serialization
+     * @override
+     */
+    toJSON() {
+      const JSONBase = super.toJSON();
+      return {
+        ...JSONBase,
+        description: this.getDescription(),
+        index: this.#programBodyIndex,
+        nextIndex: this.#programBodyNextIndex
+      };
     }
   };
 
@@ -38296,7 +38378,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     // Initialize derived values
     #satisfiedText = "";
     #description = "";
-    #units = { req: 0, taken: 0, need: 0 };
     #isValid = false;
     /**
      * Build a sub-requirement object from the TABLE node inside it's TR heading
@@ -38311,26 +38392,23 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (!this.#isValid) {
         return;
       }
-      this._initialize();
+      this._initialize(this.#headingRowNode);
       this._extractDescription();
-      this._extractUnits();
     }
     // Accessors for private values
     getDescription() {
       return this.#description;
-    }
-    getUnits() {
-      return this.#units;
     }
     isValid() {
       return this.#isValid;
     }
     // Convert to string
     toString() {
+      const units = this.getUnits();
       if (!this.#isValid) {
         return "Invalid Sub-Requirement";
       }
-      return `${this.getName()}: ${this.isSatisfied()} (${this.#units.taken}/${this.#units.req})`;
+      return `${this.getName()}: ${this.isSatisfied()} (${units.taken}/${units.req})`;
     }
     /**
      * Examine the requirement to see if it is labeled as 'satisfied'
@@ -38369,17 +38447,18 @@ Please use another name.` : formatMuiErrorMessage(18));
         console.warn("------------------------");
       }
     }
-    // Find and extract the completion unit information
-    _extractUnits() {
-      if (!this.#isValid) {
-        return;
-      }
-      this.#units = this.#mainTableNode.textContent.match(REGEX.subReqUnits)?.groups;
-      if (this.#units) {
-        this.#units.req = parseFloat(this.#units?.req);
-        this.#units.taken = parseFloat(this.#units?.taken);
-        this.#units.need = parseFloat(this.#units?.need);
-      }
+    /**
+     * Return a data-only object with reduced fields for serialization
+     * @returns {Object} A simplified JS object for serialization
+     * @override
+     */
+    toJSON() {
+      const JSONBase = super.toJSON();
+      return {
+        ...JSONBase,
+        isValid: this.isValid(),
+        description: this.getDescription()
+      };
     }
   };
 
@@ -38413,29 +38492,12 @@ Please use another name.` : formatMuiErrorMessage(18));
     const filteredNodes = Array.from(requirementNodes).filter((node2) => {
       return !node2.textContent.match(REGEX.informationalOnly);
     });
-    return Array.from(filteredNodes).map((node2) => new Requirement2(node2.parentNode));
+    return Array.from(filteredNodes).map((node2, i, array) => new Requirement2(node2.parentNode, array[i + 1]?.parentNode.textContent));
   }
-  function makeSubRequirementsArray(rootNode, rootIndex) {
-    const requirementsArray = Array.from(rootNode.children);
-    const subRequirements = [];
-    for (let i = rootIndex + 2; i < requirementsArray.length; i++) {
-      const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`);
-      if (headerNode) {
-        subRequirements.push(requirementsArray[i]);
-      } else {
-        break;
-      }
-    }
-    return subRequirements.filter((node2) => node2.textContent.trim() !== "").reduce((nodeList, node2) => {
-      let tableNode = node2;
-      while (tableNode.tagType.toLowerCase() !== "table" && tableNode.parentElement) {
-        tableNode = tableNode.parentElement;
-      }
-      if (tableNode?.tagType.toLowerCase() !== "table") {
-        return nodeList;
-      }
-      return [...nodeList, new SubRequirement(tableNode)];
-    }, []);
+  function makeSubRequirementsArray(rootNode) {
+    const subRequirementNodes = rootNode.querySelectorAll(QUERIES.subRequirementHeader);
+    const mappedNodes = Array.from(subRequirementNodes).map((node2) => node2.parentNode.parentNode.parentNode);
+    return mappedNodes.map((node2) => new SubRequirement(node2));
   }
 
   // src/Objects/Program.js
@@ -38455,15 +38517,6 @@ Please use another name.` : formatMuiErrorMessage(18));
           throw new Error("Failed to find program table");
         }
       }
-      const subNodes = this._extractSubNodes();
-      if (!Array.isArray(subNodes) || subNodes.length < 1) {
-        while (!this.#mainTable.classList?.contains(QUERIES.requirementAltHeader) && this.#mainTable.parentNode.classList) {
-          this.#mainTable = this.#mainTable.parentNode;
-        }
-        if (this.#mainTable.tagType?.toLowerCase() === "table") {
-          this.#mainTable = this.#mainTable.tBodies[0];
-        }
-      }
       this._initialize(this.#programRoot, /RG-\d+/);
     }
     /**
@@ -38474,13 +38527,24 @@ Please use another name.` : formatMuiErrorMessage(18));
     _extractHeading() {
       return this.#programHeaderNode.textContent;
     }
+    // Find and extract the completion unit information
+    _extractFullText() {
+      const descriptionText = this.#programRoot.querySelector(QUERIES.programTable(3))?.textContent;
+      if (descriptionText?.match(REGEX.units)) {
+        return descriptionText;
+      }
+      return super._extractFullText();
+    }
     /**
      * Extract the requirements and convert them to an array of Requirement objects
      * @returns {Array(Requirement)} Array of Requirement objects extracted from the HTML
      * @override
      */
     _extractSubNodes() {
-      const requirements = makeRequirementsArray(this.#mainTable);
+      let requirements = makeRequirementsArray(this.#mainTable);
+      if (!Array.isArray(requirements) || requirements.length < 1) {
+        requirements = makeSubRequirementsArray(this.#mainTable);
+      }
       return requirements;
     }
     /**
@@ -38503,7 +38567,7 @@ Please use another name.` : formatMuiErrorMessage(18));
             }
         }
         return requirement.isSatisfied();
-      });
+      }, AuditNode.SATISFIED_TYPE.COMPLETE);
     }
   };
 

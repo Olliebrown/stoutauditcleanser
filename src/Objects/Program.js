@@ -1,7 +1,7 @@
-import { QUERIES } from '../domTraversal/queriesAndRegex.js'
+import { QUERIES, REGEX } from '../domTraversal/queriesAndRegex.js'
 
 import AuditNode from './AuditNode.js'
-import { makeRequirementsArray } from './NodeFactories.js'
+import { makeRequirementsArray, makeSubRequirementsArray } from './NodeFactories.js'
 
 /**
  * An object for examining a program or sub-program and its requirements
@@ -30,18 +30,6 @@ export default class Program extends AuditNode {
       }
     }
 
-    // If there are no sub-nodes, then we need to find the parent table
-    const subNodes = this._extractSubNodes()
-    if (!Array.isArray(subNodes) || subNodes.length < 1) {
-      while (!this.#mainTable.classList?.contains(QUERIES.requirementAltHeader) && this.#mainTable.parentNode.classList) {
-        this.#mainTable = this.#mainTable.parentNode
-      }
-
-      if (this.#mainTable.tagType?.toLowerCase() === 'table') {
-        this.#mainTable = this.#mainTable.tBodies[0]
-      }
-    }
-
     // Initialize internal values
     this._initialize(this.#programRoot, /RG-\d+/)
   }
@@ -55,6 +43,16 @@ export default class Program extends AuditNode {
     return this.#programHeaderNode.textContent
   }
 
+  // Find and extract the completion unit information
+  _extractFullText () {
+    const descriptionText = this.#programRoot.querySelector(QUERIES.programTable(3))?.textContent
+    if (descriptionText?.match(REGEX.units)) {
+      return descriptionText
+    }
+
+    return super._extractFullText()
+  }
+
   /**
    * Extract the requirements and convert them to an array of Requirement objects
    * @returns {Array(Requirement)} Array of Requirement objects extracted from the HTML
@@ -62,7 +60,11 @@ export default class Program extends AuditNode {
    */
   _extractSubNodes () {
     // Try to extract as Requirements
-    const requirements = makeRequirementsArray(this.#mainTable)
+    let requirements = makeRequirementsArray(this.#mainTable)
+    if (!Array.isArray(requirements) || requirements.length < 1) {
+      // Try sub-requirements instead
+      requirements = makeSubRequirementsArray(this.#mainTable)
+    }
     return requirements
   }
 
@@ -95,6 +97,6 @@ export default class Program extends AuditNode {
 
       // Otherwise, just return the status of the current requirement
       return requirement.isSatisfied()
-    })
+    }, AuditNode.SATISFIED_TYPE.COMPLETE)
   }
 }

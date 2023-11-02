@@ -5,25 +5,21 @@ exports[`Mathematics Minor Node should have expected snapshot 1`] = `
   "internalId": "RG-11154",
   "key": "minor__infosec_mgmt",
   "name": "Minor: InfoSec Mgmt",
-  "satisfied": {
-    "description": "",
-    "internalId": "",
-    "isGenEd": false,
-    "key": "minor__infosec_mgmt_minor",
-    "name": "Minor: InfoSec Mgmt Minor",
-    "satisfied": "INCOMPLETE",
-    "subNodes": [],
-  },
+  "satisfied": "INCOMPLETE",
   "subNodes": [
     {
       "description": "",
+      "index": 1,
       "internalId": "",
       "isGenEd": false,
       "key": "minor__infosec_mgmt_minor",
       "name": "Minor: InfoSec Mgmt Minor",
+      "nextIndex": 8,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
+      "units": {},
     },
   ],
+  "units": {},
 }
 `;

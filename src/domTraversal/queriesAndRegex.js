@@ -5,7 +5,7 @@ export const QUERIES = {
   programHeader: '[id*="DERIVED_SAA_DPR_GROUPBOX1GP"]',
   requirementHeader: '.PAGROUPDIVIDER',
   requirementAltHeader: 'PSGROUPBOX',
-  subRequirementHeader: '.PSGROUPBOXLABEL',
+  subRequirementHeader: 'div[id^="win0divDERIVED_SAA_DPR_GROUPBOX3GP"]',
   subRequirementDetails: '.PSLEVEL1SCROLLAREABODYNBO > tbody > tr',
   subRequirementDescription: '.PSLONGEDITBOX',
   expander: '#DERIVED_SAA_DPR_SSS_EXPAND_ALL',
@@ -35,5 +35,7 @@ export const REGEX = {
   requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
   subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
   informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
-  subReqUnits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i
+  credits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i,
+  courses: /Courses:\s+(?<req>[\d]+)\s+required,\s+(?<taken>[\d]+)\s+taken,\s+(?<need>[\d]+)\s+needed/i,
+  gpa: /GPA:\s+(?<req>[\d.]+)\s+required,\s+(?<actual>[\d.]+)\s+actual/i
 }

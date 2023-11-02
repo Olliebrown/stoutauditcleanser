@@ -5,25 +5,21 @@ exports[`General Student Info Node should have expected snapshot 1`] = `
   "internalId": "RG-10369",
   "key": "general_information_for_students",
   "name": "General Information For Students",
-  "satisfied": {
-    "description": "Incomplete/In Progress/Courses in Registration StatusIncomplete Coursework, that has earned a Grade of an "I", must be completed within one year from the date the "I" is received or an "F" Grade will be assigned. A grade of "IP" is given for approved courses in which more than one term is required for completion because of the nature of the course requirement.  If the course requirements are not completed within two years from the date the "IP" is received, the student must re-register for the course to obtain credit. Please take the following courses into consideration when planning your future class registration.Visit the Registration & Records website  for further information.",
-    "internalId": "RQ-0169",
-    "isGenEd": false,
-    "key": "incomplete_in_progress_coursework_notice",
-    "name": "Incomplete/in-progress Coursework Notice",
-    "satisfied": "INCOMPLETE",
-    "subNodes": [],
-  },
+  "satisfied": "INCOMPLETE",
   "subNodes": [
     {
       "description": "Incomplete/In Progress/Courses in Registration StatusIncomplete Coursework, that has earned a Grade of an "I", must be completed within one year from the date the "I" is received or an "F" Grade will be assigned. A grade of "IP" is given for approved courses in which more than one term is required for completion because of the nature of the course requirement.  If the course requirements are not completed within two years from the date the "IP" is received, the student must re-register for the course to obtain credit. Please take the following courses into consideration when planning your future class registration.Visit the Registration & Records website  for further information.",
+      "index": 7,
       "internalId": "RQ-0169",
       "isGenEd": false,
       "key": "incomplete_in_progress_coursework_notice",
       "name": "Incomplete/in-progress Coursework Notice",
+      "nextIndex": 15,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
+      "units": {},
     },
   ],
+  "units": {},
 }
 `;

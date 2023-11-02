@@ -13,6 +13,7 @@ export default class Requirement extends AuditNode {
   #programRowNode = null
   #programBodyNode = null
   #programBodyIndex = null
+  #programBodyNextIndex = null
 
   // Initialize derived values
   #satisfiedText = ''
@@ -23,7 +24,7 @@ export default class Requirement extends AuditNode {
    * Build a program requirement object from the TR node of its heading
    * @param {HTMLElement} headingRowNode The TR node that contains the top-level requirement's heading
    */
-  constructor (headingRowNode) {
+  constructor (headingRowNode, nextNodeText) {
     super()
 
     // Save references to the key nodes for this requirement
@@ -34,6 +35,14 @@ export default class Requirement extends AuditNode {
     // Where is this requirement within the program body?
     this.#programBodyIndex = Array.from(this.#programBodyNode.children)
       .findIndex(node => node === this.#programRowNode)
+
+    // Where is the next requirement within the program body?
+    if (nextNodeText) {
+      this.#programBodyNextIndex = Array.from(this.#programBodyNode.children)
+        .findIndex(node => node.textContent.includes(nextNodeText))
+    } else {
+      this.#programBodyNextIndex = this.#programBodyNode.children.length
+    }
 
     // Initialize derived values
     this._extractDescription()
@@ -58,22 +67,17 @@ export default class Requirement extends AuditNode {
   }
 
   /**
-   * Is this a general education / Stout Core requirement? Includes all requirements
-   * that have 'GenEd' in the name as well as 'RES' and 'GLP' requirements.
-   * @returns {bool} Whether or not this requirement is a GenEd requirement
-   */
-  isGenEd () {
-    return this.getName().includes('GenEd') ||
-      this.getName().includes('RES') ||
-      this.getName().includes('GLP')
-  }
-
-  /**
    * Extract and return just the text of the requirement's header
    * @returns {string} The text within the requirement's header row
    */
   _extractHeading () {
     return this.#headingRowNode.textContent
+  }
+
+  _extractFullText () {
+    return Array.from(this.#programBodyNode.children)
+      .slice(this.#programBodyIndex, this.#programBodyNextIndex)
+      .map(node => node.textContent).join('\n')
   }
 
   _extractDescription () {
@@ -100,7 +104,7 @@ export default class Requirement extends AuditNode {
    * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
    */
   _extractSubNodes () {
-    return makeSubRequirementsArray(this.#programBodyNode, this.#programBodyIndex)
+    return makeSubRequirementsArray(this.#programRowNode)
   }
 
   /**
@@ -112,8 +116,9 @@ export default class Requirement extends AuditNode {
     const JSONBase = super.toJSON()
     return {
       ...JSONBase,
-      isGenEd: this.isGenEd(),
-      description: this.getDescription()
+      description: this.getDescription(),
+      index: this.#programBodyIndex,
+      nextIndex: this.#programBodyNextIndex
     }
   }
 }

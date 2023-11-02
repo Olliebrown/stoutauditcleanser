@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BS in Computer Networking & Information Technology Node should have expected snapshot 1`] = `
+exports[`BS in CyberSecurity Program Node should have expected snapshot 1`] = `
 {
-  "internalId": "RG-738",
-  "key": "bs_in_cnit_2020",
-  "name": "BS In CNIT 2020",
+  "internalId": "RG-011587",
+  "key": "bs_in_cybersec_2022",
+  "name": "BS In CyberSec 2022",
   "satisfied": "INCOMPLETE",
   "subNodes": [
     {
@@ -54,23 +54,23 @@ exports[`BS in Computer Networking & Information Technology Node should have exp
       "units": {},
     },
     {
-      "description": "GEN-ARNS.CNIT.2019",
+      "description": "General Education-Analytical Reasoning & Natural ScienceCybersecurity",
       "index": 19,
-      "internalId": "RQ-10408",
+      "internalId": "RQ-10800",
       "isGenEd": true,
-      "key": "gened__arns",
-      "name": "GenEd: ARNS",
+      "key": "gened__arns__10_14_credits_",
+      "name": "GenEd: ARNS (10-14 Credits)",
       "nextIndex": 31,
       "satisfied": "COMPLETE",
       "subNodes": [],
       "units": {
         "courses": {
-          "current": 1,
-          "required": 1,
+          "current": 3,
+          "required": 0,
         },
         "credits": {
           "current": 14,
-          "required": 11,
+          "required": 10,
         },
       },
     },
@@ -111,11 +111,11 @@ exports[`BS in Computer Networking & Information Technology Node should have exp
     {
       "description": "General Education: Cross-disciplinary Issues",
       "index": 47,
-      "internalId": "RQ-10409",
+      "internalId": "RQ-10378",
       "isGenEd": true,
       "key": "gened__ci",
       "name": "GenEd: CI",
-      "nextIndex": 53,
+      "nextIndex": 51,
       "satisfied": "COMPLETE",
       "subNodes": [],
       "units": {
@@ -126,64 +126,68 @@ exports[`BS in Computer Networking & Information Technology Node should have exp
       },
     },
     {
-      "description": "General Education: Social Responsibility and Ethical Reasoning",
-      "index": 53,
-      "internalId": "RQ-10647",
+      "description": "General Education- Social Responsibility and Ethical ReasoningTake ICT 215",
+      "index": 51,
+      "internalId": "RQ-10803",
       "isGenEd": true,
       "key": "gened__srer",
       "name": "GenEd: SRER",
-      "nextIndex": 57,
-      "satisfied": "INCOMPLETE",
+      "nextIndex": 55,
+      "satisfied": "COMPLETE",
       "subNodes": [],
       "units": {
         "credits": {
-          "current": 0,
+          "current": 3,
           "required": 3,
         },
       },
     },
     {
-      "description": "GEN-SELECTIVES.ITM.2013",
-      "index": 57,
-      "internalId": "RQ-10411",
+      "description": "Complete 0-3 credits of GE Selective to reach the 40 GE credit requirement***AAR created requiring 3 credits, HOWEVER, only complete the number of Selective credits needed to reach 40 GE credit requirement. Registration and Records will make any credit adjustments once all GE requirements are satisfied.",
+      "index": 55,
+      "internalId": "RQ-10801",
       "isGenEd": true,
-      "key": "gened__selectives",
-      "name": "GenEd: Selectives",
-      "nextIndex": 63,
-      "satisfied": "COMPLETE",
-      "subNodes": [],
-      "units": {
-        "credits": {
-          "current": 2,
-          "required": 2,
-        },
-      },
-    },
-    {
-      "description": "MAJOR STUDIES",
-      "index": 63,
-      "internalId": "RQ-313",
-      "isGenEd": false,
-      "key": "major_studies__computer_networking____information_technology",
-      "name": "Major Studies: Computer Networking  & Information Technology",
-      "nextIndex": 75,
+      "key": "gened__selectives__0_3_credits_",
+      "name": "GenEd: Selectives (0-3 Credits)",
+      "nextIndex": 59,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
       "units": {
         "credits": {
-          "current": 81,
+          "current": 2,
+          "required": 3,
+        },
+      },
+    },
+    {
+      "description": "CYBERSECURITY MAJOR STUDIES",
+      "index": 59,
+      "internalId": "RQ-010802",
+      "isGenEd": false,
+      "key": "maj__cybersec_major_studies",
+      "name": "Maj: CyberSec Major Studies",
+      "nextIndex": 73,
+      "satisfied": "INCOMPLETE",
+      "subNodes": [],
+      "units": {
+        "courses": {
+          "current": 18,
+          "required": 20,
+        },
+        "credits": {
+          "current": 75,
           "required": 80,
         },
       },
     },
     {
       "description": "OTHER COURSES",
-      "index": 75,
+      "index": 73,
       "internalId": "RQ-0331",
       "isGenEd": false,
       "key": "other_courses",
       "name": "Other Courses",
-      "nextIndex": 80,
+      "nextIndex": 78,
       "satisfied": "COMPLETE",
       "subNodes": [],
       "units": {},
@@ -191,11 +195,11 @@ exports[`BS in Computer Networking & Information Technology Node should have exp
   ],
   "units": {
     "credits": {
-      "current": 121,
+      "current": 118,
       "required": 120,
     },
     "gpa": {
-      "current": 3.2,
+      "current": 3.31,
       "required": 2,
     },
   },

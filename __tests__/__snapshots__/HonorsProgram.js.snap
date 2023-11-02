@@ -9,31 +9,59 @@ exports[`Honors College Node should have expected snapshot 1`] = `
   "subNodes": [
     {
       "description": "HONORS COLLEGE REQUIREMENTS",
+      "index": 1,
       "internalId": "RQ-10485",
       "isGenEd": false,
       "key": "honors_college_requirements",
       "name": "Honors College Requirements",
+      "nextIndex": 11,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
+      "units": {
+        "courses": {
+          "current": 4,
+          "required": 7,
+        },
+        "gpa": {
+          "current": 3.273,
+          "required": 3,
+        },
+      },
     },
     {
       "description": "Honors College Colloquium Students must complete a total of 8 colloquia. ",
+      "index": 11,
       "internalId": "RQ-10530",
       "isGenEd": false,
       "key": "honors_college_colloquium",
       "name": "Honors College Colloquium",
+      "nextIndex": 15,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
+      "units": {},
     },
     {
       "description": "Honors College Enhancement Events Participation in one Enhancement Event per academic year is required.  Check with the Honors College Office for a list of the qualifying Enhancement Events with which you can be credited. ",
+      "index": 15,
       "internalId": "RQ-10531",
       "isGenEd": false,
       "key": "honors_college_enhancement_events",
       "name": "Honors College Enhancement Events",
+      "nextIndex": 18,
       "satisfied": "INCOMPLETE",
       "subNodes": [],
+      "units": {},
     },
   ],
+  "units": {
+    "courses": {
+      "current": 4,
+      "required": 7,
+    },
+    "gpa": {
+      "current": 3.273,
+      "required": 3,
+    },
+  },
 }
 `;

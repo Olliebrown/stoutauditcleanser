@@ -14,7 +14,6 @@ export default class SubRequirement extends AuditNode {
   // Initialize derived values
   #satisfiedText = ''
   #description = ''
-  #units = { req: 0, taken: 0, need: 0 }
   #isValid = false
 
   /**
@@ -35,22 +34,21 @@ export default class SubRequirement extends AuditNode {
     if (!this.#isValid) { return }
 
     // No internal id so leave out parameters
-    this._initialize()
+    this._initialize(this.#headingRowNode)
 
     // Initialize derived values
     this._extractDescription()
-    this._extractUnits()
   }
 
   // Accessors for private values
   getDescription () { return this.#description }
-  getUnits () { return this.#units }
   isValid () { return this.#isValid }
 
   // Convert to string
   toString () {
+    const units = this.getUnits()
     if (!this.#isValid) { return 'Invalid Sub-Requirement' }
-    return `${this.getName()}: ${this.isSatisfied()} (${this.#units.taken}/${this.#units.req})`
+    return `${this.getName()}: ${this.isSatisfied()} (${units.taken}/${units.req})`
   }
 
   /**
@@ -97,16 +95,17 @@ export default class SubRequirement extends AuditNode {
     }
   }
 
-  // Find and extract the completion unit information
-  _extractUnits () {
-    if (!this.#isValid) { return }
-
-    // Extract unit information
-    this.#units = this.#mainTableNode.textContent.match(REGEX.subReqUnits)?.groups
-    if (this.#units) {
-      this.#units.req = parseFloat(this.#units?.req)
-      this.#units.taken = parseFloat(this.#units?.taken)
-      this.#units.need = parseFloat(this.#units?.need)
+  /**
+   * Return a data-only object with reduced fields for serialization
+   * @returns {Object} A simplified JS object for serialization
+   * @override
+   */
+  toJSON () {
+    const JSONBase = super.toJSON()
+    return {
+      ...JSONBase,
+      isValid: this.isValid(),
+      description: this.getDescription()
     }
   }
 }

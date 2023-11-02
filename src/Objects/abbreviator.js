@@ -63,7 +63,8 @@ const ABBREVIATIONS = {
   engl: 'ENGL',
   res: 'RES',
   glp: 'GLP',
-  gpa: 'GPA'
+  gpa: 'GPA',
+  ii: 'II'
 }
 
 // Look for known abbreviations (case-insensitive) in the string and replace them

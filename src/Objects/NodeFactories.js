@@ -47,39 +47,47 @@ export function makeRequirementsArray (rootNode) {
   })
 
   // Switch to parents (TR) and return
-  return Array.from(filteredNodes).map(node => new Requirement(node.parentNode))
+  return Array.from(filteredNodes).map((node, i, array) => (
+    new Requirement(node.parentNode, array[i + 1]?.parentNode.textContent)
+  ))
 }
 
-export function makeSubRequirementsArray (rootNode, rootIndex) {
-  // Get array of all the requirements in the entire program
-  const requirementsArray = Array.from(rootNode.children)
+export function makeSubRequirementsArray (rootNode) {
+  const subRequirementNodes = rootNode.querySelectorAll(QUERIES.subRequirementHeader)
+  const mappedNodes = Array.from(subRequirementNodes).map((node) => (
+    node.parentNode.parentNode.parentNode
+  ))
 
-  // Build array of sub-requirement rows
-  const subRequirements = []
-  for (let i = rootIndex + 2; i < requirementsArray.length; i++) {
-    const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`)
-    if (headerNode) {
-      subRequirements.push(requirementsArray[i])
-    } else {
-      break
-    }
-  }
+  return mappedNodes.map(node => new SubRequirement(node))
+  // // Get array of all the requirements in the entire program
+  // const requirementsArray = Array.from(rootNode.children)
 
-  // Remove empty sub-requirements
-  return subRequirements.filter(node => node.textContent.trim() !== '')
-    .reduce((nodeList, node) => {
-      // Find table tag that contains this sub-requirement
-      let tableNode = node
-      while (tableNode.tagType.toLowerCase() !== 'table' && tableNode.parentElement) {
-        tableNode = tableNode.parentElement
-      }
+  // // Build array of sub-requirement rows
+  // const subRequirements = []
+  // for (let i = rootIndex + 2; i < requirementsArray.length; i++) {
+  //   const headerNode = requirementsArray[i].querySelector(`:scope ${QUERIES.requirementHeader}`)
+  //   if (headerNode) {
+  //     subRequirements.push(requirementsArray[i])
+  //   } else {
+  //     break
+  //   }
+  // }
 
-      // Ignore this node if we didn't find a table tag (unlikely)
-      if (tableNode?.tagType.toLowerCase() !== 'table') {
-        return nodeList
-      }
+  // // Remove empty sub-requirements
+  // return subRequirements.filter(node => node.textContent.trim() !== '')
+  //   .reduce((nodeList, node) => {
+  //     // Find table tag that contains this sub-requirement
+  //     let tableNode = node
+  //     while (tableNode.tagType.toLowerCase() !== 'table' && tableNode.parentElement) {
+  //       tableNode = tableNode.parentElement
+  //     }
 
-      // Convert to proper sub-requirement and append
-      return [...nodeList, new SubRequirement(tableNode)]
-    }, [])
+  //     // Ignore this node if we didn't find a table tag (unlikely)
+  //     if (tableNode?.tagType.toLowerCase() !== 'table') {
+  //       return nodeList
+  //     }
+
+  //     // Convert to proper sub-requirement and append
+  //     return [...nodeList, new SubRequirement(tableNode)]
+  //   }, [])
 }
