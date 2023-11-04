@@ -2394,9 +2394,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React56 = require_react();
+          var React57 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React56.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React57.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4001,7 +4001,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React56.Children.forEach(props.children, function(child) {
+                  React57.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12448,7 +12448,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React56.Component().refs;
+          var emptyRefsObject = new React57.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24585,7 +24585,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React56 = require_react();
+          var React57 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24611,7 +24611,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React56.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React57.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error2(format) {
             {
               {
@@ -25469,15 +25469,15 @@
   });
 
   // src/index.jsx
-  var import_react20 = __toESM(require_react(), 1);
+  var import_react21 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/elements/AppRoot.jsx
-  var import_react19 = __toESM(require_react(), 1);
+  var import_react20 = __toESM(require_react(), 1);
 
   // src/elements/Components/CleanserRoot.jsx
-  var import_react16 = __toESM(require_react(), 1);
-  var import_prop_types38 = __toESM(require_prop_types(), 1);
+  var import_react17 = __toESM(require_react(), 1);
+  var import_prop_types39 = __toESM(require_prop_types(), 1);
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -37828,41 +37828,47 @@ Please use another name.` : formatMuiErrorMessage(18));
     d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
   }), "ExpandMore");
 
-  // node_modules/@mui/icons-material/esm/Info.js
+  // node_modules/@mui/icons-material/esm/Help.js
   var import_jsx_runtime38 = __toESM(require_jsx_runtime());
-  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
+  var Help_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime38.jsx)("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
+  }), "Help");
+
+  // node_modules/@mui/icons-material/esm/Info.js
+  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
+  var Info_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
   }), "Info");
 
   // node_modules/@mui/icons-material/esm/KeyboardDoubleArrowRight.js
-  var import_jsx_runtime39 = __toESM(require_jsx_runtime());
-  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
+  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
+  var KeyboardDoubleArrowRight_default = createSvgIcon([/* @__PURE__ */ (0, import_jsx_runtime40.jsx)("path", {
     d: "M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"
-  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("path", {
+  }, "0"), /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("path", {
     d: "m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"
   }, "1")], "KeyboardDoubleArrowRight");
 
   // node_modules/@mui/icons-material/esm/Warning.js
-  var import_jsx_runtime40 = __toESM(require_jsx_runtime());
-  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime40.jsx)("path", {
+  var import_jsx_runtime41 = __toESM(require_jsx_runtime());
+  var Warning_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime41.jsx)("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
   }), "Warning");
 
   // src/elements/Components/StudentSummary.jsx
-  var import_react15 = __toESM(require_react(), 1);
-  var import_prop_types37 = __toESM(require_prop_types(), 1);
+  var import_react16 = __toESM(require_react(), 1);
+  var import_prop_types38 = __toESM(require_prop_types(), 1);
 
   // src/elements/Components/SummaryNode.jsx
+  var import_react14 = __toESM(require_react(), 1);
+  var import_prop_types36 = __toESM(require_prop_types(), 1);
+
+  // src/elements/Components/Requirement.jsx
   var import_react13 = __toESM(require_react(), 1);
   var import_prop_types35 = __toESM(require_prop_types(), 1);
 
-  // src/elements/Components/Requirement.jsx
+  // src/elements/Components/RequirementGroup.jsx
   var import_react12 = __toESM(require_react(), 1);
   var import_prop_types34 = __toESM(require_prop_types(), 1);
-
-  // src/elements/Components/RequirementGroup.jsx
-  var import_react11 = __toESM(require_react(), 1);
-  var import_prop_types33 = __toESM(require_prop_types(), 1);
 
   // src/Objects/abbreviator.js
   var ABBREVIATIONS = {
@@ -38080,9 +38086,24 @@ Please use another name.` : formatMuiErrorMessage(18));
     isGenEd() {
       return this.getName().includes("GenEd") || this.getName().includes("RES") || this.getName().includes("GLP");
     }
-    // Default implementations (should be overridden by subclasses)
+    // Simple descriptive string
     toString() {
-      return `${this.#name}: ${this.isSatisfied()}`;
+      const unitString = this.unitsToString();
+      return `${this.getName()}: ${this.isSatisfied()}${unitString !== "" ? ` (${unitString})` : ""}`;
+    }
+    // Find the important units and convert to string
+    unitsToString() {
+      const units = this.getUnits();
+      if (units.gpa) {
+        return `${units.gpa.current.toFixed(2)}/${units.gpa.required.toFixed(2)} GPA`;
+      }
+      if (units.credits) {
+        return `${units.credits.current}/${units.credits.required} Credits`;
+      }
+      if (units.courses) {
+        return `${units.courses.current}/${units.courses.required} Courses`;
+      }
+      return "";
     }
     isSatisfied() {
       const subNodes = this.getSubNodes();
@@ -38160,6 +38181,10 @@ Please use another name.` : formatMuiErrorMessage(18));
   });
 
   // src/elements/Components/RequirementItem.jsx
+  var import_react11 = __toESM(require_react(), 1);
+  var import_prop_types33 = __toESM(require_prop_types(), 1);
+
+  // src/elements/Components/RequirementItemInfo.jsx
   var import_react10 = __toESM(require_react(), 1);
   var import_prop_types32 = __toESM(require_prop_types(), 1);
   var ABBREVIATE_PROPS = {
@@ -38169,19 +38194,44 @@ Please use another name.` : formatMuiErrorMessage(18));
       textOverflow: "ellipsis"
     }
   };
+  function RequirementItemInfo(props) {
+    const { isSatisfied, name, description } = props;
+    return /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement(ListItemIcon_default, null, isSatisfied === AuditNode.SATISFIED_TYPE.COMPLETE && /* @__PURE__ */ import_react10.default.createElement(CheckCircle_default, { color: "success" }), isSatisfied === AuditNode.SATISFIED_TYPE.IN_PROGRESS && /* @__PURE__ */ import_react10.default.createElement(Warning_default, { color: "warning" }), isSatisfied === AuditNode.SATISFIED_TYPE.INCOMPLETE && /* @__PURE__ */ import_react10.default.createElement(Dangerous_default, { color: "error" }), isSatisfied === AuditNode.SATISFIED_TYPE.UNKNOWN && /* @__PURE__ */ import_react10.default.createElement(Help_default, null)), /* @__PURE__ */ import_react10.default.createElement(
+      ListItemText_default,
+      {
+        primaryTypographyProps: ABBREVIATE_PROPS,
+        secondaryTypographyProps: ABBREVIATE_PROPS,
+        primary: name,
+        secondary: description
+      }
+    ));
+  }
+  RequirementItemInfo.propTypes = {
+    isSatisfied: import_prop_types32.default.oneOf(Object.values(AuditNode)),
+    name: import_prop_types32.default.string,
+    description: import_prop_types32.default.string
+  };
+  RequirementItemInfo.defaultProps = {
+    isSatisfied: AuditNode.SATISFIED_TYPE.UNKNOWN,
+    name: "Unknown Requirement",
+    description: ""
+  };
+
+  // src/elements/Components/RequirementItem.jsx
   function RequirementItem(props) {
     const { requirementNode, first, last } = props;
-    const description = import_react10.default.useMemo(() => {
+    const description = import_react11.default.useMemo(() => {
       const subNodes = requirementNode.getSubNodes();
       if (subNodes.length === 0) {
-        return requirementNode.toString();
+        return requirementNode.toString().substring(requirementNode.getName().length + 1);
       } else if (subNodes.length === 1) {
-        return subNodes[0].toString();
+        const unitsString = requirementNode.unitsToString();
+        return `${subNodes[0].toString()}${unitsString ? ` (${unitsString})` : ""}`;
       } else {
         return `${subNodes.length} sub-requirements`;
       }
     }, [requirementNode]);
-    return /* @__PURE__ */ import_react10.default.createElement(
+    return /* @__PURE__ */ import_react11.default.createElement(
       ListItemButton_default,
       {
         onClick: () => {
@@ -38192,23 +38242,21 @@ Please use another name.` : formatMuiErrorMessage(18));
           paddingBottom: last ? "12px" : void 0
         }
       },
-      /* @__PURE__ */ import_react10.default.createElement(ListItemIcon_default, null, requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.COMPLETE && /* @__PURE__ */ import_react10.default.createElement(CheckCircle_default, { color: "success" }), requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.IN_PROGRESS && /* @__PURE__ */ import_react10.default.createElement(Warning_default, { color: "warning" }), requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.INCOMPLETE && /* @__PURE__ */ import_react10.default.createElement(Dangerous_default, { color: "error" })),
-      /* @__PURE__ */ import_react10.default.createElement(
-        ListItemText_default,
+      /* @__PURE__ */ import_react11.default.createElement(
+        RequirementItemInfo,
         {
-          primaryTypographyProps: ABBREVIATE_PROPS,
-          secondaryTypographyProps: ABBREVIATE_PROPS,
-          primary: requirementNode.getName(),
-          secondary: description
+          isSatisfied: requirementNode.isSatisfied(),
+          name: requirementNode.getName(),
+          description
         }
       )
     );
   }
   RequirementItem.propTypes = {
-    requirementNode: import_prop_types32.default.instanceOf(AuditNode).isRequired,
-    description: import_prop_types32.default.string,
-    first: import_prop_types32.default.bool,
-    last: import_prop_types32.default.bool
+    requirementNode: import_prop_types33.default.instanceOf(AuditNode).isRequired,
+    description: import_prop_types33.default.string,
+    first: import_prop_types33.default.bool,
+    last: import_prop_types33.default.bool
   };
   RequirementItem.defaultProps = {
     description: null,
@@ -38218,9 +38266,12 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/elements/Components/RequirementGroup.jsx
   function RequirementGroup(props) {
-    const { groupName, programKey, requirementNodes, first, last } = props;
-    const [showDetails, setShowDetails] = import_react11.default.useState(false);
-    const groupSatisfied = import_react11.default.useMemo(() => {
+    const { groupName, programKey, unitText, requirementNodes, first, last } = props;
+    const description = import_react12.default.useMemo(() => {
+      return `${requirementNodes.length} sub-requirements${unitText ? ` (${unitText})` : ""}`;
+    }, [requirementNodes, unitText]);
+    const [showDetails, setShowDetails] = import_react12.default.useState(false);
+    const groupSatisfied = import_react12.default.useMemo(() => {
       const satisfied = requirementNodes.map((node2) => node2.isSatisfied());
       if (satisfied.includes(AuditNode.SATISFIED_TYPE.INCOMPLETE)) {
         return AuditNode.SATISFIED_TYPE.INCOMPLETE;
@@ -38230,7 +38281,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
       return AuditNode.SATISFIED_TYPE.COMPLETE;
     }, [requirementNodes]);
-    return /* @__PURE__ */ import_react11.default.createElement(import_react11.default.Fragment, null, /* @__PURE__ */ import_react11.default.createElement(
+    return /* @__PURE__ */ import_react12.default.createElement(import_react12.default.Fragment, null, /* @__PURE__ */ import_react12.default.createElement(
       ListItemButton_default,
       {
         onClick: () => {
@@ -38241,22 +38292,16 @@ Please use another name.` : formatMuiErrorMessage(18));
           paddingBottom: last ? "12px" : void 0
         }
       },
-      /* @__PURE__ */ import_react11.default.createElement(ListItemIcon_default, null, groupSatisfied === AuditNode.SATISFIED_TYPE.COMPLETE && /* @__PURE__ */ import_react11.default.createElement(CheckCircle_default, { color: "success" }), groupSatisfied === AuditNode.SATISFIED_TYPE.IN_PROGRESS && /* @__PURE__ */ import_react11.default.createElement(Warning_default, { color: "warning" }), groupSatisfied === AuditNode.SATISFIED_TYPE.INCOMPLETE && /* @__PURE__ */ import_react11.default.createElement(Dangerous_default, { color: "error" })),
-      /* @__PURE__ */ import_react11.default.createElement(
-        ListItemText_default,
+      /* @__PURE__ */ import_react12.default.createElement(
+        RequirementItemInfo,
         {
-          primaryTypographyProps: {
-            sx: {
-              whiteSpace: "nowrap",
-              overflowX: "hidden",
-              textOverflow: "ellipsis"
-            }
-          },
-          primary: groupName
+          isSatisfied: groupSatisfied,
+          name: groupName,
+          description
         }
       ),
-      showDetails ? /* @__PURE__ */ import_react11.default.createElement(ExpandLess_default, null) : /* @__PURE__ */ import_react11.default.createElement(ExpandMore_default, null)
-    ), /* @__PURE__ */ import_react11.default.createElement(Collapse_default, { in: showDetails }, /* @__PURE__ */ import_react11.default.createElement(Paper_default, { elevation: 3, sx: { mx: "10px", mb: "5px" } }, /* @__PURE__ */ import_react11.default.createElement(List_default, { component: "div", dense: true, disablePadding: true }, requirementNodes.map((requirementNode, i) => /* @__PURE__ */ import_react11.default.createElement(
+      showDetails ? /* @__PURE__ */ import_react12.default.createElement(ExpandLess_default, null) : /* @__PURE__ */ import_react12.default.createElement(ExpandMore_default, null)
+    ), /* @__PURE__ */ import_react12.default.createElement(Collapse_default, { in: showDetails }, /* @__PURE__ */ import_react12.default.createElement(Paper_default, { elevation: 3, sx: { mx: "10px", mb: "5px" } }, /* @__PURE__ */ import_react12.default.createElement(List_default, { component: "div", dense: true, disablePadding: true }, requirementNodes.map((requirementNode, i) => /* @__PURE__ */ import_react12.default.createElement(
       RequirementItem,
       {
         key: `${programKey}_${i}`,
@@ -38267,15 +38312,17 @@ Please use another name.` : formatMuiErrorMessage(18));
     ))))));
   }
   RequirementGroup.propTypes = {
-    requirementNodes: import_prop_types33.default.arrayOf(import_prop_types33.default.instanceOf(AuditNode)),
-    programKey: import_prop_types33.default.string,
-    groupName: import_prop_types33.default.string,
-    first: import_prop_types33.default.bool,
-    last: import_prop_types33.default.bool
+    requirementNodes: import_prop_types34.default.arrayOf(import_prop_types34.default.instanceOf(AuditNode)),
+    programKey: import_prop_types34.default.string,
+    groupName: import_prop_types34.default.string,
+    unitText: import_prop_types34.default.string,
+    first: import_prop_types34.default.bool,
+    last: import_prop_types34.default.bool
   };
   RequirementGroup.defaultProps = {
-    groupName: "unknown group",
+    groupName: "Unknown Group",
     programKey: "missingProgramKey",
+    unitText: "",
     requirementNodes: [],
     first: false,
     last: false
@@ -38284,22 +38331,23 @@ Please use another name.` : formatMuiErrorMessage(18));
   // src/elements/Components/Requirement.jsx
   function Requirement(props) {
     const { requirementNode, programKey, first, last } = props;
-    const isGroup = import_react12.default.useMemo(() => {
+    const isGroup = import_react13.default.useMemo(() => {
       return requirementNode.getSubNodes().length > 1;
     }, [requirementNode]);
     if (isGroup) {
-      return /* @__PURE__ */ import_react12.default.createElement(
+      return /* @__PURE__ */ import_react13.default.createElement(
         RequirementGroup,
         {
           groupName: requirementNode.getName(),
           programKey: `${programKey}_${requirementNode.getKey()}`,
           requirementNodes: requirementNode.getSubNodes(),
+          unitText: requirementNode.unitsToString() ?? requirementNode.getSubNodes()[0]?.unitsToString(),
           first,
           last
         }
       );
     } else {
-      return /* @__PURE__ */ import_react12.default.createElement(
+      return /* @__PURE__ */ import_react13.default.createElement(
         RequirementItem,
         {
           requirementNode,
@@ -38311,10 +38359,10 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   }
   Requirement.propTypes = {
-    requirementNode: import_prop_types34.default.instanceOf(AuditNode).isRequired,
-    programKey: import_prop_types34.default.string.isRequired,
-    first: import_prop_types34.default.bool,
-    last: import_prop_types34.default.bool
+    requirementNode: import_prop_types35.default.instanceOf(AuditNode).isRequired,
+    programKey: import_prop_types35.default.string.isRequired,
+    first: import_prop_types35.default.bool,
+    last: import_prop_types35.default.bool
   };
   Requirement.defaultProps = {
     first: false,
@@ -38461,11 +38509,10 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
     // Convert to string
     toString() {
-      const units = this.getUnits();
       if (!this.#isValid) {
         return "Invalid Sub-Requirement";
       }
-      return `${this.getName()}: ${this.isSatisfied()} (${units.taken}/${units.req})`;
+      return super.toString();
     }
     /**
      * Examine the requirement to see if it is labeled as 'satisfied'
@@ -38646,12 +38693,12 @@ Please use another name.` : formatMuiErrorMessage(18));
     const { programNode } = props;
     const genEdReqNodes = programNode.getSubNodes().filter((node2) => node2.isGenEd());
     const programReqNodes = programNode.getSubNodes().filter((node2) => !node2.isGenEd());
-    return /* @__PURE__ */ import_react13.default.createElement(
+    return /* @__PURE__ */ import_react14.default.createElement(
       List_default,
       {
         dense: true,
         sx: { paddingBottom: 0 },
-        subheader: /* @__PURE__ */ import_react13.default.createElement(
+        subheader: /* @__PURE__ */ import_react14.default.createElement(
           ListSubheader_default,
           {
             component: "div",
@@ -38664,7 +38711,7 @@ Please use another name.` : formatMuiErrorMessage(18));
               alignItems: "center"
             }
           },
-          /* @__PURE__ */ import_react13.default.createElement(
+          /* @__PURE__ */ import_react14.default.createElement(
             "span",
             {
               style: {
@@ -38676,10 +38723,10 @@ Please use another name.` : formatMuiErrorMessage(18));
             },
             programNode.getName()
           ),
-          /* @__PURE__ */ import_react13.default.createElement(Tooltip_default, { title: programNode.getInternalId() }, /* @__PURE__ */ import_react13.default.createElement(Info_default, { color: grey_default[100] }))
+          /* @__PURE__ */ import_react14.default.createElement(Tooltip_default, { title: programNode.getInternalId() }, /* @__PURE__ */ import_react14.default.createElement(Info_default, { color: grey_default[100] }))
         )
       },
-      genEdReqNodes.length > 0 && /* @__PURE__ */ import_react13.default.createElement(
+      genEdReqNodes.length > 0 && /* @__PURE__ */ import_react14.default.createElement(
         RequirementGroup,
         {
           groupName: "General Education",
@@ -38688,7 +38735,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           first: true
         }
       ),
-      programReqNodes.map((req, i) => /* @__PURE__ */ import_react13.default.createElement(
+      programReqNodes.map((req, i) => /* @__PURE__ */ import_react14.default.createElement(
         Requirement,
         {
           key: `${programNode.getKey()}_${i}`,
@@ -38700,16 +38747,16 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
   SummaryNode.propTypes = {
-    programNode: import_prop_types35.default.instanceOf(Program)
+    programNode: import_prop_types36.default.instanceOf(Program)
   };
 
   // src/elements/Components/AuditSkeleton.jsx
-  var import_react14 = __toESM(require_react(), 1);
-  var import_prop_types36 = __toESM(require_prop_types(), 1);
+  var import_react15 = __toESM(require_react(), 1);
+  var import_prop_types37 = __toESM(require_prop_types(), 1);
   function AuditSkeleton(props) {
     const { programCount, requirementCountMin, requirementCountMax } = props;
-    const [requirementCounts, setRequirementCounts] = import_react14.default.useState([]);
-    import_react14.default.useEffect(() => {
+    const [requirementCounts, setRequirementCounts] = import_react15.default.useState([]);
+    import_react15.default.useEffect(() => {
       const newCounts = [];
       for (let i = 0; i < programCount; i++) {
         const randInRange = Math.floor(
@@ -38722,7 +38769,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (requirementCounts.length !== programCount) {
       return null;
     }
-    return Array(programCount).fill().map((_3, i) => /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, { key: i }, /* @__PURE__ */ import_react14.default.createElement(Skeleton_default, { variant: "text", sx: { fontSize: "4rem" } }), requirementCounts[i].map((_4, j) => /* @__PURE__ */ import_react14.default.createElement(
+    return Array(programCount).fill().map((_3, i) => /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, { key: i }, /* @__PURE__ */ import_react15.default.createElement(Skeleton_default, { variant: "text", sx: { fontSize: "4rem" } }), requirementCounts[i].map((_4, j) => /* @__PURE__ */ import_react15.default.createElement(
       "div",
       {
         key: j,
@@ -38732,14 +38779,14 @@ Please use another name.` : formatMuiErrorMessage(18));
           marginBottom: j === requirementCounts[i].length - 1 ? 0 : "5px"
         }
       },
-      /* @__PURE__ */ import_react14.default.createElement(
+      /* @__PURE__ */ import_react15.default.createElement(
         Skeleton_default,
         {
           variant: "circular",
           sx: { width: 40, height: 40, marginLeft: "5px" }
         }
       ),
-      /* @__PURE__ */ import_react14.default.createElement(
+      /* @__PURE__ */ import_react15.default.createElement(
         Skeleton_default,
         {
           variant: "rectangular",
@@ -38749,9 +38796,9 @@ Please use another name.` : formatMuiErrorMessage(18));
     ))));
   }
   AuditSkeleton.propTypes = {
-    programCount: import_prop_types36.default.number,
-    requirementCountMin: import_prop_types36.default.number,
-    requirementCountMax: import_prop_types36.default.number
+    programCount: import_prop_types37.default.number,
+    requirementCountMin: import_prop_types37.default.number,
+    requirementCountMax: import_prop_types37.default.number
   };
   AuditSkeleton.defaultProps = {
     programCount: 3,
@@ -38762,34 +38809,34 @@ Please use another name.` : formatMuiErrorMessage(18));
   // src/elements/Components/StudentSummary.jsx
   function StudentSummary(props) {
     const { programData, loadingStatus } = props;
-    const generalSummaries = import_react15.default.useMemo(() => {
+    const generalSummaries = import_react16.default.useMemo(() => {
       return programData?.generalNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `generalSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react16.default.createElement(SummaryNode, { key: `generalSummary${i}`, programNode: node2 })
       );
     }, [programData?.generalNodes]);
-    const universitySummaries = import_react15.default.useMemo(() => {
+    const universitySummaries = import_react16.default.useMemo(() => {
       return programData?.universityNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `univSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react16.default.createElement(SummaryNode, { key: `univSummary${i}`, programNode: node2 })
       );
     }, [programData?.universityNodes]);
-    const programSummaries = import_react15.default.useMemo(() => {
+    const programSummaries = import_react16.default.useMemo(() => {
       return programData?.programNodes.map(
-        (node2, i) => /* @__PURE__ */ import_react15.default.createElement(SummaryNode, { key: `programSummary${i}`, programNode: node2 })
+        (node2, i) => /* @__PURE__ */ import_react16.default.createElement(SummaryNode, { key: `programSummary${i}`, programNode: node2 })
       );
     }, [programData?.programNodes]);
     if (!programData) {
-      return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(Typography_default, { component: "h1", variant: "h6" }, loadingStatus ?? "Loading ..."), /* @__PURE__ */ import_react15.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, /* @__PURE__ */ import_react15.default.createElement(AuditSkeleton, null)));
+      return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Typography_default, { component: "h1", variant: "h6" }, loadingStatus ?? "Loading ..."), /* @__PURE__ */ import_react16.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, /* @__PURE__ */ import_react16.default.createElement(AuditSkeleton, null)));
     }
-    return /* @__PURE__ */ import_react15.default.createElement(import_react15.default.Fragment, null, /* @__PURE__ */ import_react15.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, `${programData?.studentName} Summary`), /* @__PURE__ */ import_react15.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, generalSummaries, universitySummaries, programSummaries));
+    return /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(Typography_default, { component: "h1", variant: "h6", gutterBottom: true }, `${programData?.studentName} Summary`), /* @__PURE__ */ import_react16.default.createElement(Paper_default, { sx: { overflowY: "auto", height: "calc(100% - 30px)" }, elevation: 0 }, generalSummaries, universitySummaries, programSummaries));
   }
   StudentSummary.propTypes = {
-    programData: import_prop_types37.default.shape({
-      studentName: import_prop_types37.default.string,
-      generalNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program)),
-      universityNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program)),
-      programNodes: import_prop_types37.default.arrayOf(import_prop_types37.default.instanceOf(Program))
+    programData: import_prop_types38.default.shape({
+      studentName: import_prop_types38.default.string,
+      generalNodes: import_prop_types38.default.arrayOf(import_prop_types38.default.instanceOf(Program)),
+      universityNodes: import_prop_types38.default.arrayOf(import_prop_types38.default.instanceOf(Program)),
+      programNodes: import_prop_types38.default.arrayOf(import_prop_types38.default.instanceOf(Program))
     }),
-    loadingStatus: import_prop_types37.default.string
+    loadingStatus: import_prop_types38.default.string
   };
   StudentSummary.defaultProps = {
     programData: {},
@@ -38799,7 +38846,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   // src/elements/Components/CleanserRoot.jsx
   function CleanserRoot(props) {
     const { onHideSummary, showSummary, ...rest } = props;
-    return /* @__PURE__ */ import_react16.default.createElement(
+    return /* @__PURE__ */ import_react17.default.createElement(
       "div",
       {
         style: {
@@ -38810,7 +38857,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           transition: "transform 0.33s ease-in-out"
         }
       },
-      /* @__PURE__ */ import_react16.default.createElement(
+      /* @__PURE__ */ import_react17.default.createElement(
         Paper_default,
         {
           elevation: 5,
@@ -38820,22 +38867,22 @@ Please use another name.` : formatMuiErrorMessage(18));
             padding: "20px"
           }
         },
-        /* @__PURE__ */ import_react16.default.createElement(
+        /* @__PURE__ */ import_react17.default.createElement(
           IconButton_default,
           {
             "aria-label": "hide summary",
             sx: { position: "absolute", top: "10px", right: "10px" },
             onClick: onHideSummary
           },
-          /* @__PURE__ */ import_react16.default.createElement(KeyboardDoubleArrowRight_default, null)
+          /* @__PURE__ */ import_react17.default.createElement(KeyboardDoubleArrowRight_default, null)
         ),
-        /* @__PURE__ */ import_react16.default.createElement(StudentSummary, { ...rest })
+        /* @__PURE__ */ import_react17.default.createElement(StudentSummary, { ...rest })
       )
     );
   }
   CleanserRoot.propTypes = {
-    showSummary: import_prop_types38.default.bool,
-    onHideSummary: import_prop_types38.default.func
+    showSummary: import_prop_types39.default.bool,
+    onHideSummary: import_prop_types39.default.func
   };
   CleanserRoot.defaultProps = {
     showSummary: false,
@@ -38844,17 +38891,17 @@ Please use another name.` : formatMuiErrorMessage(18));
   };
 
   // src/elements/Components/SummarizeButton.jsx
-  var import_react17 = __toESM(require_react(), 1);
-  var import_prop_types39 = __toESM(require_prop_types(), 1);
+  var import_react18 = __toESM(require_react(), 1);
+  var import_prop_types40 = __toESM(require_prop_types(), 1);
   function SummarizeButton(props) {
     const { onClickCallback, showButton } = props;
-    return /* @__PURE__ */ import_react17.default.createElement("div", { style: {
+    return /* @__PURE__ */ import_react18.default.createElement("div", { style: {
       position: "fixed",
       top: "150px",
       right: showButton ? "-45px" : "-80px",
       transform: "rotate(-90deg)",
       transition: "right 0.33s ease-in-out"
-    } }, /* @__PURE__ */ import_react17.default.createElement(
+    } }, /* @__PURE__ */ import_react18.default.createElement(
       Button_default,
       {
         onClick: onClickCallback,
@@ -38865,8 +38912,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     ));
   }
   SummarizeButton.propTypes = {
-    onClickCallback: import_prop_types39.default.func,
-    showButton: import_prop_types39.default.bool
+    onClickCallback: import_prop_types40.default.func,
+    showButton: import_prop_types40.default.bool
   };
   SummarizeButton.defaultProps = {
     onClickCallback: () => {
@@ -39061,16 +39108,16 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/elements/usePageObserver.js
-  var import_react18 = __toESM(require_react(), 1);
+  var import_react19 = __toESM(require_react(), 1);
   var PAGE_DIV_CHECK_WAIT_TIME = 200;
   function usePageObserver() {
-    const [pageId, setPageId] = import_react18.default.useState("");
-    const [iframeRef, setIframeRef] = import_react18.default.useState(null);
-    import_react18.default.useEffect(() => {
+    const [pageId, setPageId] = import_react19.default.useState("");
+    const [iframeRef, setIframeRef] = import_react19.default.useState(null);
+    import_react19.default.useEffect(() => {
       const iframe = document.querySelector("iframe");
       setIframeRef(iframe);
     }, []);
-    const checkPage = import_react18.default.useCallback(() => {
+    const checkPage = import_react19.default.useCallback(() => {
       const targetElement = iframeRef?.contentDocument?.getElementById(QUERIES.pageDivId);
       if (targetElement) {
         const pageVal = targetElement.getAttribute("page");
@@ -39082,7 +39129,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         setPageId("");
       }
     }, [iframeRef?.contentDocument, pageId]);
-    import_react18.default.useEffect(() => {
+    import_react19.default.useEffect(() => {
       if (!iframeRef) {
         return;
       }
@@ -39091,7 +39138,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         iframeRef.removeEventListener("load", checkPage);
       };
     }, [checkPage, iframeRef]);
-    import_react18.default.useEffect(() => {
+    import_react19.default.useEffect(() => {
       if (!iframeRef) {
         return;
       }
@@ -39116,7 +39163,7 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/elements/AppRoot.jsx
   function AppRoot() {
-    const [showSummary, setShowSummary] = import_react19.default.useState(false);
+    const [showSummary, setShowSummary] = import_react20.default.useState(false);
     const onShowSummary = () => {
       setShowSummary(true);
     };
@@ -39124,8 +39171,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       setShowSummary(false);
     };
     const pageId = usePageObserver();
-    const [programGroups, setProgramGroups] = import_react19.default.useState(null);
-    import_react19.default.useEffect(() => {
+    const [programGroups, setProgramGroups] = import_react20.default.useState(null);
+    import_react20.default.useEffect(() => {
       async function retrieveProgramData() {
         try {
           const newGroups = await scanPageForPrograms();
@@ -39141,7 +39188,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     }, [showSummary]);
     const disableShowButton = pageId !== PAGE_IDS.audit && pageId !== PAGE_IDS.studentCenter;
     const statusMessage = pageId !== PAGE_IDS.audit ? "Loading Advising Audit ..." : "Expanding all sections ...";
-    return /* @__PURE__ */ import_react19.default.createElement(import_react19.default.Fragment, null, /* @__PURE__ */ import_react19.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react19.default.createElement(
+    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(CssBaseline_default, null), /* @__PURE__ */ import_react20.default.createElement(
       CleanserRoot,
       {
         showSummary,
@@ -39149,7 +39196,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         loadingStatus: statusMessage,
         programData: programGroups
       }
-    ), /* @__PURE__ */ import_react19.default.createElement(
+    ), /* @__PURE__ */ import_react20.default.createElement(
       SummarizeButton,
       {
         showButton: !disableShowButton && !showSummary,
@@ -39177,7 +39224,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   appContainer.id = "cleanser-app-container";
   document.body.appendChild(appContainer);
   var reactAppRoot = (0, import_client.createRoot)(appContainer);
-  reactAppRoot.render(/* @__PURE__ */ import_react20.default.createElement(AppRoot, null));
+  reactAppRoot.render(/* @__PURE__ */ import_react21.default.createElement(AppRoot, null));
 })();
 /*! Bundled license information:
 

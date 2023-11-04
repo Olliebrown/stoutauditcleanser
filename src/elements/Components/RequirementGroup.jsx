@@ -10,11 +10,11 @@ import RequirementItem from './RequirementItem.jsx'
 import RequirementItemInfo from './RequirementItemInfo.jsx'
 
 export default function RequirementGroup (props) {
-  const { groupName, programKey, requirementNodes, first, last } = props
+  const { groupName, programKey, unitText, requirementNodes, first, last } = props
 
   const description = React.useMemo(() => {
-    return `${requirementNodes.length} sub-requirements`
-  }, [requirementNodes])
+    return `${requirementNodes.length} sub-requirements${unitText ? ` (${unitText})` : ''}`
+  }, [requirementNodes, unitText])
 
   // Is the collapse open or closed?
   const [showDetails, setShowDetails] = React.useState(false)
@@ -71,6 +71,7 @@ RequirementGroup.propTypes = {
   requirementNodes: PropTypes.arrayOf(PropTypes.instanceOf(AuditNode)),
   programKey: PropTypes.string,
   groupName: PropTypes.string,
+  unitText: PropTypes.string,
   first: PropTypes.bool,
   last: PropTypes.bool
 }
@@ -78,6 +79,7 @@ RequirementGroup.propTypes = {
 RequirementGroup.defaultProps = {
   groupName: 'Unknown Group',
   programKey: 'missingProgramKey',
+  unitText: '',
   requirementNodes: [],
   first: false,
   last: false

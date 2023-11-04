@@ -107,8 +107,30 @@ export default class AuditNode {
       this.getName().includes('GLP')
   }
 
-  // Default implementations (should be overridden by subclasses)
-  toString () { return `${this.#name}: ${this.isSatisfied()}` }
+  // Simple descriptive string
+  toString () {
+    const unitString = this.unitsToString()
+    return `${this.getName()}: ${this.isSatisfied()}${unitString !== '' ? ` (${unitString})` : ''}`
+  }
+
+  // Find the important units and convert to string
+  unitsToString () {
+    const units = this.getUnits()
+    if (units.gpa) {
+      return `${units.gpa.current.toFixed(2)}/${units.gpa.required.toFixed(2)} GPA`
+    }
+
+    if (units.credits) {
+      return `${units.credits.current}/${units.credits.required} Credits`
+    }
+
+    if (units.courses) {
+      return `${units.courses.current}/${units.courses.required} Courses`
+    }
+
+    return ''
+  }
+
   isSatisfied () {
     const subNodes = this.getSubNodes()
     if (!Array.isArray(subNodes) || subNodes.length < 1) {

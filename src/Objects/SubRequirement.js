@@ -47,9 +47,8 @@ export default class SubRequirement extends AuditNode {
 
   // Convert to string
   toString () {
-    const units = this.getUnits()
     if (!this.#isValid) { return 'Invalid Sub-Requirement' }
-    return `${this.getName()}: ${this.isSatisfied()} (${units.taken}/${units.req})`
+    return super.toString()
   }
 
   /**

@@ -20,6 +20,7 @@ export default function Requirement (props) {
         groupName={requirementNode.getName()}
         programKey={`${programKey}_${requirementNode.getKey()}`}
         requirementNodes={requirementNode.getSubNodes()}
+        unitText={requirementNode.unitsToString() ?? requirementNode.getSubNodes()[0]?.unitsToString()}
         first={first}
         last={last}
       />

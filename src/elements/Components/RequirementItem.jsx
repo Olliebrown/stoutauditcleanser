@@ -12,9 +12,10 @@ export default function RequirementItem (props) {
   const description = React.useMemo(() => {
     const subNodes = requirementNode.getSubNodes()
     if (subNodes.length === 0) {
-      return requirementNode.toString()
+      return requirementNode.toString().substring(requirementNode.getName().length + 1)
     } else if (subNodes.length === 1) {
-      return subNodes[0].toString()
+      const unitsString = requirementNode.unitsToString()
+      return `${subNodes[0].toString()}${unitsString ? ` (${unitsString})` : ''}`
     } else {
       return `${subNodes.length} sub-requirements`
     }
