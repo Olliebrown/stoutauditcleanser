@@ -3,6 +3,7 @@
 exports[`Computer Network Systems and Design Minor Node should have expected snapshot 1`] = `
 {
   "internalId": "RG-10510",
+  "isGenEd": false,
   "key": "computer_networking_systems___design_minor",
   "name": "Computer Networking Systems & Design Minor",
   "satisfied": "COMPLETE",
@@ -16,7 +17,30 @@ exports[`Computer Network Systems and Design Minor Node should have expected sna
       "name": "Minor -Computer Network System & Design Minor",
       "nextIndex": 8,
       "satisfied": "COMPLETE",
-      "subNodes": [],
+      "subNodes": [
+        {
+          "description": "Required Courses",
+          "internalId": "UNKNOWN_ID",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "required_courses",
+          "name": "Required Courses",
+          "satisfied": "COMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+        {
+          "description": "Selectives",
+          "internalId": "UNKNOWN_ID",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "selectives",
+          "name": "Selectives",
+          "satisfied": "COMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+      ],
       "units": {
         "credits": {
           "current": 21,

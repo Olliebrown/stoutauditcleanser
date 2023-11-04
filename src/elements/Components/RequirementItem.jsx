@@ -1,22 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { CheckCircle as CheckIcon, Dangerous as ErrorIcon, Warning as WarnIcon } from '@mui/icons-material'
+import { ListItemButton } from '@mui/material'
 
+import RequirementItemInfo from './RequirementItemInfo.jsx'
 import AuditNode from '../../Objects/AuditNode.js'
 
-// Force the text to be on a single line and truncate with ellipsis when too wide
-const ABBREVIATE_PROPS = {
-  sx: {
-    whiteSpace: 'nowrap',
-    overflowX: 'hidden',
-    textOverflow: 'ellipsis'
-  }
-}
-
 export default function RequirementItem (props) {
-  const { requirementNode, description, first, last } = props
+  const { requirementNode, first, last } = props
+
+  const description = React.useMemo(() => {
+    const subNodes = requirementNode.getSubNodes()
+    if (subNodes.length === 0) {
+      return requirementNode.toString()
+    } else if (subNodes.length === 1) {
+      return subNodes[0].toString()
+    } else {
+      return `${subNodes.length} sub-requirements`
+    }
+  }, [requirementNode])
 
   return (
     <ListItemButton
@@ -26,16 +28,10 @@ export default function RequirementItem (props) {
         paddingBottom: (last ? '12px' : undefined)
       }}
     >
-      <ListItemIcon>
-        {requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.COMPLETE && <CheckIcon color='success' />}
-        {requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.IN_PROGRESS && <WarnIcon color='warning' />}
-        {requirementNode.isSatisfied() === AuditNode.SATISFIED_TYPE.INCOMPLETE && <ErrorIcon color='error' />}
-      </ListItemIcon>
-      <ListItemText
-        primaryTypographyProps={ABBREVIATE_PROPS}
-        secondaryTypographyProps={ABBREVIATE_PROPS}
-        primary={requirementNode.getName()}
-        secondary={description}
+      <RequirementItemInfo
+        isSatisfied={requirementNode.isSatisfied()}
+        name={requirementNode.getName()}
+        description={description}
       />
     </ListItemButton>
   )

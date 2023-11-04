@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`General Student Info Node should have expected snapshot 1`] = `
+{
+  "internalId": "RG-10369",
+  "isGenEd": false,
+  "key": "general_information_for_students",
+  "name": "General Information For Students",
+  "satisfied": "COMPLETE",
+  "subNodes": [
+    {
+      "description": "Math Placement Information",
+      "index": 7,
+      "internalId": "RQ-10596",
+      "isGenEd": false,
+      "key": "math_placement",
+      "name": "MATH Placement",
+      "nextIndex": 11,
+      "satisfied": "COMPLETE",
+      "subNodes": [
+        {
+          "description": "Math Placement 4",
+          "internalId": "UNKNOWN_ID",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "math_placement_4",
+          "name": "MATH Placement 4",
+          "satisfied": "COMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+      ],
+      "units": {},
+    },
+    {
+      "description": "English Placement",
+      "index": 11,
+      "internalId": "RQ-10597",
+      "isGenEd": false,
+      "key": "english_placement",
+      "name": "English Placement",
+      "nextIndex": 15,
+      "satisfied": "COMPLETE",
+      "subNodes": [
+        {
+          "description": "English Placement 101",
+          "internalId": "UNKNOWN_ID",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "english_placement_101",
+          "name": "English Placement 101",
+          "satisfied": "COMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+      ],
+      "units": {},
+    },
+    {
+      "description": "Incomplete/In Progress/Courses in Registration StatusIncomplete Coursework, that has earned a Grade of an "I", must be completed within one year from the date the "I" is received or an "F" Grade will be assigned. A grade of "IP" is given for approved courses in which more than one term is required for completion because of the nature of the course requirement.  If the course requirements are not completed within two years from the date the "IP" is received, the student must re-register for the course to obtain credit. Please take the following courses into consideration when planning your future class registration.Visit the Registration & Records website  for further information.",
+      "index": 15,
+      "internalId": "RQ-0169",
+      "isGenEd": false,
+      "key": "incomplete_in_progress_coursework_notice",
+      "name": "Incomplete/in-progress Coursework Notice",
+      "nextIndex": 19,
+      "satisfied": "COMPLETE",
+      "subNodes": [
+        {
+          "description": "Incomplete/In Progress Coursework ",
+          "internalId": "LN-010",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "incomplete_in_progress_coursework",
+          "name": "Incomplete/in Progress Coursework",
+          "satisfied": "COMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+      ],
+      "units": {},
+    },
+  ],
+  "units": {},
+}
+`;

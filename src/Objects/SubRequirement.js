@@ -14,6 +14,7 @@ export default class SubRequirement extends AuditNode {
   // Initialize derived values
   #satisfiedText = ''
   #description = ''
+  #requirementId = ''
   #isValid = false
 
   /**
@@ -33,11 +34,11 @@ export default class SubRequirement extends AuditNode {
     this.#isValid = (this.#mainTableNode && this.#headingRowNode && Array.isArray(this.#detailsRowNodes))
     if (!this.#isValid) { return }
 
-    // No internal id so leave out parameters
-    this._initialize(this.#headingRowNode)
-
     // Initialize derived values
     this._extractDescription()
+
+    // No internal id so leave out parameters
+    this._initialize(this.#headingRowNode, this.#requirementId)
   }
 
   // Accessors for private values
@@ -77,21 +78,25 @@ export default class SubRequirement extends AuditNode {
     if (!this.#isValid) { return }
 
     // Extract the description text
-    const descriptionGroups = this.#detailsRowNodes[0]
+    const descriptionText = this.#detailsRowNodes[0]
       ?.querySelector(QUERIES.subRequirementDescription)
-      ?.textContent.match(REGEX.subRequirementDescription)
-      ?.groups
+      ?.textContent
 
-    // Parse out the groups
-    if (descriptionGroups) {
-      this.#satisfiedText = descriptionGroups.satisfied
-      this.#description = descriptionGroups.description
-    } else {
-      console.warn('Sub-Requirement Description regex failed')
-      console.warn('------------------------')
-      console.warn(this.getName())
-      console.warn(this.#mainTableNode)
-      console.warn('------------------------')
+    if (descriptionText) {
+      // Try to match the description text to a regex
+      const descRegex = REGEX.subRequirementDescription.find(regex => descriptionText.match(regex))
+      if (descRegex) {
+        const descriptionGroups = descriptionText.match(descRegex)?.groups
+        this.#satisfiedText = descriptionGroups.satisfied
+        this.#description = descriptionGroups.description
+        this.#requirementId = descriptionGroups.ID
+      } else {
+        console.warn('Sub-Requirement Description regex failed')
+        console.warn('------------------------')
+        console.warn(this.getName())
+        console.warn(descriptionText.trim())
+        console.warn('------------------------')
+      }
     }
   }
 

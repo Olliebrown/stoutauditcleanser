@@ -32,8 +32,16 @@ export const PAGE_NAME_TO_ID = Object.fromEntries(
 export const REGEX = {
   generalHeader: /(?:GENERAL INFORMATION)/i,
   universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-  requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-  subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+  requirementDescription: [
+    /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+    /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+(?<description>.*)\s+\((?<ID>[\w-]+)\)\s*/i,
+    /\s*(?<ID>[\w-]+):\s+(?<description>.*)\s*/i
+  ],
+  subRequirementDescription: [
+    /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+\s+(?<description>.*)\((?<ID>[\w-]+)\)\s*/i,
+    /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+(?<ID>[\w-]+):\s+(?<description>.*)\s*/i,
+    /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i
+  ],
   informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
   credits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i,
   courses: /Courses:\s+(?<req>[\d]+)\s+required,\s+(?<taken>[\d]+)\s+taken,\s+(?<need>[\d]+)\s+needed/i,

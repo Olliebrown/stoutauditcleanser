@@ -37973,8 +37973,16 @@ Please use another name.` : formatMuiErrorMessage(18));
   var REGEX = {
     generalHeader: /(?:GENERAL INFORMATION)/i,
     universityRequirements: /(?:UNIVERSITY REQUIREMENTS)|(?:HONORS COLLEGE OVERVIEW)/i,
-    requirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
-    subRequirementDescription: /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i,
+    requirementDescription: [
+      /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<ID>[\w-]+):\s*(?<description>.*)\s*/i,
+      /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+(?<description>.*)\s+\((?<ID>[\w-]+)\)\s*/i,
+      /\s*(?<ID>[\w-]+):\s+(?<description>.*)\s*/i
+    ],
+    subRequirementDescription: [
+      /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+\s+(?<description>.*)\((?<ID>[\w-]+)\)\s*/i,
+      /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s+(?<ID>[\w-]+):\s+(?<description>.*)\s*/i,
+      /\s*(?<satisfied>(?:Not Satisfied)|(?:Satisfied)):\s*(?<description>.*)\s*/i
+    ],
     informationalOnly: /(?:Purpose of Academic Advisement Report)|(?:In-Progress Repeat Coursework)|(?:REMEDIAL\/PLACEMENT COURSEWORK INFORMATION)|(?:Graduation Information)|(?:Graduation With Honors Policy)/i,
     credits: /Units:\s+(?<req>[\d.]+)\s+required,\s+(?<taken>[\d.]+)\s+taken,\s+(?<need>[\d.]+)\s+needed/i,
     courses: /Courses:\s+(?<req>[\d]+)\s+required,\s+(?<taken>[\d]+)\s+taken,\s+(?<need>[\d]+)\s+needed/i,
@@ -38077,7 +38085,37 @@ Please use another name.` : formatMuiErrorMessage(18));
       return `${this.#name}: ${this.isSatisfied()}`;
     }
     isSatisfied() {
-      return _AuditNode.SATISFIED_TYPE.UNKNOWN;
+      const subNodes = this.getSubNodes();
+      if (!Array.isArray(subNodes) || subNodes.length < 1) {
+        return _AuditNode.SATISFIED_TYPE.UNKNOWN;
+      }
+      const counts = subNodes.reduce((curCounts, subNode) => {
+        switch (subNode.isSatisfied()) {
+          case _AuditNode.SATISFIED_TYPE.COMPLETE:
+            curCounts.complete += 1;
+            break;
+          case _AuditNode.SATISFIED_TYPE.IN_PROGRESS:
+            curCounts.inProgress += 1;
+            break;
+          case _AuditNode.SATISFIED_TYPE.INCOMPLETE:
+            curCounts.incomplete += 1;
+            break;
+          case _AuditNode.SATISFIED_TYPE.UNKNOWN:
+            curCounts.unknown += 1;
+            break;
+        }
+        return curCounts;
+      }, { complete: 0, inProgress: 0, incomplete: 0, unknown: 0 });
+      if (counts.unknown > 0) {
+        return _AuditNode.SATISFIED_TYPE.UNKNOWN;
+      }
+      if (counts.inProgress === 0 && counts.incomplete === 0) {
+        return _AuditNode.SATISFIED_TYPE.COMPLETE;
+      }
+      if (counts.complete === 0 && counts.inProgress === 0) {
+        return _AuditNode.SATISFIED_TYPE.INCOMPLETE;
+      }
+      return _AuditNode.SATISFIED_TYPE.IN_PROGRESS;
     }
     /**
      * Return a data-only object with reduced fields for serialization
@@ -38132,7 +38170,17 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
   };
   function RequirementItem(props) {
-    const { requirementNode, description, first, last } = props;
+    const { requirementNode, first, last } = props;
+    const description = import_react10.default.useMemo(() => {
+      const subNodes = requirementNode.getSubNodes();
+      if (subNodes.length === 0) {
+        return requirementNode.toString();
+      } else if (subNodes.length === 1) {
+        return subNodes[0].toString();
+      } else {
+        return `${subNodes.length} sub-requirements`;
+      }
+    }, [requirementNode]);
     return /* @__PURE__ */ import_react10.default.createElement(
       ListItemButton_default,
       {
@@ -38243,7 +38291,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       return /* @__PURE__ */ import_react12.default.createElement(
         RequirementGroup,
         {
-          name: requirementNode.getName(),
+          groupName: requirementNode.getName(),
           programKey: `${programKey}_${requirementNode.getKey()}`,
           requirementNodes: requirementNode.getSubNodes(),
           first,
@@ -38318,7 +38366,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (this.#satisfiedText === "Satisfied") {
         return AuditNode.SATISFIED_TYPE.COMPLETE;
       }
-      return AuditNode.SATISFIED_TYPE.INCOMPLETE;
+      return super.isSatisfied();
     }
     /**
      * Extract and return just the text of the requirement's header
@@ -38332,8 +38380,12 @@ Please use another name.` : formatMuiErrorMessage(18));
     }
     _extractDescription() {
       const requirementsArray = Array.from(this.#programBodyNode.children);
-      const descriptionMatch = requirementsArray[this.#programBodyIndex + 1].textContent.match(REGEX.requirementDescription);
-      if (descriptionMatch) {
+      const descNode = requirementsArray[this.#programBodyIndex + 1];
+      const reqRegex = REGEX.requirementDescription.find(
+        (curRegex) => descNode.textContent.match(curRegex)
+      );
+      if (reqRegex) {
+        const descriptionMatch = descNode.textContent.match(reqRegex);
         this.#satisfiedText = descriptionMatch.groups.satisfied;
         this.#requirementId = descriptionMatch.groups.ID;
         this.#description = descriptionMatch.groups.description;
@@ -38342,7 +38394,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         console.warn("------------------------");
         console.warn(this.getName());
         console.warn("------------------------");
-        console.warn(requirementsArray[this.#programBodyIndex + 1].textContent.trim());
+        console.warn(descNode.textContent.trim());
         console.warn("------------------------");
       }
     }
@@ -38351,7 +38403,11 @@ Please use another name.` : formatMuiErrorMessage(18));
      * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
      */
     _extractSubNodes() {
-      return makeSubRequirementsArray(this.#programRowNode);
+      const childrenNodes = Array.from(this.#programBodyNode.children).slice(this.#programBodyIndex, this.#programBodyNextIndex);
+      if (!Array.isArray(childrenNodes) || childrenNodes.length < 1) {
+        return [];
+      }
+      return makeSubRequirementsArray(childrenNodes);
     }
     /**
      * Return a data-only object with reduced fields for serialization
@@ -38378,6 +38434,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     // Initialize derived values
     #satisfiedText = "";
     #description = "";
+    #requirementId = "";
     #isValid = false;
     /**
      * Build a sub-requirement object from the TABLE node inside it's TR heading
@@ -38392,8 +38449,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (!this.#isValid) {
         return;
       }
-      this._initialize(this.#headingRowNode);
       this._extractDescription();
+      this._initialize(this.#headingRowNode, this.#requirementId);
     }
     // Accessors for private values
     getDescription() {
@@ -38435,16 +38492,21 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (!this.#isValid) {
         return;
       }
-      const descriptionGroups = this.#detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent.match(REGEX.subRequirementDescription)?.groups;
-      if (descriptionGroups) {
-        this.#satisfiedText = descriptionGroups.satisfied;
-        this.#description = descriptionGroups.description;
-      } else {
-        console.warn("Sub-Requirement Description regex failed");
-        console.warn("------------------------");
-        console.warn(this.getName());
-        console.warn(this.#mainTableNode);
-        console.warn("------------------------");
+      const descriptionText = this.#detailsRowNodes[0]?.querySelector(QUERIES.subRequirementDescription)?.textContent;
+      if (descriptionText) {
+        const descRegex = REGEX.subRequirementDescription.find((regex) => descriptionText.match(regex));
+        if (descRegex) {
+          const descriptionGroups = descriptionText.match(descRegex)?.groups;
+          this.#satisfiedText = descriptionGroups.satisfied;
+          this.#description = descriptionGroups.description;
+          this.#requirementId = descriptionGroups.ID;
+        } else {
+          console.warn("Sub-Requirement Description regex failed");
+          console.warn("------------------------");
+          console.warn(this.getName());
+          console.warn(descriptionText.trim());
+          console.warn("------------------------");
+        }
       }
     }
     /**
@@ -38489,14 +38551,21 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
   function makeRequirementsArray(rootNode) {
     const requirementNodes = rootNode.querySelectorAll(QUERIES.requirementHeader);
-    const filteredNodes = Array.from(requirementNodes).filter((node2) => {
-      return !node2.textContent.match(REGEX.informationalOnly);
+    const filteredNodes = Array.from(requirementNodes).map((node2, i, array) => {
+      return [node2.parentNode, array[i + 1]?.parentNode.textContent];
     });
-    return Array.from(filteredNodes).map((node2, i, array) => new Requirement2(node2.parentNode, array[i + 1]?.parentNode.textContent));
+    return Array.from(filteredNodes).map((node2) => {
+      if (!node2[0].textContent.match(REGEX.informationalOnly)) {
+        return new Requirement2(node2[0], node2[1]);
+      }
+      return null;
+    }).filter((req) => req !== null);
   }
-  function makeSubRequirementsArray(rootNode) {
-    const subRequirementNodes = rootNode.querySelectorAll(QUERIES.subRequirementHeader);
-    const mappedNodes = Array.from(subRequirementNodes).map((node2) => node2.parentNode.parentNode.parentNode);
+  function makeSubRequirementsArray(childrenNodes) {
+    const subRequirementNodes = childrenNodes.map(
+      (node2) => node2.querySelector(QUERIES.subRequirementHeader)
+    ).filter((node2) => node2);
+    const mappedNodes = subRequirementNodes.map((node2) => node2.parentNode.parentNode.parentNode);
     return mappedNodes.map((node2) => new SubRequirement(node2));
   }
 
@@ -38543,7 +38612,8 @@ Please use another name.` : formatMuiErrorMessage(18));
     _extractSubNodes() {
       let requirements = makeRequirementsArray(this.#mainTable);
       if (!Array.isArray(requirements) || requirements.length < 1) {
-        requirements = makeSubRequirementsArray(this.#mainTable);
+        const childrenNodes = Array.from(this.#mainTable.querySelectorAll(QUERIES.subRequirementHeader));
+        requirements = makeSubRequirementsArray(childrenNodes);
       }
       return requirements;
     }

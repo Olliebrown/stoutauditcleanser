@@ -41,20 +41,25 @@ export function makeRequirementsArray (rootNode) {
   // Extract the requirement nodes (all TD nodes)
   const requirementNodes = rootNode.querySelectorAll(QUERIES.requirementHeader)
 
-  // Filter out informational only nodes
-  const filteredNodes = Array.from(requirementNodes).filter((node) => {
-    return !node.textContent.match(REGEX.informationalOnly)
+  // Convert to array with parent TR and next TR text
+  const filteredNodes = Array.from(requirementNodes).map((node, i, array) => {
+    return [node.parentNode, array[i + 1]?.parentNode.textContent]
   })
 
-  // Switch to parents (TR) and return
-  return Array.from(filteredNodes).map((node, i, array) => (
-    new Requirement(node.parentNode, array[i + 1]?.parentNode.textContent)
-  ))
+  // Convert to Requirement objects and filter info only nodes
+  return Array.from(filteredNodes).map((node) => {
+    if (!node[0].textContent.match(REGEX.informationalOnly)) {
+      return new Requirement(node[0], node[1])
+    }
+    return null
+  }).filter((req) => req !== null)
 }
 
-export function makeSubRequirementsArray (rootNode) {
-  const subRequirementNodes = rootNode.querySelectorAll(QUERIES.subRequirementHeader)
-  const mappedNodes = Array.from(subRequirementNodes).map((node) => (
+export function makeSubRequirementsArray (childrenNodes) {
+  const subRequirementNodes = childrenNodes.map(
+    (node) => node.querySelector(QUERIES.subRequirementHeader)
+  ).filter((node) => node)
+  const mappedNodes = subRequirementNodes.map((node) => (
     node.parentNode.parentNode.parentNode
   ))
 

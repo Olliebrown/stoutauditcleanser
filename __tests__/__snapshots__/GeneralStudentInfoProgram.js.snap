@@ -3,6 +3,7 @@
 exports[`General Student Info Node should have expected snapshot 1`] = `
 {
   "internalId": "RG-10369",
+  "isGenEd": false,
   "key": "general_information_for_students",
   "name": "General Information For Students",
   "satisfied": "INCOMPLETE",
@@ -14,9 +15,21 @@ exports[`General Student Info Node should have expected snapshot 1`] = `
       "isGenEd": false,
       "key": "incomplete_in_progress_coursework_notice",
       "name": "Incomplete/in-progress Coursework Notice",
-      "nextIndex": 15,
+      "nextIndex": 11,
       "satisfied": "INCOMPLETE",
-      "subNodes": [],
+      "subNodes": [
+        {
+          "description": "Incomplete/In Progress Coursework ",
+          "internalId": "LN-010",
+          "isGenEd": false,
+          "isValid": true,
+          "key": "incomplete_in_progress_coursework",
+          "name": "Incomplete/in Progress Coursework",
+          "satisfied": "INCOMPLETE",
+          "subNodes": [],
+          "units": {},
+        },
+      ],
       "units": {},
     },
   ],

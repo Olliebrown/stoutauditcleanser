@@ -1,21 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Paper, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import {
-  CheckCircle as CheckIcon,
-  Dangerous as ErrorIcon,
-  Warning as WarnIcon,
-  ExpandLess as ExpandLessIcon,
-  ExpandMore as ExpandMoreIcon
-} from '@mui/icons-material'
+import { Paper, Collapse, List, ListItemButton } from '@mui/material'
+import { ExpandLess as ExpandLessIcon, ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 
 import AuditNode from '../../Objects/AuditNode.js'
 
 import RequirementItem from './RequirementItem.jsx'
+import RequirementItemInfo from './RequirementItemInfo.jsx'
 
 export default function RequirementGroup (props) {
   const { groupName, programKey, requirementNodes, first, last } = props
+
+  const description = React.useMemo(() => {
+    return `${requirementNodes.length} sub-requirements`
+  }, [requirementNodes])
 
   // Is the collapse open or closed?
   const [showDetails, setShowDetails] = React.useState(false)
@@ -43,20 +42,10 @@ export default function RequirementGroup (props) {
           paddingBottom: (last ? '12px' : undefined)
         }}
       >
-        <ListItemIcon>
-          {groupSatisfied === AuditNode.SATISFIED_TYPE.COMPLETE && <CheckIcon color='success' />}
-          {groupSatisfied === AuditNode.SATISFIED_TYPE.IN_PROGRESS && <WarnIcon color='warning' />}
-          {groupSatisfied === AuditNode.SATISFIED_TYPE.INCOMPLETE && <ErrorIcon color='error' />}
-        </ListItemIcon>
-        <ListItemText
-          primaryTypographyProps={{
-            sx: {
-              whiteSpace: 'nowrap',
-              overflowX: 'hidden',
-              textOverflow: 'ellipsis'
-            }
-          }}
-          primary={groupName}
+        <RequirementItemInfo
+          isSatisfied={groupSatisfied}
+          name={groupName}
+          description={description}
         />
         {showDetails ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
@@ -87,7 +76,7 @@ RequirementGroup.propTypes = {
 }
 
 RequirementGroup.defaultProps = {
-  groupName: 'unknown group',
+  groupName: 'Unknown Group',
   programKey: 'missingProgramKey',
   requirementNodes: [],
   first: false,

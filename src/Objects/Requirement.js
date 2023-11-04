@@ -60,10 +60,13 @@ export default class Requirement extends AuditNode {
    * @returns {bool} Whether or not this requirement is satisfied
    */
   isSatisfied () {
+    // Check satisfied text first
     if (this.#satisfiedText === 'Satisfied') {
       return AuditNode.SATISFIED_TYPE.COMPLETE
     }
-    return AuditNode.SATISFIED_TYPE.INCOMPLETE
+
+    // Examine sub-nodes to derive status
+    return super.isSatisfied()
   }
 
   /**
@@ -83,9 +86,12 @@ export default class Requirement extends AuditNode {
   _extractDescription () {
     // Extract the description text
     const requirementsArray = Array.from(this.#programBodyNode.children)
-    const descriptionMatch = requirementsArray[this.#programBodyIndex + 1]
-      .textContent.match(REGEX.requirementDescription)
-    if (descriptionMatch) {
+    const descNode = requirementsArray[this.#programBodyIndex + 1]
+    const reqRegex = REGEX.requirementDescription.find(
+      (curRegex) => descNode.textContent.match(curRegex)
+    )
+    if (reqRegex) {
+      const descriptionMatch = descNode.textContent.match(reqRegex)
       this.#satisfiedText = descriptionMatch.groups.satisfied
       this.#requirementId = descriptionMatch.groups.ID
       this.#description = descriptionMatch.groups.description
@@ -94,7 +100,7 @@ export default class Requirement extends AuditNode {
       console.warn('------------------------')
       console.warn(this.getName())
       console.warn('------------------------')
-      console.warn(requirementsArray[this.#programBodyIndex + 1].textContent.trim())
+      console.warn(descNode.textContent.trim())
       console.warn('------------------------')
     }
   }
@@ -104,7 +110,13 @@ export default class Requirement extends AuditNode {
    * @returns {Array(HTMLElement)} Array of the elements that contain the sub-requirements or an empty array
    */
   _extractSubNodes () {
-    return makeSubRequirementsArray(this.#programRowNode)
+    const childrenNodes = Array.from(this.#programBodyNode.children)
+      .slice(this.#programBodyIndex, this.#programBodyNextIndex)
+    if (!Array.isArray(childrenNodes) || childrenNodes.length < 1) {
+      return []
+    }
+
+    return makeSubRequirementsArray(childrenNodes)
   }
 
   /**

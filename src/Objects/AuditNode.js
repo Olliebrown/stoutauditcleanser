@@ -109,7 +109,49 @@ export default class AuditNode {
 
   // Default implementations (should be overridden by subclasses)
   toString () { return `${this.#name}: ${this.isSatisfied()}` }
-  isSatisfied () { return AuditNode.SATISFIED_TYPE.UNKNOWN }
+  isSatisfied () {
+    const subNodes = this.getSubNodes()
+    if (!Array.isArray(subNodes) || subNodes.length < 1) {
+      return AuditNode.SATISFIED_TYPE.UNKNOWN
+    }
+
+    // Check if any sub-nodes are satisfied
+    const counts = subNodes.reduce((curCounts, subNode) => {
+      switch (subNode.isSatisfied()) {
+        case AuditNode.SATISFIED_TYPE.COMPLETE:
+          curCounts.complete += 1
+          break
+        case AuditNode.SATISFIED_TYPE.IN_PROGRESS:
+          curCounts.inProgress += 1
+          break
+        case AuditNode.SATISFIED_TYPE.INCOMPLETE:
+          curCounts.incomplete += 1
+          break
+        case AuditNode.SATISFIED_TYPE.UNKNOWN:
+          curCounts.unknown += 1
+          break
+      }
+      return curCounts
+    }, { complete: 0, inProgress: 0, incomplete: 0, unknown: 0 })
+
+    // Any unknowns means we don't know if this requirement is satisfied
+    if (counts.unknown > 0) {
+      return AuditNode.SATISFIED_TYPE.UNKNOWN
+    }
+
+    // If there are no incomplete or in progress sub-nodes, then this requirement is satisfied
+    if (counts.inProgress === 0 && counts.incomplete === 0) {
+      return AuditNode.SATISFIED_TYPE.COMPLETE
+    }
+
+    // If there are no complete or in progress sub-nodes, then this requirement is not satisfied
+    if (counts.complete === 0 && counts.inProgress === 0) {
+      return AuditNode.SATISFIED_TYPE.INCOMPLETE
+    }
+
+    // Otherwise, we are in-progress
+    return AuditNode.SATISFIED_TYPE.IN_PROGRESS
+  }
 
   /**
    * Return a data-only object with reduced fields for serialization

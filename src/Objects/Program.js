@@ -62,8 +62,9 @@ export default class Program extends AuditNode {
     // Try to extract as Requirements
     let requirements = makeRequirementsArray(this.#mainTable)
     if (!Array.isArray(requirements) || requirements.length < 1) {
-      // Try sub-requirements instead
-      requirements = makeSubRequirementsArray(this.#mainTable)
+      // Try to extract as SubRequirements
+      const childrenNodes = Array.from(this.#mainTable.querySelectorAll(QUERIES.subRequirementHeader))
+      requirements = makeSubRequirementsArray(childrenNodes)
     }
     return requirements
   }

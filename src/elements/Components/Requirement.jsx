@@ -17,7 +17,7 @@ export default function Requirement (props) {
   if (isGroup) {
     return (
       <RequirementGroup
-        name={requirementNode.getName()}
+        groupName={requirementNode.getName()}
         programKey={`${programKey}_${requirementNode.getKey()}`}
         requirementNodes={requirementNode.getSubNodes()}
         first={first}
